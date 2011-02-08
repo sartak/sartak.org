@@ -115,6 +115,7 @@ each_article {
 
 generate_index();
 generate_about();
+generate_talks();
 generate_atom();
 generate_rss();
 generate_css();
@@ -144,6 +145,14 @@ sub generate_about {
     print $handle fill_in($layout, {
         content => scalar slurp('about.html'),
         title   => 'About Me',
+    });
+}
+
+sub generate_talks {
+    open my $handle, '>', 'generated/talks.html';
+    print $handle fill_in($layout, {
+        content => scalar slurp('talks.html'),
+        title   => 'Talks',
     });
 }
 

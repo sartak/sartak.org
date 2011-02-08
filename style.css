@@ -92,7 +92,6 @@ sub {
     top: .5ex;
 }
 
-
 .code_snippet {
     width: 100%;
     border-collapse: collapse;
@@ -131,3 +130,15 @@ sub {
 #prevlink {
     float: left;
 }
+
+#talks dt {
+    font-size: 1.4em;
+}
+#talks .metadata {
+    font-size: .8em;
+}
+#talks dd {
+    margin-bottom: 1em;
+}
+
+
