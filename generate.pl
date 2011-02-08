@@ -16,6 +16,12 @@ sub read_content_html {
     return slurp $file;
 }
 
+sub read_content_pl {
+    my $file = shift;
+    open my $handle, '-|', "perl '$file'";
+    return join "", <$handle>;
+}
+
 sub read_content {
     my $file = shift;
 
