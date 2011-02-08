@@ -4,6 +4,8 @@ use warnings;
 use File::Slurp 'slurp';
 use autodie;
 
+my $title = 'sartak';
+
 system 'rm -rf generated/';
 mkdir 'generated';
 
@@ -97,7 +99,7 @@ sub generate_index {
     $posts = qq[<ul id="posts">$posts</ul>];
 
     open my $handle, '>', 'generated/index.html';
-    print $handle fill_in($layout, { content => $posts, title => 'sartak' });
+    print $handle fill_in($layout, { content => $posts, title => $title });
 }
 
 sub generate_atom {
@@ -106,7 +108,7 @@ sub generate_atom {
     use XML::Atom::Person;
 
     my $feed = XML::Atom::Feed->new(Version => 1.0);
-    $feed->title('sartak');
+    $feed->title($title);
     $feed->id('http://sartak.org');
 
     my $author = XML::Atom::Person->new;
