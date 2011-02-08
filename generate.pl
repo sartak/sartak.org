@@ -139,7 +139,7 @@ sub generate_atom {
         $feed->add_entry($entry);
     };
 
-    open my $handle, '>', 'generated/blog.atom';
+    open my $handle, '>', 'generated/atom.xml';
     print $handle $feed->as_xml;
 }
 
@@ -165,7 +165,7 @@ sub generate_rss {
         );
     };
 
-    $feed->save('generated/blog.rss');
+    $feed->save('generated/rss.xml');
 }
 
 sub generate_css {
