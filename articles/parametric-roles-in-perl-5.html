@@ -1,0 +1,103 @@
+title: Parametric Roles in Perl 5
+date: 2009-01-17
+
+<p>Jonathon Worthington just wrote about <a href="http://use.perl.org/~JonathanWorthington/journal/38308">Perl 6's new support for parametric roles</a>. Excellent!</p>
+
+<p><a href="http://p3rl.org/Moose">Moose</a> supports this feature too, through the <a href="http://p3rl.org/MooseX::Role::Parameterized">MooseX-Role-Parameterized</a> extension I wrote a little over a month ago. It has proved to be a very useful pattern. I'm pleased that Perl 6 has it built in.</p>
+
+<p>Out of curiosity, I ported the examples Jonathon provided to MXRP. I'll have to work more with rafl to make <a href="http://p3rl.org/MooseX::Declare">MooseX-Declare</a> support something resembling Perl 6's much nicer syntax. We do plan on having syntax for positional parameters in much the same way Perl 6's parametric roles do.</p>
+
+<blockquote><tt>package Greet;<br>
+use MooseX::Role::Parameterized;<br>
+<br>
+parameter greeting =&gt; (<br>
+&nbsp; &nbsp; is&nbsp; &nbsp; &nbsp; &nbsp;=&gt; 'ro',<br>
+&nbsp; &nbsp; isa&nbsp; &nbsp; &nbsp; =&gt; 'Str',<br>
+&nbsp; &nbsp; required =&gt; 1,<br>
+);<br>
+<br>
+role {<br>
+&nbsp; &nbsp; my $p = shift;<br>
+&nbsp; &nbsp; my $greeting = $p-&gt;greeting;<br>
+<br>
+&nbsp; &nbsp; method greet =&gt; sub {<br>
+&nbsp; &nbsp; &nbsp; &nbsp; print "$greeting!\n";<br>
+&nbsp; &nbsp; };<br>
+};<br>
+<br>
+package EnglishMan;<br>
+use Moose;<br>
+with Greet =&gt; { greeting =&gt; "Hello" };<br>
+<br>
+package Slovak;<br>
+use Moose;<br>
+with Greet =&gt; { greeting =&gt; "Ahoj" };<br>
+<br>
+package Lolcat;<br>
+use Moose;<br>
+with Greet =&gt; { greeting =&gt; "OH HAI" };<br>
+<br>
+EnglishMan-&gt;new-&gt;greet; # Hello!<br>
+Slovak-&gt;new-&gt;greet; # Ahoj!<br>
+Lolcat-&gt;new-&gt;greet; # OH HAI!</tt></blockquote>
+
+<p>I'll skip the second example because it's contained by the third example.</p>
+
+<p>Moose doesn't give you multiple dispatch. <i>sigh!</i> Instead we model the problem with a default value for the transform, which is a code reference. In this way we meet the original requirement of EnglishMan and Lolcat not needing to provide a nominative-&gt;accusative transform.</p>
+
+<blockquote><tt>package Request;<br>
+use MooseX::Role::Parameterized;<br>
+<br>
+parameter statement =&gt; (<br>
+&nbsp; &nbsp; is&nbsp; &nbsp; &nbsp; &nbsp;=&gt; 'ro',<br>
+&nbsp; &nbsp; isa&nbsp; &nbsp; &nbsp; =&gt; 'Str',<br>
+&nbsp; &nbsp; required =&gt; 1,<br>
+);<br>
+<br>
+parameter transform =&gt; (<br>
+&nbsp; &nbsp; is&nbsp; &nbsp; &nbsp; =&gt; 'ro',<br>
+&nbsp; &nbsp; isa&nbsp; &nbsp; &nbsp;=&gt; 'CodeRef',<br>
+&nbsp; &nbsp; default =&gt; sub {<br>
+&nbsp; &nbsp; &nbsp; &nbsp; sub { $_[0] }, # identity function<br>
+&nbsp; &nbsp; },<br>
+);<br>
+<br>
+role {<br>
+&nbsp; &nbsp; my $p = shift;<br>
+&nbsp; &nbsp; my $statement = $p-&gt;statement;<br>
+&nbsp; &nbsp; my $transform = $p-&gt;transform;<br>
+<br>
+&nbsp; &nbsp; method request =&gt; sub {<br>
+&nbsp; &nbsp; &nbsp; &nbsp; my ($self, $object) = @_;<br>
+&nbsp; &nbsp; &nbsp; &nbsp; print "$statement " . $transform-&gt;($object) . "?\n";<br>
+&nbsp; &nbsp; };<br>
+};<br>
+<br>
+package Language::Slovak;<br>
+sub accusative {<br>
+&nbsp; &nbsp; my $nom = shift;<br>
+&nbsp; &nbsp; (my $acc = $nom) =~ s/a$/u/;<br>
+&nbsp; &nbsp; return $acc;<br>
+}<br>
+<br>
+package EnglishMan;<br>
+use Moose;<br>
+with Request =&gt; { statement =&gt; "Please can I have a" };<br>
+<br>
+package Slovak;<br>
+use Moose;<br>
+with Request =&gt; {<br>
+&nbsp; &nbsp; statement =&gt; "Prosim si",<br>
+&nbsp; &nbsp; transform =&gt; \&amp;Language::Slovak::accusative,<br>
+};<br>
+<br>
+package Lolcat;<br>
+use Moose;<br>
+with Request =&gt; { statement =&gt; "I CAN HAZ" };<br>
+<br>
+EnglishMan-&gt;new-&gt;request("yorkshire pudding");<br>
+Slovak-&gt;new-&gt;request("boravicka");<br>
+Lolcat-&gt;new-&gt;request("CHEEZEBURGER");
+</tt></blockquote>
+
+<p>I have no conclusion, except that Perl 5 hasn't been stagnant, though its new features can be a lot more verbose than in Perl 6.</p>
