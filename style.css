@@ -125,3 +125,9 @@ sub {
 .synError         { color: #FFFFFF }
 */
 
+#nextlink {
+    float: right;
+}
+#prevlink {
+    float: left;
+}

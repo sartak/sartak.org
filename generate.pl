@@ -44,7 +44,7 @@ sub read_content {
     return $reader->($file);
 }
 
-sub collect_headers {
+sub new_article {
     my $content = shift;
 
     my %headers;
@@ -54,7 +54,7 @@ sub collect_headers {
 
     my $date = prettify_date($headers{date});
 
-    $content = qq[<div id="post"><span id="date">$date</span>\n<h1 id="title">$headers{title}</h1>\n$content</div>];
+    $content = qq[<span id="date">$date</span>\n<h1 id="title">$headers{title}</h1>\n$content];
 
     $headers{content} = $content;
 
@@ -82,26 +82,36 @@ my %articles;
 
 while (my $file = glob("articles/*")) {
     my $content = read_content($file);
-    my $headers = collect_headers($content);
-    my $html = fill_in($layout, $headers);
-    my $file = titleify($headers->{title}) . '.html';
-    $headers->{file} = $file;
-    $headers->{url} = "http://sartak.org/$file";
+    my $article = new_article($content);
+    $article->{file} = titleify($article->{title}) . '.html';
+    $article->{url} = "http://preview.sartak.org/$article->{file}";
 
-    push @{ $articles{ $headers->{date} } }, $headers;
-
-    open my $handle, '>', "generated/$file";
-    print $handle $html;
+    push @{ $articles{ $article->{date} } }, $article;
 }
 
 sub each_article (&) {
     my $code = shift;
-    for my $date (reverse sort keys %articles) {
-        for my $article (@{ $articles{$date} }) {
-            $code->($article);
-        }
+    my @articles = map { @{ $articles{$_} } } reverse sort keys %articles;
+    for (my $i = 0; $i < @articles; ++$i) {
+        $code->($articles[$i], $articles[$i+1], ($i == 0 ? undef : $articles[$i-1]));
     }
 }
+
+each_article {
+    my ($article, $prev, $next) = @_;
+
+    my $html = qq[<div id="post">$article->{content}<span id="nextprevlinks">];
+    $html .= qq[<a href="$next->{url}" id="nextlink">Next: $next->{title}</a>] if $next;
+    $html .= qq[<a href="$prev->{url}" id="prevlink">Previous: $prev->{title}</a>] if $prev;
+    $html .= '</span></div>';
+
+    $article->{content} = $html;
+
+    $html = fill_in($layout, $article);
+
+    open my $handle, '>', "generated/$article->{file}";
+    print $handle $html;
+};
 
 generate_index();
 generate_about();
@@ -144,7 +154,7 @@ sub generate_atom {
 
     my $feed = XML::Atom::Feed->new(Version => 1.0);
     $feed->title($title);
-    $feed->id('http://sartak.org');
+    $feed->id('http://preview.sartak.org');
 
     my $author = XML::Atom::Person->new;
     $author->name('Shawn M Moore');
@@ -171,7 +181,7 @@ sub generate_rss {
     my $feed = XML::RSS->new(version => '1.0');
     $feed->channel(
         title => $title,
-        link  => 'http://sartak.org',
+        link  => 'http://preview.sartak.org',
     );
 
     each_article {
