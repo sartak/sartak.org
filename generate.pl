@@ -4,8 +4,8 @@ use warnings;
 use File::Slurp 'slurp';
 use autodie;
 
-system 'rm -rf blog/';
-mkdir 'blog';
+system 'rm -rf generated/';
+mkdir 'generated';
 
 my $layout = slurp 'layout.html';
 
@@ -38,7 +38,7 @@ while (my $file = glob("articles/*")) {
     $title =~ s/^-//;
     $title =~ s/-$//;
 
-    open my $handle, '>', "blog/$title.html";
+    open my $handle, '>', "generated/$title.html";
     print $handle $html;
 }
 
