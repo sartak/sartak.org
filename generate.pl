@@ -35,7 +35,7 @@ sub collect_headers {
 
     $headers{original} = $content;
 
-    $content = qq[<h1>$headers{title}</h1>\n<span class="date">$headers{date}</span>\n$content];
+    $content = qq[<div id="post"><span id="date">$headers{date}</span>\n<h1 id="title">$headers{title}</h1>\n$content</div>];
 
     $headers{content} = $content;
 

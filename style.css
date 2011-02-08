@@ -36,7 +36,7 @@ ul#posts {
 #posts .title a {
     font-size: 1.1em;
 }
-#posts .date {
+#posts .date, #post #date {
     float: right;
     color: #AAAAAA;
 }
@@ -54,3 +54,8 @@ ul#posts {
 #about li {
     margin-bottom: 1em;
 }
+
+#post h1 {
+    margin-top: none;
+}
+
