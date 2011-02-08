@@ -21,6 +21,9 @@ a:hover {
     margin: 0;
     padding: 0;
 }
+#me li {
+    padding-bottom: 0.3em;
+}
 #me ul {
     list-style-type: none;
 }
