@@ -43,3 +43,14 @@ ul#posts {
 #posts li {
     padding-bottom: 0.4em;
 }
+
+#about ul {
+    list-style-type: none;
+}
+#about a {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+#about li {
+    margin-bottom: 1em;
+}
