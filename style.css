@@ -1,0 +1,45 @@
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+#me {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 10px;
+    width: 140px;
+}
+#me .sartak a {
+    color: black;
+}
+#me h1, #me img, #me ul, #me li {
+    margin: 0;
+    padding: 0;
+}
+#me ul {
+    list-style-type: none;
+}
+#me img {
+    border: 0;
+}
+
+#content {
+    margin-left: 140px;
+    width: 800px;
+}
+
+ul#posts {
+    margin-top: 0;
+    list-style-type: none;
+}
+#posts .title a {
+    font-size: 1.1em;
+}
+#posts .date {
+    float: right;
+    color: #AAAAAA;
+}
+#posts li {
+    padding-bottom: 0.4em;
+}
