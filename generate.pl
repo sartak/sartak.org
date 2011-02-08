@@ -83,6 +83,7 @@ sub each_article (&) {
 }
 
 generate_index();
+generate_about();
 generate_atom();
 generate_rss();
 generate_css();
@@ -100,7 +101,18 @@ sub generate_index {
     $posts = qq[<ul id="posts">$posts</ul>];
 
     open my $handle, '>', 'generated/index.html';
-    print $handle fill_in($layout, { content => $posts, title => $title });
+    print $handle fill_in($layout, {
+        content => $posts,
+        title   => $title,
+    });
+}
+
+sub generate_about {
+    open my $handle, '>', 'generated/about.html';
+    print $handle fill_in($layout, {
+        content => scalar slurp('about.html'),
+        title   => 'About Me',
+    });
 }
 
 sub generate_atom {
