@@ -11,6 +11,17 @@ mkdir 'generated';
 
 my $layout = slurp 'layout.html';
 
+my @months = qw/
+    Nulluary January February March April May June July
+    August September October November December
+/;
+
+sub prettify_date {
+    my $date = shift;
+    my ($y, $m, $d) = split '-', $date;
+    return "$months[$m] $d, $y";
+}
+
 sub read_content_html {
     my $file = shift;
     return slurp $file;
@@ -41,7 +52,9 @@ sub collect_headers {
 
     $headers{original} = $content;
 
-    $content = qq[<div id="post"><span id="date">$headers{date}</span>\n<h1 id="title">$headers{title}</h1>\n$content</div>];
+    my $date = prettify_date($headers{date});
+
+    $content = qq[<div id="post"><span id="date">$date</span>\n<h1 id="title">$headers{title}</h1>\n$content</div>];
 
     $headers{content} = $content;
 
@@ -100,8 +113,9 @@ sub generate_index {
     my $posts;
     each_article {
         my $article = shift;
+        my $date = prettify_date($article->{date});
         $posts .= qq[<li>
-    <span class="date">$article->{date}</span>
+    <span class="date">$date</span>
     <span class="title"><a href="$article->{url}">$article->{title}</a></span>
 </li>];
     };
