@@ -33,6 +33,8 @@ sub collect_headers {
     my %headers;
     $headers{$1} = $2 while $content =~ s/^(\w+): (.+)\n//;
 
+    $headers{original} = $content;
+
     $content = qq[<h1>$headers{title}</h1>\n<span class="date">$headers{date}</span>\n$content];
 
     $headers{content} = $content;
@@ -133,7 +135,7 @@ sub generate_atom {
         my $article = shift;
         my $entry = XML::Atom::Entry->new(Version => 1.0);
         $entry->title($article->{title});
-        $entry->content($article->{content});
+        $entry->content($article->{original});
         $entry->id($article->{url});
 
         $feed->add_entry($entry);
@@ -157,7 +159,7 @@ sub generate_rss {
         $feed->add_item(
             title       => $article->{title},
             link        => $article->{url},
-            description => $article->{content},
+            description => $article->{original},
             dc          => {
                 date => $article->{date},
                 author => 'Shawn M Moore',
