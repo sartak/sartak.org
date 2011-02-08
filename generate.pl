@@ -84,9 +84,9 @@ while (my $file = glob("articles/*")) {
     my $content = read_content($file);
     my $headers = collect_headers($content);
     my $html = fill_in($layout, $headers);
-    my $file = titleify($headers->{title});
-    $headers->{file} = "$file.html";
-    $headers->{url} = "http://sartak.org/$headers->{file}";
+    my $file = titleify($headers->{title}) . '.html';
+    $headers->{file} = $file;
+    $headers->{url} = "http://sartak.org/$file";
 
     push @{ $articles{ $headers->{date} } }, $headers;
 
