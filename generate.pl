@@ -62,29 +62,72 @@ while (my $file = glob("articles/*")) {
     my $headers = collect_headers($content);
     my $html = fill_in($layout, $headers);
     my $file = titleify($headers->{title});
+    $headers->{file} = "$file.html";
+    $headers->{url} = "http://sartak.org/$headers->{file}";
 
-    push @{ $articles{ $headers->{date} } }, {
-        title => $headers->{title},
-        file  => $file,
-    };
+    push @{ $articles{ $headers->{date} } }, $headers;
 
-    open my $handle, '>', "generated/$file.html";
+    open my $handle, '>', "generated/$file";
     print $handle $html;
 }
 
-my $posts;
-for my $date (reverse sort keys %articles) {
-    for my $article (@{ $articles{$date} }) {
-        $posts .= qq[<li>
-    <span class="date">$date</span>
-    <span class="title"><a href="$article->{file}.html">$article->{title}</a></span>
-</li>];
+sub each_article (&) {
+    my $code = shift;
+    for my $date (reverse sort keys %articles) {
+        for my $article (@{ $articles{$date} }) {
+            $code->($article);
+        }
     }
 }
 
-$posts = qq[<ul id="posts">$posts</ul>];
+generate_index();
+generate_atom();
+generate_css();
 
-open my $handle, '>', 'generated/index.html';
-print $handle fill_in($layout, { content => $posts, title => 'sartak' });
+sub generate_index {
+    my $posts;
+    each_article {
+        my $article = shift;
+        $posts .= qq[<li>
+    <span class="date">$article->{date}</span>
+    <span class="title"><a href="$article->{url}">$article->{title}</a></span>
+</li>];
+    };
 
-system(cp => 'style.css' => 'generated/');
+    $posts = qq[<ul id="posts">$posts</ul>];
+
+    open my $handle, '>', 'generated/index.html';
+    print $handle fill_in($layout, { content => $posts, title => 'sartak' });
+}
+
+sub generate_atom {
+    use XML::Atom::Feed;
+    use XML::Atom::Entry;
+    use XML::Atom::Person;
+
+    my $feed = XML::Atom::Feed->new(Version => 1.0);
+    $feed->title('sartak');
+    $feed->id('http://sartak.org');
+
+    my $author = XML::Atom::Person->new;
+    $author->name('Shawn M Moore');
+    $author->email('sartak@gmail.com');
+    $feed->author($author);
+
+    each_article {
+        my $article = shift;
+        my $entry = XML::Atom::Entry->new(Version => 1.0);
+        $entry->title($article->{title});
+        $entry->content($article->{content});
+        $entry->id($article->{url});
+
+        $feed->add_entry($entry);
+    };
+
+    open my $handle, '>', 'generated/blog.atom';
+    print $handle $feed->as_xml;
+}
+
+sub generate_css {
+    system(cp => 'style.css' => 'generated/');
+}
