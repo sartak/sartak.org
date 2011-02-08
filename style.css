@@ -63,3 +63,62 @@ ul#posts {
     margin-top: none;
 }
 
+.spoiler {
+    color: black;
+    background: black;
+    padding: .1em;
+}
+
+.spoiler:hover {
+    color: white;
+}
+
+sup, sub {
+    height: 0;
+    line-height: 1;
+    vertical-align: baseline;
+    _vertical-align: bottom;
+    position: relative;
+}
+
+sup {
+    bottom: 1ex;
+}
+
+sub {
+    top: .5ex;
+}
+
+
+.code_snippet {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: pre;
+    font-family: monospace;
+}
+
+.line_numbers {
+    text-align: right;
+    width: 3.5em;
+    padding-right: .5em;
+}
+
+.highlighted_code {
+    padding-left: 1em;
+    color: #DDDDDD;
+    background: black none;
+}
+
+.synComment       { color: #DDDD00 }
+.synConstant      { color: #DD0000 }
+.synIdentifier    { color: #00DDDD }
+.synStatement     { color: #B8860B }
+.synPreProc       { color: #DD00DD } /* shebang */
+.synTodo          {  } /* # XXX: */
+.synSpecial       { color: #DD00DD } /* \n etc */
+/*
+.synType          { color: #FFFFFF }
+.synUnderlined    { color: #FFFFFF ; text-decoration: underline }
+.synError         { color: #FFFFFF }
+*/
+
