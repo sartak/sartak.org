@@ -84,6 +84,7 @@ sub each_article (&) {
 
 generate_index();
 generate_atom();
+generate_rss();
 generate_css();
 
 sub generate_index {
@@ -128,6 +129,31 @@ sub generate_atom {
 
     open my $handle, '>', 'generated/blog.atom';
     print $handle $feed->as_xml;
+}
+
+sub generate_rss {
+    use XML::RSS;
+
+    my $feed = XML::RSS->new(version => '1.0');
+    $feed->channel(
+        title => $title,
+        link  => 'http://sartak.org',
+    );
+
+    each_article {
+        my $article = shift;
+        $feed->add_item(
+            title       => $article->{title},
+            link        => $article->{url},
+            description => $article->{content},
+            dc          => {
+                date => $article->{date},
+                author => 'Shawn M Moore',
+            },
+        );
+    };
+
+    $feed->save('generated/blog.rss');
 }
 
 sub generate_css {
