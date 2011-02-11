@@ -1,0 +1,69 @@
+title: The New Moose Warning and the New Moose Critic
+date: 2009-04-24
+
+<h4>Role Design</h4>
+
+<blockquote>A role is something that classes do. Usually, a role encapsulates some piece of behavior or state that can be shared between classes. It is important to understand that <i>roles are not classes</i>. You cannot inherit from a role, and a role cannot be instantiated. We sometimes say that roles are <i>consumed</i>, either by classes or other roles.<br /><br />A role can be <i>composed</i> into a class. In practical terms, this means that all of the methods and attributes defined in a role are added directly to (we sometimes say "flattened into") the class that consumes the role. These attributes and methods then appear as if they were defined in the class itself. A subclass of the consuming class will inherit all of these methods and attributes.<br /><br /><span class="attribution">&ndash; Dave Rolsky in <a href="http://search.cpan.org/~drolsky/Moose/lib/Moose/Manual/Roles.pod">Moose::Manual::Roles</a></span></blockquote>
+
+<p>Roles can be composed to create new roles. This is not like inheritance; this operation is actually <i>commutative summation</i>. This does not establish a hierarchy, instead it creates a composite role with the methods, attributes, requirements, etc. of its component roles. If two or more roles in the composition provide different methods with the same name, a <i>conflict</i> is generated. Such conflicts do not immediately issue fatal errors, but they must be <i>resolved</i> at composition time. One of the ways a role consumer can resolve such a conflict is by providing its own implementation of the conflicted method name. The method could do whatever the programmer sees fit, but it is most sensible for this custom implementation to invoke the conflicting methods from the component roles.</p>
+
+<p>For example, consider two roles that provide a <tt>validate</tt> method. A class can consume the summation of these two roles. Since the two component roles each attempted to contribute a <tt>validate</tt> method, <tt>validate</tt> is a conflicted method in the composite role. To resolve this conflict, a consuming class must define its own <tt>validate</tt> method. The class's <tt>validate</tt> method should generally call the <tt>validate</tt> method of both roles. However, the class needs some way to disambiguate the two roles' <tt>validate</tt> methods so that it can call each in turn. For this reason, roles support <i>method aliasing</i>. The consumer can alias each role's <tt>validate</tt> methods. Aliasing only adds a new name for a method; it does not change the name of any method. That means the original <tt>validate</tt> methods are still conflicting. The consuming class can provide a <tt>validate</tt> method to resolve this conflict, whose implementation calls each role's <i>aliased</i> <tt>validate</tt>.</p>
+
+<table class="code_snippet">
+<tr>
+<td class="line_numbers">
+<span>1:</span>
+<span>2:</span>
+<span>3:</span>
+<span>4:</span>
+<span>5:</span>
+<span>6:</span>
+<span>7:</span>
+<span>8:</span>
+<span>9:</span>
+<span>10:</span>
+<span>11:</span>
+</td>
+<td class="perl highlighted_code">
+<span class="synComment"># this &quot;with&quot; sums the two roles then applies one role to the class</span>
+with (
+<span class="synConstant">'Role::Foo'</span> =&gt; { <span class="synConstant">alias</span> =&gt; { <span class="synConstant">validate</span> =&gt; <span class="synConstant">'validate_foo'</span> } },
+    <span class="synConstant">'Role::Bar'</span> =&gt; { <span class="synConstant">alias</span> =&gt; { <span class="synConstant">validate</span> =&gt; <span class="synConstant">'validate_bar'</span> } },
+    );
+
+<span class="synStatement">sub </span><span class="synIdentifier">validate </span>{
+<span class="synStatement">my</span> <span class="synIdentifier">$self</span> = <span class="synStatement">shift</span>;
+    <span class="synIdentifier">$self-&gt;validate_foo</span>(<span class="synIdentifier">@_</span>);
+        <span class="synIdentifier">$self-&gt;validate_bar</span>(<span class="synIdentifier">@_</span>);
+}
+</td>
+</tr>
+</table>
+
+<p>While this may seem like a lot of effort, role design has very nice theoretical <em>and practical</em> properties. Unlike multiple inheritance and mixins, <b>roles issue an error when there is an unresolved naming conflict</b>. The programmer has good tools for resolving conflicts: method aliasing, method <i>exclusion</i>, and method <i>overriding</i>. In our above example, the consuming class could have excluded the <tt>validate</tt> method from one of the two roles so that there would be no conflict (since only one role is providing a method with that name). Finally, the consuming class could have overridden the conflicted <tt>validate</tt> method. The overriding implementation may not need to call the component roles' <tt>validate</tt> methods, perhaps obviating the need for aliasing. The example above used a combination of aliasing and overriding. All of these features are available even when there are no method conflicts, granting additional flexibility to roles.</p>
+
+<h4>The New Moose Warning</h4>
+
+<p><a href="http://use.perl.org/~Ovid/journal/">Ovid</a> has written eleven articles on roles since March 4th (as of this posting). Most of them have <a href="http://use.perl.org/~Ovid/journal/38662">praised roles</a> and explained his happiness with how <a href="http://use.perl.org/~Ovid/journal/38785">comprehensible</a> his large <s>class</s> role space has become. However, in <a href="http://use.perl.org/~Ovid/journal/38809">Not All Features Are Useful (Moose Roles)</a>, Ovid describes his frustration at spending a long time trying to discover an unintentional use of the <i>method overriding</i> feature. Which is silent.</p>
+
+<p>Marcus Ramberg was the first to suggest the addition a warning to the Moose core when a class overrides a method from a role it consumes. This way we could push the "frontier" of the beloved collision detection a little further, into boundary between roles and classes. The warning (which was uncannily easy to implement, as if it had existed in a past <i>Alces</i>) would read like:</p>
+
+<blockquote>The Quux class has implicitly overridden the method (validate) from role Role::Foo. If this is intentional, please exclude the method from composition to silence this warning (see Moose::Cookbook::Roles::Recipe2)</blockquote>
+
+<p>I was one of the <em>very</em> few vocal proponents of this new warning. Suggesting to users that they explicitly list which methods they <em>intended</em> to exclude from composition would benefit maintainability. Other developers would not have to guess whether each method override was intentional or not; intention would be evident from the exclusions, or lack thereof. In a large, evolving system, accidental name collisions are bound to happen. I'd much prefer a <em>compile-time</em> warning over spending even ten minutes debugging why my application decided to start connecting to a database named "Shawn Moore".</p>
+
+<p>However, <strong>many</strong> people were unhappy with this warning, because it complained about perfectly valid <em>semantics</em>. Classes overriding local role methods has been in the design of roles since they were conceived as <a href="http://scg.unibe.ch/research/traits">traits</a> by Smalltalk researchers. Due to limitations in Perl's builtin warning system, the warning was also difficult to disable for a particular scope.</p>
+
+<p><a href="http://www.modernperlbooks.com/">chromatic</a> in particular decried this new warning in his article <a href="http://www.modernperlbooks.com/mt/2009/04/the-value-of-a-warning.html">The Value of a Warning</a>. While I continue to disagree with a few of his specific points, the argument he made in a comment on Ovid's <a href="http://use.perl.org/~Ovid/journal/38862">Well, Now I Know (Roles)</a> article struck a chord.</p>
+
+<blockquote>The moment you throw a mandatory default warning on two of the four appropriate and specified uses of roles, you've penalized them. You're subtly encouraging people not to use the most important and most powerful features of roles! You're actively discouraging people from taking advantage of alloorphism using well-established and long-recommended design techniques explicitly made safer and more understandable by roles.</blockquote>
+
+<p>He's absolutely correct. Even subtly discouraging users from perfectly good designs is unacceptable. I reverted the warning.</p>
+
+<h4>The New Moose Critic</h4>
+
+<p>One of the suggested ideas was to leave the warning disabled by default. For a while I thought it was quite ridiculous to turn Perl's own warnings on in your class, but leave Moose's own warnings off. After all, we have <a href="http://search.cpan.org/~chromatic/Modern-Perl-1.03/lib/Modern/Perl.pm">grown</a> as a community to love <tt>use warnings</tt>; it would be silly to repeat that default-off mistake.</p>
+
+<p>The final section of chromatic's <a href="http://www.modernperlbooks.com/mt/2009/04/the-value-of-a-warning.html">The Value of a Warning</a> held the best compromise. I was dead set against warnings that were off by default, so I didn't give the ideas the thorough consideration they deserved.</p>
+
+<blockquote>Compare that to optional <a href="http://perlcritic.com/">Perl::Critic</a> warnings. If your project decides that a method length of more than 24 lines is a code smell, you can determine that yourself. If you decide that a specified, implemented, and tested fea Perl 5 is troublesome (<tt>tie</tt>), you can disallow it youas already started a <a href="http://search.cpan.org/~elliotjs/Perl-Critic-Moose/lib/Perl/Critic/Moose.pm">Perl-Critic-Mooseg the many <a href="http://search.cpan.org/~drolsky/Moose-0.75/hink this is an excellent compromise and I can't wait to begin implementing Moose policies.</p>
