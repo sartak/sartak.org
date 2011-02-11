@@ -1,0 +1,179 @@
+title: Learning Japanese with Sentences
+date: 2010-04-20
+
+<h2>Sentences</h2>
+
+<p>One of the major components of my Japanese study is <em>sentences</em>. I add sentences written in Japanese to my <a href="http://blog.sartak.org/2010/01/on-learning.html">spaced repetition program</a>, <a href="http://ichi2.net/anki/">Anki</a>. When I review a sentence card, my job is to read the sentence aloud (to confirm that I know the readings for each kanji) and to understand the sentence.
+ <sup>
+  <a class="footnote_link" href="#footnote_1" name="footnote_back_1">[1]</a>
+ </sup>For simpler sentences which I know well, usually this is automatic and immediate. For new or complicated sentences, understanding sometimes demands translation into English. As I get more exposure to the language, my brain will get better at skipping that slow and lossy translation step. That's the plan anyway!
+</p>
+<img src="http://sartak.org/misc/blog/sentences/gehennom.png" alt="Reviewing a sentence" />
+<p>Reviewing a sentence card where the answer and translation have both been revealed. <a href="http://www.jnethack.org/">jNetHack</a> is a great source of sentences for me because I know NetHack so well.
+</p>
+<p>I <strong>always</strong> translate <em>from</em> Japanese <em>into</em> English. Never the other way around. For one, the <a href="http://en.wikipedia.org/wiki/Comprehensible_input">comprehensible input hypothesis</a>, which is my guiding light for language study, suggests that production is only a side-effect of language ability, which is developed only when input is received. The input hypothesis even goes so far as to suggest that premature production is <em>harmful</em>, because in doing so you are probably reinforcing incorrect usage.
+ <sup>
+  <a class="footnote_link" href="#footnote_2" name="footnote_back_2">[2]</a>
+ </sup>Also, more pragmatically, because I am not a native Japanese speaker, or even close to fluent, it is difficult for me to judge whether two sentences have the same meaning, or even similar nuance. So I would have trouble grading myself. This problem doesn't occur when I am producing English, which I have a <em>bit</em> more experience with. For Japanese, I rely only upon correct sentences written by native speakers, instead of whatever nonsense I come up with. :)
+</p>
+<p>I also avoid studying soulless
+ <sup>
+  <a class="footnote_link" href="#footnote_3" name="footnote_back_3">[3]</a>
+ </sup>vocabulary lists. Briefly, consider the difference between a <em>lethal injection</em> and a <em>mortal injection</em>. Because you've never heard of a mortal injection before,
+ <sup>
+  <a class="footnote_link" href="#footnote_4" name="footnote_back_4">[4]</a>
+ </sup>it sounds wrong, even though <em>lethal</em> and <em>mortal</em> both mean <em>deadly</em>.
+</p>
+<p>If I want to learn a new word, I force myself to find a complete sentence which uses it. So where am I getting these sentences? It turns out the answer is "from all over the place." But before I can talk about that, I want to explain a bit more about Anki.</p>
+<h2>Facts vs Cards</h2>
+<p>Anki is great for separating <em>facts</em> from <em>cards</em>. A card is familiar; each has a front (the question) and a back (the answer). A fact, on the other hand, is a set of key/value pairs. You create a fact then generate one or more cards from it. For example, if you are studying world nations, you could have a fact for each country which includes Country Name, Capital, Languages, etc. Then you could generate many cards which test you on going from country to capital, country to language, capital to country, etc. Anki's pleasant design turns out to be a great timesaver since it frees you from repeating yourself. You only type the country's name once but it can be used in many cards.
+</p>
+<img src="http://sartak.org/misc/blog/sentences/nation.png" alt="Creating a new fact in Anki" />
+<p>This is fact creation screen, which you will see a lot.</p>
+<br />
+<img src="http://sartak.org/misc/blog/sentences/generate.png" alt="Generating cards from facts in Anki" />
+<p>This is the card template screen, which you will rarely look at.
+ <sup>
+  <a class="footnote_link" href="#footnote_5" name="footnote_back_5">[5]</a>
+ </sup>
+</p>
+<p>We added only four facts, but from them we created twenty-eight cards, each of which tests a single piece of data. This way, your "language of Australia" card will be independently spaced from your "capital of Australia", which is good when you have trouble with one of them. If you already know "English" but "Canberra" just won't stick in your mind, that's okay. You won't have to review that the Australians use English nearly as often as you review their capital city.</p>
+<h2>Sources</h2>
+<p>One of the fields that my sentence facts have is 'Source'. Other than the sentence itself, Source is the only field that I require myself to fill in. Translation, readings, context, etc. are optional. Knowing where each sentence came from is useful because it lets me gauge the trustworthiness of each sentence. I always trust the correctness of sentences uttered in, say, film, whereas an offhand remark on Twitter could easily have a typo or unusually playful grammar. It's also useful to know whether I have accidentally incorporated feminine language into my lexicon.</p>
+<p>My diligence in citing every sentence I learn also lets me geek out and analyze precisely how I am learning Japanese. I wrote a script to pull all the values for the Source field out of the database and categorize them according to rules like:</p>
+
+<table class="code_snippet">
+ <tr>
+  <td class="line_numbers">
+<span>1:</span>
+<span>2:</span>
+<span>3:</span>
+<span>4:</span>
+<span>5:</span>
+<span>6:</span>
+<span>7:</span>
+<span>8:</span>
+<span>9:</span>
+<span>10:</span>
+<span>11:</span>
+  </td>
+  <td class="perl highlighted_code">
+<span class="synConstant">qr{The Matrix}</span> =&gt; { speech, native, movie, source(<span class="synConstant">&quot;The Matrix&quot;</span>) },
+<span class="synConstant">qr{iPod USB/dock cable box}</span> =&gt; {
+    text, native,
+    <span class="synConstant">medium</span> =&gt; <span class="synConstant">'misc'</span>,
+    source(<span class="synConstant">&quot;Miscellaneous&quot;</span>),
+},
+<span class="synConstant">qr{IRC PM with </span><span class="synSpecial">(\w+)</span><span class="synConstant">}</span> =&gt; {
+    student, correspondence, author(defer { <span class="synIdentifier">$1</span> }),
+},
+<span class="synConstant">qr{mt</span><span class="synSpecial">.</span><span class="synConstant">endeworks</span><span class="synSpecial">.</span><span class="synConstant">jp}</span> =&gt; { blog(<span class="synConstant">'lestrrat'</span>) },
+<span class="synConstant">qr{Conversation at Ebisuya}</span> =&gt; { convo, native },
+  </td>
+ </tr>
+</table>
+
+<h2>My Input</h2>
+<p>Another component of my study is <em>immersion</em>. I try to always have Japanese music in my environment. I can't escape the deluge of Japanese tweets from those I follow. There's also movies, books, IRC, and when I'm lucky even in-person conversation. I expose myself to as much Japanese-meant-for-native-speakers as possible. Every now and then I get a sentence I <em>almost</em> understand, except for a word or a reading. For example, as for the sentence in the marked-up image at the top of this post, I already knew and understood everything except the reading for 門 (gate) which is もん (mon). So for each so-called <em>i+1</em> sentence
+ <sup>
+  <a class="footnote_link" href="#footnote_6" name="footnote_back_6">[6]</a>
+ </sup>, I look up the one piece I'm missing then add it to Anki. Repeat until fluent.
+</p>
+<p>But this, for sanity's sake, is tempered with Japanese-as-a-second-language materials. It would be frustrating to listen to and read complete gibberish all day, so I begrudingly use a <a href="http://www.guidetojapanese.org/learn/grammar">grammar guide</a>. I also use various other second-language materials
+ <sup>
+  <a class="footnote_link" href="#footnote_7" name="footnote_back_7">[7]</a>
+ </sup>, as long as they meet my impossibly high standards.
+ <sup>
+  <a class="footnote_link" href="#footnote_8" name="footnote_back_8">[8]</a>
+ </sup>
+</p>
+<p>Turns out my setences are almost exactly evenly split between these two types. Eventually the number of sentences which are intended for native speakers will dwarf the sentences intended for students. I seem to be on the right track, as evidenced by this shiny chart
+ <sup>
+  <a class="footnote_link" href="#footnote_9" name="footnote_back_9">[9]</a>
+ </sup>(the x-axis is of course time but the unit is unimportant).
+</p>
+<img src="http://sartak.org/misc/blog/sentences/audience.png" alt="A chart of the intended audience by week" />
+<p>It's also interesting to look at the ratio of added sentences which I have <em>read</em> (94%) versus sentences I have <em>heard</em> (6%).
+</p>
+<img src="http://sartak.org/misc/blog/sentences/media-type.png" alt="A chart of sentences I have read versus those I have heard" />
+<p>There are a few reasons for this disparity. I am reluctant to add sentences from music. Though lyrics are usually grammatically correct, it's fair to say they probably utilize some iffy language in order to fit the struture of the song. Also there's the peculiarity of kanji and <a href="http://en.wikipedia.org/wiki/Remembering_the_kanji">how I'm studying them</a>. I do much better with words written in kanji than those nd usually not a lot of context is needed (as opposed to a sentence in the middle of a book). The games from which I've mined most are Phantasy Star 4 and jNetHack (which I beat yesterday!). I'm not really into anime, but the sentences I have are from Fist of the North Star:</p>
+
+<object width="480" height="385"><param name="movie" value="http://www.youtube.com/v/_N2pPrIxboI&hl=ja_JP&fs=1&rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/_N2pPrIxboI&hl=ja_JP&fs=1&rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>
+
+<p>It's also worth noting that knowing the entire English script of The Matrix has been helpful for watching and learning from the Japanese dub. Just sayin'.</p>
+<img src="http://sartak.org/misc/blog/sentences/matrix-pie.png" alt="Truisms" />
+<p>I got this idea of learning from sentences using spaced repetition from the guys at <a href="http://www.antimoon.com/">Antimoon</a>. They learned English to native levels while living in Poland.
+</p>
+<p>In a year, I will rerun the script I used to generate these charts to see how they compare. In the meantime, I better get to back to <a href="http://twitter.com/sartak/status/12501182382">studying</a>!
+</p>
+<h5>Footnotes</h5>
+<hr />
+<ol class="footnotes">
+ <li class="footnote">
+  <a name="footnote_1"></a>
+  <span class="footnote_content">I too-often have to mark sentence cards incorrect for flubbing a reading even though I <em>know</em> what the sentence means. So I am sorely tempted to generate two separate cards for each sentence, one which tests readings and one which tests understanding. It would be easy to do, but I'm not entirely convinced that I should.
+  </span>
+  <sup>
+   <a href="#footnote_back_1" class="footnote_link_top">(back)</a>
+  </sup>
+ </li>
+ <li class="footnote">
+  <a name="footnote_2"></a>
+  <span class="footnote_content">Though, of course, it's really fun to converse with speakers of your second language. The whole point of language is to communicate after all. So production there is fine. You just should not do it during review.</span>
+  <sup>
+   <a href="#footnote_back_2" class="footnote_link_top">(back)</a>
+  </sup>
+ </li>
+ <li class="footnote">
+  <a name="footnote_3"></a>
+  <span class="footnote_content">I've been using this word a lot lately. It's excellent.</span>
+  <sup>
+   <a href="#footnote_back_3" class="footnote_link_top">(back)</a>
+  </sup>
+ </li>
+ <li class="footnote">
+  <a name="footnote_4"></a>
+  <span class="footnote_content">Except when listening to language blowhards like me explain this point.</span>
+  <sup>
+   <a href="#footnote_back_4" class="footnote_link_top">(back)</a>
+  </sup>
+ </li>
+ <li class="footnote">
+  <a name="footnote_5"></a>
+  <span class="footnote_content">If you're familiar with <a href="http://moose.perl.org">Moose</a>, then maybe a useful analogy is that the Add Facts screen is like <code>use Moose</code>, but the Card Template screen is like delving into <code>Class::MOP</code>.
+  </span>
+  <sup>
+   <a href="#footnote_back_5" class="footnote_link_top">(back)</a>
+  </sup>
+ </li>
+ <li class="footnote">
+  <a name="footnote_6"></a>
+  <span class="footnote_content">Here, <em>i</em> is everything I understood about Japanese before adding the Gehennom sentence. <em>+1</em> represents the reading of gate that I learned through SRSing this sentence. Now my <em>i</em> is a little bit higher, and I'm a little bit more prepared for the next sentence.
+  </span>
+  <sup>
+   <a href="#footnote_back_6" class="footnote_link_top">(back)</a>
+  </sup>
+ </li>
+ <li class="footnote">
+  <a name="footnote_7"></a>
+  <span class="footnote_content">Such as various Japanese-English dictionaries. I haven't started using a monolingual dictionary yet. That is a scary - but necessary - step to take. Very soon!</span>
+  <sup>
+   <a href="#footnote_back_7" class="footnote_link_top">(back)</a>
+  </sup>
+ </li>
+ <li class="footnote">
+  <a name="footnote_8"></a>
+  <span class="footnote_content">I avoid learning sentences written or spoken by fellow learners - even those who are far better than me with the language. Sorry! Nothing personal, but my goal is to eventually confuse people into thinking my first language is Japanese. :)</span>
+  <sup>
+   <a href="#footnote_back_8" class="footnote_link_top">(back)</a>
+  </sup>
+ </li>
+ <li class="footnote">
+  <a name="footnote_9"></a>
+  <span class="footnote_content">The charts in this post were generated with <a href="http://search.cpan.org/perldoc?Chart::Clicker">Chart::Clicker</a>, written by the inimitable <a href="http://www.onemogin.com/">Cory Watson</a>. Any anti-Tuftean errors are mine, not the module's.
+  </span>
+  <sup>
+   <a href="#footnote_back_9" class="footnote_link_top">(back)</a>
+  </sup>
+ </li>
+</ol>
