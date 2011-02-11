@@ -103,7 +103,7 @@ sub each_article (&) {
 each_article {
     my ($article, $prev, $next) = @_;
 
-    my $html = qq[<div id="post">$article->{content}<span id="nextprevlinks">];
+    my $html = qq[<div id="post">$article->{content}<hr><span id="nextprevlinks">];
     $html .= qq[<a href="$next->{url}" id="nextlink">Next: $next->{title}</a>] if $next;
     $html .= qq[<a href="$prev->{url}" id="prevlink">Previous: $prev->{title}</a>] if $prev;
     $html .= '</span></div>';
