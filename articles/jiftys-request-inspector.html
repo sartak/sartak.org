@@ -1,0 +1,42 @@
+title: Jifty's Request Inspector
+date: 2009-10-07
+
+<p><a href="http://jifty.org">Jifty</a>'s <a href="http://search.cpan.org/perldoc?Jifty::Plugin::RequestInspector">RequestInspector plugin</a> provides you with debugging information for HTTP requests. You can examine the SQL queries that were issued in servicing the request, inspect a <a href="http://search.cpan.org/perldoc?Devel::NYTProf">Devel::NYTProf</a> profile of the request, and more. The information is presented in an (admittedly ugly) admin panel. Here's what our <a href="http://changelogger.bestpractical.com">Changelogger</a>'s request inspector page looks like:</p>
+
+<img src="http://sartak.org/misc/blog/requestinspector-basic.png" />
+
+<p>If we click into one of the requests, we can get an overview of that request.</p>
+
+<img src="http://sartak.org/misc/blog/requestinspector-request.png" />
+
+<p>We can inspect in detail a particular part of a request with another click.</p>
+
+<img src="http://sartak.org/misc/blog/requestinspector-dumpreqres.png" />
+
+<h2>Backend</h2>
+
+<p>The frontend is good enough. It gets the job done. But what I am really interested in, and what I had far more fun creating, is the backend that powers this.</p>
+
+<p>RequestInspector is a Jifty plugin. Its job is to manage all of the other plugins that inspect requests (such as SQLQueries, DumpRequestResponse, NYTProf, and Gladiator). RequestInspector informs the plugins of interesting events such as: a new request is beginning, that request finished.</p>
+
+<p>Each plugin produces various kinds of data. That data is <em>completely opaque</em> to RequestInspector. The data can be an object, a number, a code reference, or whatever else. All RequestInspector does is keep track of that data, handing the data to the plugin when it needs to do something with the data.</p>
+
+<p>When a new request begins, RequestInspector calls the <tt>inspect_before_request</tt> method on each plugin. When the request ends, <tt>inspect_after_request</tt> is called on each plugin. The interesting bit is that the opaque data is threaded between the return values and parameters of these methods. The return value of <tt>inspect_before_request</tt> is passed to that plugin's <tt>inspect_after_request</tt>. <tt>inspect_after_request</tt>'s return value is stored for later rendering. (In what amounts to a global variable &mdash; sorry!)</p>
+
+<p>When the user wants to see a request, RequestInspector calls the <tt>inspect_render_summary</tt> method on each plugin. When the user wants to see the detailed analysis by a particular plugin for a particular request, RequestInspector calls the <tt>inspect_render_analysis</tt> method on that plugin. It is completely up to the plugin to decide what to render. Both methods receive the data it returned from <tt>inspect_after_request</tt> for that request.</p>
+
+<h3>Benefits</h3>
+
+<p>You might wonder why this design is better than, say, a specific data format to which each plugin must adhere.</p>
+
+<p>It is unclear what such a data format would look like. I don't think a single data format could usefully encompass the different kinds of data that these plugins produce. While SQLQueries's data is complex data structure with a lot of information, NYTProf's is basically just a random number used to track the on-disk profile directory.</p>
+
+<p>The format would certainly evolve over time. This means that plugins would have to change as well just to keep up with RequestInspector. With my design, plugins really only need to change when they want to support newer RequestInspector features.</p>
+
+<p>It's simpler for plugins to let <em>them</em> dictate how they want to store whatever they are tracking. It's simpler for the RequestInspector core too, since it is free from having to examine the plugins' data.</p>
+
+<p>Finally, the RequestInspector plugin can get arbitrarily complex and the plugins do not have to care about it. The RequestInspector already lets you filter out URLs you know you will not want to inspect. The individual request inspector plugins do not have to implement that functionality.</p>
+
+<p>In the future, I plan to add a feature to RequestInspector that lets you see which requests took the most amount of database time, or leaked the most amount of memory, etc. All the feature will require of plugins is that they implement an optional <tt>inspect_compare_requests</tt> method. The method will receive that plugin's data from two requests and returns -1, 0, or 1. So trivial that I should just do it now.. :)</p>
+
+<p>Basically, RequestInspector leverages the <a href="http://en.wikipedia.org/wiki/Principle_of_least_knowledge">Principle of Least Knowledge</a> to keep things simple, easy, and flexible. Shriram Krishnamurthi's <a href="http://www.international-lisp-conference.org/2009/speakers#krishnamurthi_shriram">Moby Scheme Compiler</a> talk was particularly influential on this design. He described a similar (though simpler) system that he uses to make programming fun and interesting for middle school kids.</p>
