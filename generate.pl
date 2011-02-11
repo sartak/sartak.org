@@ -71,10 +71,13 @@ sub fill_in {
 }
 
 sub titleify {
-    my $title = lc shift;
+    my $orig = shift;
+    my $title = lc $orig;
     $title =~ s/\W+/-/g;
     $title =~ s/^-//;
     $title =~ s/-$//;
+
+    return lc($orig) if $title eq '';
     return $title;
 }
 
