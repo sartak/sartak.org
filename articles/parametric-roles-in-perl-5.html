@@ -7,97 +7,200 @@ date: 2009-01-17
 
 <p>Out of curiosity, I ported the examples Jonathon provided to MXRP. I'll have to work more with rafl to make <a href="http://p3rl.org/MooseX::Declare">MooseX-Declare</a> support something resembling Perl 6's much nicer syntax. We do plan on having syntax for positional parameters in much the same way Perl 6's parametric roles do.</p>
 
-<blockquote><tt>package Greet;<br>
-use MooseX::Role::Parameterized;<br>
-<br>
-parameter greeting =&gt; (<br>
-&nbsp; &nbsp; is&nbsp; &nbsp; &nbsp; &nbsp;=&gt; 'ro',<br>
-&nbsp; &nbsp; isa&nbsp; &nbsp; &nbsp; =&gt; 'Str',<br>
-&nbsp; &nbsp; required =&gt; 1,<br>
-);<br>
-<br>
-role {<br>
-&nbsp; &nbsp; my $p = shift;<br>
-&nbsp; &nbsp; my $greeting = $p-&gt;greeting;<br>
-<br>
-&nbsp; &nbsp; method greet =&gt; sub {<br>
-&nbsp; &nbsp; &nbsp; &nbsp; print "$greeting!\n";<br>
-&nbsp; &nbsp; };<br>
-};<br>
-<br>
-package EnglishMan;<br>
-use Moose;<br>
-with Greet =&gt; { greeting =&gt; "Hello" };<br>
-<br>
-package Slovak;<br>
-use Moose;<br>
-with Greet =&gt; { greeting =&gt; "Ahoj" };<br>
-<br>
-package Lolcat;<br>
-use Moose;<br>
-with Greet =&gt; { greeting =&gt; "OH HAI" };<br>
-<br>
-EnglishMan-&gt;new-&gt;greet; # Hello!<br>
-Slovak-&gt;new-&gt;greet; # Ahoj!<br>
-Lolcat-&gt;new-&gt;greet; # OH HAI!</tt></blockquote>
+
+<table class="code_snippet">
+ <tr>
+  <td class="line_numbers">
+<span>1:</span>
+<span>2:</span>
+<span>3:</span>
+<span>4:</span>
+<span>5:</span>
+<span>6:</span>
+<span>7:</span>
+<span>8:</span>
+<span>9:</span>
+<span>10:</span>
+<span>11:</span>
+<span>12:</span>
+<span>13:</span>
+<span>14:</span>
+<span>15:</span>
+<span>16:</span>
+<span>17:</span>
+<span>18:</span>
+<span>19:</span>
+<span>20:</span>
+<span>21:</span>
+<span>22:</span>
+<span>23:</span>
+<span>24:</span>
+<span>25:</span>
+<span>26:</span>
+<span>27:</span>
+<span>28:</span>
+<span>29:</span>
+<span>30:</span>
+<span>31:</span>
+<span>32:</span>
+<span>33:</span>
+  </td>
+  <td class="perl highlighted_code">
+<span class="synStatement">package</span><span class="synType"> Greet</span>;
+<span class="synStatement">use </span>MooseX::Role::Parameterized;
+
+parameter <span class="synConstant">greeting</span> =&gt; (
+    <span class="synConstant">is</span>       =&gt; <span class="synConstant">'ro'</span>,
+    <span class="synConstant">isa</span>      =&gt; <span class="synConstant">'Str'</span>,
+    <span class="synConstant">required</span> =&gt; <span class="synConstant">1</span>,
+);
+
+role {
+    <span class="synStatement">my</span> <span class="synIdentifier">$p</span> = <span class="synStatement">shift</span>;
+    <span class="synStatement">my</span> <span class="synIdentifier">$greeting</span> = <span class="synIdentifier">$p-&gt;greeting</span>;
+
+    method <span class="synConstant">greet</span> =&gt; <span class="synStatement">sub </span>{
+        <span class="synStatement">print</span> <span class="synConstant">&quot;</span><span class="synIdentifier">$greeting</span><span class="synConstant">!</span><span class="synSpecial">\n</span><span class="synConstant">&quot;</span>;
+    };
+};
+
+<span class="synStatement">package</span><span class="synType"> EnglishMan</span>;
+<span class="synStatement">use </span>Moose;
+with <span class="synConstant">Greet</span> =&gt; { <span class="synConstant">greeting</span> =&gt; <span class="synConstant">&quot;Hello&quot;</span> };
+
+<span class="synStatement">package</span><span class="synType"> Slovak</span>;
+<span class="synStatement">use </span>Moose;
+with <span class="synConstant">Greet</span> =&gt; { <span class="synConstant">greeting</span> =&gt; <span class="synConstant">&quot;Ahoj&quot;</span> };
+
+<span class="synStatement">package</span><span class="synType"> Lolcat</span>;
+<span class="synStatement">use </span>Moose;
+with <span class="synConstant">Greet</span> =&gt; { <span class="synConstant">greeting</span> =&gt; <span class="synConstant">&quot;OH HAI&quot;</span> };
+
+EnglishMan-&gt;new-&gt;greet; <span class="synComment"># Hello!</span>
+Slovak-&gt;new-&gt;greet; <span class="synComment"># Ahoj!</span>
+Lolcat-&gt;new-&gt;greet; <span class="synComment"># OH HAI!</span>
+  </td>
+ </tr>
+</table>
 
 <p>I'll skip the second example because it's contained by the third example.</p>
 
 <p>Moose doesn't give you multiple dispatch. <i>sigh!</i> Instead we model the problem with a default value for the transform, which is a code reference. In this way we meet the original requirement of EnglishMan and Lolcat not needing to provide a nominative-&gt;accusative transform.</p>
 
-<blockquote><tt>package Request;<br>
-use MooseX::Role::Parameterized;<br>
-<br>
-parameter statement =&gt; (<br>
-&nbsp; &nbsp; is&nbsp; &nbsp; &nbsp; &nbsp;=&gt; 'ro',<br>
-&nbsp; &nbsp; isa&nbsp; &nbsp; &nbsp; =&gt; 'Str',<br>
-&nbsp; &nbsp; required =&gt; 1,<br>
-);<br>
-<br>
-parameter transform =&gt; (<br>
-&nbsp; &nbsp; is&nbsp; &nbsp; &nbsp; =&gt; 'ro',<br>
-&nbsp; &nbsp; isa&nbsp; &nbsp; &nbsp;=&gt; 'CodeRef',<br>
-&nbsp; &nbsp; default =&gt; sub {<br>
-&nbsp; &nbsp; &nbsp; &nbsp; sub { $_[0] }, # identity function<br>
-&nbsp; &nbsp; },<br>
-);<br>
-<br>
-role {<br>
-&nbsp; &nbsp; my $p = shift;<br>
-&nbsp; &nbsp; my $statement = $p-&gt;statement;<br>
-&nbsp; &nbsp; my $transform = $p-&gt;transform;<br>
-<br>
-&nbsp; &nbsp; method request =&gt; sub {<br>
-&nbsp; &nbsp; &nbsp; &nbsp; my ($self, $object) = @_;<br>
-&nbsp; &nbsp; &nbsp; &nbsp; print "$statement " . $transform-&gt;($object) . "?\n";<br>
-&nbsp; &nbsp; };<br>
-};<br>
-<br>
-package Language::Slovak;<br>
-sub accusative {<br>
-&nbsp; &nbsp; my $nom = shift;<br>
-&nbsp; &nbsp; (my $acc = $nom) =~ s/a$/u/;<br>
-&nbsp; &nbsp; return $acc;<br>
-}<br>
-<br>
-package EnglishMan;<br>
-use Moose;<br>
-with Request =&gt; { statement =&gt; "Please can I have a" };<br>
-<br>
-package Slovak;<br>
-use Moose;<br>
-with Request =&gt; {<br>
-&nbsp; &nbsp; statement =&gt; "Prosim si",<br>
-&nbsp; &nbsp; transform =&gt; \&amp;Language::Slovak::accusative,<br>
-};<br>
-<br>
-package Lolcat;<br>
-use Moose;<br>
-with Request =&gt; { statement =&gt; "I CAN HAZ" };<br>
-<br>
-EnglishMan-&gt;new-&gt;request("yorkshire pudding");<br>
-Slovak-&gt;new-&gt;request("boravicka");<br>
-Lolcat-&gt;new-&gt;request("CHEEZEBURGER");
-</tt></blockquote>
+
+<table class="code_snippet">
+ <tr>
+  <td class="line_numbers">
+<span>1:</span>
+<span>2:</span>
+<span>3:</span>
+<span>4:</span>
+<span>5:</span>
+<span>6:</span>
+<span>7:</span>
+<span>8:</span>
+<span>9:</span>
+<span>10:</span>
+<span>11:</span>
+<span>12:</span>
+<span>13:</span>
+<span>14:</span>
+<span>15:</span>
+<span>16:</span>
+<span>17:</span>
+<span>18:</span>
+<span>19:</span>
+<span>20:</span>
+<span>21:</span>
+<span>22:</span>
+<span>23:</span>
+<span>24:</span>
+<span>25:</span>
+<span>26:</span>
+<span>27:</span>
+<span>28:</span>
+<span>29:</span>
+<span>30:</span>
+<span>31:</span>
+<span>32:</span>
+<span>33:</span>
+<span>34:</span>
+<span>35:</span>
+<span>36:</span>
+<span>37:</span>
+<span>38:</span>
+<span>39:</span>
+<span>40:</span>
+<span>41:</span>
+<span>42:</span>
+<span>43:</span>
+<span>44:</span>
+<span>45:</span>
+<span>46:</span>
+<span>47:</span>
+<span>48:</span>
+<span>49:</span>
+<span>50:</span>
+<span>51:</span>
+<span>52:</span>
+<span>53:</span>
+  </td>
+  <td class="perl highlighted_code">
+<span class="synStatement">package</span><span class="synType"> Request</span>;
+<span class="synStatement">use </span>MooseX::Role::Parameterized;
+
+parameter <span class="synConstant">statement</span> =&gt; (
+    <span class="synConstant">is</span>       =&gt; <span class="synConstant">'ro'</span>,
+    <span class="synConstant">isa</span>      =&gt; <span class="synConstant">'Str'</span>,
+    <span class="synConstant">required</span> =&gt; <span class="synConstant">1</span>,
+);
+
+parameter <span class="synConstant">transform</span> =&gt; (
+    <span class="synConstant">is</span>      =&gt; <span class="synConstant">'ro'</span>,
+    <span class="synConstant">isa</span>     =&gt; <span class="synConstant">'CodeRef'</span>,
+    <span class="synConstant">default</span> =&gt; <span class="synStatement">sub </span>{
+        <span class="synStatement">sub </span>{ <span class="synIdentifier">$_[</span><span class="synConstant">0</span><span class="synIdentifier">]</span> }, <span class="synComment"># identity function</span>
+    },
+);
+
+role {
+    <span class="synStatement">my</span> <span class="synIdentifier">$p</span> = <span class="synStatement">shift</span>;
+    <span class="synStatement">my</span> <span class="synIdentifier">$statement</span> = <span class="synIdentifier">$p-&gt;statement</span>;
+    <span class="synStatement">my</span> <span class="synIdentifier">$transform</span> = <span class="synIdentifier">$p-&gt;transform</span>;
+
+    method <span class="synConstant">request</span> =&gt; <span class="synStatement">sub </span>{
+        <span class="synStatement">my</span> (<span class="synIdentifier">$self</span>, <span class="synIdentifier">$object</span>) = <span class="synIdentifier">@_</span>;
+        <span class="synStatement">print</span> <span class="synConstant">&quot;</span><span class="synIdentifier">$statement</span><span class="synConstant"> &quot;</span> . <span class="synIdentifier">$transform</span>-&gt;(<span class="synIdentifier">$object</span>) . <span class="synConstant">&quot;?</span><span class="synSpecial">\n</span><span class="synConstant">&quot;</span>;
+    };
+};
+
+<span class="synStatement">package</span><span class="synType"> Language::Slovak</span>;
+<span class="synStatement">sub </span><span class="synIdentifier">accusative </span>{
+    <span class="synStatement">my</span> <span class="synIdentifier">$nom</span> = <span class="synStatement">shift</span>;
+    (<span class="synStatement">my</span> <span class="synIdentifier">$acc</span> = <span class="synIdentifier">$nom</span>) =~ <span class="synStatement">s/</span><span class="synConstant">a$</span><span class="synStatement">/</span><span class="synConstant">u</span><span class="synStatement">/</span>;
+    <span class="synStatement">return</span> <span class="synIdentifier">$acc</span>;
+}
+
+<span class="synStatement">package</span><span class="synType"> EnglishMan</span>;
+<span class="synStatement">use </span>Moose;
+with <span class="synConstant">Request</span> =&gt; { <span class="synConstant">statement</span> =&gt; <span class="synConstant">&quot;Please can I have a&quot;</span> };
+
+<span class="synStatement">package</span><span class="synType"> Slovak</span>;
+<span class="synStatement">use </span>Moose;
+with <span class="synConstant">Request</span> =&gt; {
+    <span class="synConstant">statement</span> =&gt; <span class="synConstant">&quot;Prosim si&quot;</span>,
+    <span class="synConstant">transform</span> =&gt; \<span class="synIdentifier">&amp;</span><span class="synType">Language::Slovak::</span><span class="synIdentifier">accusative</span>,
+};
+
+<span class="synStatement">package</span><span class="synType"> Lolcat</span>;
+<span class="synStatement">use </span>Moose;
+with <span class="synConstant">Request</span> =&gt; { <span class="synConstant">statement</span> =&gt; <span class="synConstant">&quot;I CAN HAZ&quot;</span> };
+
+EnglishMan-&gt;new-&gt;request(<span class="synConstant">&quot;yorkshire pudding&quot;</span>);
+Slovak-&gt;new-&gt;request(<span class="synConstant">&quot;boravicka&quot;</span>);
+Lolcat-&gt;new-&gt;request(<span class="synConstant">&quot;CHEEZEBURGER&quot;</span>);
+  </td>
+ </tr>
+</table>
 
 <p>I have no conclusion, except that Perl 5 hasn't been stagnant, though its new features can be a lot more verbose than in Perl 6.</p>
