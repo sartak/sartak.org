@@ -3,13 +3,27 @@ date: 2010-12-27
 
 More for my future reference than anything else :)
 
-<pre>
-brew install giflib
-brew install libjpeg
-cpanm --look Imager::File::GIF
-    perl Makefile.PL --libpath=~/.brew/lib --incpath=~/.brew/include
-    make test install
-cpanm --look Imager::File::JPEG
-    perl Makefile.PL --libpath=~/.brew/lib --incpath=~/.brew/include
-    make test install
-</pre>
+<table class="code_snippet">
+ <tr>
+  <td class="line_numbers">
+<span>1:</span>
+<span>2:</span>
+<span>3:</span>
+<span>4:</span>
+<span>5:</span>
+<span>6:</span>
+<span>7:</span>
+<span>8:</span>
+  </td>
+  <td class="sh highlighted_code">
+brew <span class="synStatement">install</span> giflib
+brew <span class="synStatement">install</span> libjpeg
+cpanm <span class="synSpecial">--look</span> Imager::File::GIF
+    perl Makefile.PL <span class="synSpecial">--libpath=~/.brew/lib</span> <span class="synSpecial">--incpath=~/.brew/include</span>
+    make <span class="synStatement">test</span> <span class="synStatement">install</span>
+cpanm <span class="synSpecial">--look</span> Imager::File::JPEG
+    perl Makefile.PL <span class="synSpecial">--libpath=~/.brew/lib</span> <span class="synSpecial">--incpath=~/.brew/include</span>
+    make <span class="synStatement">test</span> <span class="synStatement">install</span>
+  </td>
+ </tr>
+</table>
