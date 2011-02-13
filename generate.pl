@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use File::Slurp 'slurp';
 use autodie;
+use Encode;
 
 my $title = 'sartak';
 
@@ -199,9 +200,9 @@ sub generate_rss {
     each_article {
         my $article = shift;
         $feed->add_item(
-            title       => $article->{title},
+            title       => decode_utf8($article->{title}),
             link        => $article->{url},
-            description => $article->{original},
+            description => decode_utf8($article->{original}),
             dc          => {
                 date => $article->{date},
                 author => 'Shawn M Moore',
