@@ -2,13 +2,14 @@
 use strict;
 use warnings;
 use File::Slurp 'slurp';
+use File::Path 'make_path';
 use autodie;
 use Encode;
 
 my $title = 'sartak';
 
 system 'rm -rf generated/';
-mkdir 'generated';
+make_path 'generated';
 
 my $layout = slurp 'layout.html';
 
@@ -82,12 +83,20 @@ sub titleify {
     return $title;
 }
 
+sub date_dir {
+    my $date = shift;
+    $date =~ s[^(\d{4})-(\d{2})-\d{2}][$1/$2/]
+        or die "Invalid date: $date";
+    return $date;
+}
+
 my %articles;
 
 while (my $file = glob("articles/*")) {
     my $content = read_content($file);
     my $article = new_article($content);
-    $article->{file} = titleify($article->{title}) . '.html';
+    $article->{dir} = date_dir($article->{date});
+    $article->{file} = $article->{dir} . titleify($article->{title}) . '.html';
     $article->{url} = "http://preview.sartak.org/$article->{file}";
 
     push @{ $articles{ $article->{date} } }, $article;
@@ -113,6 +122,7 @@ each_article {
 
     $html = fill_in($layout, $article);
 
+    make_path "generated/$article->{dir}";
     open my $handle, '>', "generated/$article->{file}";
     print $handle $html;
 };
