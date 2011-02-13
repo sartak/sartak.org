@@ -119,7 +119,7 @@ each_article {
 generate_index();
 generate_about();
 generate_talks();
-generate_atom();
+#generate_atom();
 generate_rss();
 generate_css();
 
