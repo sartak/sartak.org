@@ -1,0 +1,194 @@
+title: Reflections on YAPC::NA 2009
+date: 2009-06-28
+
+<p>I had a lot of fun at <a href="http://yapc10.org/yn2009/">YAPC::NA</a> this year. I met some <a href="http://pbfcomics.com/?cid=PBF152-Scorpy_the_Forest_Friend.gif">forest friends</a> that didn't make it last year, such as <a href="http://ilmari.org/">ilmari</a>, <a href="http://clownpenis.fart/">Nick Perez</a>, and <a href="http://dylan.hardison.net">Dylan Hardison</a>. I also laughed until it hurt. A few times.</p>
+
+<p>I was a hermit on Sunday and Monday nights because I had not finished my slides. That was very unfortunate, so I will have future talks ready well in advance. Jitting slides is so not my style.</p>
+
+<h3>Moose Course</h3>
+
+<p>The eight hour Moose course went very well. I was a passable <a href="http://blog.urth.org/2009/06/i-wont-be-at-yapc-10.html">Rolsky-substitute</a>. The <a href="http://blog.afoolishmanifesto.com/archives/844">feedback</a> I recieved was (nearly) unanimously good, so I'm thrilled that people enjoyed it. There were some minor complaints, so if I ever teach a course again I'll be sure to keep them in mind. This year, YAPC::NA is running surveys on talks and courses, so I expect I'll learn more ways that the class could be improved. If you attended the class, please do not worry about offending Dave or me if you disliked something.</p>
+
+<p>I was under-prepared for the class, but <a href="http://git.shadowcat.co.uk/gitweb/gitweb.cgi?p=gitmo/moose-presentations.git;a=tree;f=moose-class">the course material</a> was very good. I got the impression that the exercises were extremely helpful. In particular, having a good test suite (powered by the metaobject protocol!) was very useful. The exercises were also useful for me because they let me sit down. Speaking on your feet for so many hours is tough.</p>
+
+<p>Like the first version of anything, the course material contained some typos, inconsistencies, and bugs. It was pleasant to fix these <em>and push them back to the source repository</em> while people worked on the exercises. For some reason, we could not get public (i.e. noncommitter) access to the repository working, perhaps due to DNS issues. It would have been useful to have people pull my changes to fix the exercises. Instead, I settled for announcing what the problems were and how to fix them.</p>
+
+<h4 id="context">Context</h4>
+
+<p>Early in the course I had a vitriolic rant about Perl's notion of <i>context</i>. On the whole I think context is a nice solution to a certain class of problems, but it definitely has some edge cases where it really bites programmers. For example, propagating context is very fiddly. You <em>must</em> propagate context if you wrap a function to do work after it is called without affecting its return value.</p>
+
+<table class="code_snippet">
+ <tr>
+  <td class="line_numbers">
+<span>1:</span>
+<span>2:</span>
+<span>3:</span>
+<span>4:</span>
+<span>5:</span>
+<span>6:</span>
+<span>7:</span>
+<span>8:</span>
+<span>9:</span>
+<span>10:</span>
+<span>11:</span>
+<span>12:</span>
+<span>13:</span>
+<span>14:</span>
+<span>15:</span>
+<span>16:</span>
+<span>17:</span>
+<span>18:</span>
+<span>19:</span>
+<span>20:</span>
+<span>21:</span>
+<span>22:</span>
+<span>23:</span>
+<span>24:</span>
+  </td>
+  <td class="perl highlighted_code">
+<span class="synStatement">sub </span><span class="synIdentifier">method </span>{
+    <span class="synStatement">my</span> <span class="synIdentifier">$self</span> = <span class="synStatement">shift</span>;
+
+    <span class="synComment"># call SUPER::method in the right context.</span>
+    <span class="synComment"># not handling void context is a BUG!</span>
+    <span class="synStatement">my</span> <span class="synIdentifier">@ret</span>;
+    <span class="synStatement">if</span> (<span class="synStatement">wantarray</span>) {
+        <span class="synIdentifier">@ret</span> = <span class="synIdentifier">$self-&gt;SUPER</span>::method(<span class="synIdentifier">@_</span>);
+    }
+    <span class="synStatement">elsif</span> (<span class="synStatement">defined</span> <span class="synStatement">wantarray</span>) {
+        <span class="synIdentifier">$ret[</span><span class="synConstant">0</span><span class="synIdentifier">]</span> = <span class="synIdentifier">$self-&gt;SUPER</span>::method(<span class="synIdentifier">@_</span>);
+    }
+    <span class="synStatement">else</span> {
+        <span class="synIdentifier">$self-&gt;SUPER</span>::method(<span class="synIdentifier">@_</span>);
+    }
+    
+    <span class="synIdentifier">$self-&gt;called_method</span>(<span class="synIdentifier">$self-&gt;called_method</span> + <span class="synConstant">1</span>);
+    
+    <span class="synComment"># return what the caller asked for.</span>
+    <span class="synComment"># void context doesn't need to be explicitly handled here</span>
+    <span class="synComment"># .. or does it? maybe!</span>
+    <span class="synStatement">return</span> <span class="synIdentifier">@ret</span> <span class="synStatement">if</span> <span class="synStatement">wantarray</span>;
+    <span class="synStatement">return</span> <span class="synIdentifier">$ret[</span><span class="synConstant">0</span><span class="synIdentifier">]</span>;
+} 
+  </td>
+ </tr>
+</table>
+
+<p>I don't recall mentioning in the class that Moose does all of this for us in the <tt>after</tt> method modifier:</p>
+
+<table class="code_snippet">
+ <tr>
+  <td class="line_numbers">
+<span>1:</span>
+<span>2:</span>
+<span>3:</span>
+<span>4:</span>
+  </td>
+  <td class="perl highlighted_code">
+after <span class="synConstant">method</span> =&gt; <span class="synStatement">sub </span>{
+    <span class="synStatement">my</span> <span class="synIdentifier">$self</span> = <span class="synStatement">shift</span>;
+    <span class="synIdentifier">$self-&gt;called_method</span>(<span class="synIdentifier">$self-&gt;called_method</span> + <span class="synConstant">1</span>);
+}; 
+  </td>
+ </tr>
+</table>
+
+<p>The other painful detail about context is in returning a list in scalar context. Most people know that an <strong>array</strong> in scalar context evaluates to the number of elements:</p>
+
+<table class="code_snippet">
+ <tr>
+  <td class="line_numbers">
+<span>1:</span>
+<span>2:</span>
+<span>3:</span>
+<span>4:</span>
+<span>5:</span>
+<span>6:</span>
+<span>7:</span>
+  </td>
+  <td class="perl highlighted_code">
+<span class="synStatement">sub </span><span class="synIdentifier">users </span>{
+    <span class="synStatement">my</span> <span class="synIdentifier">$self</span> = <span class="synStatement">shift</span>;
+    <span class="synStatement">my</span> <span class="synIdentifier">@users</span> = <span class="synIdentifier">$self-&gt;objects</span>(<span class="synConstant">'users'</span>);
+    <span class="synStatement">return</span> <span class="synIdentifier">@users</span>;
+}
+
+<span class="synStatement">my</span> <span class="synIdentifier">$users</span> = <span class="synIdentifier">$game-&gt;users</span>; <span class="synComment"># 51 </span>
+  </td>
+ </tr>
+</table>
+
+<p>However, a lot of people don't know that there is an irritating amount of subtlety in evaluating a <strong>list</strong> in scalar context:</p>
+
+<table class="code_snippet">
+ <tr>
+  <td class="line_numbers">
+<span>1:</span>
+<span>2:</span>
+<span>3:</span>
+<span>4:</span>
+<span>5:</span>
+<span>6:</span>
+<span>7:</span>
+  </td>
+  <td class="perl highlighted_code">
+<span class="synStatement">sub </span><span class="synIdentifier">administrators </span>{
+    <span class="synStatement">my</span> <span class="synIdentifier">$self</span> = <span class="synStatement">shift</span>;
+
+    <span class="synStatement">return</span> (<span class="synConstant">'Sartak'</span>, <span class="synConstant">'autarch'</span>);
+}
+
+<span class="synStatement">my</span> <span class="synIdentifier">$admins</span> = <span class="synIdentifier">$game-&gt;administrators</span>; <span class="synComment"># autarch </span>
+  </td>
+ </tr>
+</table>
+<p>Instead of receiving the <em>count</em> of administrators, we get the last element of the list. The problem is actually the <em>comma</em>. Due to C's strong influence on Perl 5, the comma is not just a list separator. In scalar context it acts as a sequencing operator. We're evaluating the string 'Sartak', throwing it away, then evaluating the string 'autarch'. <strong>There is no list at all here!</strong></p>
+
+<blockquote>Binary "," is the comma operator. In scalar context it evaluates its left argument, throws that value away, then evaluates its right argument and returns that value.  This is just like C's comma operator.<br /><br /><span class="attribution">&ndash; <tt><a href="http://perldoc.perl.org/perlop.html#Comma-Operator">perldoc perlop</a></tt></span></blockquote>
+
+<p>Almost everywhere else in the language, arrays and lists are interchangeable. I wish this inconsistency could be excised. Thanks to <tt>do BLOCK</tt>, we do not need C's comma operator at all.</p>
+
+
+<h3>Extending Moose</h3>
+
+<p>On Tuesday morning I presented <a href="http://sartak.org/talks/yapc-na-2009/extending-moose/extending-moose.pdf">Extending Moose for Applications</a> <a href="http://sartak.org/talks/yapc-na-2009/extending-moose/extending-moose.key">(keynote source)</a>. There were maybe 20 attendees. I blame the 8AM start time. Oh well.</p>
+
+<p>I'm told that at one point someone walked out saying the talk got "too abstract". It certainly is a very abstract topic, but I hope the examples showed that there is value to be had in using the ideas I presented.</p>
+
+<p>Some good questions were asked, and some people did get it. I conveyed the point I wanted to make, which is that the metaobject protocol uses concepts you already know well.</p>
+
+<p>I encourage you to read the slides. There are notes which is basically what I spoke when I was presenting, so they should be pretty readable. Please let me know how I did. I've received very little feedback on this talk.</p>
+
+<h3>TAEB</h3>
+
+<p>One of my good friends <a href="http://tozt.net/">Jesse Luehrs (doy)</a> gave a lightning talk about our NetHack bot, <a href="http://taeb.sartak.org/">TAEB</a>.</p>
+
+<img src="http://sartak.org/misc/blog/doy-taeb.jpg" />
+
+<p>The line "The code I'm working on isn't really a NetHack bot; it's more of a framework for writing NetHack bots" got quite a few laughs. It's completely true, too. The topic of the talk was writing a new AI for this bot framework.</p>
+
+<p>The bitrotted web interface seemed to please people. It's too bad they saw how it was when I first wrote it. Since I took those screenshots, I improved it quite a bit, making it use NetHack's colors and providing an AJAXy interface. Oh well, I should really get that working again.</p>
+
+<p>This lightning talk was a hit. Several people <em>cheered</em>! Great job, Jesse.</p>
+
+<h3><a name="others_talks">Others' Talks</h3>
+
+<p></a>My favorite talk, by far, was <a href="http://thelackthereof.org">Brock Wilcox</a>'s <a href="http://thelackthereof.org/CGI_Inspect">CGI::Inspect talk</a>. As I said during the talk, when I wrote <a href="http://search.cpan.org/perldoc?Carp::REPL">Carp::REPL</a>, I was <em>actually</em> aiming for exactly what <a href="http://search.cpan.org/perldoc?CGI::Inspect">CGI::Inspect</a> <em>is</em>. And I meant it! About two years ago, it was mentioned to me how when there's an error in your Django application, it opens an AJAXy REPL for you. I figured out how to do some of that - REPL on error - but I never actually hooked it up to <a href="http://jifty.org">Jifty</a>. Now I don't have to. Bravo, Brock!</p>
+
+<p>Another talk I enjoyed was <a href="http://rjbs.manxome.org/">Ricardo Signes</a>'s <a href="http://yapc10.org/yn2009/talk/1942">Git is Easy talk</a>. I knew most of the material presented, but since seeing that talk I have had a lot more confidence in using git. In particular, remotes now make sense to me. I also now use <a href="http://gitx.frim.nl/">GitX</a> to visualize where other developers are relative to me.</p>
+
+<p><a href="http://slowass.net/~scott/">Scott Walter</a>'s <a href="http://yapc10.org/yn2009/talk/1974">Perl in Vegas talk</a> was fascinating. He drew an interesting parallel between the incredible strictures of Vegas slot machines versus America's completely opaque and mostly unregulated voting machines. One strange requirement of the slot machines is that code must be compiled. Though Perl is an interpreted language, it provides a <a href="http://www.perl.com/doc/manual/html/utils/perlcc.html">perlcc</a> utility to "compile" the code.</p>
+
+<p><a href="http://weftsoar.net/~hdp/">Hans Dieter Pearcey</a>'s <a href="http://yapc10.org/yn2009/talk/1986">Dist::Zilla - Automating quality since 2008</a> reminded me of its excellent plugin-centric design:</p>
+
+<img src="http://sartak.org/misc/blog/dist-zilla-plugins.png" />
+
+<p>This slide <em>directly</em> caused me to submit a talk about <a href="http://sartak.org/talks/yapc-asia-2009/api-design/abstract.txt">API Design</a> to <a href="http://conferences.yapcasia.org/ya2009/">YAPC::Asia 2009</a>.</p>
+
+<p>Finally, <a href="http://bulknews.vox.com/">miyagawa</a>'s <a href="http://yapc10.org/yn2009/talk/2018">Build a desktop application with Perl, HTTP::Engine, SQLite and jQuery</a> talk was exciting. I've been working toward using his <a href="">perl-app-builder</a> for TAEB since he <a href="http://remediecode.org/2009/06/binary-builds-for-os-x-leopard-users.html">blogged about it</a>. The talk showed how we can write standalone, web-based, GUI apps, in Perl, without inflicting CPAN on our users. Because Perl has been a web language ever since the web has had languages, the tools for generating HTML, serving pages, etc. are <em>very good</em>. The traditional GUI tools are mediocre at best. They are why my applications have been strictly web- and curses-based.</p>
+
+<h3>Thanks!</h3>
+
+<p>Thank you Robert Blackwell, Casey West, Tom Moertel, Dan Wright, and anyone else who helped! This YAPC was fantastic.</p>
+
+<p>If you have never been to YAPC, you should seriously consider going to the next one!</p>
