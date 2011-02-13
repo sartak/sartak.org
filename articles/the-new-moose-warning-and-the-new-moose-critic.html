@@ -68,9 +68,9 @@ with (
 
 <blockquote>Compare that to optional <a href="http://p3rl.org/Perl::Critic">Perl::Critic</a> warnings. If your project decides that a method length of more than 24 lines is a code smell, you can determine that yourself. If you decide that a specified, implemented, and tested feature of Perl 5 is troublesome (<tt>tie</tt>), you can disallow it yourself locally.</blockquote>
 
-<p>What we need is a set of Perl::Critic policies for Moose. Elliot Shank has already started a <a href="http://p3rl.org/Perl::Critic::Moose">Perl-Critic-Moose</a> for, among other things, ensuring (statically) that you make your classes immutable.</p>
+<p>What we need is a set of Perl::Critic policies for Moose. Elliot Shank has already started a <a href="http://p3rl.org/Perl::Critic::Moose">Perl::Critic::Moose</a> for, among other things, ensuring (statically) that you make your classes immutable.</p>
 
-<p>Moose stores plenty of data in its metaobjects, rich for plunder. Though nearly all of Perl-Critic performs <i>static</i> analysis, there <em>is</em> precedent for <a href="http://p3rl.org/Perl::Critic::Dynamic">dynamic Perl-Critic policies</a>. We could stand on the shoulders of the Perl::Critic giants so as to reuse and contribute to their <a href="http://p3rl.org/Perl::Critic#CONFIGURATION">configuration system</a>, <a href="http://p3rl.org/Test::Perl::Critic">testing modules</a>, and great community.</p>
+<p>Moose stores plenty of data in its metaobjects, rich for plunder. Though nearly all of Perl::Critic performs <i>static</i> analysis, there <em>is</em> precedent for <a href="http://p3rl.org/Perl::Critic::Dynamic">dynamic Perl::Critic policies</a>. We could stand on the shoulders of the Perl::Critic giants so as to reuse and contribute to their <a href="http://p3rl.org/Perl::Critic#CONFIGURATION">configuration system</a>, <a href="http://p3rl.org/Test::Perl::Critic">testing modules</a>, and great community.</p>
 
 <p>Some easily-implemented dynamic Moose policies (of varying severity) could highlight:</p>
 <ul>
