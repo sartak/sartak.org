@@ -141,4 +141,7 @@ sub {
     margin-bottom: 1em;
 }
 
+#post {
+    font-size: 1.2em;
+}
 
