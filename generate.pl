@@ -9,8 +9,10 @@ use Encode;
 my $title = 'sartak';
 my $outdir = shift || 'generated';
 
-system "rm -rf $outdir/";
-make_path $outdir;
+unless (-d $outdir) {
+    system "rm -rf $outdir";
+    make_path $outdir;
+}
 
 my $layout = slurp 'layout.html';
 
