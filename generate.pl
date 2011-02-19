@@ -7,9 +7,10 @@ use autodie;
 use Encode;
 
 my $title = 'sartak';
+my $outdir = shift || 'generated';
 
-system 'rm -rf generated/';
-make_path 'generated';
+system "rm -rf $outdir/";
+make_path $outdir;
 
 my $layout = slurp 'layout.html';
 
@@ -135,8 +136,8 @@ sub generate_article {
 
     $html = fill_in($layout, $article);
 
-    make_path "generated/$article->{dir}";
-    open my $handle, '>', "generated/$article->{file}";
+    make_path "$outdir/$article->{dir}";
+    open my $handle, '>', "$outdir/$article->{file}";
     print $handle $html;
 }
 
@@ -168,7 +169,7 @@ sub generate_index {
 
     $posts = qq[<ul id="posts">$posts</ul>];
 
-    open my $handle, '>', 'generated/index.html';
+    open my $handle, '>', "$outdir/index.html";
     print $handle fill_in($layout, {
         content => $posts,
         title   => $title,
@@ -176,7 +177,7 @@ sub generate_index {
 }
 
 sub generate_about {
-    open my $handle, '>', 'generated/about.html';
+    open my $handle, '>', "$outdir/about.html";
     print $handle fill_in($layout, {
         content => scalar slurp('about.html'),
         title   => 'About Me',
@@ -184,7 +185,7 @@ sub generate_about {
 }
 
 sub generate_talks {
-    open my $handle, '>', 'generated/talks.html';
+    open my $handle, '>', "$outdir/talks.html";
     print $handle fill_in($layout, {
         content => scalar slurp('talks.html'),
         title   => 'Talks',
@@ -215,7 +216,7 @@ sub generate_atom {
         $feed->add_entry($entry);
     };
 
-    open my $handle, '>', 'generated/atom.xml';
+    open my $handle, '>', "$outdir/atom.xml";
     print $handle $feed->as_xml;
 }
 
@@ -241,9 +242,9 @@ sub generate_rss {
         );
     };
 
-    $feed->save('generated/rss.xml');
+    $feed->save("$outdir/rss.xml");
 }
 
 sub generate_css {
-    system(cp => 'style.css' => 'generated/');
+    system(cp => 'style.css' => "$outdir/");
 }
