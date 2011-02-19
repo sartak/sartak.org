@@ -67,6 +67,7 @@ sub fill_in {
     my $template = shift;
     my $vars     = shift;
 
+    $template =~ s/{now}/scalar gmtime/eg;
     $template =~ s/{(\w+)}/$vars->{$1}/g;
 
     return $template;
