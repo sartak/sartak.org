@@ -31,7 +31,7 @@ sub read_content_html {
 
 sub read_content_pl {
     my $file = shift;
-    open my $handle, '-|', "perl '$file'";
+    open my $handle, '-|', "perl -Ilib '$file'";
     return join "", <$handle>;
 }
 
