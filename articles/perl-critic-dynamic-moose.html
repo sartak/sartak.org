@@ -5,13 +5,13 @@ date: 2009-05-03
 
 <h3>CPAN?</h3>
 
-<p><tt>Perl::Critic::Dynamic::Moose</tt> is not on CPAN yet because <tt>Perl::Critic</tt> does not currently distinguish between "safe" (static) and "possibly unsafe" (dynamic) policies. <tt>Perl::Critic</tt> usually works by statically inspecting some Perl document. This allows users to <a href="http://perlcritic.com/">critique untrusted code</a>. Most of the policies I wrote are <i>dynamic</i>. These dynamic policies work by executing the code to be critiqued, then analyzing any new metaclasses that were created. While this limits their utility to analyzing only trusted code, this dynamicism does magnify analytic potential. Instead of inspecting <a href="http://search.cpan.org/~adamk/PPI/lib/PPI.pm">PPI</a> DOMs, these policies can inspect any and every metaobject in the system. A large part of why the metaobject protocol exists is for sane and consistent inspection, so these dynamic policies work well.</p>
+<p><tt>Perl::Critic::Dynamic::Moose</tt> is not on CPAN yet because <tt>Perl::Critic</tt> does not currently distinguish between "safe" (static) and "possibly unsafe" (dynamic) policies. <tt>Perl::Critic</tt> usually works by statically inspecting some Perl document. This allows users to <a href="http://perlcritic.com/">critique untrusted code</a>. Most of the policies I wrote are <i>dynamic</i>. These dynamic policies work by executing the code to be critiqued, then analyzing any new metaclasses that were created. While this limits their utility to analyzing only trusted code, this dynamicism does magnify analytic potential. Instead of inspecting <a href="http://p3rl.org/PPI">PPI</a> DOMs, these policies can inspect any and every metaobject in the system. A large part of why the metaobject protocol exists is for sane and consistent inspection, so these dynamic policies work well.</p>
 
-<p>Anyway, <tt>Perl::Critic</tt> uses <a href="http://search.cpan.org/~simonw/Module-Pluggable/lib/Module/Pluggable.pm"><tt>Module::Pluggable</tt></a> to unconditionally load every module in the <tt>Perl::Critic::Policy</tt> namespace. It would be harmful to add unsafe modules to that namespace, so I am going to make sure that a new <tt>Perl::Critic</tt> that runs only safe policies is released before I begin publishing dynamic policies. It should be a very simple matter of programming...</p>
+<p>Anyway, <tt>Perl::Critic</tt> uses <a href="http://p3rl.org/Module::Pluggable"><tt>Module::Pluggable</tt></a> to unconditionally load every module in the <tt>Perl::Critic::Policy</tt> namespace. It would be harmful to add unsafe modules to that namespace, so I am going to make sure that a new <tt>Perl::Critic</tt> that runs only safe policies is released before I begin publishing dynamic policies. It should be a very simple matter of programming...</p>
 
 <h3>Perl::Critic::DynamicMoosePolicy</h3>
 
-<p><tt>Perl::Critic::DynamicMoosePolicy</tt> is a base class for dynamic Moose policies. It's written, of course, with Moose (extending <tt>Perl::Critic::Policy</tt> using <a href="http://search.cpan.org/~doy/MooseX-NonMoose/lib/MooseX/NonMoose.pm"><tt>MooseX::NonMoose</tt></a>). It does the things that every dynamic Moose policy needs to do:</p>
+<p><tt>Perl::Critic::DynamicMoosePolicy</tt> is a base class for dynamic Moose policies. It's written, of course, with Moose (extending <tt>Perl::Critic::Policy</tt> using <a href="http://p3rl.org/MooseX::NonMoose"><tt>MooseX::NonMoose</tt></a>). It does the things that every dynamic Moose policy needs to do:</p>
 
 <ol>
 <li>Compile the document being analyzed</li>
@@ -23,7 +23,7 @@ date: 2009-05-03
 
 <p>Since this analysis is entirely divorced from the source code, it is impossible (in general) to provide a useful file and line number pointing to the violation. Instead of making each policy provide an arbitrary location in the document for violations, <tt>DynamicMoosePolicy</tt> just does it for you. If you're combining PPI and metaobject inspection, then you can of course provide a more useful violation location when you have one. Instead of a location, I recommend that you be as detailed as possible in your error report (include the class name!)</p>
 
-<p><a href="http://search.cpan.org/~thaljef/Perl-Critic-Dynamic/lib/Perl/Critic/DynamicPolicy.pm"><tt>Perl::Critic::DynamicPolicy</tt></a> runs each policy in a forked process, to prevent the analyzed code from mucking with the analyzing process's operation. Dynamic policies communicate violations with perlcritic via a <a href="http://perldoc.perl.org/functions/pipe.html">parent-child pipe</a>, with all violation objects frozen and thawed with <a href="http://search.cpan.org/~ams/Storable/Storable.pm">Storable</a>. This means your violations cannot include code references (such as those created by <a href="http://search.cpan.org/~jesse/Scalar-Defer/lib/Scalar/Defer.pm"><tt>Scalar::Defer</tt></a>), or anything else that <tt>Storable</tt> cannot handle. I spent a while scratching my head trying to figure out what was causing this error:</p>
+<p><a href="http://p3rl.org/Perl::Critic::DynamicPolicy"><tt>Perl::Critic::DynamicPolicy</tt></a> runs each policy in a forked process, to prevent the analyzed code from mucking with the analyzing process's operation. Dynamic policies communicate violations with perlcritic via a <a href="http://perldoc.perl.org/functions/pipe.html">parent-child pipe</a>, with all violation objects frozen and thawed with <a href="http://p3rl.org/Storable">Storable</a>. This means your violations cannot include code references (such as those created by <a href="http://p3rl.org/Scalar::Defer"><tt>Scalar::Defer</tt></a>), or anything else that <tt>Storable</tt> cannot handle. I spent a while scratching my head trying to figure out what was causing this error:</p>
 
 <p><tt>Cannot restore overloading on HASH(0xc42f0c) (package &lt;unknown&gt;) at blib/lib/Storable.pm  (autosplit into blib/lib/auto/Storable/thaw.al) line 415</tt></p>
 
@@ -31,7 +31,7 @@ date: 2009-05-03
 
 <h4>augment/inner</h4>
 
-<p>Policies may define a <tt>applies_to_metaclass</tt> method that filters for only the metaclasses that sensibly apply. I utilized the rarely-seen <a href="http://search.cpan.org/~drolsky/Moose/lib/Moose/Cookbook/Basics/Recipe6.pod"><tt>augment</tt> and <tt>inner</tt></a> for this method (as well as <tt>default_themes</tt>). The default implementation of <tt>applies_to_metaclass</tt> is:
+<p>Policies may define a <tt>applies_to_metaclass</tt> method that filters for only the metaclasses that sensibly apply. I utilized the rarely-seen <a href="http://p3rl.org/Moose::Cookbook::Basics::Recipe6"><tt>augment</tt> and <tt>inner</tt></a> for this method (as well as <tt>default_themes</tt>). The default implementation of <tt>applies_to_metaclass</tt> is:
 
 <table class="code_snippet">
  <tr>
@@ -128,7 +128,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>Next up is another easy policy. This is <em>by far</em> the simplest. It performs one simple check on the metaclass (<tt>is_immutable</tt>).</p>
 
-<p>Elliot Shank wrote <a href="http://search.cpan.org/~elliotjs/Perl-Critic-Moose/lib/Perl/Critic/Policy/Moose/RequireMakeImmutable.pm">Perl::Critic::Policy::Moose::RequireMakeImmutable</a>, a static policy that checks for <tt>__PACKAGE__-&gt;meta-&gt;make_immutable</tt>. There is room enough for both a static and a dynamic policy. Not every class can <tt>make_immutable</tt> in that specific way. Class::MOP, for example calls <tt>make_immutable</tt> on all of its classes at once. In other cases, the programmer may have accidentally forgotten to call <tt>make_immutable</tt> on a dynamically-generated class.</p>
+<p>Elliot Shank wrote <a href="http://p3rl.org/Perl::Critic::Policy::Moose::RequireMakeImmutable">Perl::Critic::Policy::Moose::RequireMakeImmutable</a>, a static policy that checks for <tt>__PACKAGE__-&gt;meta-&gt;make_immutable</tt>. There is room enough for both a static and a dynamic policy. Not every class can <tt>make_immutable</tt> in that specific way. Class::MOP, for example calls <tt>make_immutable</tt> on all of its classes at once. In other cases, the programmer may have accidentally forgotten to call <tt>make_immutable</tt> on a dynamically-generated class.</p>
 
 <p>As with most static policies, <tt>PCP::Moose::RequireMakeImmutable</tt> admirably handles the common cases, but might not handle strange corner cases well. Dynamic policies can fill such gaps.</p>
 
@@ -417,7 +417,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>The inside statement makes sure that the method was provided from the correct role, not just any role. If you sequentially apply <tt>Role::Dog</tt> then <tt>Role::Tree</tt>, you would want to know about the implicit override of Dog's <tt>bark</tt> method with Tree's.</p>
 
-<p>The inside statement also attempts to handle the method coming in from the same role multiple ways. Suppose you have a <tt>Foo::Basic</tt> role with a method <tt>kerplow</tt> that is consumed by both the <tt>Foo::Advanced</tt> and <tt>Foo::Safe</tt> roles. A class that sequentially consumes <tt>Foo::Advanced</tt> then <tt>Foo::Safe</tt> would get the <tt>kerplow</tt> method twice. But since it's the exact same implementation (i.e. the same code reference), it's not worth warning about. I trust that the programmer will utilize <a href="http://search.cpan.org/~thaljef/Test-Perl-Critic/lib/Test/Perl/Critic.pm"><tt>Test::Perl::Critic</tt></a>, so that the divergence of the two <tt>kerplow</tt> methods would become a violation.</p>
+<p>The inside statement also attempts to handle the method coming in from the same role multiple ways. Suppose you have a <tt>Foo::Basic</tt> role with a method <tt>kerplow</tt> that is consumed by both the <tt>Foo::Advanced</tt> and <tt>Foo::Safe</tt> roles. A class that sequentially consumes <tt>Foo::Advanced</tt> then <tt>Foo::Safe</tt> would get the <tt>kerplow</tt> method twice. But since it's the exact same implementation (i.e. the same code reference), it's not worth warning about. I trust that the programmer will utilize <a href="http://p3rl.org/Test::Perl::Critic"><tt>Test::Perl::Critic</tt></a>, so that the divergence of the two <tt>kerplow</tt> methods would become a violation.</p>
 
 <table class="code_snippet">
  <tr>
