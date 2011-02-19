@@ -7,7 +7,7 @@ date: 2009-05-12
 
 <h3>Example</h3>
 
-<p>My <a href="http://taeb-nethack.blogspot.com/">NetHack bot TAEB</a> has a <a href="https://github.com/sartak/TAEB/blob/master/lib/TAEB/Action/Role/Item.pm"><tt>TAEB::Action::Role::Item</tt></a> parameterized role. It accepts one parameter, a list of names for item attributes. These attributes (which specify a type constraint of <a href="http://search.cpan.org/~sartak/NetHack-Item/lib/NetHack/Item.pm"><tt>NetHack::Item</tt></a> and a custom "provided" trait) are added to the class upon composition. The role provides a few other things as well: a <tt>current_item</tt> attribute and a method for dealing with missing-item exceptions. The <tt>current_item</tt> attribute's value is a lazy default, pointing to the first item in the parameterized list of attribute names. This is an application of the well-trodden Don't Repeat Yourself principle &mdash; each class does not have to repeat its item attribute names. Parameterized roles are pretty good enablers of <i>DRY</i>!</p>
+<p>My <a href="http://taeb-nethack.blogspot.com/">NetHack bot TAEB</a> has a <a href="https://github.com/sartak/TAEB/blob/master/lib/TAEB/Action/Role/Item.pm"><tt>TAEB::Action::Role::Item</tt></a> parameterized role. It accepts one parameter, a list of names for item attributes. These attributes (which specify a type constraint of <a href="http://p3rl.org/NetHack::Item"><tt>NetHack::Item</tt></a> and a custom "provided" trait) are added to the class upon composition. The role provides a few other things as well: a <tt>current_item</tt> attribute and a method for dealing with missing-item exceptions. The <tt>current_item</tt> attribute's value is a lazy default, pointing to the first item in the parameterized list of attribute names. This is an application of the well-trodden Don't Repeat Yourself principle &mdash; each class does not have to repeat its item attribute names. Parameterized roles are pretty good enablers of <i>DRY</i>!</p>
 
 <p>Since NetHack is a <em>very</em> item-oriented game, this role has many consumers. The <a href="https://github.com/sartak/TAEB/blob/master/lib/TAEB/Action/Dip.pm"><tt>TAEB::Action::Dip</tt></a> consumer specifies <tt>item</tt> and <tt>into</tt> for the list of attribute names, so it gets those two attributes (as well as whatever else the role provides). Likewise, <a href="https://github.com/sartak/TAEB/blob/master/lib/TAEB/Action/Wield.pm"><tt>TAEB::Action::Wield</tt></a> gets a <tt>weapon</tt> attribute. Most of the consumers specify nothing for this parameter, so they get the default list of <tt>item</tt>. Consuming a parameterized role without specifying any parameters is syntactically identical to applying vanilla roles, which is a (minor) convenience.</p>
 
@@ -15,7 +15,7 @@ date: 2009-05-12
 
 <h3>Design</h3>
 
-<p>In December, I wrote the <a href="http://search.cpan.org/~sartak/MooseX-Role-Parameterized/lib/MooseX/Role/Parameterized.pm"><tt>MooseX::Role::Parameterized</tt></a> extension. I had grown tired of people (primarily myself!) putting off coding because the proper implementation of <i>whatever</i> demanded parameterized roles. I am not exaggerating:</p>
+<p>In December, I wrote the <a href="http://p3rl.org/MooseX::Role::Parameterized"><tt>MooseX::Role::Parameterized</tt></a> extension. I had grown tired of people (primarily myself!) putting off coding because the proper implementation of <i>whatever</i> demanded parameterized roles. I am not exaggerating:</p>
 
 <ul class="irc">
 <li>hoping once we have parameterised roles we can do that</li>
@@ -103,7 +103,7 @@ role {
  </tr>
 </table>
 
-<p>The <tt>role</tt> keyword exists for specifying the aforementioned role-building procedure. This is the unusual syntax. <a href="http://search.cpan.org/~flora/MooseX-Declare-0.22/lib/MooseX/Declare.pm"><tt>MooseX::Declare</tt></a> could improve upon this a lot, once some tuits are spent.</p>
+<p>The <tt>role</tt> keyword exists for specifying the aforementioned role-building procedure. This is the unusual syntax. <a href="http://p3rl.org/MooseX::Declare"><tt>MooseX::Declare</tt></a> could improve upon this a lot, once some tuits are spent.</p>
 
 <p>The <tt>method</tt> keyword is required (instead of the usual <tt>sub name { ... }</tt>) because Perl handles <em>named, inner subroutines</em> in a way that is not useful for this design. The details are many, but mostly unimportant. The salient point is that such subroutines do not properly close over <tt>$p</tt>, rendering them unparameterizable. The anonymous subroutine passed to <tt>method</tt> can properly capture <tt>$p</tt>. The <tt>method</tt> keyword has a fringe benefit over <tt>sub</tt> in easing the parameterization of the method's name.</p>
 
