@@ -107,12 +107,15 @@ while (my $file = glob("articles/*")) {
 sub each_article (&) {
     my $code = shift;
     my @articles = map { @{ $articles{$_} } } reverse sort keys %articles;
+
+    @articles = grep { !$_->{draft} } @articles;
+
     for (my $i = 0; $i < @articles; ++$i) {
         $code->($articles[$i], $articles[$i+1], ($i == 0 ? undef : $articles[$i-1]));
     }
 }
 
-each_article {
+sub generate_article {
     my ($article, $prev, $next) = @_;
 
     my $html = qq[<div id="post">$article->{content}<hr><span id="nextprevlinks">];
@@ -127,7 +130,15 @@ each_article {
     make_path "generated/$article->{dir}";
     open my $handle, '>', "generated/$article->{file}";
     print $handle $html;
+}
+
+each_article {
+    generate_article(@_);
 };
+
+for my $article (grep { $_->{draft} } @articles) {
+    generate_article($article);
+}
 
 generate_index();
 generate_about();
