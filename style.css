@@ -94,7 +94,6 @@ sub {
 
 .code_snippet {
     width: 100%;
-    border-collapse: collapse;
     white-space: pre;
     font-family: monospace;
 }
