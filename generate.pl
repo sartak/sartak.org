@@ -104,11 +104,12 @@ while (my $file = glob("articles/*")) {
     push @{ $articles{ $article->{date} } }, $article;
 }
 
+my @articles = map { @{ $articles{$_} } } reverse sort keys %articles;
+
 sub each_article (&) {
     my $code = shift;
-    my @articles = map { @{ $articles{$_} } } reverse sort keys %articles;
 
-    @articles = grep { !$_->{draft} } @articles;
+    my @articles = grep { !$_->{draft} } @articles;
 
     for (my $i = 0; $i < @articles; ++$i) {
         $code->($articles[$i], $articles[$i+1], ($i == 0 ? undef : $articles[$i-1]));
