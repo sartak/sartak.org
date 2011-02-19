@@ -95,6 +95,8 @@ my %articles;
 while (my $file = glob("articles/*")) {
     my $content = read_content($file);
     my $article = new_article($content);
+    next if $article->{skip};
+
     $article->{dir} = date_dir($article->{date});
     $article->{file} = $article->{dir} . titleify($article->{title}) . '.html';
     $article->{url} = "http://preview.sartak.org/$article->{file}";
