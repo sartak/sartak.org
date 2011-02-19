@@ -155,6 +155,7 @@ generate_talks();
 #generate_atom();
 generate_rss();
 generate_css();
+generate_favicon();
 
 sub generate_index {
     my $posts;
@@ -247,4 +248,8 @@ sub generate_rss {
 
 sub generate_css {
     system(cp => 'style.css' => "$outdir/");
+}
+
+sub generate_favicon {
+    system(cp => 'favicon.ico' => "$outdir/");
 }
