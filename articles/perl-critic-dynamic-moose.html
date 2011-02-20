@@ -121,10 +121,9 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
  </tr>
 </table>
 
-<p><tt>get_attribute_list</tt> returns the names of attributes defined in this <em>local</em> class. Inherite attributes are not considered. I figure you would be running these policies on every class and role in your project anyway.</p>
+<p><tt>get_attribute_list</tt> returns the names of attributes defined in this <em>local</em> class. Inherited attributes are not considered. I figure you would be running these policies on every class and role in your project anyway.</p>
 
 <h3>PCP::DynamicMoose::RequireMakeImmutable</h3>
-
 
 <p>Next up is another easy policy. This is <em>by far</em> the simplest. It performs one simple check on the metaclass (<tt>is_immutable</tt>).</p>
 
