@@ -108,6 +108,9 @@ sub {
     padding-left: 1em;
     color: #DDDDDD;
     background: black none;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
 .synComment       { color: #DDDD00 }
