@@ -39,7 +39,7 @@ date: 2009-05-12
 
 <p><tt>MooseX::Role::Parameterized</tt> works, in short, by executing a procedure for each role application. This procedure takes as an argument a "parameters" object. It is executed in the dynamic extent of an anonymous role metaobject. All of the usual role keywords (<tt>has</tt>, <tt>around</tt>, <tt>requires</tt>, etc) operate on this anonymous role. The procedure may use the "parameters" object in building up the role using these keywords.</p>
 
-<p>This is also a reasonable description of how vanilla roles are created, from a backstage point-of-view. The primary difference is that the procedure is only ever executed once for vanilla roles, whereas it is executed potentially many times for parameterized roles.</p>
+<p>This is also a reasonable description of how vanilla roles are created, from a backstage point-of-view. The primary difference is that the procedure is only ever executed once for vanilla roles, whereas it is executed potentially many times, building up a different role metaobject each time, for parameterized roles.</p>
 
 <p>This difference is precisely what makes the syntax of <tt>MooseX::Role::Parameterized</tt> slightly unusual, at least in the context of core Moose:</p>
 
