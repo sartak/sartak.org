@@ -1,7 +1,7 @@
 title: Jifty's Request Inspector
 date: 2009-10-07
 
-<p><a href="http://jifty.org">Jifty</a>'s <a href="http://p3rl.org/Jifty::Plugin::RequestInspector">RequestInspector plugin</a> provides you with debugging information for HTTP requests. You can examine the SQL queries that were issued in servicing the request, inspect a <a href="http://p3rl.org/Devel::NYTProf">Devel::NYTProf</a> profile of the request, and more. The information is presented in an (admittedly ugly) admin panel. Here's what our <a href="http://changelogger.bestpractical.com">Changelogger</a>'s request inspector page looks like:</p>
+<p><a href="http://jifty.org">Jifty</a>'s <a href="http://p3rl.org/Jifty::Plugin::RequestInspector">RequestInspector plugin</a> provides you with debugging information for HTTP requests. You can examine the SQL queries that were issued in servicing the request, inspect a <a href="http://p3rl.org/Devel::NYTProf">Devel::NYTProf</a> profile of the request, and more. The information is presented in an (admittedly ugly) admin panel. Here's what our <a href="https://github.com/bestpractical/App-Changeloggr">Changelogger</a>'s request inspector page looks like:</p>
 
 <img src="http://sartak.org/misc/blog/requestinspector-basic.png" />
 
@@ -17,7 +17,7 @@ date: 2009-10-07
 
 <p>The frontend is good enough. It gets the job done. But what I am really interested in, and what I had far more fun creating, is the backend that powers this.</p>
 
-<p>RequestInspector is a Jifty plugin. Its job is to manage all of the other plugins that inspect requests (such as SQLQueries, DumpRequestResponse, NYTProf, and Gladiator). RequestInspector informs the plugins of interesting events such as: a new request is beginning, that request finished.</p>
+<p>RequestInspector is a Jifty plugin. Its job is to manage all of the other plugins that inspect requests (such as <a href="http://p3rl.org/Jifty::Plugin::SQLQueries">SQLQueries</a>, <a href="http://p3rl.org/Jifty::Plugin::DumpRequestResponse">DumpRequestResponse</a>, <a href="http://p3rl.org/Jifty::Plugin::NYTProf">NYTProf</a>, and <a href="http://p3rl.org/Jifty::Plugin::Gladiator">Gladiator</a>). RequestInspector informs the plugins of interesting events such as: a new request is beginning, that request finished.</p>
 
 <p>Each plugin produces various kinds of data. That data is <em>completely opaque</em> to RequestInspector. The data can be an object, a number, a code reference, or whatever else. All RequestInspector does is keep track of that data, handing the data to the plugin when it needs to do something with the data.</p>
 
