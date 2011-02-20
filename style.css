@@ -113,6 +113,14 @@ sub {
     border-radius: 10px;
 }
 
+/* a cool idea - show scroll bar only when you hover over a code snippet */
+.highlighted_code {
+    overflow: hidden;
+}
+.highlighted_code:hover {
+    overflow: auto;
+}
+
 .synComment       { color: #DDDD00 }
 .synConstant      { color: #DD0000 }
 .synIdentifier    { color: #00DDDD }
