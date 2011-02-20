@@ -56,7 +56,7 @@ sub new_article {
 
     if (!$headers{date}) {
         warn "No date for $headers{title}!" if !$headers{draft};
-        (undef,undef,undef,$day,$mon,$year) = localtime;
+        my (undef,undef,undef,$day,$mon,$year) = localtime;
         $mon++;
         $year += 1900;
         $headers{date} = "$year-$mon-$day";
