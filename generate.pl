@@ -98,7 +98,13 @@ while (my $file = glob("articles/*")) {
     my $article = new_article($content);
     next if $article->{skip};
 
-    $article->{dir} = date_dir($article->{date});
+    if ($article->{draft}) {
+        $article->{dir} = 'drafts/';
+    }
+    else {
+        $article->{dir} = date_dir($article->{date});
+    }
+
     $article->{file} = $article->{dir} . titleify($article->{title}) . '.html';
     $article->{url} = "http://sartak.org/$article->{file}";
 
