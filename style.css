@@ -100,7 +100,7 @@ sub {
 
 .line_numbers {
     text-align: right;
-    max-width: 3em;
+    width: 3em;
     padding-right: .5em;
 }
 
