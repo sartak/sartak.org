@@ -108,7 +108,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$name</span> (<span class="synIdentifier">$meta-&gt;get_attribute_list</span>) {
     <span class="synStatement">my</span> <span class="synIdentifier">$attribute</span> = <span class="synIdentifier">$meta-&gt;get_attribute</span>(<span class="synIdentifier">$name</span>);
 
-    <span class="synStatement">my</spa> <span class="synIdentifier">$builder</span> = <span class="synIdentifier">$attribute-&gt;builder</span>
+    <span class="synStatement">my</span> <span class="synIdentifier">$builder</span> = <span class="synIdentifier">$attribute-&gt;builder</span>
         <span class="synStatement">or</span> <span class="synStatement">next</span>;
 
     <span class="synStatement">if</span> (<span class="synIdentifier">$builder</span> !~ <span class="synStatement">/</span><span class="synConstant">^_</span><span class="synStatement">/</span>) {
