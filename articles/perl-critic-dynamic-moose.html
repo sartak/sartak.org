@@ -319,7 +319,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>Ahhh, the violation that launched a thousand comments. I've already <a href="/2009/04/the-new-moose-warning-and-the-new-moose-critic.html">summed up the what and the why</a> of this violation.</p>
 
-<p>I wrote this policy today. It required keeping track of more metadata in Moose. There exist a handful of <tt>Moose::Meta::Role::Application</tt> classes, which track, among other things, an application of a role to a class. We were creating these objects but then discarding them once the application was completed. Instead, we now keep track of them. Progress!</p>
+<p>I wrote this policy today. It required keeping track of more metadata in Moose. There exist a handful of <tt>Moose::Meta::Role::Application</tt> classes, which track, among other things, an application of a role to a class. We were creating these objects but then discarding them once the application was completed. Instead, I improved Moose so we now keep track of them. Progress!</p>
 
 <p>Let's walk through this implementation as well.</p>
 
