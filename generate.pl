@@ -146,6 +146,7 @@ each_article {
 
 for my $article (grep { $_->{draft} } @articles) {
     generate_article($article);
+    print $article->{url} . "\n";
 }
 
 generate_index();
