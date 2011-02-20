@@ -31,6 +31,8 @@ date: 2009-05-12
 <li>"that <em>sounds</em> like parameterized roles, which someone should implement some time"</li>
 </ul>
 
+<p>I think the biggest roadblock in the way of implementing a parameterized role system was Moose's lack of support for anonymous roles. So I did that hard part first then wrote <a href="http://p3rl.org/MooseX::Role::Parameterized">MooseX::Role::Parameterized</a>.</p>
+
 <p>Designers of parameterized role systems (perhaps three or four of us by now?) must decide how much freedom each role is given. How much parameterizability is permissible? In <tt>MooseX::Role::Parameterized</tt>, and <a href="http://rakudo.org/2009/01/parametric-roles.html">Perl 6's parametric roles</a>, there are <strong>no</strong> limitations. You can parameterize anything.</p>
 
 <p>Maximizing your user's freedom is certainly laudable, but I am not convinced that it is <em>completely</em> beneficial. There is value in stricture, for example, to improve the efficacy of class/role browsers. I will leave such meditations for the next parameterized role designer. At least for Moose, we have several more chances to get the design right; there are plenty of other namespaces available on CPAN: <tt>MooseX::Role::Parametric</tt>, <tt>MooseX::Role::Parameterizable</tt>, <tt>MooseX::Role::Parameterised</tt>, and so on.</p>
