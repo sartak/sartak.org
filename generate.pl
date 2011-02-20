@@ -185,7 +185,8 @@ sub generate_about {
 }
 
 sub generate_talks {
-    open my $handle, '>', "$outdir/talks.html";
+    make_path "$outdir/talks" unless -d "$outdir/talks";
+    open my $handle, '>', "$outdir/talks/index.html";
     print $handle fill_in($layout, {
         content => scalar slurp('talks.html'),
         title   => 'Talks',
