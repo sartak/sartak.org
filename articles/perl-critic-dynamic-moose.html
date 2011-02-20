@@ -455,10 +455,9 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <h3>PCP::Moose::ProhibitMultipleWiths</h3>
 
-<p>I did write one static policy, which prohibits multiple calls to <tt>with</tt> in one package. Roles provide powerful and safe means of combination, but these are only activated if you actually <em>combine</em> the roles. If you sequentially apply multiple roles to a class, conflicting method names are silently ignored. This could possibly be fixed in the future, but for now we'll have to live with this behavior. At least we can now warn ou about it.</p>
+<p>I did write one static policy, which prohibits multiple calls to <tt>with</tt> in one package. Roles provide powerful and safe means of combination, but these are only activated if you actually <em>combine</em> the roles. If you sequentially apply multiple roles to a class, conflicting method names are silently ignored. This could possibly be fixed in the future, but for now we'll have to live with this behavior. At least we can now warn you about it.</p>
 
 <p>This implementation is pretty simple as far as <tt>Perl::Critic</tt> policies go. I wrote this one as a static policy because PPI-based analysis is still very worthwhile. It actually would have been easier to implement dynamically. However, as I explained earlier, you would lose out the "location" of the violation &mdash; the second <tt>with</tt>.</p>
-
 
 <h3>Conclusion</h3>
 
