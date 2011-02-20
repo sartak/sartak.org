@@ -465,7 +465,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>As far as writing more policies, I think it's largely limited by creativity. I was able to write all the policies I wanted. There were some hairy bits, but mostly it was quite pleasant and a novel use of the metaobject protocol.</p>
 
-<p>Ovid has submitted a bug to the Moose RT queue: <a href="http://rt.cpan.org/Public/Bug/Display.html?id=45591">Excluded methods should be added to 'requires'</a>. I'm not sure I agree with his assertion that "since My::Class-&gt;meta-&gt;does('My::Role::Foo'), there's a promise that it will provide the &foo method". Since this may not make it into core Moose, I invite Ovid to write a policy covering this case. It would look quite similar to the <tt>ClassOverridesRole</tt> policy.</p>
+<p>Ovid has submitted a bug to the Moose RT queue: <a href="http://rt.cpan.org/Public/Bug/Display.html?id=45591">Excluded methods should be added to 'requires'</a>. I'm not sure I agree with his assertion that "since <tt>My::Class-&gt;meta-&gt;does('My::Role::Foo')</tt>, there's a promise that it will provide the <tt>&foo</tt> method". Since this may not make it into core Moose, I invite Ovid to write a policy covering this case. It would look quite similar to the <tt>ClassOverridesRole</tt> policy.</p>
 
 <p>If you have ideas for more policies, or (better yet) would like help implementing them, get in touch with me! I'd be thrilled to help you out.</p>
 
