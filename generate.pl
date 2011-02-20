@@ -100,7 +100,7 @@ while (my $file = glob("articles/*")) {
 
     $article->{dir} = date_dir($article->{date});
     $article->{file} = $article->{dir} . titleify($article->{title}) . '.html';
-    $article->{url} = "http://preview.sartak.org/$article->{file}";
+    $article->{url} = "http://sartak.org/$article->{file}";
 
     push @{ $articles{ $article->{date} } }, $article;
 }
@@ -199,7 +199,7 @@ sub generate_atom {
 
     my $feed = XML::Atom::Feed->new(Version => 1.0);
     $feed->title($title);
-    $feed->id('http://preview.sartak.org');
+    $feed->id('http://sartak.org');
 
     my $author = XML::Atom::Person->new;
     $author->name('Shawn M Moore');
@@ -226,7 +226,7 @@ sub generate_rss {
     my $feed = XML::RSS->new(version => '1.0');
     $feed->channel(
         title => $title,
-        link  => 'http://preview.sartak.org',
+        link  => 'http://sartak.org',
     );
 
     each_article {
