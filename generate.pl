@@ -54,6 +54,14 @@ sub new_article {
 
     $headers{original} = $content;
 
+    if (!$headers{date}) {
+        warn "No date for $headers{title}!" if !$headers{draft};
+        (undef,undef,undef,$day,$mon,$year) = localtime;
+        $mon++;
+        $year += 1900;
+        $headers{date} = "$year-$mon-$day";
+    }
+
     my $date = prettify_date($headers{date});
 
     $content = qq[<span id="date">$date</span>\n<h1 id="title">$headers{title}</h1>\n$content];
