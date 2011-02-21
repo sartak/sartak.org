@@ -11,8 +11,8 @@ $Template::Declare::Tags::SKIP_XML_ESCAPING = 1;
 Template::Declare->init(postprocessor => sub {
     my $out = shift;
 
-    # [Module::Name]
-    $out =~ s{\[(\w+(::\w+)*)\]}{<a href="http://p3rl.org/$1">$1</a>}g;
+    # [Module::Name] but not [1]
+    $out =~ s{\[((?!\d+\])\w+(::\w+)*)\]}{<a href="http://p3rl.org/$1">$1</a>}g;
 
     $out = markdown($out);
 
