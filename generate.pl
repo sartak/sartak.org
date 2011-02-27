@@ -201,7 +201,7 @@ sub generate_drafts {
 
     $posts = qq[<ul id="posts">$posts</ul>];
 
-    open my $handle, '>', "$outdir/drafts.html";
+    open my $handle, '>', "$outdir/drafts/index.html";
     print $handle fill_in($layout, {
         content => $posts,
         title   => $title,
