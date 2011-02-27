@@ -164,6 +164,7 @@ for my $article (grep { $_->{draft} } @articles) {
 }
 
 generate_index();
+generate_drafts();
 generate_about();
 generate_talks();
 #generate_atom();
@@ -185,6 +186,25 @@ sub generate_index {
     $posts = qq[<ul id="posts">$posts</ul>];
 
     open my $handle, '>', "$outdir/index.html";
+    print $handle fill_in($layout, {
+        content => $posts,
+        title   => $title,
+    });
+}
+
+sub generate_drafts {
+    my $posts;
+    for my $article (grep { $_->{draft} } @articles) {
+        my $date = prettify_date($article->{date});
+        $posts .= qq[<li>
+    <span class="date">$date</span>
+    <span class="title"><a href="$article->{url}">$article->{title}</a></span>
+</li>];
+    };
+
+    $posts = qq[<ul id="posts">$posts</ul>];
+
+    open my $handle, '>', "$outdir/drafts.html";
     print $handle fill_in($layout, {
         content => $posts,
         title   => $title,
