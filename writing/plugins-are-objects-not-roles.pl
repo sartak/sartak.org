@@ -37,7 +37,7 @@ h3 { "Plugins as Objects with Roles" };
 h3 { "Fight!" };
 
 # separation of concerns
-p { "Treating plugins as roles, as in MXOP, encourages the \"god object\" design antipattern. Because [MooseX::Plugins] plugins are delegate objects and are not composed into the owner object, separation of concerns is neatly maintained." };
+p { "Treating plugins as roles, as in MXOP, encourages the \"god object\" design antipattern. Because object-based plugins are delegate objects and are not composed into the owner object, separation of concerns is neatly maintained." };
 
 #modularization
 p { "Each plugin, because it's a class, gets its own namespace, so plugin authors do not need to worry about depleting or polluting the owner's namespace." };
@@ -62,5 +62,5 @@ p { "Plugins must consume roles to effect any behavior changes. Because consumin
 
 # refactorability
 
-p { "`MooseX::Object::Pluggable` relies primarily on method modifiers to achieve behavior extension. This means that the application designer cannot simply refactor methods that are wrapped by plugins without breaking them. The application designer has complete control over L<MooseX::Plugins> hook points. Moving a hook point in use by several plugins can be done safely and without backwards compatibility issues." };
+p { "`MooseX::Object::Pluggable` relies primarily on method modifiers to achieve behavior extension. This means that the application designer cannot simply refactor methods that are wrapped by plugins without breaking them. The application designer has complete control over object-based-plugin hook points. Moving a hook point in use by several plugins can be done safely and without backwards compatibility issues." };
 
