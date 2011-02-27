@@ -156,7 +156,7 @@ sub {
 }
 
 .xyzzy {
-    visibility: none;
+    visibility: hidden;
 }
 .xyzzy:hover {
     visibility: visible;
