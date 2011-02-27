@@ -101,7 +101,7 @@ sub date_dir {
 
 my %articles;
 
-while (my $file = glob("articles/*")) {
+while (my $file = glob("published/* writing/*")) {
     my $content = read_content($file);
     my $article = new_article($content);
     next if $article->{skip};
