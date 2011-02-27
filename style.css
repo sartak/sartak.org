@@ -156,9 +156,9 @@ sub {
 }
 
 .xyzzy {
-    visibility: hidden;
+    color: white;
 }
 .xyzzy:hover {
-    visibility: visible;
+    color: black;
 }
 
