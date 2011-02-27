@@ -2,11 +2,11 @@ use Sartak::Blog;
 
 BEGIN { print "title: Plugins are Objects not Roles\ndraft: 1\n" }
 
-p { "Say you're writing a reasonably complex application and you want to support plugins, both to support optional functionality and to promote open extensibility. If you're doing this with [Moose](http://moose.perl.org), you have a number of options. Today I'm here to talk about plugins based on [roles](http://www.modernperlbooks.com/mt/2009/04/the-why-of-perl-roles.html)." };
+p { "Say you're banging out a complex application and you want it to support plugins, both to enable optional functionality and to promote open extensibility. If you're doing this with [Moose](http://moose.perl.org), you have a number of options for getting plugins. Today I'm here to talk about plugins based on [roles](http://www.modernperlbooks.com/mt/2009/04/the-why-of-perl-roles.html)." };
 
 h3 { "Plugins as Roles" };
 
-p { "Because you can apply a melange of roles to an object, it is alluring to design a system whereby each plugin is a role to be applied directly to the pluggable object. For Moose, `[MooseX::Object::Pluggable]` provides this for you with a minimum of fuss. Just consume the `MooseX::Object::Pluggable` role and call `load_plugin`." };
+p { "Because you can apply a melange of roles to an object, it is alluring to design a system whereby *each plugin is a role* to be applied directly to the pluggable object. For Moose, `[MooseX::Object::Pluggable]` provides this for you with a minimum of fuss. Just consume the `MooseX::Object::Pluggable` role and call `load_plugin`." };
 
 perl << 'EOP';
 package App;
@@ -33,6 +33,7 @@ p { "`[Devel::REPL]` in particular makes heavy use of `MooseX::Object::Pluggable
 
 h3 { "Plugins as Objects with Roles" };
 
+p { "Another option, which I will argue is superior, is that *each plugin is an object consuming roles*." };
 
 h3 { "Fight!" };
 
