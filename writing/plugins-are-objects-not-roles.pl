@@ -13,14 +13,19 @@ package App;
 use Moose;
 with 'MooseX::Object::Pluggable';
 
-package App::Plugin::Foo;
-use Moose::Role;
+sub echo { say "echo echo echo" }
 
-sub foo { print "This is a plugin method" }
+package App::Plugin::TimedEcho;
+use Moose::Role;
+use DateTime;
+
+before echo => sub { print DateTime->now . ': ' };
 
 my $app = App->new;
-$app->load_plugin('Foo'); # applies App::Plugin::Foo to $app
-$app->foo; # This is a plugin method 
+$app->echo; # echo echo echo
+
+$app->load_plugin('TimedEcho'); # applies App::Plugin::TimedEcho to $app
+$app->echo; # 2011-02-27T23:09:23: echo echo echo
 EOP
 
 p {
