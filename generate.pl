@@ -158,11 +158,6 @@ each_article {
     generate_article(@_);
 };
 
-for my $article (grep { $_->{draft} } @articles) {
-    generate_article($article);
-    print $article->{url} . "\n";
-}
-
 generate_index();
 generate_drafts();
 generate_about();
@@ -195,6 +190,8 @@ sub generate_index {
 sub generate_drafts {
     my $posts;
     for my $article (grep { $_->{draft} } @articles) {
+        generate_article($article);
+
         my $date = prettify_date($article->{date});
         $posts .= qq[<li>
     <span class="date">$date</span>
