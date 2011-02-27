@@ -31,6 +31,11 @@ p {
 
 p { "`[Devel::REPL]` in particular makes heavy use of `MooseX::Object::Pluggable`. This project exposes each of its features as a plugin so that each can be enabled and disabled - and superseded - at the user's whim. For example `[Devel::REPL::Plugin::MultiLine::PPI]` wraps `Devel::REPL`'s `read` method to use `[PPI]` to test if the input is complete, and if not, read another line. This lets you type in `for (1 .. 10) {` and hit enter without an immediate syntax error for missing the corresponding `}`. And of course if a better `PPI` comes along, someone can write a new `Devel::REPL::Plugin::MultiLine::PPI6` that uses that new system and people can switch over to the new plugin at their leisure." };
 
+h3 { "Plugins as Objects with Roles" };
+
+
+h3 { "Fight!" };
+
 __END__
 
 =item separation of concerns
