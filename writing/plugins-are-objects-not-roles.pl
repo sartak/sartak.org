@@ -4,7 +4,7 @@ BEGIN { print "title: Plugins are Objects not Roles\ndraft: 1\n" }
 
 p { "Say you're writing a reasonably complex application and you want to support plugins, both to support optional functionality and to promote open extensibility. If you're doing this with [Moose](http://moose.perl.org), you have a number of options. Today I'm here to talk about plugins based on [roles](http://www.modernperlbooks.com/mt/2009/04/the-why-of-perl-roles.html)." };
 
-h3 { "Roles as Plugins" };
+h3 { "Plugins as Roles" };
 
 p { "Because you can apply a melange of roles to an object, it is alluring to design a system whereby each plugin is a role to be applied directly to the pluggable object. For Moose, [MooseX::Object::Pluggable] provides this for you with a minimum of fuss:" };
 
