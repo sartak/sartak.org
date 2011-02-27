@@ -4,7 +4,9 @@ BEGIN { print "title: Role-Based Plugin Design\ndraft: 1\n" }
 
 p { "Say you're writing a reasonably complex application and you want to support plugins, both to support optional functionality and to promote open extensibility. If you're doing this with [Moose](http://moose.perl.org), you have a number of options. Today I'm here to talk about plugins based on [roles](http://www.modernperlbooks.com/mt/2009/04/the-why-of-perl-roles.html)." };
 
-p { "Roles are a solid basis for a plugin system. Because you can apply a melange of roles to an object, it is alluring to design a system whereby each plugin is a role to be applied directly to the pluggable object. For Moose, [MooseX::Object::Pluggable] provides this for you with a minimum of fuss:" };
+h3 { "Roles as Plugins" };
+
+p { "Because you can apply a melange of roles to an object, it is alluring to design a system whereby each plugin is a role to be applied directly to the pluggable object. For Moose, [MooseX::Object::Pluggable] provides this for you with a minimum of fuss:" };
 
 perl << 'EOP';
 package App;
