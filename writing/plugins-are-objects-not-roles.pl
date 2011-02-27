@@ -2,7 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: Plugins are Objects not Roles\ndraft: 1\n" }
 
-p { "Say you're banging out a complex application and you want it to support plugins, both to enable optional functionality and to promote open extensibility. If you're doing this with [Moose](http://moose.perl.org), you have a number of options for getting plugins. Today I'm here to talk about plugins based on [roles](http://www.modernperlbooks.com/mt/2009/04/the-why-of-perl-roles.html)." };
+p { "Say you're banging out a complex application and you want it to support plugins, both to enable optional functionality and to promote open extensibility. If you're doing this with [Moose](http://moose.perl.org), you have a number of options for getting plugins. Today I'm all about plugins based on [roles](http://www.modernperlbooks.com/mt/2009/04/the-why-of-perl-roles.html)." };
 
 h3 { "Plugins as Roles" };
 
