@@ -2,6 +2,8 @@ use Sartak::Blog;
 
 BEGIN { print "title: Role-Based Plugin Design\ndraft: 1\n" }
 
+p { "Say you're writing a reasonably complex application and you want to support plugins. If you're doing this with [Moose](http://moose.perl.org), you have a number of options." };
+
 p { "Roles are a solid basis for a plugin system. Because you can apply a melange of roles to an object, it is alluring to design a system whereby each plugin is a role to be applied directly to the pluggable object. For [Moose], [MooseX::Object::Pluggable] implements this style of architecture for you with a minimum of fuss:" };
 
 perl << 'EOP';
