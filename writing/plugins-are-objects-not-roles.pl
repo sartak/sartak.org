@@ -6,7 +6,7 @@ p { "Say you're banging out a complex application and you want it to support plu
 
 h3 { "Plugins as Roles" };
 
-p { "Because you can apply a melange of roles to an object, it is alluring to design a system whereby *each plugin is a role* to be applied directly to the pluggable object. For Moose, `[MooseX::Object::Pluggable]` provides this for you with a minimum of fuss. Just consume the `MooseX::Object::Pluggable` role and call `load_plugin`." };
+p { "Because you can apply a melange of roles to an object, it is alluring to design a system whereby **each plugin is a role** to be applied directly to the pluggable object. For Moose, `[MooseX::Object::Pluggable]` provides this for you with a minimum of fuss. Just consume the `MooseX::Object::Pluggable` role and call `load_plugin`." };
 
 perl << 'EOP';
 package App;
@@ -33,7 +33,7 @@ p { "`[Devel::REPL]` in particular makes heavy use of `MooseX::Object::Pluggable
 
 h3 { "Plugins as Objects with Roles" };
 
-p { "Another option, which I will argue is superior, is that *each plugin is an object consuming roles*." };
+p { "Another option, which I will argue is superior, is that **each plugin is an object consuming roles**." };
 
 h3 { "Fight!" };
 
