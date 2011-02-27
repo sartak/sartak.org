@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: Role-Based Plugin Design\ndraft: 1\n" }
+BEGIN { print "title: Plugins are Objects not Roles\ndraft: 1\n" }
 
 p { "Say you're writing a reasonably complex application and you want to support plugins, both to support optional functionality and to promote open extensibility. If you're doing this with [Moose](http://moose.perl.org), you have a number of options. Today I'm here to talk about plugins based on [roles](http://www.modernperlbooks.com/mt/2009/04/the-why-of-perl-roles.html)." };
 
@@ -29,7 +29,7 @@ p {
     outs "This empowers MooseX::Object::Pluggable style plugins to wrap any of the methods of the pluggable object. Needless to say, being able to run code before and after any method, and even to massage arguments and return values, is a powerful tool for extensibility.";
 };
 
-p { "[Devel::REPL] in particular makes heavy use of MooseX::Object::Pluggable. This project exposes each of its features as a plugin so that each can be enabled and disabled - and superseded - at the user's whim. For example [Devel::REPL::Plugin::MultiLine::PPI] wraps Devel::REPL's `read` method to use [PPI] to test if the input is complete, and if not, read another line. This lets you type in `for (1 .. 10) {` and hit enter without an immediate syntax error for missing the corresponding `}`. If someone creates a better [PPI] they can write a new Devel::REPL::Plugin::MultiLine that uses that new system and people can switch over to the new plugin at their leisure." };
+p { "[Devel::REPL] in particular makes heavy use of MooseX::Object::Pluggable. This project exposes each of its features as a plugin so that each can be enabled and disabled - and superseded - at the user's whim. For example [Devel::REPL::Plugin::MultiLine::PPI] wraps Devel::REPL's `read` method to use [PPI] to test if the input is complete, and if not, read another line. This lets you type in `for (1 .. 10) {` and hit enter without an immediate syntax error for missing the corresponding `}`. And of course if a better PPI comes along, someone can write a new Devel::REPL::Plugin::MultiLine::PPI6 that uses that new system and people can switch over to the new plugin at their leisure." };
 
 __END__
 
