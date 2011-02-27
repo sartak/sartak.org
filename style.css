@@ -155,3 +155,10 @@ sub {
     font-size: 1.1em;
 }
 
+.xyzzy {
+    visibility: none;
+}
+.xyzzy:hover {
+    visibility: visible;
+}
+
