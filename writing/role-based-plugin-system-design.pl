@@ -23,8 +23,8 @@ EOP
 
 p {
     outs "Moose roles support method modifiers to wrap existing methods during composition. This is a practical, but not strictly theoretically sound, extension of the original traits model.";
-    footnote { "Roles are supposed to have the same effects no matter which order you consume them in, but method modifiers let you break this rule. Moose continues to support method modifiers in roles because the feature is very pragmatic, useful, and rarely harms people in practice." };
-    outs "This empowers MooseX::Object::Pluggable style plugins to wrap any of the methods of the pluggable object. Needless to say, being able to run code before and after methods, and even to massage arguments and return values, is a powerful tool for extensibility.";
+    footnote { "Roles are supposed to have the same effects no matter which order you consume them in, but method modifiers let you break this rule. Moose continues to support method modifiers in roles because the feature is very pragmatic." };
+    outs "This empowers MooseX::Object::Pluggable style plugins to wrap any of the methods of the pluggable object. Needless to say, being able to run code before and after any method, and even to massage arguments and return values, is a powerful tool for extensibility.";
 };
 
 p { "[Devel::REPL] in particular makes heavy use of MooseX::Object::Pluggable. This project exposes each of its features as a plugin so that each can be enabled and disabled - and superseded - at the user's whim. For example [Devel::REPL::Plugin::MultiLine::PPI] wraps Devel::REPL's `read` method to use [PPI] to test if the input is complete, and if not, read another line. This lets you type in `for (1 .. 10) {` and hit enter without an immediate syntax error for missing the corresponding `}`. If someone creates a better [PPI] they can write a new Devel::REPL::Plugin::MultiLine that uses that new system and people can switch over to the new plugin at their leisure." };
