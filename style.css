@@ -92,10 +92,6 @@ sub {
     top: .5ex;
 }
 
-.code_snippet {
-    table-layout: fixed;
-}
-
 .line_numbers {
     text-align: right;
     width: 3em;
@@ -109,11 +105,6 @@ sub {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    width: 800px;
-    overflow: hidden;
-}
-.highlighted_code:hover {
-    overflow: auto;
 }
 
 .synComment       { color: #DDDD00 }

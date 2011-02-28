@@ -13,16 +13,18 @@ package App;
 use Moose;
 with 'MooseX::Object::Pluggable';
 
+sub echo { say "echo echo echo" }
 
 package App::Plugin::TimedEcho;
 use Moose::Role;
 use DateTime;
 
+before echo => sub { print DateTime->now . ': ' };
 
 my $app = App->new;
 $app->echo; # echo echo echo
 
-$app->load_plugin('TimedEcho'); # applies App::Plugin::TimedEcho to $app aaaaaa bbbbbb ccccc ddddddddd eeeeeee ffffffff gggggggg hhhhhhhhh iiiiiiiiiii jjjjjjjj kkkkkkkkkk llllllll
+$app->load_plugin('TimedEcho'); # applies App::Plugin::TimedEcho to $app
 $app->echo; # 2011-02-27T23:09:23: echo echo echo
 EOP
 
