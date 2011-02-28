@@ -24,7 +24,7 @@ before echo => sub { print DateTime->now . ': ' };
 my $app = App->new;
 $app->echo; # echo echo echo
 
-$app->load_plugin('TimedEcho'); # applies App::Plugin::TimedEcho to $app aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk lll mmm
+$app->load_plugin('TimedEcho'); # applies App::Plugin::TimedEcho to $app
 $app->echo; # 2011-02-27T23:09:23: echo echo echo
 EOP
 
