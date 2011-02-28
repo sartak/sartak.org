@@ -13,18 +13,16 @@ package App;
 use Moose;
 with 'MooseX::Object::Pluggable';
 
-sub echo { say "echo echo echo" }
 
 package App::Plugin::TimedEcho;
 use Moose::Role;
 use DateTime;
 
-before echo => sub { print DateTime->now . ': ' };
 
 my $app = App->new;
 $app->echo; # echo echo echo
 
-$app->load_plugin('TimedEcho'); # applies App::Plugin::TimedEcho to $app
+$app->load_plugin('TimedEcho'); # applies App::Plugin::TimedEcho to $app aaaaaa bbbbbb ccccc ddddddddd eeeeeee ffffffff gggggggg hhhhhhhhh iiiiiiiiiii jjjjjjjj kkkkkkkkkk llllllll
 $app->echo; # 2011-02-27T23:09:23: echo echo echo
 EOP
 
@@ -38,7 +36,9 @@ p { "`[Devel::REPL]` in particular makes heavy use of `MooseX::Object::Pluggable
 
 h3 { "Plugins as Objects with Roles" };
 
-p { "Another option, which I will argue is superior, is that **each plugin is an object consuming roles**." };
+p { "Another option, which I will argue is superior, is that **each plugin is an object consuming roles**. [MooseX::Plugins] supports this style." };
+
+p { "The addition of roles changes the question from \"Do you have a method with this name?\" to \"Do you interact with this feature?\"" };
 
 h3 { "Fight!" };
 
