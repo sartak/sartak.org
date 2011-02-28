@@ -45,7 +45,9 @@ date: 2009-05-12
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
 <span>2:</span>
 <span>3:</span>
@@ -53,8 +55,11 @@ date: 2009-05-12
 <span>5:</span>
 <span>6:</span>
 <span>7:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 <span class="synStatement">package</span><span class="synType"> Counter</span>;
 <span class="synStatement">use </span>MooseX::Role::Parameterized;
 
@@ -62,6 +67,7 @@ parameter <span class="synConstant">name</span> =&gt; (
     <span class="synConstant">isa</span>      =&gt; <span class="synConstant">'Str'</span>,
     <span class="synConstant">required</span> =&gt; <span class="synConstant">1</span>,
 );
+   </pre>
   </td>
  </tr>
 </table>
@@ -70,7 +76,9 @@ parameter <span class="synConstant">name</span> =&gt; (
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>9:</span>
 <span>10:</span>
 <span>11:</span>
@@ -85,8 +93,11 @@ parameter <span class="synConstant">name</span> =&gt; (
 <span>20:</span>
 <span>21:</span>
 <span>22:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 role {
     <span class="synStatement">my</span> <span class="synIdentifier">$p</span> = <span class="synStatement">shift</span>;
     <span class="synStatement">my</span> <span class="synIdentifier">$name</span> = <span class="synIdentifier">$p-&gt;name</span>;
@@ -101,6 +112,7 @@ role {
         <span class="synIdentifier">$self-&gt;$name</span>(<span class="synIdentifier">$self-&gt;$name</span> + <span class="synConstant">1</span>);
     };
 };
+   </pre>
   </td>
  </tr>
 </table>

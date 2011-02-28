@@ -93,9 +93,7 @@ sub {
 }
 
 .code_snippet {
-    width: 100%;
-    white-space: pre;
-    font-family: monospace;
+    table-layout: fixed;
 }
 
 .line_numbers {
@@ -111,10 +109,7 @@ sub {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-}
-
-/* a cool idea - show scroll bar only when you hover over a code snippet */
-.highlighted_code {
+    width: 800px;
     overflow: hidden;
 }
 .highlighted_code:hover {

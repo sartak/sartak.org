@@ -73,24 +73,28 @@ sub code_snippet {
         row {
             # line numbers
             cell {
-                class is 'line_numbers';
-                my $i = 1;
-                my $lines;
-                $lines .= '<span>' . $i++ . ":</span>\n" for split /\n/, $code;
-                chomp $lines;
-                outs_raw "\n$lines";
+                pre {
+                    class is 'line_numbers';
+                    my $i = 1;
+                    my $lines;
+                    $lines .= '<span>' . $i++ . ":</span>\n" for split /\n/, $code;
+                    chomp $lines;
+                    outs_raw "\n\n$lines";
+                };
             }
             # code
             cell {
-                class is "$type highlighted_code";
-                my $syntax = Text::VimColor->new(
-                    string   => $code,
-                    filetype => $type,
-                );
+                pre {
+                    class is "$type highlighted_code";
+                    my $syntax = Text::VimColor->new(
+                        string   => $code,
+                        filetype => $type,
+                    );
 
-                my $html = $syntax->html;
-                chomp $html;
-                outs_raw "\n$html";
+                    my $html = $syntax->html;
+                    chomp $html;
+                    outs_raw "\n\n$html";
+                };
             }
         }
     }

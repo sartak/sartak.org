@@ -19,7 +19,9 @@ date: 2009-06-28
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
 <span>2:</span>
 <span>3:</span>
@@ -44,8 +46,11 @@ date: 2009-06-28
 <span>22:</span>
 <span>23:</span>
 <span>24:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 <span class="synStatement">sub </span><span class="synIdentifier">method </span>{
     <span class="synStatement">my</span> <span class="synIdentifier">$self</span> = <span class="synStatement">shift</span>;
 
@@ -70,6 +75,7 @@ date: 2009-06-28
     <span class="synStatement">return</span> <span class="synIdentifier">@ret</span> <span class="synStatement">if</span> <span class="synStatement">wantarray</span>;
     <span class="synStatement">return</span> <span class="synIdentifier">$ret[</span><span class="synConstant">0</span><span class="synIdentifier">]</span>;
 } 
+   </pre>
   </td>
  </tr>
 </table>
@@ -78,17 +84,23 @@ date: 2009-06-28
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
 <span>2:</span>
 <span>3:</span>
 <span>4:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 after <span class="synConstant">method</span> =&gt; <span class="synStatement">sub </span>{
     <span class="synStatement">my</span> <span class="synIdentifier">$self</span> = <span class="synStatement">shift</span>;
     <span class="synIdentifier">$self-&gt;called_method</span>(<span class="synIdentifier">$self-&gt;called_method</span> + <span class="synConstant">1</span>);
 }; 
+   </pre>
   </td>
  </tr>
 </table>
@@ -97,7 +109,9 @@ after <span class="synConstant">method</span> =&gt; <span class="synStatement">s
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
 <span>2:</span>
 <span>3:</span>
@@ -105,8 +119,11 @@ after <span class="synConstant">method</span> =&gt; <span class="synStatement">s
 <span>5:</span>
 <span>6:</span>
 <span>7:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 <span class="synStatement">sub </span><span class="synIdentifier">users </span>{
     <span class="synStatement">my</span> <span class="synIdentifier">$self</span> = <span class="synStatement">shift</span>;
     <span class="synStatement">my</span> <span class="synIdentifier">@users</span> = <span class="synIdentifier">$self-&gt;objects</span>(<span class="synConstant">'users'</span>);
@@ -114,6 +131,7 @@ after <span class="synConstant">method</span> =&gt; <span class="synStatement">s
 }
 
 <span class="synStatement">my</span> <span class="synIdentifier">$users</span> = <span class="synIdentifier">$game-&gt;users</span>; <span class="synComment"># 51 </span>
+   </pre>
   </td>
  </tr>
 </table>
@@ -122,7 +140,9 @@ after <span class="synConstant">method</span> =&gt; <span class="synStatement">s
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
 <span>2:</span>
 <span>3:</span>
@@ -130,8 +150,11 @@ after <span class="synConstant">method</span> =&gt; <span class="synStatement">s
 <span>5:</span>
 <span>6:</span>
 <span>7:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 <span class="synStatement">sub </span><span class="synIdentifier">administrators </span>{
     <span class="synStatement">my</span> <span class="synIdentifier">$self</span> = <span class="synStatement">shift</span>;
 
@@ -139,6 +162,7 @@ after <span class="synConstant">method</span> =&gt; <span class="synStatement">s
 }
 
 <span class="synStatement">my</span> <span class="synIdentifier">$admins</span> = <span class="synIdentifier">$game-&gt;administrators</span>; <span class="synComment"># autarch </span>
+   </pre>
   </td>
  </tr>
 </table>

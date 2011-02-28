@@ -11,7 +11,9 @@ date: 2009-04-24
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
 <span>2:</span>
 <span>3:</span>
@@ -23,8 +25,11 @@ date: 2009-04-24
 <span>9:</span>
 <span>10:</span>
 <span>11:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 <span class="synComment"># this &quot;with&quot; sums the two roles then applies one role to the class</span>
 with (
     <span class="synConstant">'Role::Foo'</span> =&gt; { <span class="synConstant">alias</span> =&gt; { <span class="synConstant">validate</span> =&gt; <span class="synConstant">'validate_foo'</span> } },
@@ -36,6 +41,7 @@ with (
     <span class="synIdentifier">$self-&gt;validate_foo</span>(<span class="synIdentifier">@_</span>);
     <span class="synIdentifier">$self-&gt;validate_bar</span>(<span class="synIdentifier">@_</span>);
 }
+   </pre>
   </td>
  </tr>
 </table>

@@ -35,11 +35,17 @@ date: 2009-05-03
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 <span class="synStatement">sub </span><span class="synIdentifier">applies_to_metaclass </span>{ <span class="synConstant">'Class::MOP::Class'</span>, inner() }
+   </pre>
   </td>
  </tr>
 </table>
@@ -48,11 +54,17 @@ date: 2009-05-03
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 <span class="synStatement">sub </span><span class="synIdentifier">applies_to_metaclass </span>{ <span class="synConstant">'Moose::Meta::Role'</span> }
+   </pre>
   </td>
  </tr>
 </table>
@@ -63,15 +75,21 @@ date: 2009-05-03
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
 <span>2:</span>
 <span>3:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class="synStatement">sub </span>{
     <span class="synConstant">'Moose::Meta::Role'</span>
 };
+   </pre>
   </td>
  </tr>
 </table>
@@ -90,7 +108,9 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
 <span>2:</span>
 <span>3:</span>
@@ -103,8 +123,11 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 <span>10:</span>
 <span>11:</span>
 <span>12:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$name</span> (<span class="synIdentifier">$meta-&gt;get_attribute_list</span>) {
     <span class="synStatement">my</span> <span class="synIdentifier">$attribute</span> = <span class="synIdentifier">$meta-&gt;get_attribute</span>(<span class="synIdentifier">$name</span>);
 
@@ -117,6 +140,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
             <span class="synIdentifier">$self-&gt;violation</span>(<span class="synIdentifier">$desc</span>, <span class="synIdentifier">$PL</span>);
     }
 }
+   </pre>
   </td>
  </tr>
 </table>
@@ -150,19 +174,25 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
 <span>2:</span>
 <span>3:</span>
 <span>4:</span>
 <span>5:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 <span class="synStatement">sub </span><span class="synIdentifier">violates_metaclass </span>{
     <span class="synStatement">my</span> <span class="synIdentifier">$self</span>  = <span class="synStatement">shift</span>;
     <span class="synStatement">my</span> <span class="synIdentifier">$class</span> = <span class="synStatement">shift</span>;
 
     <span class="synStatement">my</span> <span class="synIdentifier">@violations</span>;
+   </pre>
   </td>
  </tr>
 </table>
@@ -171,13 +201,19 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>7:</span>
 <span>8:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
     <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$name</span> (<span class="synIdentifier">$class-&gt;get_method_list</span>) {
         <span class="synStatement">my</span> <span class="synIdentifier">$method</span> = <span class="synIdentifier">$class-&gt;get_method</span>(<span class="synIdentifier">$name</span>);
+   </pre>
   </td>
  </tr>
 </table>
@@ -186,15 +222,21 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>10:</span>
 <span>11:</span>
 <span>12:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
         <span class="synComment"># override and augment modifiers are always fine.</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Moose::Meta::Method::Overridden'</span>)
              || <span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Moose::Meta::Method::Augmented'</span>);
+   </pre>
   </td>
  </tr>
 </table>
@@ -203,7 +245,9 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>14:</span>
 <span>15:</span>
 <span>16:</span>
@@ -211,8 +255,11 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 <span>18:</span>
 <span>19:</span>
 <span>20:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
         <span class="synComment"># Since we can implicitly override and wrap in the same class, we</span>
         <span class="synComment"># need to be a little more careful here.</span>
         <span class="synStatement">if</span> (<span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Class::MOP::Method::Wrapped'</span>)) {
@@ -220,6 +267,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
             <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method-&gt;associated_metaclass-&gt;name</span>
                  <span class="synStatement">ne</span> <span class="synIdentifier">$orig_method-&gt;associated_metaclass-&gt;name</span>;
         }
+   </pre>
   </td>
  </tr>
 </table>
@@ -230,13 +278,19 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>22:</span>
 <span>23:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
         <span class="synComment"># Generated methods</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Class::MOP::Method::Generated'</span>);
+   </pre>
   </td>
  </tr>
 </table>
@@ -247,17 +301,23 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>25:</span>
 <span>26:</span>
 <span>27:</span>
 <span>28:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
         <span class="synComment"># </span><span class="synTodo">XXX</span><span class="synComment">: this freaking sucks</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$name</span> <span class="synStatement">eq</span> <span class="synConstant">'meta'</span>
              || <span class="synIdentifier">$name</span> <span class="synStatement">eq</span> <span class="synConstant">'BUILD'</span>
              || <span class="synIdentifier">$name</span> <span class="synStatement">eq</span> <span class="synConstant">'DEMOLISH'</span>;
+   </pre>
   </td>
  </tr>
 </table>
@@ -268,17 +328,23 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>30:</span>
 <span>31:</span>
 <span>32:</span>
 <span>33:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
         <span class="synStatement">my</span> <span class="synIdentifier">$next</span> = <span class="synIdentifier">$class-&gt;find_next_method_by_name</span>(<span class="synIdentifier">$name</span>);
 
         <span class="synComment"># Adding new methods is always fine.</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> !<span class="synIdentifier">$next</span>;
+   </pre>
   </td>
  </tr>
 </table>
@@ -287,7 +353,9 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>35:</span>
 <span>36:</span>
 <span>37:</span>
@@ -297,8 +365,11 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 <span>41:</span>
 <span>42:</span>
 <span>43:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
         <span class="synStatement">push</span> <span class="synIdentifier">@violations</span>, <span class="synIdentifier">$self-&gt;violation</span>(
             <span class="synConstant">&quot;The '</span><span class="synIdentifier">$name</span><span class="synConstant">' method of class &quot;</span> . <span class="synIdentifier">$class-&gt;name</span>
           . <span class="synConstant">&quot; does not use a method modifier to&quot;</span>
@@ -308,6 +379,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
     <span class="synStatement">return</span> <span class="synIdentifier">@violations</span>;
 }
+   </pre>
   </td>
  </tr>
 </table>
@@ -325,19 +397,25 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>1:</span>
 <span>2:</span>
 <span>3:</span>
 <span>4:</span>
 <span>5:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
 <span class="synStatement">sub </span><span class="synIdentifier">violates_metaclass </span>{
     <span class="synStatement">my</span> <span class="synIdentifier">$self</span>  = <span class="synStatement">shift</span>;
     <span class="synStatement">my</span> <span class="synIdentifier">$class</span> = <span class="synStatement">shift</span>;
 
     <span class="synStatement">my</span> <span class="synIdentifier">@violations</span>;
+   </pre>
   </td>
  </tr>
 </table>
@@ -346,13 +424,19 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>7:</span>
 <span>8:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
     <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$application</span> (<span class="synIdentifier">$class-&gt;role_applications</span>) {
         <span class="synStatement">my</span> <span class="synIdentifier">$role</span> = <span class="synIdentifier">$application-&gt;role</span>;
+   </pre>
   </td>
  </tr>
 </table>
@@ -363,15 +447,21 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>10:</span>
 <span>11:</span>
 <span>12:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
         <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$method</span> (<span class="synIdentifier">$role-&gt;get_method_list</span>) {
             <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$application-&gt;is_method_excluded</span>(<span class="synIdentifier">$method</span>);
             <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$application-&gt;is_method_aliased</span>(<span class="synIdentifier">$method</span>);
+   </pre>
   </td>
  </tr>
 </table>
@@ -382,13 +472,19 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>14:</span>
 <span>15:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
             <span class="synStatement">my</span> <span class="synIdentifier">$method_object</span> = <span class="synIdentifier">$class-&gt;get_method</span>(<span class="synIdentifier">$method</span>)
                 <span class="synStatement">or</span> <span class="synStatement">next</span>;
+   </pre>
   </td>
  </tr>
 </table>
@@ -397,17 +493,23 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>17:</span>
 <span>18:</span>
 <span>19:</span>
 <span>20:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
             <span class="synStatement">if</span> (<span class="synIdentifier">$method_object-&gt;isa</span>(<span class="synConstant">'Moose::Meta::Role::Method'</span>)) {
                 <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method_object-&gt;body</span>
                      == <span class="synIdentifier">$role-&gt;get_method</span>(<span class="synIdentifier">$method</span>)-&gt;body;
             }
+   </pre>
   </td>
  </tr>
 </table>
@@ -420,7 +522,9 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <table class="code_snippet">
  <tr>
-  <td class="line_numbers">
+  <td>
+   <pre class="line_numbers">
+
 <span>22:</span>
 <span>23:</span>
 <span>24:</span>
@@ -433,8 +537,11 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 <span>31:</span>
 <span>32:</span>
 <span>33:</span>
+   </pre>
   </td>
-  <td class="perl highlighted_code">
+  <td>
+   <pre class="perl highlighted_code">
+
             <span class="synStatement">my</span> <span class="synIdentifier">$class_name</span> = <span class="synIdentifier">$class-&gt;name</span>;
             <span class="synStatement">my</span> <span class="synIdentifier">$role_name</span>  = <span class="synIdentifier">$role-&gt;name</span>;
 
@@ -447,6 +554,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
     <span class="synStatement">return</span> <span class="synIdentifier">@violations</span>;
 }
+   </pre>
   </td>
  </tr>
 </table>
