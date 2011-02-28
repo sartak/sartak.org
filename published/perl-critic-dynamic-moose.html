@@ -33,66 +33,25 @@ date: 2009-05-03
 
 <p>Policies may define a <tt>applies_to_metaclass</tt> method that filters for only the metaclasses that sensibly apply. I utilized the rarely-seen <a href="http://p3rl.org/Moose::Cookbook::Basics::Recipe6"><tt>augment</tt> and <tt>inner</tt></a> for this method (as well as <tt>default_themes</tt>). The default implementation of <tt>applies_to_metaclass</tt> is:
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>1:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
 <span class="synStatement">sub </span><span class="synIdentifier">applies_to_metaclass </span>{ <span class="synConstant">'Class::MOP::Class'</span>, inner() }
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>If the policy wants to analyze <em>only</em> role metaobjects, then they can ignore the method's inverse nature by writing the standard:</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>1:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
 <span class="synStatement">sub </span><span class="synIdentifier">applies_to_metaclass </span>{ <span class="synConstant">'Moose::Meta::Role'</span> }
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>If the policy wants to analyze <em>only</em> class metaobjects, then they do not have to augment this method. The parent's <tt>inner</tt> in such cases is a no-op, returning the empty list.</p>
 
 <p>However, if a policy wants to analyze <em>both</em> classes and roles (which I suspect happens when the actual subject for analysis is attributes and methods), the policy can include:</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>1:</span>
-<span>2:</span>
-<span>3:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
 augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class="synStatement">sub </span>{
     <span class="synConstant">'Moose::Meta::Role'</span>
 };
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p><tt>augment</tt> signals that the method resolution order <em>descends</em> the class hierarchy: grandparent -&gt; parent -&gt; child. <tt>inner</tt> calls the next most specific method. The end result of calling the above method is the list <tt>('Class::MOP::Class', 'Moose::Meta::Role')</tt>.</p>
 
@@ -106,28 +65,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>Handling roles for this policy sucks because attributes in roles are just inert hash references. Since there have been threats to improve roles to make use of real objects, I will elide handling roles here for brevity.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>1:</span>
-<span>2:</span>
-<span>3:</span>
-<span>4:</span>
-<span>5:</span>
-<span>6:</span>
-<span>7:</span>
-<span>8:</span>
-<span>9:</span>
-<span>10:</span>
-<span>11:</span>
-<span>12:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
 <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$name</span> (<span class="synIdentifier">$meta-&gt;get_attribute_list</span>) {
     <span class="synStatement">my</span> <span class="synIdentifier">$attribute</span> = <span class="synIdentifier">$meta-&gt;get_attribute</span>(<span class="synIdentifier">$name</span>);
 
@@ -140,10 +78,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
             <span class="synIdentifier">$self-&gt;violation</span>(<span class="synIdentifier">$desc</span>, <span class="synIdentifier">$PL</span>);
     }
 }
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p><tt>get_attribute_list</tt> returns the names of attributes defined in this <em>local</em> class. Inherited attributes are not considered. I figure you would be running these policies on every class and role in your project anyway.</p>
 
@@ -172,94 +107,32 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 <p>This is the first novel dynamic policy; the previous policies could be implemented statically, but this one would have little chance. Let's walk through its entire <tt>violates_metaclass</tt>.</p>
 
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>1:</span>
-<span>2:</span>
-<span>3:</span>
-<span>4:</span>
-<span>5:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
 <span class="synStatement">sub </span><span class="synIdentifier">violates_metaclass </span>{
     <span class="synStatement">my</span> <span class="synIdentifier">$self</span>  = <span class="synStatement">shift</span>;
     <span class="synStatement">my</span> <span class="synIdentifier">$class</span> = <span class="synStatement">shift</span>;
 
     <span class="synStatement">my</span> <span class="synIdentifier">@violations</span>;
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>This policy does not apply to roles, and does not require Moose-specific features (such as, well, roles), so it can use the default <tt>applies_to_metaclass</tt>. We also need a place to store the list of violations, since many methods could be implicitly overriding inherited methods.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>7:</span>
-<span>8:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
     <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$name</span> (<span class="synIdentifier">$class-&gt;get_method_list</span>) {
         <span class="synStatement">my</span> <span class="synIdentifier">$method</span> = <span class="synIdentifier">$class-&gt;get_method</span>(<span class="synIdentifier">$name</span>);
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>We iterate over the class's <em>local</em> methods. <tt>get_method_list</tt> and <tt>get_method</tt> do not look at inherited methods at all. Methods brought in from <em>locally-consumed roles</em> are also included in this list &mdash; this is a feature called <em>flattening</em>. (If in your code you <em>do</em> want to consider inheritance, use <tt>get_all_methods</tt> and <tt>find_method_by_name</tt>)</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>10:</span>
-<span>11:</span>
-<span>12:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
         <span class="synComment"># override and augment modifiers are always fine.</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Moose::Meta::Method::Overridden'</span>)
              || <span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Moose::Meta::Method::Augmented'</span>);
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>This quickly excludes two of the five method modifiers. Such modifiers have their own metaclasses for various reasons, not least of which is our usage here: to allow detection that the method is just a modifier.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>14:</span>
-<span>15:</span>
-<span>16:</span>
-<span>17:</span>
-<span>18:</span>
-<span>19:</span>
-<span>20:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
         <span class="synComment"># Since we can implicitly override and wrap in the same class, we</span>
         <span class="synComment"># need to be a little more careful here.</span>
         <span class="synStatement">if</span> (<span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Class::MOP::Method::Wrapped'</span>)) {
@@ -267,109 +140,42 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
             <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method-&gt;associated_metaclass-&gt;name</span>
                  <span class="synStatement">ne</span> <span class="synIdentifier">$orig_method-&gt;associated_metaclass-&gt;name</span>;
         }
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>Handling the other three method modifiers (<tt>before</tt>, <tt>after</tt>, and <tt>around</tt>) is trickier. You can both define a method and wrap it with these three modifiers in the same class. This is useful for, say, running code <tt>before</tt> an attribute's <tt>clearer</tt>.</p>
 
 <p>If the method we're wrapping is from a different metaclass, then we must be wrapping an inherited method, which is fine. If we're wrapping a local method, then we need to peel off a layer. We do not need peel off many layers in a loop, since multiple local modifiers coalesce into one layer.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>22:</span>
-<span>23:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
         <span class="synComment"># Generated methods</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Class::MOP::Method::Generated'</span>);
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>This one worries me a little. Generated methods are those created for you by Moose. Examples include accessors, <tt>new</tt> (but only after a <tt>make_immutable</tt>), and delegation methods. Since these methods are generated for you, you have no way to indicate that they are overriding an inherited method.</p>
 
 <p>Because you can certainly accidentally override an inherited method with a generated method, this check should be optional.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>25:</span>
-<span>26:</span>
-<span>27:</span>
-<span>28:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
         <span class="synComment"># </span><span class="synTodo">XXX</span><span class="synComment">: this freaking sucks</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$name</span> <span class="synStatement">eq</span> <span class="synConstant">'meta'</span>
              || <span class="synIdentifier">$name</span> <span class="synStatement">eq</span> <span class="synConstant">'BUILD'</span>
              || <span class="synIdentifier">$name</span> <span class="synStatement">eq</span> <span class="synConstant">'DEMOLISH'</span>;
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>This "freaking sucks" for two reasons. <tt>meta</tt> is installed into your local class by Moose. That's fine (though we will eventually support renaming or excluding it). The metaclass of the <tt>meta</tt> method is not <tt>Class::MOP::Method::Generated</tt> like it should be, it's <tt>Moose::Meta::Method</tt>. This misclassification makes it look like a regular method defined by the user. <tt>meta</tt> would receive special consideration even if it were properly labeled as a generated method, because every class gets its own.</p>
 
 <p>The other reason this sucks is the hardcoded <tt>BUILD</tt> and <tt>DEMOLISH</tt>. These are special methods with unusual dispatch semantics. Every <tt>BUILD</tt> and <tt>DEMOLISH</tt> method is called in your hierarchy automatically; there is no choice about redispatching to your inherited method. This is a useful feature, because too often do we forget to do this which can silently mess up initialization or destruction. Anyway, this list of special methods should be inspectable from the metaclass, and given their own <tt>Class::MOP::Method</tt> subclass.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>30:</span>
-<span>31:</span>
-<span>32:</span>
-<span>33:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
         <span class="synStatement">my</span> <span class="synIdentifier">$next</span> = <span class="synIdentifier">$class-&gt;find_next_method_by_name</span>(<span class="synIdentifier">$name</span>);
 
         <span class="synComment"># Adding new methods is always fine.</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> !<span class="synIdentifier">$next</span>;
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>Simple enough, right? It finds the inherited method by a given name, if any. If there is none, then it must be an entirely new method with a unique name, which is perfectly fine.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>35:</span>
-<span>36:</span>
-<span>37:</span>
-<span>38:</span>
-<span>39:</span>
-<span>40:</span>
-<span>41:</span>
-<span>42:</span>
-<span>43:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
         <span class="synStatement">push</span> <span class="synIdentifier">@violations</span>, <span class="synIdentifier">$self-&gt;violation</span>(
             <span class="synConstant">&quot;The '</span><span class="synIdentifier">$name</span><span class="synConstant">' method of class &quot;</span> . <span class="synIdentifier">$class-&gt;name</span>
           . <span class="synConstant">&quot; does not use a method modifier to&quot;</span>
@@ -379,10 +185,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
     <span class="synStatement">return</span> <span class="synIdentifier">@violations</span>;
 }
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>That's all. We've exhausted all the acceptable ways for a method to interact with its super-methods, so what remains must be a violation.</p>
 
@@ -395,124 +198,48 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>Let's walk through this implementation as well.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>1:</span>
-<span>2:</span>
-<span>3:</span>
-<span>4:</span>
-<span>5:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
 <span class="synStatement">sub </span><span class="synIdentifier">violates_metaclass </span>{
     <span class="synStatement">my</span> <span class="synIdentifier">$self</span>  = <span class="synStatement">shift</span>;
     <span class="synStatement">my</span> <span class="synIdentifier">$class</span> = <span class="synStatement">shift</span>;
 
     <span class="synStatement">my</span> <span class="synIdentifier">@violations</span>;
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>Familiar enough.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>7:</span>
-<span>8:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
     <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$application</span> (<span class="synIdentifier">$class-&gt;role_applications</span>) {
         <span class="synStatement">my</span> <span class="synIdentifier">$role</span> = <span class="synIdentifier">$application-&gt;role</span>;
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>Every time you consume a role with <tt>with</tt>, it creates an object of class <tt>Moose::Meta::Role::Application::ToClass</tt> and adds it to your metaclass. This object has, among other things, a <tt>role</tt> attribute.</p>
 
 <p>As an aside, it might be interesting to make the <tt>does</tt> method return these role application objects. They're certainly true values, and there is precedent: the true value that <tt>can</tt> returns is a code reference.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>10:</span>
-<span>11:</span>
-<span>12:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
         <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$method</span> (<span class="synIdentifier">$role-&gt;get_method_list</span>) {
             <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$application-&gt;is_method_excluded</span>(<span class="synIdentifier">$method</span>);
             <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$application-&gt;is_method_aliased</span>(<span class="synIdentifier">$method</span>);
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>We need to consider every method in the role. If a method has been excluded or aliased, then that is explicit overriding, so the violation does not apply.</p>
 
 <p>To allow for this explicit override is exactly why I needed to add role-application tracking to Moose, and why I could not implement this policy until today.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>14:</span>
-<span>15:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
             <span class="synStatement">my</span> <span class="synIdentifier">$method_object</span> = <span class="synIdentifier">$class-&gt;get_method</span>(<span class="synIdentifier">$method</span>)
                 <span class="synStatement">or</span> <span class="synStatement">next</span>;
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>We inspect the method's metaobject from the class. Again, we use <tt>get_method</tt> and not <tt>find_method_by_name</tt> because we do not want to consider inheritance. At this point, the method is definitely there, since it hasn't been excluded. What matters now is whether the role provided it or if the class did.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>17:</span>
-<span>18:</span>
-<span>19:</span>
-<span>20:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
             <span class="synStatement">if</span> (<span class="synIdentifier">$method_object-&gt;isa</span>(<span class="synConstant">'Moose::Meta::Role::Method'</span>)) {
                 <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method_object-&gt;body</span>
                      == <span class="synIdentifier">$role-&gt;get_method</span>(<span class="synIdentifier">$method</span>)-&gt;body;
             }
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>Methods of class <tt>Moose::Meta::Role::Method</tt> were originally pulled in from a role. If the method was not provided by a role, then it was a silent class override.</p>
 
@@ -520,28 +247,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>The inside statement also attempts to handle the method coming in from the same role multiple ways. Suppose you have a <tt>Foo::Basic</tt> role with a method <tt>kerplow</tt> that is consumed by both the <tt>Foo::Advanced</tt> and <tt>Foo::Safe</tt> roles. A class that sequentially consumes <tt>Foo::Advanced</tt> then <tt>Foo::Safe</tt> would get the <tt>kerplow</tt> method twice. But since it's the exact same implementation (i.e. the same code reference), it's not worth warning about. I trust that the programmer will utilize <a href="http://p3rl.org/Test::Perl::Critic"><tt>Test::Perl::Critic</tt></a>, so that the divergence of the two <tt>kerplow</tt> methods would become a violation.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>22:</span>
-<span>23:</span>
-<span>24:</span>
-<span>25:</span>
-<span>26:</span>
-<span>27:</span>
-<span>28:</span>
-<span>29:</span>
-<span>30:</span>
-<span>31:</span>
-<span>32:</span>
-<span>33:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
             <span class="synStatement">my</span> <span class="synIdentifier">$class_name</span> = <span class="synIdentifier">$class-&gt;name</span>;
             <span class="synStatement">my</span> <span class="synIdentifier">$role_name</span>  = <span class="synIdentifier">$role-&gt;name</span>;
 
@@ -554,10 +260,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
     <span class="synStatement">return</span> <span class="synIdentifier">@violations</span>;
 }
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>And that's it.</p>
 

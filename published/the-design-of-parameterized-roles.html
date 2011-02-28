@@ -43,23 +43,7 @@ date: 2009-05-12
 
 <p>This difference is precisely what makes the syntax of <tt>MooseX::Role::Parameterized</tt> slightly unusual, at least in the context of core Moose:</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>1:</span>
-<span>2:</span>
-<span>3:</span>
-<span>4:</span>
-<span>5:</span>
-<span>6:</span>
-<span>7:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
 <span class="synStatement">package</span><span class="synType"> Counter</span>;
 <span class="synStatement">use </span>MooseX::Role::Parameterized;
 
@@ -67,37 +51,11 @@ parameter <span class="synConstant">name</span> =&gt; (
     <span class="synConstant">isa</span>      =&gt; <span class="synConstant">'Str'</span>,
     <span class="synConstant">required</span> =&gt; <span class="synConstant">1</span>,
 );
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>You explicitly specify which parameters the role can take. This improves introspectability, and makes it immediately obvious (if you've written Moose code) how to specify that a parameter is required, or has a type constraint; default value; or predicate, etc.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>9:</span>
-<span>10:</span>
-<span>11:</span>
-<span>12:</span>
-<span>13:</span>
-<span>14:</span>
-<span>15:</span>
-<span>16:</span>
-<span>17:</span>
-<span>18:</span>
-<span>19:</span>
-<span>20:</span>
-<span>21:</span>
-<span>22:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
 role {
     <span class="synStatement">my</span> <span class="synIdentifier">$p</span> = <span class="synStatement">shift</span>;
     <span class="synStatement">my</span> <span class="synIdentifier">$name</span> = <span class="synIdentifier">$p-&gt;name</span>;
@@ -112,10 +70,7 @@ role {
         <span class="synIdentifier">$self-&gt;$name</span>(<span class="synIdentifier">$self-&gt;$name</span> + <span class="synConstant">1</span>);
     };
 };
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>The <tt>role</tt> keyword exists for specifying the aforementioned role-building procedure. This is the unusual syntax. <a href="http://p3rl.org/MooseX::Declare"><tt>MooseX::Declare</tt></a> could improve upon this a lot, once some tuits are spent.</p>
 

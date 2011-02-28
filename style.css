@@ -92,19 +92,18 @@ sub {
     top: .5ex;
 }
 
-.line_numbers {
-    text-align: right;
-    width: 3em;
-    padding-right: .5em;
-}
-
-.highlighted_code {
-    padding-left: 1em;
+.code_snippet {
+    width: 100%;
     color: #DDDDDD;
-    background: black none;
+    background: black;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
+    padding: 1em 1em 1em 1em;
+    overflow: hidden;
+}
+.code_snippet:hover {
+    overflow: auto;
 }
 
 .synComment       { color: #DDDD00 }

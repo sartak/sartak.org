@@ -42,22 +42,7 @@ date: 2010-04-20
 <p>One of the fields that my sentence facts have is 'Source'. Other than the sentence itself, Source is the only field that I require myself to fill in. Translation, readings, context, etc. are optional. Knowing where each sentence came from is useful because it lets me gauge the trustworthiness of each sentence. I always trust the correctness of sentences uttered in, say, film, whereas an offhand remark on Twitter could easily have a typo or unusually playful grammar. It's also useful to know whether I have accidentally incorporated feminine language into my lexicon.</p>
 <p>My diligence in citing every sentence I learn also lets me geek out and analyze precisely how I am learning Japanese. I wrote a script to pull all the values for the Source field out of the database and categorize them according to rules like:</p>
 
-<table class="code_snippet">
- <tr>
-  <td class="line_numbers">
-<span>1:</span>
-<span>2:</span>
-<span>3:</span>
-<span>4:</span>
-<span>5:</span>
-<span>6:</span>
-<span>7:</span>
-<span>8:</span>
-<span>9:</span>
-<span>10:</span>
-<span>11:</span>
-  </td>
-  <td class="perl highlighted_code">
+<pre class="perl code_snippet">
 <span class="synConstant">qr{The Matrix}</span> =&gt; { speech, native, movie, source(<span class="synConstant">&quot;The Matrix&quot;</span>) },
 <span class="synConstant">qr{iPod USB/dock cable box}</span> =&gt; {
     text, native,
@@ -69,9 +54,7 @@ date: 2010-04-20
 },
 <span class="synConstant">qr{mt</span><span class="synSpecial">.</span><span class="synConstant">endeworks</span><span class="synSpecial">.</span><span class="synConstant">jp}</span> =&gt; { blog(<span class="synConstant">'lestrrat'</span>) },
 <span class="synConstant">qr{Conversation at Ebisuya}</span> =&gt; { convo, native },
-  </td>
- </tr>
-</table>
+</pre>
 
 <h2>My Input</h2>
 <p>Another component of my study is <em>immersion</em>. I try to always have Japanese music in my environment. I can't escape the deluge of Japanese tweets from those I follow. There's also movies, books, IRC, and when I'm lucky even in-person conversation. I expose myself to as much Japanese-meant-for-native-speakers as possible. Every now and then I get a sentence I <em>almost</em> understand, except for a word or a reading. For example, as for the sentence in the marked-up image at the top of this post, I already knew and understood everything except the reading for 門 (gate) which is もん (mon). So for each so-called <em>i+1</em> sentence

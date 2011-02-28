@@ -9,27 +9,7 @@ date: 2009-04-24
 
 <p>For example, consider two roles that provide a <tt>validate</tt> method. A class can consume the summation of these two roles. Since the two component roles each attempted to contribute a <tt>validate</tt> method, <tt>validate</tt> is a conflicted method in the composite role. To resolve this conflict, a consuming class must define its own <tt>validate</tt> method. The class's <tt>validate</tt> method should generally call the <tt>validate</tt> method of both roles. However, the class needs some way to disambiguate the two roles' <tt>validate</tt> methods so that it can call each in turn. For this reason, roles support <i>method aliasing</i>. The consumer can alias each role's <tt>validate</tt> methods. Aliasing only adds a new name for a method; it does not change the name of any method. That means the original <tt>validate</tt> methods are still conflicting. The consuming class can provide a <tt>validate</tt> method to resolve this conflict, whose implementation calls each role's <i>aliased</i> <tt>validate</tt>.</p>
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>1:</span>
-<span>2:</span>
-<span>3:</span>
-<span>4:</span>
-<span>5:</span>
-<span>6:</span>
-<span>7:</span>
-<span>8:</span>
-<span>9:</span>
-<span>10:</span>
-<span>11:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
 <span class="synComment"># this &quot;with&quot; sums the two roles then applies one role to the class</span>
 with (
     <span class="synConstant">'Role::Foo'</span> =&gt; { <span class="synConstant">alias</span> =&gt; { <span class="synConstant">validate</span> =&gt; <span class="synConstant">'validate_foo'</span> } },
@@ -41,10 +21,7 @@ with (
     <span class="synIdentifier">$self-&gt;validate_foo</span>(<span class="synIdentifier">@_</span>);
     <span class="synIdentifier">$self-&gt;validate_bar</span>(<span class="synIdentifier">@_</span>);
 }
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>While this may seem like a lot of effort, role design has very nice theoretical <em>and practical</em> properties. Unlike multiple inheritance and mixins, <b>roles issue an error when there is an unresolved naming conflict</b>. The programmer has good tools for resolving conflicts: method aliasing, method <i>exclusion</i>, and method <i>overriding</i>. In our above example, the consuming class could have excluded the <tt>validate</tt> method from one of the two roles so that there would be no conflict (since only one role is providing a method with that name). Finally, the consuming class could have overridden the conflicted <tt>validate</tt> method. The overriding implementation may not need to call the component roles' <tt>validate</tt> methods, perhaps obviating the need for aliasing. The example above used a combination of aliasing and overriding. All of these features are available even when there are no method conflicts, granting additional flexibility to roles.</p>
 

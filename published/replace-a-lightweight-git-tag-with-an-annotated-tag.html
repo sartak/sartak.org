@@ -14,27 +14,10 @@ date: 2011-01-11
 <p>Here's the syntax for each of these commands to upgrade tag <strong>0.64</strong> from lightweight to annotated.</p>
 
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>1:</span>
-<span>2:</span>
-<span>3:</span>
-<span>4:</span>
-<span>5:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="sh highlighted_code">
-
+<pre class="sh code_snippet">
 git checkout <span class="synConstant">0</span>.<span class="synConstant">64</span>
 git tag <span class="synSpecial">-d</span> <span class="synConstant">0</span>.<span class="synConstant">64</span>
 <span class="synIdentifier">GIT_COMMITTER_DATE</span>=<span class="synStatement">&quot;</span><span class="synPreProc">$(</span><span class="synSpecial">git show --</span><span class="synIdentifier">format</span>=<span class="synSpecial">%aD </span><span class="synStatement">|</span><span class="synSpecial"> head </span><span class="synConstant">-1</span><span class="synPreProc">)</span><span class="synStatement">&quot;</span> git tag <span class="synSpecial">-s</span> <span class="synConstant">0</span>.<span class="synConstant">64</span> <span class="synSpecial">-m</span> <span class="synStatement">'</span><span class="synConstant">0.64</span><span class="synStatement">'</span>
 git push origin :refs/tags/<span class="synConstant">0</span>.<span class="synConstant">64</span>
 git push <span class="synSpecial">--tags</span>
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>

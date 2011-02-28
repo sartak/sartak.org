@@ -6,35 +6,7 @@ date: 2009-03-25
 <p><a href="http://p3rl.org/PadWalker">PadWalker</a> is used as an example of an XS module that could seriously mess with other code. <a href="http://p3rl.org/Math::BigInt::FastCalc">Math::BigInt::FastCalc</a> is specifically allowed by Sys::Protect to perform unsafe operations because its domain is only big integers, it is used by a lot of other modules, and because its XS code has been verified to be safe.</p>
 
 
-<table class="code_snippet">
- <tr>
-  <td>
-   <pre class="line_numbers">
-
-<span>1:</span>
-<span>2:</span>
-<span>3:</span>
-<span>4:</span>
-<span>5:</span>
-<span>6:</span>
-<span>7:</span>
-<span>8:</span>
-<span>9:</span>
-<span>10:</span>
-<span>11:</span>
-<span>12:</span>
-<span>13:</span>
-<span>14:</span>
-<span>15:</span>
-<span>16:</span>
-<span>17:</span>
-<span>18:</span>
-<span>19:</span>
-   </pre>
-  </td>
-  <td>
-   <pre class="perl highlighted_code">
-
+<pre class="perl code_snippet">
 <span class="synPreProc">#!/usr/bin/env perl</span>
 <span class="synStatement">no strict</span>;
 <span class="synStatement">use warnings</span>;
@@ -54,10 +26,7 @@ is(<span class="synIdentifier">${</span>PadWalker::closed_over(<span class="synI
 
     <span class="synIdentifier">$_[</span><span class="synConstant">0</span><span class="synIdentifier">]</span> = <span class="synConstant">&quot;PadWalker&quot;</span>;
 }; 
-   </pre>
-  </td>
- </tr>
-</table>
+</pre>
 
 <p>Don't use Sys::Protect. :)</p>
 
