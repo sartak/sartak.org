@@ -113,8 +113,8 @@ sub {
 .synPreProc       { color: #DD00DD } /* shebang */
 .synTodo          {  } /* # XXX: */
 .synSpecial       { color: #DD00DD } /* \n etc */
+.synType          { color: #00DD00 } /* ctermbg in vimrc */
 /*
-.synType          { color: #FFFFFF }
 .synUnderlined    { color: #FFFFFF ; text-decoration: underline }
 .synError         { color: #FFFFFF }
 */
