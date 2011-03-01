@@ -11,7 +11,7 @@ set list
 set listchars=trail:.
 EOV
 
-p { "These two settings make it so when whitespace occurs at the end of a line, each character is displayed as a blue period. This is good in theory but in practice it means that whenever you're typing new content, these blue periods show up whenever you're done typing a word and continue on to the next one. This is what I mean by _obnoxious_. Of course there's going to be lots of fleeting EOL whitespace if I'm typing a sentence or a line of code. I don't need to be distracted by a blue dot bouncing around with my cursor. So a few years ago [Jesse Luehrs](http://tozt.net) and I banged our heads against our own separate walls until we came up with something that worked for us:" };
+p { "These two settings make it so when whitespace occurs at the end of a line, each character is displayed as a blue period. This is good in theory, but in practice it means that whenever you're typing new content, these blue periods show up every single time you're done typing a word and continue on to the next one. This is what I mean by _obnoxious_. Of course there's going to be lots of fleeting EOL whitespace if I'm typing a sentence or a line of code. I don't need to be distracted by a blue dot bouncing around with my cursor. So a few years ago [Jesse Luehrs](http://tozt.net) and I banged our heads against our own separate walls until we came up with something that worked for us:" };
 
 code_snippet vim => << 'EOV';
 autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
@@ -19,9 +19,9 @@ autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
 highlight EOLWS ctermbg=red
 EOV
 
-p { "What this does is highlight EOL whitespace with a red background (we'd use a red foreground but it's whitespace, you see!) **except on the line you're editing**. Which means it's not _obnoxious_." };
+p { "What this does is highlight EOL whitespace with a red background (we'd use a red foreground but it's whitespace, you see!) **except on the line you're editing**. Which means it's not _obnoxious_. The highlighting only occurs when you leave insert mode or if you leave that line." };
 
-p { "It's worth explaining how it works. `autocmd` is used to register triggers in vim, to run some code after some _event_. In this case we want to run code on the `InsertEnter` and `InsertLeave` events. The next argument to each `autocmd` is the filename pattern. We specify `*` which says we want this trigger for all files, not just `.html` or `Makefile` or whatever. Then the interesting stuff happens." };
+p { "It's worth explaining how this bit of vimscript works. `autocmd` is used to register triggers in vim, to run some code after some _event_. In this case we want to run code on the `InsertEnter` and `InsertLeave` events. The next argument to each `autocmd` is the filename pattern. We specify `*` which indicates that we want this trigger to fire for all files, not just `*.html` or `Makefile` or whatever. Then the interesting stuff happens." };
 
 p { "..." };
 
