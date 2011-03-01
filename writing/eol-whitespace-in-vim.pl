@@ -35,7 +35,4 @@ p { "`nmap` sets up a normal mode command remapping (see also `imap`, `vmap`, et
 
 p { "The first part should be familiar to anyone who's used vim seriously. `:%s/\\s\\+\$//` just runs a substitution to remove all whitespace characters that occur at end of line. `<CR>` is a way to mock typing the Enter key in vimscript. The `:let @/=''` bit empties the `/` register so that the whitespace you deleted is not used accidentally in an :hlsearch." };
 
-code_snippet vim => << 'EOV';
-syntax on    
-EOV
 
