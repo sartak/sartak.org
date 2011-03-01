@@ -16,6 +16,8 @@ Template::Declare->init(postprocessor => sub {
     # [Module::Name] but not [1]
     $out =~ s{\[((?!\d+\])\w+(::\w+)*)\]}{<a href="http://p3rl.org/$1">$1</a>}g;
 
+    $out =~ s/ -- / &mdash; /g;
+
     # remove extraneous whitespace
     chomp $out;
     $out =~ s/^<p>//;
