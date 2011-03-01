@@ -2,28 +2,28 @@ use Sartak::Blog;
 
 BEGIN { print "title: End-of-Line Whitespace in Vim\ndraft: 1\n" }
 
-p { "Whitespace characters at the ends of lines are sloppy and useless. Not to mention, when you notice and remove them, they clutter up your version control history, though this can be mitigated somewhat by using `git diff --ignore-space-at-eol` or similar. So I have two settings in [my vimrc file](https://github.com/sartak/conf/blob/master/vimrc) that help me avoid committing EOL whitespace to any of my hobby or work projects." };
+p { "Whitespace characters at the ends of lines are sloppy and useless. Not to mention when you notice and remove them, they clutter up your version control history, though this can be mitigated somewhat by using `git diff --ignore-space-at-eol` or similar. So I have two settings in [my vimrc](https://github.com/sartak/conf/blob/master/vimrc) that help me avoid committing EOL whitespace to any of my hobby or work projects." };
 
-p { "The first one highlights EOL whitespace in a way that isn't _obnoxious_. vim does have a builtin way to do this. But it sucks." };
+p { "The first one highlights EOL whitespace so you can tell that it's even there, but in a way that isn't _obnoxious_. vim does offer a builtin option to do this. But it sucks." };
 
 code_snippet vim => << 'EOV';
 set list
 set listchars=trail:.
 EOV
 
-p { "These two settings make it so when whitespace occurs at the end of a line, each character is displayed as a blue period. This is good in theory, but in practice it means that whenever you're typing new content, these blue periods show up every single time you're done typing a word and continue on to the next one. This is what I mean by _obnoxious_. Of course there's going to be lots of fleeting EOL whitespace if I'm typing a sentence or a line of code. I don't need to be distracted by a blue dot bouncing around with my cursor. So a few years ago [Jesse Luehrs](http://tozt.net) and I banged our heads against our own separate walls until we came up with something that worked for us:" };
+p { "These two settings make it so when whitespace occurs at the end of a line, each character is displayed as a blue period. This is good in theory, but actually it means that whenever you're typing new content, these blue periods show up every single time you're done typing a word and continue on to the next one. This is what I mean by _obnoxious_. Of course there's going to be lots of fleeting EOL whitespace if I'm typing a sentence or a line of code. So a few years ago [Jesse Luehrs](http://tozt.net) and I banged our heads against our own separate walls until we came up with something that worked for us:" };
 
 code_snippet vim => << 'EOV';
 autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
 autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
-highlight EOLWS ctermbg=red
+highlight EOLWS ctermbg=red guibg=red
 EOV
 
-p { "What this does is highlight EOL whitespace with a red background (we'd use a red foreground but it's whitespace, you see!) **except on the line you're editing**. Which means it's not _obnoxious_. The highlighting only occurs when you leave insert mode or if you leave that line." };
+p { "What this does is highlight EOL whitespace with a red background (we'd use a red foreground but it's whitespace, you see!) **except on the line you're editing**. Which means it's not _obnoxious_. The highlighting only occurs when you leave insert mode or if you leave that line, such as by hitting insert." };
 
 p { "It's worth explaining how this bit of vimscript works. `autocmd` is used to register triggers in vim, to run some code after some _event_. In this case we want to run code on the `InsertEnter` and `InsertLeave` events. The next argument to each `autocmd` is the filename pattern. We specify `*` which indicates that we want this trigger to fire for all files, not just `*.html` or `Makefile` or whatever. Then the interesting stuff happens." };
 
-p { "..." };
+p { "`syn clear EOLWS` gets rid of the " };
 
 p { "The other tool I use to combat EOL whitespace is to unceremoniously execute it. This remapping makes `\\w` (or more likely `,w` -- my leader is nonstandard) just kill all EOL whitespace." };
 
@@ -35,4 +35,5 @@ p { "`nmap` sets up a normal mode command remapping (see also `imap`, `vmap`, et
 
 p { "The first part should be familiar to anyone who's used vim seriously. `:%s/\\s\\+\$//` just runs a substitution to remove all whitespace characters that occur at end of line. `<CR>` is a way to mock typing the Enter key in vimscript. The `:let @/=''` bit empties the `/` register so that the whitespace you deleted is not used accidentally in an :hlsearch." };
 
+p { "Some people run something like this in a `BufWritePre` autocommand. But I don't like that solutions because sometimes whitespace at the end of a line _is_ important -- such as in [Markdown](http://daringfireball.net/projects/markdown/syntax#p). Instead, the configuration I've described gives you tools for dealing with EOL whitespace sanely." };
 
