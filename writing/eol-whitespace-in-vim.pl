@@ -2,7 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: End-of-Line Whitespace in Vim\ndraft: 1\n" }
 
-p { "Whitespace characters at the ends of lines are sloppy and when you notice and remove them, they clutter up your version control history. So I have two settings in [my vimrc file](https://github.com/sartak/conf/blob/master/vimrc) that help me avoid committing EOL whitespace to any of my hobby or work projects." };
+p { "Whitespace characters at the ends of lines are sloppy and useless. Not to mention, when you notice and remove them, they clutter up your version control history, though this can be mitigated somewhat by using `git diff --ignore-space-at-eol` or similar. So I have two settings in [my vimrc file](https://github.com/sartak/conf/blob/master/vimrc) that help me avoid committing EOL whitespace to any of my hobby or work projects." };
 
 p { "The first one highlights EOL whitespace in a way that isn't _obnoxious_. vim does have a builtin way to do this:" };
 
@@ -25,7 +25,7 @@ p { "It's worth explaining how it works. `autocmd` is used to register triggers 
 
 p { "..." };
 
-p { "The other tool I use to combat EOL whitespace is to unceremoniously execute it. This remapping makes `\\w` (or more likely `,w` but my leader is nonstandard) just kill all EOL whitespace." };
+p { "The other tool I use to combat EOL whitespace is to unceremoniously execute it. This remapping makes `\\w` (or more likely `,w` -- my leader is nonstandard) just kill all EOL whitespace." };
 
 code_snippet vim => << 'EOV';
 nmap <leader>w :%s/\s\+$//<CR>:let @/=''<CR>
