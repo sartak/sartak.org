@@ -2,7 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: End-of-Line Whitespace in Vim\ndraft: 1\n" }
 
-p { "Whitespace characters at the ends of lines are sloppy and almost 100% useless. Not to mention when you notice and remove them, they clutter up your version control history. Though that can be mitigated somewhat by using `git diff --ignore-space-at-eol` or similar, it's better to never let it become a problem. So I have two settings in [my vimrc](https://github.com/sartak/conf/blob/master/vimrc) that help me avoid committing EOL whitespace to any of my hobby or work projects." };
+p { "Whitespace characters at the ends of lines are sloppy and (almost completely) useless. Not to mention when you notice and remove them, they clutter up your version control history. That can be mitigated by using `git diff --ignore-space-at-eol`, but it's better to never let it become a problem. So I have two settings in [my vimrc](https://github.com/sartak/conf/blob/master/vimrc) that help me avoid committing EOL whitespace to any of my hobby or work projects." };
 
 p { "The first one highlights EOL whitespace so you can tell that it's even there, but in a way that isn't _obnoxious_. Vim does offer a builtin option to do this. But it sucks." };
 
@@ -19,9 +19,9 @@ autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
 highlight EOLWS ctermbg=red guibg=red
 EOV
 
-p { "What this does is highlight EOL whitespace with a red background **except on the line you're editing**. Which means it's not obnoxiously telling you about every time you hit the space bar. The highlighting only occurs when you leave insert mode or if you move the cursor to a different line, such as by hitting enter." };
+p { "What this does is highlight EOL whitespace with a red background **except on the line you're editing**. Which means it's not obnoxiously telling you about every time you hit the space bar. The highlighting only occurs when you leave insert mode or if you move the cursor to a different line, such as by hitting enter. Which we've found to be exactly the kind of highlighting we want." };
 
-p { "The `syn clear EOLS` is needed so when you switch modes, the appropriate syntax highlighting rule runs instead of both of them. The first line has two components of abominable Vim-specific regex: `\\%#` matches cursor position, and `\@!` is like a negative lookahead from Perl for the previous atom. So in effect this matches end of line whitespace, except when the cursor is inside that whitespace." };
+p { "The `syn clear EOLS` is needed so when you switch modes, the appropriate syntax highlighting rule runs instead of both of them. The first line has two components of abominable Vim-specific regex: `\\%#` matches cursor position, and `\\@!` is like a negative lookahead from Perl for the previous atom. So in effect this matches end of line whitespace, except when the cursor is inside that whitespace." };
 
 p { "The other tool I use to combat EOL whitespace is to unceremoniously execute it." };
 
