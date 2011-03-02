@@ -31,5 +31,5 @@ EOV
 
 p { "This sets up a new normal-mode command `<leader>w`. The `<leader>` is like a user-specific namespace for custom commands; for most people it's going to be `,` but I have it set to `\\`. The `:let @/=''` bit empties the `/` register so that the `/\\s\\+\$/` regular expression is not used for the `n` command or `hlsearch` highlighting. Unfortunately you lose whatever was in `@/` before you ran `\\w` but that kind of problem hasn't affected me in practice." };
 
-p { "Some people run a whitespace stripper like this in a `BufWritePre` autocommand. But I don't like that solution because sometimes whitespace at the end of a line _is_ important -- such as in [Markdown](http://daringfireball.net/projects/markdown/syntax#p). Instead, the configuration I've described gives you tools for dealing with EOL whitespace sanely." };
+p { "Some people run a whitespace stripper like this in a `BufWritePre` autocommand. But I don't like that solution because sometimes whitespace at the end of a line _is_ important -- such as in [Markdown](http://daringfireball.net/projects/markdown/syntax#p). Instead, the configuration I've described gives you tools for dealing with EOL whitespace sanely. Got any more?" };
 
