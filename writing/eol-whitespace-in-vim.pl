@@ -19,17 +19,17 @@ autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
 highlight EOLWS ctermbg=red guibg=red
 EOV
 
-p { "What this does is highlight EOL whitespace with a red background **except on the line you're editing**. Which means it's not _obnoxious_. The highlighting only occurs when you leave insert mode or if you leave that line, such as by hitting insert." };
+p { "What this does is highlight EOL whitespace with a red background **except on the line you're editing**. Which means it's not obnoxiously telling you about every time you hit the space bar. The highlighting only occurs when you leave insert mode or if you move the cursor to a different line, such as by hitting enter." };
 
-p { "The `syn clear EOLS` is needed so when you leave insert mode and go back into it, the regex with `\\%#\\@!` runs. This abomination of regex has two components: `\\%#` matches cursor position, and `\@!` is like a negative lookahead from Perl for the previous atom. So in effect this matches end of line whitespace except if the cursor is after that space." };
+p { "The `syn clear EOLS` is needed so when you switch modes the appropriate syntax highlighting rule runs. The first line has two components of abominable Vim-specific regex: `\\%#` matches cursor position, and `\@!` is like a negative lookahead from Perl for the previous atom. So in effect this matches end of line whitespace, except when the cursor is inside that whitespace." };
 
-p { "The other tool I use to combat EOL whitespace is to unceremoniously execute it. This remapping makes `\\w` (or more likely `,w` -- my leader is nonstandard) just kill all EOL whitespace." };
+p { "The other tool I use to combat EOL whitespace is to unceremoniously execute it." };
 
 code_snippet vim => << 'EOV';
 nmap <leader>w :%s/\s\+$//<CR>:let @/=''<CR>
 EOV
 
-p { "This sets up a new normal-mode command `<leader>w`. The `<leader>` is like a user-specific namespace for custom commands; for most people it's going to be `,` but I have it set to `\\`. The `:let @/=''` bit empties the `/` register so that regular expression is not used for the `n` command or `hlsearch` highlighting." };
+p { "This sets up a new normal-mode command `<leader>w`. The `<leader>` is like a user-specific namespace for custom commands; for most people it's going to be `,` but I have it set to `\\`. The `:let @/=''` bit empties the `/` register so that the `/\\s\\+\$/` regular expression is not used for the `n` command or `hlsearch` highlighting. Unfortunately you lose whatever was in `@/` before you ran `\\w` but that kind of problem hasn't affected me in practice." };
 
 p { "Some people run a whitespace stripper like this in a `BufWritePre` autocommand. But I don't like that solution because sometimes whitespace at the end of a line _is_ important -- such as in [Markdown](http://daringfireball.net/projects/markdown/syntax#p). Instead, the configuration I've described gives you tools for dealing with EOL whitespace sanely." };
 
