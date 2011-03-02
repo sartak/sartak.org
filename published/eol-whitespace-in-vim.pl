@@ -33,4 +33,4 @@ p { "This sets up a new normal-mode command `<leader>w`. The `<leader>` is like 
 
 p { "Some people run a whitespace stripper like this in a `BufWritePre` autocommand. But I don't like that solution because sometimes whitespace at the end of a line _is_ important -- such as in [Markdown](http://daringfireball.net/projects/markdown/syntax#p). Instead, the configuration I've described gives you tools for dealing with EOL whitespace sanely. Got any more?" };
 
-p { "Several people on [reddit](http://www.reddit.com/r/vim/comments/fvj70/detecting_and_deleting_endofline_whitespace/)] have offered alternate highlighting solutions." };
+p { "Several people on [reddit](http://www.reddit.com/r/vim/comments/fvj70/detecting_and_deleting_endofline_whitespace/) have offered alternate highlighting solutions." };
