@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: End-of-Line Whitespace in Vim\ndraft: 1\n" }
+BEGIN { print "title: End-of-Line Whitespace in Vim\ndate: 2011-03-01\n" }
 
 p { "Whitespace characters at the ends of lines are sloppy and (almost completely) useless. Not to mention when you notice and remove them, they clutter up your version control history. That can be mitigated by using `git diff --ignore-space-at-eol`, but it's better to never let it become a problem. So I have two settings in [my vimrc](https://github.com/sartak/conf/blob/master/vimrc) that help me avoid committing EOL whitespace to any of my hobby or work projects." };
 
