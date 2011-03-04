@@ -34,3 +34,21 @@ p { "This sets up a new normal-mode command `<leader>w`. The `<leader>` is like 
 p { "Some people run a whitespace stripper like this in a `BufWritePre` autocommand. But I don't like that solution because sometimes whitespace at the end of a line _is_ important -- such as in [Markdown](http://daringfireball.net/projects/markdown/syntax#p). Instead, the configuration I've described gives you tools for dealing with EOL whitespace sanely. Got any more?" };
 
 p { "Several people on [reddit](http://www.reddit.com/r/vim/comments/fvj70/detecting_and_deleting_endofline_whitespace/) have offered alternate highlighting solutions." };
+
+p { "Update: I'm stealing [Amablue's whitespace stripper](http://www.reddit.com/r/vim/comments/fvj70/detecting_and_deleting_endofline_whitespace/c1j0uiy) because it doesn't stomp on `@/` and it maintains the cursor position. I also like his `<leader><space>` over `<leader>w`." };
+
+code_snippet vim => << 'EOV';
+function! <SID>StripTrailingWhitespace()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+nmap <silent> <Leader><space> :call <SID>StripTrailingWhitespace()<CR>
+EOV
+
