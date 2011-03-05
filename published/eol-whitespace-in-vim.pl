@@ -35,7 +35,8 @@ p { "Some people run a whitespace stripper like this in a `BufWritePre` autocomm
 
 p { "Several people on [reddit](http://www.reddit.com/r/vim/comments/fvj70/detecting_and_deleting_endofline_whitespace/) have offered alternate highlighting solutions." };
 
-p { "Update: I'm stealing reddit user Amablue's [improvements](http://www.reddit.com/r/vim/comments/fvj70/detecting_and_deleting_endofline_whitespace/c1j0uiy) to the whitespace stripper because it no longer stomps on `@/` and it reinstates the cursor position. I also like his `<leader><space>` over `<leader>w`." };
+# XXX: apparently Markdown has some trouble with the "Update:" since it doesn't parse??
+p { outs_raw "Update: "; outs "I'm stealing reddit user Amablue's [improvements](http://www.reddit.com/r/vim/comments/fvj70/detecting_and_deleting_endofline_whitespace/c1j0uiy) to the whitespace stripper because it no longer stomps on `@/` and it reinstates the cursor position. I also like his `<leader><space>` over `<leader>w`." };
 
 code_snippet vim => << 'EOV';
 function! <SID>StripTrailingWhitespace()
