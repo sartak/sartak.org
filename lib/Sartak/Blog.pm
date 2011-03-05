@@ -19,7 +19,7 @@ Template::Declare->init(postprocessor => sub {
     $out =~ s/ -- / &mdash; /g;
 
     # remove extraneous whitespace
-    chomp $out;
+    1 while chomp $out;
     $out =~ s/^<p>//;
     $out =~ s/<\/p>$//;
 
