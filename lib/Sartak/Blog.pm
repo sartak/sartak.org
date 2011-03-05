@@ -20,7 +20,7 @@ Template::Declare->init(postprocessor => sub {
 
     # remove extraneous whitespace
     1 while chomp $out;
-    $out =~ s/^<p>// or $out && warn "This did not parse as Markdown: $out\n";
+    $out =~ s/^<p>// or $out && warn "This apparently did not parse as Markdown: $out\n";
     $out =~ s/<\/p>$//;
 
     $out
