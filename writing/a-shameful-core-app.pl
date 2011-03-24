@@ -14,7 +14,7 @@ p { "I've just recently started using Calculator.app in anger. I want it to reme
 
 h2 { "Unintrusive Improvements" };
 
-p { "Long-press is a great UI pattern for hiding rarely-used alternatives until they are needed. If you hold down the `\$` button in your iOS keyboard, out pops up a tiny menu with other currency keys, including ¢, on it. I very rarely need the Korean currency symbol ₩, so I'm glad it's not sitting there all the time, wasting space. But every now and then Korea will come up in conversation, and even if this is the first time you've seen long-press on the keyboard, I bet in a few months you'll still remember how to type ₩. A bunch of other keys support long-press including `?`, `!`, and `&`." };
+p { outs "Long-press is a great UI pattern for hiding rarely-used alternatives until they are needed. If you hold down the `\$` button in your iOS keyboard, out pops up a tiny menu with other currency keys, including ¢, on it. I very rarely need the Korean "; i {"_won_"}; outs " symbol ₩, so I'm glad it's not sitting there all the time, wasting space. But every now and then Korea will come up in conversation, and even if this is the first time you've seen long-press on the keyboard, I bet in a few months you'll still remember how to type ₩. A bunch of other keys support long-press including `?`, `!`, and `&`." };
 
 image("currency.png", "Long-pressing the \$ key pops up a currency menu");
 
