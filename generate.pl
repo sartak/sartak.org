@@ -278,5 +278,5 @@ sub generate_rss {
 }
 
 sub generate_static {
-    system('cp', '-r', 'static/' => "$outdir/");
+    system("cp -r static/* $outdir/");
 }
