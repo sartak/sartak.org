@@ -164,8 +164,7 @@ generate_about();
 generate_talks();
 #generate_atom();
 generate_rss();
-generate_css();
-generate_favicon();
+generate_static();
 
 sub generate_index {
     my $posts;
@@ -278,10 +277,6 @@ sub generate_rss {
     $feed->save("$outdir/rss.xml");
 }
 
-sub generate_css {
-    system(cp => 'style.css' => "$outdir/");
-}
-
-sub generate_favicon {
-    system(cp => 'favicon.ico' => "$outdir/");
+sub generate_static {
+    system('cp', '-r', 'static' => "$outdir/");
 }
