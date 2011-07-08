@@ -8,7 +8,7 @@ p { "第一に、先月に会社を辞めた。Infinity Interactiveに雇われ�
 
 p { "先週に[YAPC::NA](http://www.yapc2011.us/yn2011/)を参加して、2つの演説(?)やった。1つ目は、[cpandoc](http://perldoc.jp/docs/modules/Pod-Cpandoc-0.09/Cpandoc.pod)についてLTだった。インターネットが必要だった生の実演で、cpandocを使う方法を教えたが、楽しかった！2つ目は、[Announcements](http://beta.metacpan.org/module/Announcements)入門を20分話した。YAPCで、miyagawaさんが僕に「How does it feel to be a ニート?」って冗談に聞いたので、このブログの表題をくれた。" };
 
-p { "最近、DTraceを習ってみた。強力すぎなツールだから、使わなくてはいけない。printf式でのデバグが好きなプログラマー、DTraceを調査して下さい！[Pinboard](http://pinboard.in)でDTraceを記述する記事を集めている: [[すべて](http://pinboard.in/u:sartak/t:dtrace)] [[日本語だけ](http://pinboard.in/u:sartak/t:%E6%97%A5%E6%9C%AC%E8%AA%9E/t:dtrace/)]。PerlはDTraceのプローブがあるけど、関数の呼びと関数の返ししかトレースできない。しかし、僕がPerlにプローブ追加しようとしてる。一回目に、`\${^GLOBAL_PHASE}`というの変数([perldocを参照](http://perldoc.perl.org/perlvar.html#%24%7b%5eGLOBAL_PHASE%7d))の変化を知らせたい。それだから、p5pに[パッチ](https://rt.perl.org/rt3/Public/Bug/Display.html?id=94234)をあげた。次のプローブを追加するのは、文字列式のeval、たぶん。今年のYAPC::Asiaで、僕の話はDTraceのテーマと思う。[PPW](http://pghpw.org/ppw2011/)も、もし行ったら。" };
+p { "最近、DTraceを習ってみた。強力すぎなツールだから、使わなくてはいけない。printf式でのデバグが好きなプログラマー、DTraceを調査して下さい！[Pinboard](http://pinboard.in)でDTraceを記述する記事を集めている: [[すべて](http://pinboard.in/u:sartak/t:dtrace)] [[日本語だけ](http://pinboard.in/u:sartak/t:%E6%97%A5%E6%9C%AC%E8%AA%9E/t:dtrace/)]。PerlはDTraceのプローブがあるけど、関数の呼びと関数の返ししかトレースできない。しかし、僕がPerlにプローブ追加しようとしてる。一回目に、`\${^GLOBAL_PHASE}`というの変数([perldocを参照](http://perldoc.perl.org/perlvar.html#%24%7b%5eGLOBAL_PHASE%7d))の変化を知らせたい。それだから、p5pに[パッチ](https://rt.perl.org/rt3/Public/Bug/Display.html?id=94234)をあげた。次のプローブを追加するのは、文字列式のeval、たぶん。今年のYAPC::Asiaで、僕の話はDTraceのテーマと思う。[PPW](http://pghpw.org/ppw2011/)も、もし僕が行ったら。" };
 
 p { "次回に、最新の国語の勉強を物語る。さらばだ！" };
 
