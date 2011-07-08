@@ -2,13 +2,9 @@ use Sartak::Blog;
 
 BEGIN { print "title: ニートであることについての記述\ndraft: 1\n" }
 
-p { "" };
+p { "お久しぶりですね！！今日の多読を休止しようと思ったが、日常の出来事についてツイートより長い説明を書く。" };
 
-# Quit my job
-# - New job is II
-# - Studying Japanese in July
-# - Also finding good cafes to hack both Japanese and Perl since I
-#   have the free time and the need since II is telecommute
+p { "第一に、先月に会社を辞めた。Infinity Interactiveに雇われた！MooseとかKiokuDBとかPath::RouterとかBread::Boardをリリースした会社なんだ。ワクワクしながら始まるのを待ってる！まだ始まらなかった理由は、まる1ヶ月の休みを取ったかったんだ。7月中に激しく日本語をレベルアップしたいんだよ！" };
 
 # YAPC::NA
 # - miyagawa's ニート question
@@ -19,6 +15,7 @@ p { "" };
 # - モダンPerl入門 - vocabulary
 # - CPANモジュールガイド
 # - デューン
+# - Scribblenauts, kanji game
 # - This post
 
 # DTrace
