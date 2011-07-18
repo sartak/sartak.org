@@ -48,6 +48,7 @@ sub read_content {
 
 sub new_article {
     my $content = shift;
+    my $file    = shift;
 
     my %headers;
     $headers{$1} = $2 while $content =~ s/^(\w+): (.+)\n//;
@@ -56,7 +57,7 @@ sub new_article {
 
     if (!$headers{date}) {
         warn "No date for $headers{title}!" if !$headers{draft};
-        my (undef,undef,undef,$day,$mon,$year) = localtime;
+        my (undef,undef,undef,$day,$mon,$year) = localtime((stat($file))[9]);
         $mon++;
         $year += 1900;
         $headers{date} = "$year-$mon-$day";
@@ -103,7 +104,7 @@ my %articles;
 
 while (my $file = glob("published/* writing/*")) {
     my $content = read_content($file);
-    my $article = new_article($content);
+    my $article = new_article($content, $file);
     next if $article->{skip};
 
     if ($article->{draft}) {
