@@ -7,30 +7,19 @@ p { "I love how quickly [metacpan](http://metacpan.org) is becoming the ultimate
 a {
     onclick is "load_wishlists();";
     href is '#';
-    "Click here to load authors who have put in a wishlist";
+    "Click here to load authors who have a wishlist!";
 };
 
 script {
     my $url = 'http://api.metacpan.org/author/_search?q=author.donation.name:wishlist&size=100';
     outs_raw << "JS";
-    function _handler () {
-        if (this.readyState != 4) {
-            return;
-        }
-        
-        if (this.status == 20) {
-            alert(this.responseText);
-        }
-        else {
-            alert(this.statusText);
-        }
-    }
 
     function load_wishlists () {
-        var client = new XMLHttpRequest();
-        client.onreadystatechange = _handler;
-        client.open("GET", "$url");
-        client.send();
+        alert("$url");
+        jQuery.getJSON("$url", function (json) {
+            alert("success");
+        })
+        .error(function(foo, bar) { alert("error" + JSON.stringify(foo)); })
     }
 JS
 };
