@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: TODO? vim ♥ ack\ndraft: 1\n" }
+BEGIN { print "title: TODO? vim ♥ ack\ndate: 2011-09-20\n" }
 
 p { "One pattern I frequently find myself following is acking for a very specific set of results..." }
 
