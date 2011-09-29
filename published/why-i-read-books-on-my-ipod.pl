@@ -12,6 +12,6 @@ image "ipod-reading/copy-word.png";
 image "ipod-reading/paste-word.png";
 hr {};
 
-p { "There are a few reasons why I'm pretty excited about the iPhone 5 announcement. There will supposedly be a fat home button which allows gestures for easy switching of apps. If that feature indeed lands on the new iPhone, it will save me a couple moments and clicks, thousands of times over, as I flip between iBooks, Anki, and 大辞林 while studying. Also I'm still rocking a third-gen iPod Touch which does not have anything near a retina display, so that'll be for turning those kanji from muddy to crisp." };
+p { "There are a few reasons why I'm pretty excited about the iPhone 5 announcement. There will supposedly be a fat home button which allows gestures for easy switching of apps. If that feature indeed lands on the new iPhone, it will save me a couple moments and clicks, thousands of times over, as I flip between iBooks, Anki, and 大辞林 while studying. Also I'm still rocking a third-gen iPod Touch which does not have anything near a retina display, so that'll be great for turning those kanji from muddy to crisp." };
 
 p { "I don't foresee myself getting a new Kindle any time soon, even though those Kindle Touches look pretty damn good." };
