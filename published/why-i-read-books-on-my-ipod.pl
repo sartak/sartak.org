@@ -9,7 +9,7 @@ hr {};
 
 h4 {
     outs "I can copy Japanese words I _don't_ understand into a dictionary:";
-    footnote { "iBooks has a built-in dictionary (the 辞書 button), but it's not useful for my study because it's English-only. One way to make that button universally useful would be to let you set it up to launch some other application, but unfortunately built-in apps typically don't give you that much rope. Update: a reader has pointed me to iBunkos which is designed for reading Japanese text. iBunkos not only gives you the rope to launch the URLs of your choosing (which means you can launch any app that supports being launched to), but also has a builtin dictionary and a builtin link to 大辞林. Perfect!" };
+    footnote { "iBooks has a built-in dictionary, but it's not useful for my study because it's English-only. One way to make that button universally useful would be to let you set it up to launch some other application, but unfortunately built-in apps typically don't give you that much rope. Update: a reader has pointed me to iBunkos which is designed for reading Japanese text. iBunkos not only gives you the rope to launch the URLs of your choosing (which means you can launch any app that supports being launched to), but also has a builtin dictionary and a builtin link to 大辞林. Perfect!" };
 };
 image "ipod-reading/copy-word.png";
 image "ipod-reading/paste-word.png";
