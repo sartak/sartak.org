@@ -34,26 +34,26 @@ BEGIN {
         my $anchor = ++$footnotes; # closures!
 
         push @footnotes, sub {
-            a { name is "footnote_$anchor" };
-            span {
-                class is 'footnote_content';
-                $code->();
-            }
-            sup {
-                a {
-                    href is "#footnote_back_$anchor";
-                    class is 'footnote_link_top';
-                    '&#8617;'; # LEFTWARDS ARROW WITH HOOK
+            li {
+                id is "fn-$anchor";
+                span {
+                    $code->();
                 }
-            }
+                sup {
+                    a {
+                        class is 'footnoteBackLink';
+                        href is "#fnr-$anchor";
+                        '&#8617;'; # LEFTWARDS ARROW WITH HOOK
+                    }
+                }
+            };
         };
 
         sup {
+            id is "fnr-$anchor";
             a {
-                class is 'footnote_link';
-                href is "#footnote_$anchor";
-                name is "footnote_back_$anchor";
-                "[$anchor]";
+                href is "#fn-$anchor";
+                $anchor;
             }
         }
     };
@@ -97,12 +97,13 @@ sub image {
 
 sub print_footnotes {
     if (@footnotes) {
-        h5 { "Footnotes" }
-        hr {}
-        ol {
+        div {
             class is 'footnotes';
-            while (local $_ = shift @footnotes) {
-                li { class is 'footnote'; $_->() };
+            hr {};
+            ol {
+                while (local $_ = shift @footnotes) {
+                    $_->();
+                }
             }
         }
     }
