@@ -1,10 +1,12 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
+use lib 'lib';
 use File::Slurp 'slurp';
 use File::Path 'make_path';
 use autodie;
 use Encode;
+use Sartak::Blog::Talks;
 
 my $title = 'sartak';
 my $outdir = shift || 'generated';
@@ -220,7 +222,7 @@ sub generate_talks {
     system("cp -r talks/* $outdir/talks");
     open my $handle, '>', "$outdir/talks/index.html";
     print $handle fill_in($layout, {
-        content => scalar slurp('talks.html'),
+        content => Sartak::Blog::Talks->generate_talks_html,
         title   => 'Talks',
     });
 }
