@@ -229,6 +229,10 @@ my @talks = (
     },
 );
 
+for (@talks) {
+    $_->{url} ||= "http://sartak.org/talks/$_->{conference}{dir}/$_->{dir}/";
+}
+
 sub generate_talks_html {
     my $output = '';
 
@@ -239,8 +243,6 @@ sub generate_talks_html {
 
     for my $talk (@talks) {
         my $conference = $talk->{conference};
-
-        my $url = $talk->{url} || "http://sartak.org/talks/$conference->{dir}/$talk->{dir}/";
 
         my $videos = '';
 
@@ -259,7 +261,7 @@ sub generate_talks_html {
         }
 
         $output .= << "        END";
-            <dt><a href="$url">$talk->{name}</a>$videos</dt>
+            <dt><a href="$talk->{url}">$talk->{name}</a>$videos</dt>
             <dd>
                 <span class="metadata">$talk->{length}. Presented at <a href="$conference->{url}">$conference->{name}</a>, $talk->{date}.
                 </span>
@@ -285,7 +287,9 @@ my %upload = (
 sub talk_pages {
     my @pages;
 
-    for my $talk (@talks) {
+    for (my $t = 0; $t < @talks; ++$t) {
+        my $talk = $talks[$t];
+
         next if $talk->{skip_index};
         my $page = { talk => $talk };
         my @links = @{ $talk->{links} || [] };
@@ -351,6 +355,15 @@ sub talk_pages {
                 $links
             </div>
         END
+
+        my $next = $t == 0 ? undef : $talks[$t - 1];;
+        my $prev = $talks[$t + 1];
+        if ($next || $prev) {
+            $html .= qq[<hr><span id="nextprevlinks">];
+            $html .= qq[<a href="$next->{url}" id="nextlink">Next: $next->{name}</a>] if $next;
+            $html .= qq[<a href="$prev->{url}" id="prevlink">Previous: $prev->{name}</a>] if $prev;
+            $html .= qq[</span>];
+        }
 
         $page->{content} = $html;
 
