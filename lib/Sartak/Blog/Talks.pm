@@ -6,6 +6,20 @@ my @talks = (
     {
         name        => 'DTrace: printf debugging for seventh-level wizards',
         dir         => 'dtrace',
+        length      => '40 min',
+        future      => 1,
+        date        => '2012-01-15',
+        speakerdeck => '4ea43e36a0250e005400d9ed',
+        conference  => {
+            name    => 'Perl Oasis',
+            dir     => 'perl-oasis-2012',
+            url     => 'http://www.perloasis.info/opw2012/',
+        },
+        description => q{DTrace is an extremely powerful tool for examining what a computer is doing. Even in production. Without invoking the ire of the Munin Gods. It's also an indispensible tool for programmers who are trying to debug, optimize, or otherwise investigate what their code is doing when it ventures (and venture it must!) outside of the cozy, warm, abstract world of the Perl interpreter.},
+    },
+    {
+        name        => 'DTrace: printf debugging for seventh-level wizards',
+        dir         => 'dtrace',
         length      => '20 min',
         date        => '2011-10-15',
         speakerdeck => '4ea43e36a0250e005400d9ed',
@@ -324,11 +338,13 @@ sub talk_pages {
         }
 
         my $date = main::prettify_date($talk->{date});
+        my $presented = $talk->{future} ? "To be presented" : "Presented";
+
         my $html = << "        END";
             <div id="talk">
                 <span id="date">$date</span>
                 <h1 id="title">$talk->{name}</h1>
-                <span class="metadata">$talk->{length}. Presented at <a href="$conference->{url}">$conference->{name}</a>.</span>
+                <span class="metadata">$talk->{length}. $presented at <a href="$conference->{url}">$conference->{name}</a>.</span>
                 <br />
                 <br />
 
