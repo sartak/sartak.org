@@ -57,6 +57,7 @@ my @talks = (
     },
     {
         name        => 'cpandoc',
+        dir         => 'cpandoc',
         url         => 'http://www.yapc2011.us/yn2011/talk/3519',
         length      => '5 min',
         date        => '2011-06-27',
@@ -144,6 +145,7 @@ my @talks = (
     },
     {
         name        => 'Surviving in the Cruel, Unforgiving World',
+        dir         => 'surviving-in-the-cruel-unforgiving-world',
         url         => 'http://www.perloasis.info/opw2010/talk/2476',
         length      => '40 min',
         date        => '2010-01-16',
@@ -257,7 +259,7 @@ my @talks = (
 );
 
 for (@talks) {
-    $_->{url} ||= "http://sartak.org/talks/$_->{conference}{dir}/$_->{dir}/";
+    $_->{url} = "http://sartak.org/talks/$_->{conference}{dir}/$_->{dir}/";
 }
 
 sub talks { @talks }
