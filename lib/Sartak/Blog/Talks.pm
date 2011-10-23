@@ -236,39 +236,18 @@ for (@talks) {
 sub generate_talks_html {
     my $output = '';
 
-    $output .= << "    END";
-        <div id="talks">
-            <dl>
-    END
-
     for my $talk (@talks) {
+        my $date = main::prettify_date($talk->{date});
         my $conference = $talk->{conference};
 
-        my $videos = '';
+        $output .= qq[<li>
+    <span class="date">$date</span>
+    <span class="title"><a href="$talk->{url}">$talk->{name}</a></span>
+    <span class="conference">at <a href="$conference->{url}">$conference->{name}</a></span>
+</li>];
+    };
 
-        if ($talk->{video}) {
-            if (ref($talk->{video})) {
-                my $i = 0;
-                $videos = " (video: "
-                        . join(', ',
-                            map { ++$i; qq[<a href="$_">part $i</a>] }
-                            @{ $talk->{video} })
-                        . ")";
-            }
-            else {
-                $videos = qq[ <a href="$talk->{video}">(video)</a>];
-            }
-        }
-
-        $output .= << "        END";
-            <dt><a href="$talk->{url}">$talk->{name}</a>$videos</dt>
-            <dd>
-                <span class="metadata">$talk->{length}. Presented at <a href="$conference->{url}">$conference->{name}</a>, $talk->{date}.
-                </span>
-                <p class="description">$talk->{description}</p>
-            </dd>
-        END
-    }
+    $output = qq[<ul id="talks">$output</ul>];
 
     $output .= << "    END";
             <hr />
@@ -342,9 +321,10 @@ sub talk_pages {
                    . '</ul>';
         }
 
+        my $date = main::prettify_date($talk->{date});
         my $html = << "        END";
             <div id="talk">
-                <span id="date">$talk->{date}</span>
+                <span id="date">$date</span>
                 <h1 id="title">$talk->{name}</h1>
                 <span class="metadata">$talk->{length}. Presented at <a href="$conference->{url}">$conference->{name}</a>.</span>
                 <br />

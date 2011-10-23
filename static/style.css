@@ -36,19 +36,22 @@ a:hover {
     width: 800px;
 }
 
-ul#posts {
+ul#posts, ul#talks {
     margin-top: 0;
     list-style-type: none;
 }
-#posts .title a {
+#posts .title a, #talks .title a {
     font-size: 1.1em;
 }
-#posts .date, #post #date, #talk #date {
+#posts .date, #talks .date, #post #date, #talk #date {
     float: right;
     color: #AAAAAA;
 }
-#posts li {
+#posts li, #talks li {
     padding-bottom: 0.4em;
+}
+#talks .conference {
+    font-size: 0.7em;
 }
 
 #about ul {
