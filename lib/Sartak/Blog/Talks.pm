@@ -9,6 +9,10 @@ my @talks = (
         length      => '20 min',
         date        => '2011-10-15',
         speakerdeck => '4ea43e36a0250e005400d9ed',
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
         video       => 'http://www.youtube.com/watch?v=GccTqjEWAp4',
         conference  => {
             name    => 'YAPC::Asia',
@@ -23,6 +27,10 @@ my @talks = (
         length      => '20 min',
         date        => '2011-06-28',
         speakerdeck => '4ea45036a0250e005100ef01',
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
         conference  => {
             name    => 'YAPC::NA',
             dir     => 'yapc-na-2011',
@@ -48,6 +56,10 @@ my @talks = (
         length      => '20 min',
         date        => '2010-10-15',
         speakerdeck => '4ea450b7a0250e005400e9fb',
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
         video       => [
             'http://www.youtube.com/watch?v=fLVTZv4XjgM',
             'http://www.youtube.com/watch?v=SwXrY8yYUgQ',
@@ -65,6 +77,10 @@ my @talks = (
         length      => '20 min',
         date        => '2010-06-23',
         speakerdeck => '4ea450cfaaf429005100fc3a',
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
         conference  => {
             name    => 'YAPC::NA',
             dir     => 'yapc-na-2010',
@@ -78,6 +94,10 @@ my @talks = (
         length      => '5 min',
         date        => '2010-05-28',
         speakerdeck => '4ea45109aaf429005100fcad',
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
         conference  => {
             name    => 'Tsukuba.xs Beer Talks #1',
             dir     => 'tsukuba.xs-1',
@@ -91,6 +111,10 @@ my @talks = (
         length      => '50 min',
         date        => '2010-04-25',
         speakerdeck => '4ea4511fa0250e005100f060',
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
         conference  => {
             name    => 'OSDC.tw',
             dir     => 'osdc.tw-2010',
@@ -116,6 +140,10 @@ my @talks = (
         dir         => '(parameterized)-roles',
         length      => '40 min',
         date        => '2009-09-11',
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
         video       => 'http://www.nicovideo.jp/watch/sm8674742',
         conference  => {
             name    => 'YAPC::Asia',
@@ -129,6 +157,10 @@ my @talks = (
         dir         => 'api-design',
         length      => '40 min',
         date        => '2009-09-10',
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
         video       => 'http://www.nicovideo.jp/watch/sm8627720',
         conference  => {
             name    => 'YAPC::Asia',
@@ -142,6 +174,10 @@ my @talks = (
         dir         => 'extending-moose',
         length      => '50 min',
         date        => '2009-06-23',
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
         conference  => {
             name    => 'YAPC::NA',
             dir     => 'yapc-na-2009',
@@ -238,13 +274,25 @@ sub generate_talks_html {
     return $output;
 }
 
+my %upload = (
+    pdf => 'PDF',
+    key => 'Keynote source',
+);
+
 sub talk_pages {
     my @pages;
 
     for my $talk (@talks) {
         next if $talk->{skip_index};
         my $page = { talk => $talk };
-        my @links;
+        my @links = @{ $talk->{links} || [] };
+
+        for (@links) {
+            if (my $label = $upload{$_->{type}}) {
+                $_->{label} = $label;
+                $_->{href} = "http://sartak.org/talks/$talk->{conference}->{dir}/$talk->{dir}/$talk->{dir}.$_->{type}";
+            }
+        }
 
         my $slides = "";
         if ($talk->{speakerdeck}) {
