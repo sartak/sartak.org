@@ -43,7 +43,7 @@ ul#posts {
 #posts .title a {
     font-size: 1.1em;
 }
-#posts .date, #post #date {
+#posts .date, #post #date, #talk #date {
     float: right;
     color: #AAAAAA;
 }
@@ -62,8 +62,8 @@ ul#posts {
     margin-bottom: 1em;
 }
 
-#post h1 {
-    margin-top: none;
+#post h1, #talk h1 {
+    margin: 0;
 }
 
 .spoiler {
@@ -129,7 +129,7 @@ sub {
 #talks dt {
     font-size: 1.4em;
 }
-#talks .metadata {
+#talks .metadata, #talk .metadata {
     font-size: .8em;
 }
 #talks dd {
@@ -142,7 +142,7 @@ sub {
     margin-right: auto;
 }
 
-#post {
+#post, #talk {
     font-size: 1.1em;
 }
 

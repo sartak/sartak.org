@@ -290,10 +290,12 @@ sub talk_pages {
         my $page = { talk => $talk };
         my @links = @{ $talk->{links} || [] };
 
+        my $conference = $talk->{conference};
+
         for (@links) {
             if (my $label = $upload{$_->{type}}) {
                 $_->{label} = $label;
-                $_->{href} = "http://sartak.org/talks/$talk->{conference}->{dir}/$talk->{dir}/$talk->{dir}.$_->{type}";
+                $_->{href} = "http://sartak.org/talks/$conference->{dir}/$talk->{dir}/$talk->{dir}.$_->{type}";
             }
         }
 
@@ -333,10 +335,17 @@ sub talk_pages {
         }
 
         my $html = << "        END";
-            <h2>$talk->{name}</h2>
-            $slides
-            <p class="description">$talk->{description}</p>
-            $links
+            <div id="talk">
+                <span id="date">$talk->{date}</span>
+                <h1 id="title">$talk->{name}</h1>
+                <span class="metadata">$talk->{length}. Presented at <a href="$conference->{url}">$conference->{name}</a>.</span>
+                <br />
+                <br />
+
+                $slides
+                <p class="description">$talk->{description}</p>
+                $links
+            </div>
         END
 
         $page->{content} = $html;
