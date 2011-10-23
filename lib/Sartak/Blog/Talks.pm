@@ -14,6 +14,7 @@ my @talks = (
             name    => 'Perl Oasis',
             dir     => 'perl-oasis-2012',
             url     => 'http://www.perloasis.info/opw2012/',
+            talk    => 'http://www.perloasis.info/opw2012/talk/3868',
         },
         description => q{DTrace is an extremely powerful tool for examining what a computer is doing. Even in production. Without invoking the ire of the Munin Gods. It's also an indispensible tool for programmers who are trying to debug, optimize, or otherwise investigate what their code is doing when it ventures (and venture it must!) outside of the cozy, warm, abstract world of the Perl interpreter.},
     },
@@ -32,6 +33,7 @@ my @talks = (
             name    => 'YAPC::Asia',
             dir     => 'yapc-asia-2011',
             url     => 'http://yapcasia.org/2011/',
+            talk    => 'http://yapcasia.org/2011/talk/23',
         },
         description => q{DTrace is an extremely powerful tool for examining what a computer is doing. Even in production. Without invoking the ire of the Munin Gods. It's also an indispensible tool for programmers who are trying to debug, optimize, or otherwise investigate what their code is doing when it ventures (and venture it must!) outside of the cozy, warm, abstract world of the Perl interpreter.},
     },
@@ -49,6 +51,7 @@ my @talks = (
             name    => 'YAPC::NA',
             dir     => 'yapc-na-2011',
             url     => 'http://www.yapc2011.us/yn2011',
+            talk    => 'http://www.yapc2011.us/yn2011/talk/3197',
         },
         description => q{Say you&#39;re writing a system that uses the observer design pattern. What happens if instead of passing around the NAME of an event, you pass around an OBJECT representing the event? Turns out, a whole lot of goodness! Announcements enable communication from the observer to the observed, and even communication &#40;and conspiracy&#41; amongst observers themselves. All with a very strongly object-oriented, antler-shaped flavor.},
     },
@@ -61,6 +64,7 @@ my @talks = (
             name    => 'YAPC::NA',
             dir     => 'yapc-na-2011',
             url     => 'http://www.yapc2011.us/yn2011',
+            talk    => 'http://www.yapc2011.us/yn2011/talk/3519',
         },
         description => q{This lightning talk was just a live demonstration of cpandoc. No slides, and nothing you wouldn't see in the documentation.},
     },
@@ -82,6 +86,7 @@ my @talks = (
             name    => 'YAPC::Asia',
             dir     => 'yapc-asia-2010',
             url     => 'http://yapcasia.org/2010/',
+            talk    => 'http://yapcasia.org/2010/talks/63D22246-BC8C-11DF-8791-B9FC0F276C45',
         },
         description => q{A new-and-improved version of my YAPC::NA talk directly below. This talk has become a case study in Moosey design, describing how the needs of Path::Dispatcher&#39;s users have influenced its evolution. Too many talks present a topic as though the solution sprung fully-formed from the designer&#39;s brain in an instant, ignoring the interesting details of how a system is improved over time. Maybe next conference I&#39;ll present The Evolution of &#39;The Evolution of Path::Dispatcher&#39;, a talk on how to evolve talks after presenting them. :&#41;},
     },
@@ -99,6 +104,7 @@ my @talks = (
             name    => 'YAPC::NA',
             dir     => 'yapc-na-2010',
             url     => 'http://yapc2010.com/yn2010/',
+            talk    => 'http://yapc2010.com/yn2010/talk/2642',
         },
         description => q{This talk will give a brief overview of Path::Dispatcher&#39;s features. Then the meat of the talk will describe how its flexible design has met the challenges thrown at it, and how Path::Dispatcher&#39;s sibling rival, Path::Router, would have fared.},
     },
@@ -146,6 +152,7 @@ my @talks = (
             name    => 'Perl Oasis',
             dir     => 'perl-oasis-2010',
             url     => 'http://www.perloasis.info/opw2010/',
+            talk    => 'http://www.perloasis.info/opw2010/talk/2476',
         },
         description => q{This talk about my NetHack-playing AI was very informal and impromptu. I blathered on about <a href="http://taeb.sartak.org">TAEB</a>&#39;s design, mostly about making proper use of object-oriented design, while TAEB played NetHack on the projector. If I give this talk again I will definitely write slides because there is a lot of good design in TAEB. Without slides I think it bored the people who didn&#39;t know much about NetHack. On the other hand, it <i>enchanted</i> those who did.},
     },
@@ -164,6 +171,7 @@ my @talks = (
             name    => 'YAPC::Asia',
             dir     => 'yapc-asia-2009',
             url     => 'http://conferences.yapcasia.org/ya2009/',
+            talk    => 'http://conferences.yapcasia.org/ya2009/talk/2261',
         },
         description => q{Roles are an excellent object-oriented tool both for allomorphism and for reuse. Roles can combine with conflict detection. This eliminates accidental shadowing of methods that is painful with multiple inheritance and mixins. Parameterized roles &#40;via MooseX::Role::Parameterized&#41; improve the reusability of roles by letting each consumer cater the role to its needs.},
     },
@@ -182,6 +190,7 @@ my @talks = (
             name    => 'YAPC::Asia',
             dir     => 'yapc-asia-2009',
             url     => 'http://conferences.yapcasia.org/ya2009/',
+            talk    => 'http://conferences.yapcasia.org/ya2009/talk/2188',
         },
         description => q{Too few projects demand good API design as a critical goal. A clean and extensible API will pay for itself many times over in fostering a community of plugins. We certainly cannot anticipate the ways in which our users will bend our modules, but designing an extensible system alleviates the pain. There are many lessons to be learned from Moose, HTTP::Engine and IM::Engine, Dist::Zilla, KiokuDB, Fey, and TAEB.},
     },
@@ -199,6 +208,7 @@ my @talks = (
             name    => 'YAPC::NA',
             dir     => 'yapc-na-2009',
             url     => 'http://yapc10.org/yn2009/',
+            talk    => 'http://yapc10.org/yn2009/talk/1880',
         },
         description => q{The real power of Moose rests in its extensibility. By subclassing Moose&#39;s metaclasses, you can augment and change Moose&#39;s behavior to suit your application&#39;s needs. This extensibility is powered by the meta-object protocol of Moose&#39;s foundation, Class::MOP. This talk focuses on domain-specific metaprogramming, particularly with traits.},
     },
@@ -212,6 +222,7 @@ my @talks = (
             name    => 'Frozen Perl',
             dir     => 'frozen-perl-2009',
             url     => 'http://www.frozen-perl.org/mpw2009/',
+            talk    => 'http://www.frozen-perl.org/mpw2009/talk/1687',
         },
         description => q{Yet another introductory Moose talk. What separates this from other Moose Intro talks is that it focuses entirely on the immediate time-saving benefits of Moose. No mention of Class::MOP &#40;surely an advanced topic&#41; is made. This talk covers most options of &#39;has&#39;, method modifiers, and roles.},
     },
@@ -225,6 +236,7 @@ my @talks = (
             name    => 'Frozen Perl',
             dir     => 'frozen-perl-2009',
             url     => 'http://www.frozen-perl.org/mpw2009/',
+            talk    => 'http://www.frozen-perl.org/mpw2009/talk/1663',
         },
         description => q{Devel::REPL is an excellent addition to your toolkit. It is an interactive shell for Perl; you type in a line of Perl code and Devel::REPL will evaluate it. This talk introduces Devel::REPL and Carp::REPL. It then delves into the design of Devel::REPL, and how its strong use of roles cleanly supports extensibility.},
     },
@@ -238,6 +250,7 @@ my @talks = (
             name    => 'Frozen Perl',
             dir     => 'frozen-perl-2008',
             url     => 'http://www.frozen-perl.org/mpw2008/',
+            talk    => 'http://www.frozen-perl.org/mpw2008/talk/858',
         },
         description => q{Template::Declare is a novel templating system written in Perl. &#39;TD&#39; has a very pleasant block-oriented syntax. This talk introduces its features and shortcomings, then describes how it is implemented.},
     },
@@ -326,6 +339,13 @@ sub talk_pages {
                     label => 'Video',
                 },
             }
+        }
+
+        if ($conference->{talk}) {
+            push @links, {
+                href  => $conference->{talk},
+                label => "$conference->{name} talk page",
+            };
         }
 
         my $links = '';
