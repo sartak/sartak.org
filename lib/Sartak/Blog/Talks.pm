@@ -124,14 +124,14 @@ my @talks = (
     },
     {
         name        => 'Surviving in the Cruel, Unforgiving World',
-        url         => 'http://perloasis.org/opw2010/talk/2476',
+        url         => 'http://www.perloasis.info/opw2010/talk/2476',
         length      => '40 min',
         date        => '2010-01-16',
         video       => 'http://www.presentingperl.org/opw2010/cruel-world/',
         conference  => {
             name    => 'Perl Oasis',
             dir     => 'perl-oasis-2010',
-            url     => 'http://perloasis.org/',
+            url     => 'http://www.perloasis.info/opw2010/',
         },
         description => q{This talk about my NetHack-playing AI was very informal and impromptu. I blathered on about <a href="http://taeb.sartak.org">TAEB</a>&#39;s design, mostly about making proper use of object-oriented design, while TAEB played NetHack on the projector. If I give this talk again I will definitely write slides because there is a lot of good design in TAEB. Without slides I think it bored the people who didn&#39;t know much about NetHack. On the other hand, it <i>enchanted</i> those who did.},
     },
