@@ -306,6 +306,10 @@ sub talk_pages {
                     <script src="http://speakerdeck.com/embed/$talk->{speakerdeck}.js"></script>
                 </div>
             END
+            push @links, {
+                label => 'Speakerdeck',
+                href  => "http://speakerdeck.com/presentations/$talk->{speakerdeck}",
+            };
         }
 
         my $videos = "";
