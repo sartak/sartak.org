@@ -15,6 +15,8 @@ my @talks = (
             dir     => 'perl-oasis-2012',
             url     => 'http://www.perloasis.info/opw2012/',
             talk    => 'http://www.perloasis.info/opw2012/talk/3868',
+            venue   => 'The Four Points Sheraton',
+            city    => 'Orlando',
         },
         description => q{DTrace is an extremely powerful tool for examining what a computer is doing. Even in production. Without invoking the ire of the Munin Gods.
 
@@ -40,6 +42,8 @@ This talk is intended as an introduction to DTrace for those who have maybe hear
             dir     => 'yapc-asia-2011',
             url     => 'http://yapcasia.org/2011/',
             talk    => 'http://yapcasia.org/2011/talk/23',
+            venue   => 'Tokyo Institute of Technology',
+            city    => 'Tokyo',
         },
         description => q{DTraceは、コンピューターが何を動作していることを調べるために、とても強力なツールです。プロダクションでも使えますよ。ネットワーク監視という神様が怒らず！
 
@@ -62,6 +66,8 @@ This talk is intended as an introduction to DTrace for those who have maybe hear
             dir     => 'yapc-na-2011',
             url     => 'http://www.yapc2011.us/yn2011',
             talk    => 'http://www.yapc2011.us/yn2011/talk/3197',
+            venue   => 'Crowne Plaza Resort',
+            city    => 'Asheville',
         },
         description => q{Say you're writing a system that uses the observer design pattern. What happens if instead of passing around the NAME of an event, you pass around an OBJECT representing the event? Turns out, a whole lot of goodness!
 
@@ -80,6 +86,8 @@ All with a very strongly object-oriented, antler-shaped flavor.},
             dir     => 'yapc-na-2011',
             url     => 'http://www.yapc2011.us/yn2011',
             talk    => 'http://www.yapc2011.us/yn2011/talk/3519',
+            venue   => 'Crowne Plaza Resort',
+            city    => 'Asheville',
         },
         description => q{This lightning talk was just a live demonstration of cpandoc. No slides, and nothing you wouldn't see in the documentation.},
     },
@@ -102,6 +110,8 @@ All with a very strongly object-oriented, antler-shaped flavor.},
             dir     => 'yapc-asia-2010',
             url     => 'http://yapcasia.org/2010/',
             talk    => 'http://yapcasia.org/2010/talks/63D22246-BC8C-11DF-8791-B9FC0F276C45',
+            venue   => 'Tokyo Institute of Technology',
+            city    => 'Tokyo',
         },
         description => q{A new-and-improved version of my YAPC::NA talk directly below. This talk has become a case study in Moosey design, describing how the needs of Path::Dispatcher's users have influenced its evolution. Too many talks present a topic as though the solution sprung fully-formed from the designer's brain in an instant, ignoring the interesting details of how a system is improved over time. Maybe next conference I'll present The Evolution of "The Evolution of Path::Dispatcher", a talk on how to evolve talks after presenting them. :)},
     },
@@ -120,6 +130,8 @@ All with a very strongly object-oriented, antler-shaped flavor.},
             dir     => 'yapc-na-2010',
             url     => 'http://yapc2010.com/yn2010/',
             talk    => 'http://yapc2010.com/yn2010/talk/2642',
+            venue   => 'Ohio State University',
+            city    => 'Columbus',
         },
         description => q{Path::Dispatcher solves the problem of "dispatch" - mapping a string (the path) through a set of rules to find matches and then act upon them. Most commonly this is done in web applications to run one or more actions based on each incoming request URI. However, Path::Dispatcher, unlike most of the other modules in its niche, is not married to the web. It is also used to dispatch based on command-line arguments in some applications, and to dispatch commands in a MUD engine.
 
@@ -139,6 +151,8 @@ All with a very strongly object-oriented, antler-shaped flavor.},
             name    => 'Tsukuba.xs Beer Talks #1',
             dir     => 'tsukuba.xs-1',
             url     => 'http://atnd.org/events/4628',
+            venue   => 'Recruit Media Technology Lab',
+            city    => 'Tokyo',
         },
         description => q{A 5-minute introduction to Inline::C. In Japanese! I wrote the talk in English and then translated it, so English speakers will be able to read it too. :)},
     },
@@ -156,6 +170,8 @@ All with a very strongly object-oriented, antler-shaped flavor.},
             name    => 'OSDC.tw',
             dir     => 'osdc.tw-2010',
             url     => 'http://osdc.tw/',
+            venue   => 'Academia Sinica',
+            city    => 'Taipei',
         },
         description => q{The current trend for new programming languages seems to be to include more and more nonhierarchical OOP features. Some examples are new-style interfaces in Google's Go, traits in Scala and Fortress, and roles in Perl 6. This talk will focus on roles as provided by Perl 5's Moose object system, as that seems to have the most uptake and is most relevant for OSDC.tw's audience. Furthermore, because of roles' "class building-block" nature, they are perhaps the best fit for open source of any nonhierarchical system thus far.},
     },
@@ -171,6 +187,8 @@ All with a very strongly object-oriented, antler-shaped flavor.},
             dir     => 'perl-oasis-2010',
             url     => 'http://www.perloasis.info/opw2010/',
             talk    => 'http://www.perloasis.info/opw2010/talk/2476',
+            venue   => 'The Four Points Sheraton',
+            city    => 'Orlando',
         },
         description => q{This talk about my NetHack-playing AI was very informal and impromptu. I blathered on about <a href="http://taeb.sartak.org">TAEB</a>'s design, mostly about making proper use of object-oriented design, while TAEB played NetHack on the projector. If I give this talk again I will definitely write slides because there is a lot of good design in TAEB. Without slides I think it bored the people who didn't know much about NetHack. On the other hand, it <i>enchanted</i> those who did.},
     },
@@ -190,6 +208,8 @@ All with a very strongly object-oriented, antler-shaped flavor.},
             dir     => 'yapc-asia-2009',
             url     => 'http://conferences.yapcasia.org/ya2009/',
             talk    => 'http://conferences.yapcasia.org/ya2009/talk/2261',
+            venue   => 'Tokyo Institute of Technology',
+            city    => 'Tokyo',
         },
         description => q{Roles are an excellent object-oriented tool both for allomorphism and for reuse.
 
@@ -217,6 +237,8 @@ Parameterized roles (via MooseX::Role::Parameterized) improve the reusability of
             dir     => 'yapc-asia-2009',
             url     => 'http://conferences.yapcasia.org/ya2009/',
             talk    => 'http://conferences.yapcasia.org/ya2009/talk/2188',
+            venue   => 'Tokyo Institute of Technology',
+            city    => 'Tokyo',
         },
         description => q{Too few projects demand good API design as a critical goal. A clean and extensible API will pay for itself many times over in fostering a community of plugins. We certainly cannot anticipate the ways in which our users will bend our modules, but designing an extensible system alleviates the pain. There are many lessons to be learned from Moose, HTTP::Engine and IM::Engine, Dist::Zilla, KiokuDB, Fey, and TAEB.
 
@@ -241,6 +263,8 @@ Finally, I will reveal the secret to designing excellent APIs.},
             dir     => 'yapc-na-2009',
             url     => 'http://yapc10.org/yn2009/',
             talk    => 'http://yapc10.org/yn2009/talk/1880',
+            venue   => 'Carnegie Mellon University',
+            city    => 'Pittsburgh',
         },
         description => q{Using Moose provides many immediate and obvious benefits, starting with the obviation of typing "use strict" and "use warnings" in your classes.
 
@@ -261,6 +285,8 @@ Experience with using Moose to create regular classes is expected. Having some f
             dir     => 'frozen-perl-2009',
             url     => 'http://www.frozen-perl.org/mpw2009/',
             talk    => 'http://www.frozen-perl.org/mpw2009/talk/1687',
+            venue   => 'University of Minnesota',
+            city    => 'Minneapolis',
         },
         description => q{Yet another introductory Moose talk. What separates this from other Moose Intro talks is that it focuses entirely on the immediate time-saving benefits of Moose. No mention of Class::MOP (surely an advanced topic) is made. This talk covers most options of "has", method modifiers, and roles.},
     },
@@ -275,6 +301,8 @@ Experience with using Moose to create regular classes is expected. Having some f
             dir     => 'frozen-perl-2009',
             url     => 'http://www.frozen-perl.org/mpw2009/',
             talk    => 'http://www.frozen-perl.org/mpw2009/talk/1663',
+            venue   => 'University of Minnesota',
+            city    => 'Minneapolis',
         },
         description => q{Devel::REPL is an excellent addition to your toolkit. It is an interactive shell for Perl; you type in a line of Perl code and Devel::REPL will evaluate it. You can use Devel::REPL to quickly test out code or to provide a debugging shell for your applications. There are many plugins, such as simply adding color, nopasting your session to a pastebin, and even dumping each line of code with B::Concise.
 
@@ -293,6 +321,8 @@ Matt Trout's design for Devel::REPL is worthy of study. It is a Moose library th
             dir     => 'frozen-perl-2008',
             url     => 'http://www.frozen-perl.org/mpw2008/',
             talk    => 'http://www.frozen-perl.org/mpw2008/talk/858',
+            venue   => 'University of Minnesota',
+            city    => 'Minneapolis',
         },
         description => q{Template::Declare is a novel templating system written in Perl. "TD" has a very pleasant block-oriented syntax. This talk introduces its features and shortcomings, then describes how it is implemented.},
     },
@@ -407,7 +437,7 @@ sub talk_pages {
             <div id="talk">
                 <span id="date">$date</span>
                 <h1 id="title">$talk->{name}</h1>
-                <span class="metadata">$talk->{length}. $presented at <a href="$conference->{url}">$conference->{name}</a>.</span>
+                <span class="metadata">$talk->{length}. $presented at <a href="$conference->{url}">$conference->{name}</a>, $conference->{venue} in $conference->{city}.</span>
                 <br />
                 <br />
 
