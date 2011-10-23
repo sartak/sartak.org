@@ -146,6 +146,7 @@ my @talks = (
     },
     {
         name        => 'Introduction to Moose',
+        skip_index  => 1,
         dir         => 'moose',
         length      => '45 min',
         date        => '2009-02-07',
@@ -158,6 +159,7 @@ my @talks = (
     },
     {
         name        => 'Devel::REPL',
+        skip_index  => 1,
         dir         => 'devel-repl',
         length      => '45 min',
         date        => '2009-02-07',
@@ -170,6 +172,7 @@ my @talks = (
     },
     {
         name        => 'Template::Declare',
+        skip_index  => 1,
         dir         => 'template-declare',
         length      => '20 min',
         date        => '2008-02-16',
@@ -228,4 +231,47 @@ sub generate_talks_html {
     END
 
     return $output;
+}
+
+sub talk_pages {
+    my @pages;
+
+    for my $talk (@talks) {
+        next if $talk->{skip_index};
+        my $page = { talk => $talk };
+
+        my $slides = "";
+        if ($talk->{speakerdeck}) {
+            $slides = << "            END";
+                <div id="slides">
+                    <script src="http://speakerdeck.com/embed/$talk->{speakerdeck}.js"></script>
+                </div>
+            END
+        }
+
+        my $video = "";
+        if ($talk->{video}) {
+            $video = "<ul>";
+            $video .= "<li>$_</li>" for ref($talk->{video}) ? @{ $talk->{video} } : $talk->{video};
+            $video .= "</ul>";
+        }
+
+        my $html = << "        END";
+            <html>
+                <head>
+                    <title>$talk->{name}</title>
+                    <style>#slides { margin-left: auto; margin-right: auto; width: 640px }</style>
+                </head>
+                <body>
+                    <p class="description">$talk->{description}</p>
+                    $slides
+                    $video
+                </body>
+            </html>
+        END
+
+        push @pages, $page;
+    }
+
+    return @pages;
 }

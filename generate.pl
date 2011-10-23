@@ -219,7 +219,20 @@ sub generate_about {
 }
 
 sub generate_talks {
-    system("cp -r talks/* $outdir/talks");
+    for my $page (Sartak::Blog::Talks->talk_pages) {
+        my $talk = $page->{talk};
+        next unless $talk->{dir};
+
+        my $dir = "$outdir/talks/$talk->{conference}{dir}/$talk->{dir}";
+        make_path($dir);
+
+        open my $handle, '>', "$dir/index.html";
+        print $handle fill_in($layout, {
+            content => $page->{content},
+            title   => $talk->{name},
+        });
+    }
+
     open my $handle, '>', "$outdir/talks/index.html";
     print $handle fill_in($layout, {
         content => Sartak::Blog::Talks->generate_talks_html,
