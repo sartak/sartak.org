@@ -167,6 +167,7 @@ generate_about();
 generate_talks();
 #generate_atom();
 generate_rss();
+generate_talk_rss();
 generate_static();
 
 sub generate_index {
@@ -287,13 +288,37 @@ sub generate_rss {
             link        => $article->{url},
             description => decode_utf8($article->{original}),
             dc          => {
-                date => $article->{date},
-                author => 'Shawn M Moore',
+                date    => $article->{date},
+                author  => 'Shawn M Moore',
             },
         );
     };
 
     $feed->save("$outdir/rss.xml");
+}
+
+sub generate_talk_rss {
+    use XML::RSS;
+
+    my $feed = XML::RSS->new(version => '1.0');
+    $feed->channel(
+        title => 'Sartak Talks',
+        link  => 'http://sartak.org/talks',
+    );
+
+    for my $talk (Sartak::Blog::Talks->talks) {
+        $feed->add_item(
+            title       => decode_utf8($talk->{name}),
+            link        => $talk->{url},
+            description => decode_utf8($talk->{description}),
+            dc          => {
+                date    => $talk->{date},
+                author  => 'Shawn M Moore',
+            },
+        );
+    };
+
+    $feed->save("$outdir/talks/rss.xml");
 }
 
 sub generate_static {

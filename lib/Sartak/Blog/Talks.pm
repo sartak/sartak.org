@@ -233,6 +233,8 @@ for (@talks) {
     $_->{url} ||= "http://sartak.org/talks/$_->{conference}{dir}/$_->{dir}/";
 }
 
+sub talks { @talks }
+
 sub generate_talks_html {
     my $output = '';
 
