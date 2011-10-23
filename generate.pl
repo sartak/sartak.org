@@ -79,7 +79,7 @@ sub fill_in {
     my $vars     = shift;
 
     $template =~ s/{now}/scalar gmtime/eg;
-    $template =~ s/{(\w+)}/$vars->{$1}/g;
+    $template =~ s/{(\w+)}/$vars->{$1} || do { warn "Undefined variable $1"; '' }/eg;
 
     return $template;
 }
