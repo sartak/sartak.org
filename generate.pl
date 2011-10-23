@@ -81,6 +81,9 @@ sub fill_in {
     $template =~ s/{now}/scalar gmtime/eg;
     $template =~ s/{(\w+)}/$vars->{$1} || do { warn "Undefined variable $1"; '' }/eg;
 
+    $template =~ s[(title="RSS" href=")/rss.xml(")][$1$vars->{rss}$2]
+        if $vars->{rss};
+
     return $template;
 }
 
@@ -234,6 +237,7 @@ sub generate_talks {
         print $handle fill_in($layout, {
             content => $page->{content},
             title   => $title,
+            rss     => '/talks/rss.xml',
         });
     }
 
@@ -241,6 +245,7 @@ sub generate_talks {
     print $handle fill_in($layout, {
         content => Sartak::Blog::Talks->generate_talks_html,
         title   => 'Talks',
+        rss     => '/talks/rss.xml',
     });
 }
 
