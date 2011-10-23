@@ -226,10 +226,13 @@ sub generate_talks {
         my $dir = "$outdir/talks/$talk->{conference}{dir}/$talk->{dir}";
         make_path($dir);
 
+        # titles sometimes contain HTML
+        (my $title = $talk->{name}) =~ s/<.*?>//g;
+
         open my $handle, '>', "$dir/index.html";
         print $handle fill_in($layout, {
             content => $page->{content},
-            title   => $talk->{name},
+            title   => $title,
         });
     }
 

@@ -136,6 +136,12 @@ sub {
     margin-bottom: 1em;
 }
 
+#slides {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #post {
     font-size: 1.1em;
 }

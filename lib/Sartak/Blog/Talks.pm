@@ -239,6 +239,7 @@ sub talk_pages {
     for my $talk (@talks) {
         next if $talk->{skip_index};
         my $page = { talk => $talk };
+        my @links;
 
         my $slides = "";
         if ($talk->{speakerdeck}) {
@@ -249,26 +250,40 @@ sub talk_pages {
             END
         }
 
-        my $video = "";
+        my $videos = "";
         if ($talk->{video}) {
-            $video = "<ul>";
-            $video .= "<li>$_</li>" for ref($talk->{video}) ? @{ $talk->{video} } : $talk->{video};
-            $video .= "</ul>";
+            if (ref($talk->{video})) {
+                my $i = 0;
+                push @links, {
+                    href  => $_,
+                    label => "Video part " . ++$i
+                } for @{ $talk->{video} }
+            }
+            else {
+                push @links, {
+                    href  => $talk->{video},
+                    label => 'Video',
+                },
+            }
+        }
+
+        my $links = '';
+        if (@links) {
+            $links = '<ul>'
+                   . join('',
+                       map { qq[<li><a href="$_->{href}">$_->{label}</a></li>] }
+                       @links)
+                   . '</ul>';
         }
 
         my $html = << "        END";
-            <html>
-                <head>
-                    <title>$talk->{name}</title>
-                    <style>#slides { margin-left: auto; margin-right: auto; width: 640px }</style>
-                </head>
-                <body>
-                    <p class="description">$talk->{description}</p>
-                    $slides
-                    $video
-                </body>
-            </html>
+            <h2>$talk->{name}</h2>
+            $slides
+            <p class="description">$talk->{description}</p>
+            $links
         END
+
+        $page->{content} = $html;
 
         push @pages, $page;
     }
