@@ -53,7 +53,9 @@ ul {
         my ($module, $note) = @$_;
         li {
             a {
-                href is "http://metacpan.org/module/$module";
+                my $url = "http://metacpan.org/module/$module";
+                $url = "https://github.com/tokuhirom/OrePAN" if $module eq "OrePAN";
+                href is $url;
                 outs_raw $module;
             };
 
