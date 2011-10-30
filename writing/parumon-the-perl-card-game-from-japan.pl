@@ -4,6 +4,11 @@ BEGIN { print "title: Parumon: The Perl Card Game from Japan\ndraft: 1\n" }
 
 p { "At YAPC::Asia, [\@maka2_donzoko](http://twitter.com/maka2_donzoko) released [Parumon: The Perl Monger Training Card Game](http://donzoko.net/parumon/). As soon as I heard about it I quickly snatched one up (which was fortunate since they of course sold out on the first day). I don't intend to give a full translation of all the rules and cards, but I'd like to give you an idea of how it works." };
 
+a {
+    href is 'http://www.flickr.com/photos/sartak/6295144434';
+    img { src is 'http://farm7.static.flickr.com/6019/6295144434_0930b8a9b6.jpg' };
+}
+
 p { "For ego surfers here's the list of modules that appear in the game: " };
 
 ul {
