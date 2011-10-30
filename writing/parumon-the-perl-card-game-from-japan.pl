@@ -9,7 +9,14 @@ a {
     img { src is 'http://farm7.static.flickr.com/6019/6295144434_0930b8a9b6.jpg' };
 }
 
-p { "For ego surfers here's the list of modules that appear in the game: " };
+p { "_Withstand the impending attack while completing a project making the most of CPAN modules!_" };
+
+ul {
+    li { "Players who forget to declare `use strict` on their first turn lose a point." };
+    li { "One of the actions you can perform on your team is to _pair program_ with another player. This facilitates card trading." };
+};
+
+p { "For ego surfers here's the list of modules that appear in the game. The modules in this game were selected from [_CPAN Module Guide_](http://cpanbook.koneta.org/) written by [\@tomita](http://twitter.com/tomita)." };
 
 ul {
     my @modules = map { [ /(\S+)(?: (x\d))?/ ] } grep { /\S/ } split /\n/, '
