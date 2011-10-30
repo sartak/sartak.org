@@ -52,9 +52,7 @@ ul {
                 outs_raw $module;
             };
 
-            if ($note) {
-                outs " $note";
-            }
+            outs_raw " ($note)" if $note;
         }
     }
 }
