@@ -7,7 +7,7 @@ p { "At YAPC::Asia, [\@maka2_donzoko](http://twitter.com/maka2_donzoko) released
 p { "For ego surfers here's the list of modules that appear in the game: " };
 
 ul {
-    my @modules = map { [ /(\W+)(?: (\dx))?/ ] } split /\n/, '
+    my @modules = map { [ /(\S+)(?: (x\d))?/ ] } grep { /\S/ } split /\n/, '
         Acme::Bleach
         Amon2
         AnyEvent
@@ -31,7 +31,7 @@ ul {
         POE
         Path::Class x2
         Plack
-        Template-Toolkit
+        Template
         Teng
         Test::Base
         Test::More x2
@@ -49,7 +49,7 @@ ul {
         li {
             a {
                 href is "http://metacpan.org/module/$module";
-                $module
+                outs_raw $module;
             };
 
             if ($note) {
