@@ -12,8 +12,10 @@ a {
 p { "_Withstand the impending attack while completing a project making the most of CPAN modules!_" };
 
 ul {
-    li { "Players who forget to declare `use strict` on their first turn lose a point." };
-    li { "One of the actions you can perform on your team is to _pair program_ with another player. This facilitates card trading." };
+    li { "Players who forget to declare `use strict` on their first turn lose a _hack point_." };
+    li { "On your turn you can play a CPAN module card, but only if its dependencies (e.g. Plack depends on URI and Try::Tiny) are already in play. You have to spend as many hack points (1-3) as the card needs, but you gain . When you play a core module card you can take another turn." };
+    li { "One of the actions players can perform is to _pair program_ with another player. This facilitates card trading." };
+    li { "This game is one of the first collaborative card games I've seen. There's even a rule where other players can spend some of their points to bring a fallen co-conspirator back from having lost. "};
 };
 
 p { "For ego surfers here's the list of modules that appear in the game. The modules in this game were selected from [_CPAN Module Guide_](http://cpanbook.koneta.org/) written by [\@tomita](http://twitter.com/tomita)." };
