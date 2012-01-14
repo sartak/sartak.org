@@ -17,6 +17,10 @@ my @talks = (
             venue   => 'The Four Points Sheraton',
             city    => 'Orlando',
         },
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
         description => q{DTrace is an extremely powerful tool for examining what a computer is doing. Even in production. Without invoking the ire of the Munin Gods.
 
     It's also an indispensible tool for programmers who are trying to debug, optimize, or otherwise investigate what their code is doing when it ventures (and venture it must!) outside of the cozy, warm, abstract world of the Perl interpreter.
