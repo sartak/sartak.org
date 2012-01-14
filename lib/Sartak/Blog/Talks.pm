@@ -7,7 +7,6 @@ my @talks = (
         name        => 'DTrace: printf debugging for seventh-level wizards',
         dir         => 'dtrace',
         length      => '50 min',
-        future      => 1,
         date        => '2012-01-14',
         speakerdeck => '4f11e23cd28ef6001f01198a',
         conference  => {
