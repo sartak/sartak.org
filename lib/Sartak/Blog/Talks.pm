@@ -9,6 +9,7 @@ my @talks = (
         length      => '50 min',
         date        => '2012-01-14',
         speakerdeck => '4f11e23cd28ef6001f01198a',
+        video       => 'http://www.presentingperl.org/opw2012/dtrace/',
         conference  => {
             name    => 'Perl Oasis',
             dir     => 'perl-oasis-2012',
