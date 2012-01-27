@@ -20,4 +20,4 @@ p { q{It's generally at the "mentally translate the Perl regex to vim" stage whe
 
 p { "Do I have to write this thing myself?" }
 
-p { outs_raw("Update:") . outs " apparently the answer is no! [Thomas Sibley](http://twitter.com/trs) wrote a new tool called [`viack`](https://github.com/tsibley/viack) and I'm happy with how simple it is. \\v gives a close enough approximation of Perl regexes." }
+p { "Update: apparently the answer is no! [Thomas Sibley](http://twitter.com/trs) wrote a new tool called [`viack`](https://github.com/tsibley/viack) and I'm happy with how simple it is. \\v gives a close enough approximation of Perl regexes." }
