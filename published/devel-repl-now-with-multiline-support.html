@@ -5,109 +5,109 @@ date: 2007-09-21
 
 <p>There are plugins to dump output with <a href="http://p3rl.org/Data::Dump::Streamer">Data::Dump::Streamer</a>, enable tab completion of the current lexical environment and loaded modules, save input history across sessions, and more. However, if you dabble in other P-languages such as Python and Ruby (know thy enemy.. honest!) you'll find yourself wanting more out of Devel::REPL. Let's take the example of writing a factorial function in python:</p>
 
-<blockquote><tt>
-% python<br>
-Python 2.3.5 (#1, Dec&nbsp; 7 2006, 14:50:51)<br>
-[GCC 4.0.1 (Apple Computer, Inc. build 5363) (+4864187)] on darwin<br>
-Type "help", "copyright", "credits" or "license" for more information.<br>
-&gt;&gt;&gt; def fact(n):<br>
-...&nbsp; &nbsp; &nbsp;if n &lt; 2:<br>
-...&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1<br>
-...&nbsp; &nbsp; &nbsp;return n * fact(n - 1)<br>
-...<br>
-&gt;&gt;&gt; fact(10)<br>
+<pre class="perl code_snippet">
+% python
+Python 2.3.5 (#1, Dec  7 2006, 14:50:51)
+[GCC 4.0.1 (Apple Computer, Inc. build 5363) (+4864187)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; def fact(n):
+...     if n &lt; 2:
+...         return 1
+...     return n * fact(n - 1)
+...
+&gt;&gt;&gt; fact(10)
 3628800
-</tt></blockquote>
+</pre>
 
 <p>in irb:</p>
 
-<blockquote><tt>
-% irb<br>
-irb(main):001:0&gt; def fact(n)<br>
-irb(main):002:1&gt; if n &lt; 2<br>
-irb(main):003:2&gt; 1<br>
-irb(main):004:2&gt; else<br>
-irb(main):005:2* n * fact(n-1)<br>
-irb(main):006:2&gt; end<br>
-irb(main):007:1&gt; end<br>
-=&gt; nil<br>
-irb(main):008:0&gt; fact 10<br>
+<pre class="code_snippet">
+% irb
+irb(main):001:0&gt; def fact(n)
+irb(main):002:1&gt; if n &lt; 2
+irb(main):003:2&gt; 1
+irb(main):004:2&gt; else
+irb(main):005:2* n * fact(n-1)
+irb(main):006:2&gt; end
+irb(main):007:1&gt; end
+=&gt; nil
+irb(main):008:0&gt; fact 10
 =&gt; 3628800
-</tt></blockquote>
+</pre>
 
 <p>in lua:</p>
 
-<blockquote><tt>
-% lua<br>
-Lua 5.1.2&nbsp; Copyright (C) 1994-2007 Lua.org, PUC-Rio<br>
-&gt; function fact(n)<br>
-&gt;&gt; if n &lt; 2 then<br>
-&gt;&gt; return 1<br>
-&gt;&gt; else<br>
-&gt;&gt; return n * fact(n-1)<br>
-&gt;&gt; end<br>
-&gt;&gt; end<br>
-&gt; =fact(10)<br>
+<pre class="code_snippet">
+% lua
+Lua 5.1.2  Copyright (C) 1994-2007 Lua.org, PUC-Rio
+&gt; function fact(n)
+&gt;&gt; if n &lt; 2 then
+&gt;&gt; return 1
+&gt;&gt; else
+&gt;&gt; return n * fact(n-1)
+&gt;&gt; end
+&gt;&gt; end
+&gt; =fact(10)
 3628800
-</tt></blockquote>
+</pre>
 
 <p>and in Devel::REPL:</p>
 
-<blockquote><tt>
-% re.pl<br>
-$ sub fact {<br>
-Compile error: Missing right curly or square bracket at (eval 60) line<br>
-8, at end of line<br>
+<pre class="code_snippet">
+% re.pl
+$ sub fact {
+Compile error: Missing right curly or square bracket at (eval 60) line
+8, at end of line
 syntax error at (eval 60) line 8, at EOF
-</tt></blockquote>
+</pre>
 
 <p>D'oh. OK, let's try again..</p>
 
-<blockquote><tt>
-% re.pl<br>
-$ sub fact { my $n = shift; return 1 if $n &lt; 2; $n * fact($n - 1) }<br>
-<br>
-$ fact 10<br>
+<pre class="code_snippet">
+% re.pl
+$ sub fact { my $n = shift; return 1 if $n &lt; 2; $n * fact($n - 1) }
+
+$ fact 10
 3628800
-</tt></blockquote>
+</pre>
 
 <p>Well, that works in this case, but one big line of code quickly becomes unmanageable.</p>
 
 <p>Recently I had the idea to use <a href="http://p3rl.org/PPI">PPI</a> to figure out if the current line of code is complete. PPI::Dumper quickly confirmed that I can detect the most important case: a PPI::Structure that doesn't have both a -&gt;start and -&gt;finish. Structures encompass { {nested { blocks } } }, (parentheses), [array indexing], {hash indexing}, and so on. Hopefully future versions of PPI will be able to figure out that, say, an s/// or quoted string is incomplete.</p><p>Here's what the factorial example looks like with the MultiLine::PPI plugin.</p>
 
-<blockquote><tt>
-% re.pl<br>
-$ load_plugin 'MultiLine::PPI'<br>
-1<br>
-$ sub fact {<br>
-&gt; my $n = shift;<br>
-&gt; return 1 if $n &lt; 2;<br>
-&gt; $n * fact($n - 1);<br>
-&gt; }<br>
-<br>
-$ fact 10<br>
+<pre class="code_snippet">
+% re.pl
+$ load_plugin 'MultiLine::PPI'
+1
+$ sub fact {
+&gt; my $n = shift;
+&gt; return 1 if $n &lt; 2;
+&gt; $n * fact($n - 1);
+&gt; }
+
+$ fact 10
 3628800
-</tt></blockquote>
+</pre>
 
 <p>I believe Devel::REPL is the only Perl REPL that can do this. Hooray! :)</p>
 
 <p>You can change the default prompts with my FancyPrompt plugin. Here's how I actually have my prompt (code is slightly different to show off nesting). It may look like "ugh", but it's actually really nice when you're in the driver's seat.</p>
 
-<blockquote><tt>
-% re.pl<br>
-&gt; sub fact {<br>
-&gt;&gt; my $n = shift;<br>
-&gt;&gt; if ($n &lt; 2) {<br>
-&gt;&gt;&gt; return 1;<br>
-&gt;&gt;&gt; }<br>
-&gt;&gt; else {<br>
-&gt;&gt;&gt; return $n * fact($n-1);<br>
-&gt;&gt;&gt; }<br>
-&gt;&gt; }<br>
-<br>
-&gt; fact 10<br>
+<pre class="code_snippet">
+% re.pl
+&gt; sub fact {
+&gt;&gt; my $n = shift;
+&gt;&gt; if ($n &lt; 2) {
+&gt;&gt;&gt; return 1;
+&gt;&gt;&gt; }
+&gt;&gt; else {
+&gt;&gt;&gt; return $n * fact($n-1);
+&gt;&gt;&gt; }
+&gt;&gt; }
+
+&gt; fact 10
 3628800
-</tt></blockquote>
+</pre>
 
 <p>MultiLine::PPI hasn't been CPANed yet, but you can get it (and other new plugins) from <a href="http://git.shadowcat.co.uk/gitweb/gitweb.cgi?p=p5sagit/Devel-REPL.git;a=summary">the Devel::REPL git repository</a>.</p>
 
