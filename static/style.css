@@ -7,7 +7,7 @@ a:hover {
     text-decoration: underline;
 }
 
-#me {
+nav {
     text-align: center;
     position: fixed;
     top: 0;
@@ -16,25 +16,25 @@ a:hover {
 }
 
 @media all and (max-width: 1000px) {
-    #me {
+    nav {
         position: absolute;
     }
 }
 
-#me .sartak a {
+nav .sartak a {
     color: black;
 }
-#me h1, #me img, #me ul, #me li {
+nav h1, nav img, nav ul, nav li {
     margin: 0;
     padding: 0;
 }
-#me li {
+nav li {
     padding-bottom: 0.3em;
 }
-#me ul {
+nav ul {
     list-style-type: none;
 }
-#me img {
+nav img {
     border: 0;
 }
 
