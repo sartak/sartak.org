@@ -194,7 +194,7 @@ sub generate_index {
 }
 
 sub generate_drafts {
-    my $posts;
+    my $posts = '';
     for my $article (grep { $_->{draft} } @articles) {
         generate_article($article);
 
