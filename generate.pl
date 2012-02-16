@@ -151,10 +151,12 @@ sub generate_article {
     my $html = qq[<div id="post">$article->{content}];
 
     if ($next || $prev) {
+        $html .= qq[<footer>];
         $html .= qq[<hr><span id="nextprevlinks">];
         $html .= qq[<a href="$next->{url}" id="nextlink">Next: $next->{title}</a>] if $next;
         $html .= qq[<a href="$prev->{url}" id="prevlink">Previous: $prev->{title}</a>] if $prev;
         $html .= qq[</span>];
+        $html .= qq[</footer>];
     }
 
     $html .= qq[</div>];
