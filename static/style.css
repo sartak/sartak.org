@@ -14,6 +14,13 @@ a:hover {
     left: 10px;
     width: 140px;
 }
+
+@media all and (max-width: 1000px) {
+    #me {
+        position: absolute;
+    }
+}
+
 #me .sartak a {
     color: black;
 }
