@@ -296,12 +296,22 @@ sub generate_rss {
         link  => 'http://sartak.org',
     );
 
+    my @articles;
+
     each_article {
         my $article = shift;
+        push @articles, $article;
+    };
+
+    for my $talk (Sartak::Blog::Talks->talks) {
+        push @articles, $talk;
+    }
+
+    for my $article (sort { $a->{date} cmp $b->{date} } @articles) {
         $feed->add_item(
-            title       => decode_utf8($article->{title}),
+            title       => decode_utf8($article->{title} || $article->{name}),
             link        => $article->{url},
-            description => decode_utf8($article->{original}),
+            description => decode_utf8($article->{original} || $article->{description}),
             dc          => {
                 date    => $article->{date},
                 author  => 'Shawn M Moore',
