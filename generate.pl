@@ -67,7 +67,7 @@ sub new_article {
 
     my $date = prettify_date($headers{date});
 
-    $content = qq[<span id="date">$date</span>\n<h1 id="title">$headers{title}</h1>\n$content];
+    $content = qq[<span id="date">$date</span>\n<h1 id="title">$headers{title}</h1>\n<article>$content</article>];
 
     $headers{content} = $content;
 
