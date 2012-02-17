@@ -22,6 +22,8 @@ pre {
     );
 };
 
+image "word-spark.png";
+
 p { "This means if I add one card for the word, I've got a decent 87% chance of recalling it on time. A second card helps a _lot_. Add a few more cards and my chances are golden." };
 
 h3 { "English" };
