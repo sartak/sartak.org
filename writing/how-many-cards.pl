@@ -14,7 +14,7 @@ div {
     class is 'yui3-g';
 
     div {
-        class is 'yui3-u-1-3';
+        class is 'yui3-u-2-5';
         pre {
             class is 'code_snippet';
             style is 'margin: 0; width: auto';
@@ -32,11 +32,11 @@ div {
     };
 
     div {
-        class is "yui3-u-1-3";
+        class is "yui3-u-1-5";
     };
 
     div {
-        class is "yui3-u-1-3";
+        class is "yui3-u-2-5";
         image "word-spark.png";
     };
 };
