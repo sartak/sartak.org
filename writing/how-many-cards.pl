@@ -10,20 +10,31 @@ p { "Luckily to answer such questions, I have a giant (currently 14,722 flash ca
 
 p { "Using [Text::MeCab] to split up Japanese sentences (which do not use spaces) into stemmed words, I can get visibility into how hard each word itself is, based on my review history of the sentence cards which contain it. Since I do a fair amount of this kind of analysis anyway, I already had most of the tools I needed. 50 lines of Perl later I have this data set:" };
 
-div { style is "float: right"; image "word-spark.png" };
+div {
+    class is 'yui3-g';
 
-pre {
-    class is 'code_snippet';
-    style is 'display: inline-block; width: auto';
-    outs_raw join "\n", (
-        '1: 87.75%',
-        '2: 91.19%',
-        '3: 92.59%',
-        '4: 93.36%',
-        '5: 95.06%',
-        '6: 95.80%',
-        '7: 96.38%',
-    );
+    div {
+        class is 'yui3-u-1-2';
+        pre {
+            class is 'code_snippet';
+            style is 'margin: 0; width: auto';
+
+            outs_raw join "\n", (
+                '1: 87.75%',
+                '2: 91.19%',
+                '3: 92.59%',
+                '4: 93.36%',
+                '5: 95.06%',
+                '6: 95.80%',
+                '7: 96.38%',
+            );
+        };
+    };
+
+    div {
+        class is "yui3-u-1-2";
+        image "word-spark.png";
+    };
 };
 
 p { "This means if I add one card for the word, I've got a decent 87% chance of recalling it on time. A second card helps a _lot_. Add a few more cards and my chances are golden." };
