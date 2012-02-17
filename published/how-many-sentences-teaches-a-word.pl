@@ -8,7 +8,7 @@ p { "I'm certain that at my skill level, one card is not always enough to cement
 
 p { "Luckily to answer such questions, I have a giant (currently 14,722 flash card) list of Japanese sentences that I can mostly comprehend. Each sentence even include a set of statistics including how many times I've reviewed it, what my breakdown of incorrect versus correct responses were, when I first reviewed it, and so on. Since I'm very diligent about learning using this flash card system, **I can data mine my understanding of Japanese.**" };
 
-p { "Using [Text::MeCab] to split up Japanese sentences (which do not use spaces, stifling this kind of analysis until I found mecab) into stemmed words, I can get visibility into how hard each word itself is, based on my review history of the sentence cards which contain it. Since I do a fair amount of this kind of analysis anyway, I already had most of the tools I needed. 50 lines of Perl later I have this data set:" };
+p { "Using [Text::MeCab] to split up Japanese sentences (which do not use spaces, stifling this kind of analysis until I found mecab) into stemmed words, I can get visibility into how hard each word itself is, based on my review history of the sentence cards which contain it. Since I do a fair amount of this kind of analysis anyway, I already had most of the tools I needed. [50 lines of Perl](https://github.com/sartak/Anki-Morphology/commit/7e74ac3c4) later I have this data set:" };
 
 div {
     class is 'yui3-g';
