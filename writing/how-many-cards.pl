@@ -22,6 +22,8 @@ pre {
     );
 };
 
+p { "This means if I add one card for the word, I've got a decent 87% chance of recalling it on time. A second card helps a _lot_. Add a few more cards and my chances are golden." };
+
 h3 { "English" };
 
 p { "Since December I've been adding English words I don't know to a separate Anki deck. I'm up to 133 of them, which averages out to just under two new words a day. This process is very lightweight - when I spot a word I don't know I just add it to my todo list with a particular tag. As a special case, when I'm reading an ebook, I highlight every unknown word I come across so that when I'm done with the book I can bulk add everything I didn't know all at once. Before this vocabulary spree, I was already most of the way there, since I was selecting words I didn't know so I could read their definitions." };
