@@ -8,7 +8,7 @@ p { "I'm certain that at my skill level, one card is not always enough to cement
 
 p { "Luckily to answer such questions, I have a giant (currently 14,722 flash card) list of Japanese sentences that I can mostly comprehend. Each sentence even include a set of statistics including how many times I've reviewed it, what my breakdown of incorrect versus correct responses were, when I first reviewed it, and so on. Since I'm very diligent about learning using this flash card system, **I can data mine my understanding of Japanese.**" };
 
-p { "Using [Text::MeCab] to split up Japanese sentences (which do not use spaces) into stemmed words, I can get visibility into how hard each word itself is, based on my review history of the sentence cards which contain it. Since I do a fair amount of this kind of analysis anyway, I already had most of the tools I needed. 50 lines of Perl later I have this data set:" };
+p { "Using [Text::MeCab] to split up Japanese sentences (which do not use spaces which stifled this kind of analysis until I found mecab) into stemmed words, I can get visibility into how hard each word itself is, based on my review history of the sentence cards which contain it. Since I do a fair amount of this kind of analysis anyway, I already had most of the tools I needed. 50 lines of Perl later I have this data set:" };
 
 div {
     class is 'yui3-g';
@@ -43,7 +43,7 @@ div {
 
 p { "This means if I add one card for the word, I've got a decent 87% chance of recalling it on time. A second card helps a _lot_. Add a few more cards and my chances are golden." };
 
-p { "I should search Twitter for tweets mentioning tricky words like 格納 and 敢行, add a few cards, and never have problems with them again." };
+p { "I should search for tweets mentioning tricky words like 格納 and 敢行, add a few of the less awful sentences, and never have problems with them again." };
 
 h3 { "English" };
 
@@ -51,3 +51,4 @@ p { "Since December I've been adding English words I don't know to a separate An
 
 p { "I do know from several examples that for an English word, one flash card is sufficient to get it into my *active* vocabulary. I freely used 'babel' (a confusion of many voices) the other day which I learned only eleven days ago from [an H.P. Lovecraft short story](http://en.wikipedia.org/wiki/The_Rats_in_the_Walls). I've reviewed it three times since then, marking it correct all three times." };
 
+p { "I look forward to my Japanese being that good too." };
