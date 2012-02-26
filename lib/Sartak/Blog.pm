@@ -92,7 +92,9 @@ sub perl {
 sub image {
     my ($file, $alt) = @_;
     img {
-        src is "http://sartak.org/misc/blog/$file";
+        $file = "http://sartak.org/misc/blog/$file"
+            unless $file =~ m{^https?://};
+        src is $file;
         alt is $alt;
     }
 }
