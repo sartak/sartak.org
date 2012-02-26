@@ -4,10 +4,13 @@ BEGIN { print "title: I'm Published!\ndraft: 1\n" }
 
 p { "Today I received a complimentary copy of [WEB+DB Press volume 67](http://www.amazon.co.jp/WEB-DB-PRESS-Vol-67-%E5%B7%9D%E5%8F%A3/dp/4774149942/ref=sr_1_1?ie=UTF8&qid=1330290184&sr=8-1), which is a Japanese magazine about programming. My article, メタオブジェクトプロトコル入門, <i>Introduction to Metaobject Protocols</i>, is the thirteenth entry in the series of articles called [Perl Hackers Hub](http://gihyo.jp/dev/serial/01/perl-hackers-hub)." };
 
-a {
-    href is "http://www.flickr.com/photos/sartak/6786643658";
-    image("http://farm8.staticflickr.com/7054/6786643658_91ca0f2b90.jpg");
-}
+div {
+    style is "text-align: center";
+    a {
+        href is "http://www.flickr.com/photos/sartak/6786643658";
+        image("http://farm8.staticflickr.com/7054/6786643658_91ca0f2b90.jpg");
+    }
+};
 
 h2 { "Production" };
 
