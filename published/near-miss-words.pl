@@ -18,4 +18,8 @@ ol {
     li { "だいぶ - <i>great</i> (68x)" };
 };
 
+p { "One example among the 123 sentences for that top word is:" };
+
+p { "だから、手紙をもらった時、**驚いた**わ<br><i>That's why I was **surprised** when I got the letter!</i>" };
+
 p { "Pretty soon I will need a meta-analyzer for finding the words that most frequently appear at the tops of these lists." };
