@@ -18,4 +18,4 @@ ol {
     li { "だいぶ - <i>great</i> (68x)" };
 };
 
-p { "Pretty soon I will need a meta-analyzer for finding the words that appear at the tops of lists such as these most frequently." };
+p { "Pretty soon I will need a meta-analyzer for finding the words that most frequently appear at the tops of these lists." };
