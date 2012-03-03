@@ -18,7 +18,7 @@ ol {
     li { "だいぶ - <i>great</i> (68x)" };
 };
 
-p { "One example among the 123 sentences for that top word is:" };
+p { "One example among the 123 sentences for that top word follows. Notice how the verb is in the past tense form - mecab's got me covered." };
 
 p { "だから、手紙をもらった時、**驚いた**わ<br><i>That's why I was **surprised** when I got the letter!</i>" };
 
