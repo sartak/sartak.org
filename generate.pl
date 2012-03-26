@@ -145,11 +145,13 @@ sub each_article (&) {
 sub generate_article {
     my $article = shift;
 
-    my $html = qq[<div id="post">$article->{content}</div>];
+    $article->{content} = qq[
+        <div id="post">
+            $article->{content}
+        </div>
+    ];
 
-    $article->{content} = $html;
-
-    $html = fill_in($layout, $article);
+    my $html = fill_in($layout, $article);
 
     make_path "$outdir/$article->{dir}";
     open my $handle, '>', "$outdir/$article->{file}";
