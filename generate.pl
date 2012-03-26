@@ -139,27 +139,13 @@ sub each_article (&) {
     my $code = shift;
 
     my @articles = grep { !$_->{draft} } @articles;
-
-    for (my $i = 0; $i < @articles; ++$i) {
-        $code->($articles[$i], $articles[$i+1], ($i == 0 ? undef : $articles[$i-1]));
-    }
+    $code->($_) for @articles;
 }
 
 sub generate_article {
-    my ($article, $prev, $next) = @_;
+    my $article = shift;
 
-    my $html = qq[<div id="post">$article->{content}];
-
-    if ($next || $prev) {
-        $html .= qq[<footer>];
-        $html .= qq[<hr><span id="nextprevlinks">];
-        $html .= qq[<a href="$next->{url}" id="nextlink">Next: $next->{title}</a>] if $next;
-        $html .= qq[<a href="$prev->{url}" id="prevlink">Previous: $prev->{title}</a>] if $prev;
-        $html .= qq[</span>];
-        $html .= qq[</footer>];
-    }
-
-    $html .= qq[</div>];
+    my $html = qq[<div id="post">$article->{content}</div>];
 
     $article->{content} = $html;
 
@@ -171,7 +157,8 @@ sub generate_article {
 }
 
 each_article {
-    generate_article(@_);
+    my $article = shift;
+    generate_article($article);
 };
 
 generate_index();
