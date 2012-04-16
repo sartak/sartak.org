@@ -37,7 +37,7 @@ div {
 
     div {
         class is "yui3-u-2-5";
-        image "word-spark.png";
+        image "how-many-sentences-teaches-a-word/word-spark.png";
     };
 };
 
