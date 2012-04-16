@@ -128,7 +128,7 @@ while (my $file = glob("published/* writing/*")) {
     }
 
     $article->{file} = $article->{dir} . titleify($article->{title}) . '.html';
-    $article->{url} = "http://sartak.org/$article->{file}";
+    $article->{url} = "/$article->{file}";
 
     push @{ $articles{ $article->{date} } }, $article;
 }
