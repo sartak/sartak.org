@@ -194,7 +194,7 @@ All with a very strongly object-oriented, antler-shaped flavor.},
             venue   => 'The Four Points Sheraton',
             city    => 'Orlando',
         },
-        description => q{This talk about my NetHack-playing AI was very informal and impromptu. I blathered on about <a href="http://taeb.sartak.org">TAEB</a>'s design, mostly about making proper use of object-oriented design, while TAEB played NetHack on the projector. If I give this talk again I will definitely write slides because there is a lot of good design in TAEB. Without slides I think it bored the people who didn't know much about NetHack. On the other hand, it <i>enchanted</i> those who did.},
+        description => q{This talk about my NetHack-playing AI was very informal and impromptu. I blathered on about <a href="https://github.com/sartak/TAEB">TAEB</a>'s design, mostly about making proper use of object-oriented design, while TAEB played NetHack on the projector. If I give this talk again I will definitely write slides because there is a lot of good design in TAEB. Without slides I think it bored the people who didn't know much about NetHack. On the other hand, it <i>enchanted</i> those who did.},
     },
     {
         name        => '(Parameterized) Roles',
