@@ -98,6 +98,7 @@ sub fill_in {
 sub titleify {
     my $orig = shift;
     my $title = lc $orig;
+    $title =~ s/'s\b/s/g;
     $title =~ s/\W+/-/g;
     $title =~ s/^-//;
     $title =~ s/-$//;
