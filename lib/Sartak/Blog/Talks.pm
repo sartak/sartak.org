@@ -333,7 +333,7 @@ Matt Trout's design for Devel::REPL is worthy of study. It is a Moose library th
 );
 
 for (@talks) {
-    $_->{url} = "http://sartak.org/talks/$_->{conference}{dir}/$_->{dir}/";
+    $_->{url} = "/talks/$_->{conference}{dir}/$_->{dir}/";
     $_->{description} =~ s{([^\n]+)}{<p>$1</p>}g;
 }
 
@@ -384,7 +384,7 @@ sub talk_pages {
         for (@links) {
             if (my $label = $upload{$_->{type}}) {
                 $_->{label} = $label;
-                $_->{href} = "http://sartak.org/talks/$conference->{dir}/$talk->{dir}/$talk->{dir}.$_->{type}";
+                $_->{href} = "/talks/$conference->{dir}/$talk->{dir}/$talk->{dir}.$_->{type}";
             }
         }
 
