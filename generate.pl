@@ -260,7 +260,7 @@ sub generate_atom {
 
     my $author = XML::Atom::Person->new;
     $author->name('Shawn M Moore');
-    $author->email('homepage@sartak.org');
+    $author->email('www@sartak.org');
     $feed->author($author);
 
     each_article {
