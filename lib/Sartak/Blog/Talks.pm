@@ -453,20 +453,7 @@ sub talk_pages {
                 <p class="description">$talk->{description}</p>
                 $links
             </div>
-        END
-
-        $html .= '<hr>';
-
-        my $next = $t == 0 ? undef : $talks[$t - 1];;
-        my $prev = $talks[$t + 1];
-        if ($next || $prev) {
-            $html .= qq[<span id="nextprevlinks">];
-            $html .= qq[<a href="$next->{url}" id="nextlink">Next: $next->{name}</a>] if $next;
-            $html .= qq[<a href="$prev->{url}" id="prevlink">Previous: $prev->{name}</a>] if $prev;
-            $html .= qq[</span>];
-        }
-
-        $html .= << "        END";
+            <hr />
             <p class="license"><div style="text-align: center"><a href="http://creativecommons.org/licenses/by-sa/3.0/us/" rel="license"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/us/88x31.png"/></a></div>This talk is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/us/" rel="license">Creative Commons Attribution-Share Alike 3.0 United States License</a>.</p>
         END
 
