@@ -22,7 +22,9 @@ my @talks = (
             { type => 'pdf' },
             { type => 'key' },
         ],
-        description => q{DTrace is an extremely powerful tool for examining what a computer is doing. Even in production. Without invoking the ire of the Munin Gods.
+        description => q{<a href="/talks/yapc-asia-2011/dtrace/">(日本語版はこちら)</a>
+
+DTrace is an extremely powerful tool for examining what a computer is doing. Even in production. Without invoking the ire of the Munin Gods.
 
     It's also an indispensible tool for programmers who are trying to debug, optimize, or otherwise investigate what their code is doing when it ventures (and venture it must!) outside of the cozy, warm, abstract world of the Perl interpreter.
 
@@ -49,7 +51,9 @@ This talk is intended as an introduction to DTrace for those who have maybe hear
             venue   => 'Tokyo Institute of Technology',
             city    => 'Tokyo',
         },
-        description => q{DTraceは、コンピューターが何を動作していることを調べるために、とても強力なツールです。プロダクションでも使えますよ。ネットワーク監視という神様が怒らず！
+        description => q{<a href="/talks/perl-oasis-2012/dtrace/">(English version here)</a>
+
+DTraceは、コンピューターが何を動作していることを調べるために、とても強力なツールです。プロダクションでも使えますよ。ネットワーク監視という神様が怒らず！
 
     これは、Perlのやさしい世界の厳しい外部でも、デバッグや最適化や監視をするツールです。アプリケーションのコードを汚染していないままで、再起動が必要でなくて、トレースを示す可能があります！しかも、他の使っているモジューでも、カーネルプロセスでも、他のアプリケーションル（例えば:MySQL、Apache）でも、トレースで動作を検査できます。printfのようなデバッグすることが好きの方にとって、DTraceも好きになると思います。
 
