@@ -22,7 +22,11 @@ my @months = qw/
 
 sub prettify_date {
     my $date = shift;
+    my $lang = shift;
+
     my ($y, $m, $d) = split '-', $date;
+
+    return "$y年$m月$d日" if $lang eq 'ja';
     return "$months[$m] $d, $y";
 }
 
@@ -65,7 +69,7 @@ sub new_article {
         $headers{date} = "$year-$mon-$day";
     }
 
-    my $date = prettify_date($headers{date});
+    my $date = prettify_date($headers{date}, 'en');
 
     $content = qq[
         <header>
@@ -176,7 +180,7 @@ sub generate_index {
     my $posts;
     each_article {
         my $article = shift;
-        my $date = prettify_date($article->{date});
+        my $date = prettify_date($article->{date}, 'en');
         $posts .= qq[<li>
     <span class="date">$date</span>
     <span class="title"><a href="$article->{url}">$article->{title}</a></span>
@@ -197,7 +201,7 @@ sub generate_drafts {
     for my $article (grep { $_->{draft} } @articles) {
         generate_article($article);
 
-        my $date = prettify_date($article->{date});
+        my $date = prettify_date($article->{date}, 'en');
         $posts .= qq[<li>
     <span class="date">$date</span>
     <span class="title"><a href="$article->{url}">$article->{title}</a></span>

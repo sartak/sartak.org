@@ -347,7 +347,7 @@ sub generate_talks_html {
     my $output = '';
 
     for my $talk (@talks) {
-        my $date = main::prettify_date($talk->{date});
+        my $date = main::prettify_date($talk->{date}, 'en');
         my $conference = $talk->{conference};
 
         $output .= qq[<li>
@@ -438,7 +438,7 @@ sub talk_pages {
                    . '</ul>';
         }
 
-        my $date = main::prettify_date($talk->{date});
+        my $date = main::prettify_date($talk->{date}, 'en');
         my $presented = $talk->{future} ? "To be presented" : "Presented";
 
         my $html = << "        END";
