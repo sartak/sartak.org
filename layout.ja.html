@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <title>{title}</title>
+        <link rel="stylesheet" href="/style.css" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
+
+        <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
+
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+        <!--<link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml" />-->
+
+        <meta http-equiv="x-xrds-location" content="http://sartak.myopenid.com/?xrds=1" />
+        <link rel="openid.server"    href="http://www.myopenid.com/server" />
+        <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+        <link rel="openid.delegate" href="http://sartak.myopenid.com/" />
+        <link rel="openid2.local_id" href="http://sartak.myopenid.com" />
+    </head>
+    <body>
+        <nav>
+            <h1 class="sartak"><a href="/">sartak</a></h1>
+            <a href="/"><img height="100" width="100" src="/img/sartak-100x100.jpg" /></a>
+            <ul id="links">
+                <li><a href="/about.html">自己紹介</a></li>
+                <li><a href="/talks">トーク</a></li>
+                <li><a href="http://twitter.com/sartak">twitter</a></li>
+                <li><a href="http://github.com/sartak">github</a></li>
+                <li><a href="https://metacpan.org/author/SARTAK?sort=%5B%5B2%2C1%5D%5D">cpan</a></li>
+                <li><a href="http://www.amazon.com/wishlist/28Z3PMAC42Z9F/ref=cm_wl_rlist_go?tag=533633855-20">願い事</a></li>
+                <li><a href="mailto:www@sartak.org">メール</a></li>
+                <li><a class="xyzzy" href="http://github.com/sartak/sartak.org">fork me</a></li>
+            </ul>
+        </nav>
+        <div id="content">
+            {content}
+        </div>
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-21253667-1']);
+        _gaq.push(['_setDomainName', '.sartak.org']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        </script>
+    </body>
+</html>

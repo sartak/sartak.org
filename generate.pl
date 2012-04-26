@@ -13,7 +13,7 @@ my $outdir = shift || 'generated';
 
 make_path $outdir unless -d $outdir;
 
-my $en_layout = slurp 'layout.en.html';
+my $en_layout = slurp 'layout.ja.html';
 
 my @months = qw/
     Nulluary January February March April May June July
