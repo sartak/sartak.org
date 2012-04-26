@@ -171,7 +171,8 @@ each_article {
     generate_article($article);
 };
 
-generate_index();
+generate_index('en');
+generate_index('ja');
 generate_drafts();
 generate_about();
 generate_talks();
@@ -180,10 +181,12 @@ generate_talk_rss();
 generate_static();
 
 sub generate_index {
+    my $lang = shift;
+
     my $posts;
     each_article {
         my $article = shift;
-        my $date = prettify_date($article->{date}, 'en');
+        my $date = prettify_date($article->{date}, $lang);
         $posts .= qq[<li>
     <span class="date">$date</span>
     <span class="title"><a href="$article->{url}">$article->{title}</a></span>
@@ -192,8 +195,10 @@ sub generate_index {
 
     $posts = qq[<ul id="posts">$posts</ul>];
 
-    open my $handle, '>', "$outdir/index.html";
-    print $handle fill_in($layout{en}, {
+    my $file = $lang eq 'ja' ? "$outdir/index.ja.html" : "$outdir/index.html";
+
+    open my $handle, '>', $file;
+    print $handle fill_in($layout{$lang}, {
         content => $posts,
         title   => $title,
     });
