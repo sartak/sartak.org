@@ -174,7 +174,8 @@ each_article {
 generate_index('en');
 generate_index('ja');
 generate_drafts();
-generate_about();
+generate_about('en');
+generate_about('ja');
 generate_talks();
 generate_rss();
 generate_talk_rss();
@@ -226,10 +227,13 @@ sub generate_drafts {
 }
 
 sub generate_about {
-    open my $handle, '>', "$outdir/about.html";
-    print $handle fill_in($layout{en}, {
-        content => scalar slurp('about.html'),
-        title   => 'About Me',
+    my $lang = shift;
+
+    my $file = $lang eq 'ja' ? "$outdir/about.ja.html" : "$outdir/about.html";
+    open my $handle, '>', $file;
+    print $handle fill_in($layout{$lang}, {
+        content => scalar slurp('about.'.$lang.'.html'),
+        title   => ($lang eq 'ja' ? '自己紹介' : 'About Me'),
     });
 }
 
