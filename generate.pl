@@ -168,7 +168,6 @@ generate_index();
 generate_drafts();
 generate_about();
 generate_talks();
-#generate_atom();
 generate_rss();
 generate_talk_rss();
 generate_static();
@@ -247,34 +246,6 @@ sub generate_talks {
         title   => 'Talks',
         rss     => '/talks/rss.xml',
     });
-}
-
-sub generate_atom {
-    use XML::Atom::Feed;
-    use XML::Atom::Entry;
-    use XML::Atom::Person;
-
-    my $feed = XML::Atom::Feed->new(Version => 1.0);
-    $feed->title($title);
-    $feed->id('http://sartak.org');
-
-    my $author = XML::Atom::Person->new;
-    $author->name('Shawn M Moore');
-    $author->email('www@sartak.org');
-    $feed->author($author);
-
-    each_article {
-        my $article = shift;
-        my $entry = XML::Atom::Entry->new(Version => 1.0);
-        $entry->title($article->{title});
-        $entry->content($article->{original});
-        $entry->id($article->{url});
-
-        $feed->add_entry($entry);
-    };
-
-    open my $handle, '>', "$outdir/atom.xml";
-    print $handle $feed->as_xml;
 }
 
 sub generate_rss {
