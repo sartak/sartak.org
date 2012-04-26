@@ -13,7 +13,10 @@ my $outdir = shift || 'generated';
 
 make_path $outdir unless -d $outdir;
 
-my $en_layout = slurp 'layout.en.html';
+my %layout = (
+    en => scalar(slurp 'layout.en.html'),
+    ja => scalar(slurp 'layout.ja.html'),
+);
 
 my @months = qw/
     Nulluary January February March April May June July
@@ -156,7 +159,7 @@ sub generate_article {
         </div>
     ];
 
-    my $html = fill_in($en_layout, $article);
+    my $html = fill_in($layout{en}, $article);
 
     make_path "$outdir/$article->{dir}";
     open my $handle, '>', "$outdir/$article->{file}";
@@ -190,7 +193,7 @@ sub generate_index {
     $posts = qq[<ul id="posts">$posts</ul>];
 
     open my $handle, '>', "$outdir/index.html";
-    print $handle fill_in($en_layout, {
+    print $handle fill_in($layout{en}, {
         content => $posts,
         title   => $title,
     });
@@ -211,7 +214,7 @@ sub generate_drafts {
     $posts = qq[<ul id="posts">$posts</ul>];
 
     open my $handle, '>', "$outdir/drafts/index.html";
-    print $handle fill_in($en_layout, {
+    print $handle fill_in($layout{en}, {
         content => $posts,
         title   => $title,
     });
@@ -219,7 +222,7 @@ sub generate_drafts {
 
 sub generate_about {
     open my $handle, '>', "$outdir/about.html";
-    print $handle fill_in($en_layout, {
+    print $handle fill_in($layout{en}, {
         content => scalar slurp('about.html'),
         title   => 'About Me',
     });
@@ -237,7 +240,7 @@ sub generate_talks {
         (my $title = $talk->{name}) =~ s/<.*?>//g;
 
         open my $handle, '>', "$dir/index.html";
-        print $handle fill_in($en_layout, {
+        print $handle fill_in($layout{en}, {
             content => $page->{content},
             title   => $title,
             rss     => '/talks/rss.xml',
@@ -245,7 +248,7 @@ sub generate_talks {
     }
 
     open my $handle, '>', "$outdir/talks/index.html";
-    print $handle fill_in($en_layout, {
+    print $handle fill_in($layout{en}, {
         content => Sartak::Blog::Talks->generate_talks_html,
         title   => 'Talks',
         rss     => '/talks/rss.xml',
