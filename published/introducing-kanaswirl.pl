@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: Introducing KanaSwirl\ndraft: 1\n" }
+BEGIN { print "title: Introducing KanaSwirl\ndate: 2012-05-14\n" }
 
 outs_raw '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>';
 
