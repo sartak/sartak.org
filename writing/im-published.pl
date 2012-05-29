@@ -18,12 +18,12 @@ p { "At [YAPC::Asia 2011](http://yapcasia.org/2011/) in Tokyo, [Kazuhiro Osawa](
 
 p { "Then the hard part began. I wrote the article directly in Japanese in November and December. Or at least, in an English pidgin of something resembling Japanese! My buddy [Daisuke Maki](http://mt.endeworks.jp/d-6/) ([\@lestrrat](http://twitter.com/lestrrat)) spent a _lot_ of time editing and clarifying what I had written into an article worthy of publication." };
 
+p { "Months later now that I have forgotten all the work that went into writing this article, I'm now rereading it with a fine-toothed comb to add sentences to Anki and words to my vocabulary. I don't recommend publishing an article simply for the purpose of finding gaps in your second language writing ability, but I'm making the most of that fringe benefit, having done so." };
+
 h2 { "Content" };
 
 p { "The article ended up eight pages long. I thankfully didn't need to cut any important instructive content at all, but there was some fluff that went easily." };
 
 h2 { "Plug" };
-
-p { "I will be speaking at the low-cost [DC-Baltimore Perl Workshop](http://dcbpw.org/dcbpw2012/) in April about how to learn a second language *engineer-style*." };
 
 # http://www.amazon.co.jp/s/ref=ntt_athr_dp_sr_7?_encoding=UTF8&search-alias=books-jp&field-author=Shawn%20M%20Moore
