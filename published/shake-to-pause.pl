@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: Shake to Pause\ndraft: 1\n" }
+BEGIN { print "title: Shake to Pause\ndate: 2012-06-03\n" }
 
 p { "This morning I was groggily playing the game I'm [working on](/2012/05/introducing-kanaswirl.html) called [KanaSwirl](http://itunes.apple.com/us/app/kanaswirl/id525332301), supine in bed. Phone inches above my face, purring along in the game, then ***pow!***, I slipped and the bastard hit me right in the cheek. Of course, my game kept running, ignoring my curse, smarting, and eventual rescue of my phone off the floor. But it got me thinking: why _didn't_ the game pause? The iPhone has an accelerometer: surely it would be trivial to sense the sudden jolt of glass hitting flesh." };
 
