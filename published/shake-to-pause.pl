@@ -21,7 +21,7 @@ self.isAccelerometerEnabled = YES;
     }
 }';
 
-p { "I'm sure that `if` check for acceleration could be improved (compare the sum instead of each component separately?), but what I have here has worked well for me. It doesn't automatically trigger when I'm walking even animatedly, but it does pass the phone-falls-into-cheek test." };
+p { "I'm sure that `if` check for acceleration could be improved (compare the overall magnitude instead of each component separately?), but what I have here has worked well for me. It doesn't automatically trigger when I'm walking even animatedly, but it does pass the phone-falls-into-cheek test." };
 
 p { "On the off-chance you don't want this behavior, I went ahead and added a snarky setting too." };
 
