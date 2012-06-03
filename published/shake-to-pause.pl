@@ -27,4 +27,4 @@ p { "On the off-chance you don't want this behavior, I went ahead and added a sn
 
 image "shake-to-pause/settings.png";
 
-p { "I'm sure other games could benefit from this kind of automatic pause. If you add it to your game, I'd like to hear about it!" };
+p { "I'm sure many other games could benefit from this shake to pause idea. If you add it to your game, I'd like to hear about it!" };
