@@ -2,13 +2,14 @@ use Sartak::Blog;
 
 BEGIN { print "title: Shake to Pause\ndraft: 1\n" }
 
-p { "This morning I was groggily playing the game I'm [working on](/2012/05/introducing-kanaswirl.html) called [KanaSwirl](http://itunes.apple.com/us/app/kanaswirl/id525332301), supine in bed. Phone inches above my face, doing reviews, then **\*pow\***, I slipped and the bastard hit me right in the cheek. Of course, my game kept going despite my curse, smarting, and eventually collection of my phone off the floor. But it got me thinking: why _didn't_ the game pause? The iPhone has an accelerometer: surely it would be trivial to sense the sudden jolt of glass hitting flesh." };
+p { "This morning I was groggily playing the game I'm [working on](/2012/05/introducing-kanaswirl.html) called [KanaSwirl](http://itunes.apple.com/us/app/kanaswirl/id525332301), supine in bed. Phone inches above my face, purring along in the game, then ***pow!***, I slipped and the bastard hit me right in the cheek. Of course, my game kept running, ignoring my curse, smarting, and eventual rescue of my phone off the floor. But it got me thinking: why _didn't_ the game pause? The iPhone has an accelerometer: surely it would be trivial to sense the sudden jolt of glass hitting flesh." };
 
-p { "And it turns out the implementation was indeed trivial. I simply just want to capture the \"shake\" gesture and then quickly launch the pause screen (as I already do when the app notices it is going into the background). Luckily my game doesn't have, and probably will never need, to use the accelerometer for in-game effects." };
+p { "And it turns out the implementation was indeed trivial. I simply just want to capture the moral equivalent of the \"shake\" gesture and then automatically launch the pause screen. Most games, mine included, already have automatic pausing, so that part's free. Luckily KanaSwirl doesn't use the accelerometer for in-game effects, so I can abuse it for this feature." };
 
-p { "The new code follows. I use the [cocos2d](http://www.cocos2d-iphone.org/) game framework which has an abstraction over the accelerometer API, but I'm sure it's trivially applicable to other systems as well." };
+p { "The new code follows. I use the [cocos2d](http://www.cocos2d-iphone.org/) game framework which has tiny abstractions over the [accelerometer API](http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIAcceleration_Class/Reference/UIAcceleration.html#//apple_ref/doc/uid/TP40006901), but I'm sure it's trivially applicable to other systems as well." };
 
 code_snippet objc => '
+/* during initialization ... */
 self.isAccelerometerEnabled = YES;
 [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 60)];
 
@@ -20,3 +21,10 @@ self.isAccelerometerEnabled = YES;
     }
 }';
 
+p { "I'm sure that `if` check for acceleration could be improved (compare the sum instead of each component separately?), but what I have here has worked well for me. It doesn't automatically trigger when I'm walking even animatedly, but it does pass the phone-falls-into-cheek test." };
+
+p { "On the off-chance you don't want this behavior, I went ahead and added a snarky setting too." };
+
+image "shake-to-pause/settings.png";
+
+p { "I'm sure other games could benefit from this kind of automatic pause. If you add it to your game, I'd like to hear about it!" };
