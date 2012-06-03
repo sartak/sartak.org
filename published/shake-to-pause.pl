@@ -21,10 +21,8 @@ self.isAccelerometerEnabled = YES;
     }
 }';
 
-p { "I'm sure that `if` check for acceleration could be improved (compare the overall magnitude instead of each component separately?), but what I have here has worked well for me. It doesn't automatically trigger when I'm walking even animatedly, but it does pass the phone-falls-into-cheek test." };
-
-p { "On the off-chance you don't want this behavior, I went ahead and added a snarky setting too." };
+p { "I'm sure that `if` check for acceleration could be improved (compare the overall magnitude instead of each component separately?), but what I have here has worked well for me. It doesn't automatically trigger when I'm walking even animatedly, but it does pass the phone-falls-into-cheek test. On the off-chance you don't want this behavior, I went ahead and added a snarky setting too." };
 
 image "shake-to-pause/settings.png";
 
-p { "I'm sure many other games could benefit from this shake to pause idea. If you add it to your game, I'd like to hear about it!" };
+p { "While I initially added this for when I dropped my phone, it's also useful as advertised &mdash; it's easier to shake your phone than it is to peck at the onscreen pause button. I'm sure many other games could benefit from this shake to pause idea. If you add it to your game, I'd like to hear about it!" };
