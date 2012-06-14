@@ -4,6 +4,26 @@ use warnings;
 
 my @talks = (
     {
+        name        => 'git-status-tackle',
+        dir         => 'git-status-tackle',
+        length      => '5 min',
+        date        => '2012-06-14',
+        speakerdeck => '4fd9f4a817e3000022019f94',
+        conference  => {
+            name    => 'YAPC::NA',
+            dir     => 'yapc-na-2012',
+            url     => 'http://www.yapcna.org/2012',
+            talk    => 'http://act.yapcna.org/2012/talk/173',
+            venue   => 'University of Wisconsin',
+            city    => 'Madison, Wisconsin',
+        },
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
+        description => q{`git status` is verbose almost to the point of uselessness. git-status-tackle is a new suite of tools that tells you exactly what you want to know about your git repository in a very pluggable and configurable way.},
+    },
+    {
         name        => 'DTrace: printf debugging for seventh-level wizards',
         dir         => 'dtrace',
         length      => '50 min',
