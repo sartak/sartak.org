@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: Roaming ElasticSearch\ndraft: 1\n" }
+BEGIN { print "title: Roaming ElasticSearch\ndate: 2012-06-22\n" }
 
 p { "I've been suffering from an unfortunate side effect of ElasticSearch's default configuration for months I finally got annoyed enough to diagnose and fix the problem." };
 
