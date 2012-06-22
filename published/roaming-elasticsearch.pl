@@ -21,4 +21,4 @@ code_snippet yaml => << 'YAML';
 network.host: 127.0.0.1
 YAML
 
-p { "If you've installed ElasticSearch from homebrew, use `brew info elasticsearch` to find your config file." };
+p { "If you've installed ElasticSearch from homebrew, use `brew info elasticsearch` to find your config file. I'm sure if you're on a Debian-based system it'll be in `/etc/elasticsearch/elasticsearch.yml`." };
