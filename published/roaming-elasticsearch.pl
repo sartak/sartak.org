@@ -26,3 +26,5 @@ network.host: 127.0.0.1
 YAML
 
 p { "If you've installed ElasticSearch from homebrew, use `brew info elasticsearch` to find your config file. I'm sure if you're on a Debian-based system it'll be in `/etc/elasticsearch/elasticsearch.yml`." };
+
+p { "Update: [\@karmik suggested](http://twitter.com/karmiq/status/216456537219145728) that I submit a pull request to add this default for `network.host` which is a great idea. [So I did!](https://github.com/mxcl/homebrew/pull/12985)" };
