@@ -36,25 +36,6 @@
             {content}
         </div>
         <script type="text/javascript">
-            (function () {
-                var links = document.getElementsByTagName("a");
-                for (var i = 0; i < links.length; i++) {
-                    var link = links[i];
-                    var href = link.getAttribute("href");
-                    if (href.match(/sartak.org|^\//)) {
-                        link.onclick = function (e) {
-                            history.pushState(null, null, href);
-                            var req = new XMLHttpRequest();
-                            req.open("GET", href, false);
-                            req.send();
-                            document.getElementById("content").innerHTML = req.responseXML.getElementById("content").innerHTML.toUpperCase();
-                            e.preventDefault();
-                        };
-                    }
-                }
-            })();
-        </script>
-        <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-21253667-1']);
         _gaq.push(['_setDomainName', '.sartak.org']);
