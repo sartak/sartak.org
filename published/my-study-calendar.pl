@@ -12,7 +12,7 @@ p { "The _fourth_ is my own **sentence corpus** system, which I still have not d
 
 h2 { "My Study Calendar" };
 
-p { "The third tool is the focus of this article. It's important to expose oneself to a variety of media. There's no substitute for immersion in acquiring a second language. I use the calendar to make sure that I'm regularly reading articles and novels, practicing writing, watching movies, learning song lyrics (for [karaoke](http://www.flickr.com/photos/sartak/4628540837/) purposes), playing video games, and everything else I enjoy doing. Just... in Japanese." };
+p { "The third tool is the focus of this article. It's important to expose oneself to a variety of media. There's no substitute for immersion in acquiring a second language. I need to make sure that I'm regularly reading articles and novels, practicing writing, watching movies, learning song lyrics (for [karaoke](http://www.flickr.com/photos/sartak/4628540837/) purposes), playing video games, and everything else I enjoy doing. Just... in Japanese." };
 
 p { "To track my progress, to keep me honest about my immersion, and to decide what kinds of study I should do today, I maintain a **study calendar**. It used to take the form of a cheap whiteboard, inspired directly by [Giles](http://gilesbowkett.blogspot.com/2011/01/my-habit-calendar-system-levelling-up.html) [Bowkett](http://gilesbowkett.blogspot.com/2010/02/calendar-win-rapid-course-correction.html)." };
 
