@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: My Study Calendar\ndraft: 1\n" }
+BEGIN { print "title: My Study Calendar\ndate: 2012-07-28\n" }
 
 p { "I've been studying Japanese for three years now. There are four tools that I have found to be invaluable in making me productive with the language. (I'm still trying to figure out how to be modest about it.)" };
 
