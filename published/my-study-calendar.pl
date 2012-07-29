@@ -27,7 +27,7 @@ ul {
     li { "As you can see, it was messy. It would only support about a dozen goals before it became a wreck. Actually, more like five goals." };
     li { "I could look at it and update it only when I was home. This meant that when I traveled my study went to shit." };
     li { "It didn't support metadata very well, though I certainly tried! Those numbers on each day represent the number of sentence cards I added to Anki (red), the number of words I learned (blue), and the number of kanji I learned (green)." };
-    li { "It supported daily (horizontal) and weekly (vertical) tasks well, but any other schedule was a pain to manage." };
+    li { "It supported daily (horizontal) and weekly (vertical) goals well, but any other schedule was a pain to manage." };
     li { "It wasn't computerized so I couldn't extract any statistics. Not even streaks. Of course I also threw away all my data every month, which led to weird mental side effects depending on how far into the month it was." };
     li { "It was... accident-prone." };
 };
@@ -40,7 +40,7 @@ p { "Thankfully (and finally!), a worthy replacement has come out, and I've been
 
 image "my-study-calendar/full.png";
 
-p { "As you can see it solves the issues I had with my whiteboard well. The quotation icons indicate notes, so I can track what I'm actually doing. I can consult my calendar and update it from anywhere I have an internet connection, including from my phone." };
+p { "As you can see it solves the issues I had with my whiteboard well. The quotation icons indicate notes, so I can track what I'm actually doing. I can consult my calendar and update it from anywhere I have an internet connection, including from my phone. The lightly shaded blocks are \"free\" days based on the independent schedule each goal." };
 
 p { "This is the current set of commitments I demand of myself. I wrote them in Japanese because that is most definitely how I roll." };
 
