@@ -91,5 +91,5 @@ image "my-study-calendar/barren.png";
 
 p { "As you can see, this time period is barren. There are multiple days where I did only the bare essentials: my Anki reviews and learning a couple kanji. It was depressing to look at." };
 
-p { "So [I fixed it](http://twitter.com/sartak/status/220287719706853376)! And now a month later I still haven't broken the chains in my TDP calendar. My appetite for study waxes and wanes, but externalizing what I have _actually_ done encourages honesty and leads me to course-correct in this way. TDP answers the question \"What should I do today?\" for me. Without it, the answer is usually \"goof around on the internet\"." };
+p { "So [I fixed it](http://twitter.com/sartak/status/220287719706853376)! And now a month later I still haven't broken the chains in my study calendar. My appetite for study waxes and wanes, but externalizing what I have _actually_ done encourages honesty and leads me to course-correct in this way. The Daily Practice answers the question \"What should I do today?\" for me. Without it, the answer is usually \"goof around on the internet\"." };
 
