@@ -44,20 +44,45 @@ p { "As you can see it solves the issues I had with my whiteboard well. The quot
 
 p { "This is the current set of commitments I demand of myself. I wrote them in Japanese because that is most definitely how I roll." };
 
-ol {
-    li { "2ch: read [2chan](http://en.wikipedia.org/wiki/2channel) every day. \"_it has gained significant influence in Japanese society, comparable to that of traditional mass media such as television, radio, and magazines_\". I'd be robbing myself of important arguing and trolling tactics if I ignored this!" };
-    li { "記事 / article: read an article-length document every day. This usually comes in the form of a [Japanese Wikipedia](http://ja.wikipedia.org/wiki/メインページ) article or a blog post." };
-    li { "書く / write: write every day. Sorry about all the Japanese tweets. :) (not really sorry)" };
-    li { "アンキの勉強 / anki: do my Anki reviews every day. I have an unbroken streak of 164 days, which is how long I've been using The Daily Practice. It's also the [longest streak on the site](http://twitter.com/jshirley/status/228887804485197824)!" };
-    li { "漢字 / kanji: learn at least one kanji every day. This uses the Heisig system I described above as tool number two. It has a recycling widget because I'm done! Once my last checkmark falls off the weekly calendar, so too will the goal itself. But the data is still there. That's a great bit of design." };
-    li { "カードを加える / cards: add sentence cards to Anki every day." };
-    li { "単語 / vocabulary: learn at least one word every day. I keep track of my active vocabulary [on github](https://github.com/sartak/vocabulary/commits)." };
-    li { "ゲーム / game: play a video game every _other_ day. Currently playing Final Fantasy VII on my newly-imported PlayStation 2." };
-    li { "読む / read book: read part of a book or manga every _other_ day. [Currently reading](http://www.goodreads.com/user/show/5099248-shawn-moore) Dune and Harry Potter and the Goblet of Fire." };
-    li { "映画を観る / movie: watch a movie or television every _fourth_ day. Mostly I watch American movies that I already like dubbed into Japanese. But I've noticed I can follow along with new content too, watching Miyazaki and Kurosawa." };
-    li { "歌詞 / lyrics: learn part of a song every _week_." };
-    li { "漢検 / kanken test: take the [kanji aptitude test](http://en.wikipedia.org/wiki/Kanji_kentei) every _week_. I have a [kanken DS game](http://traveljapanblog.com/wordpress/2009/04/kanken-ds-3-deluxe/) and I'm currently struggling with [level 7](http://en.wikipedia.org/wiki/Kanji_kentei#Level_7)." };
-    li { "資料を集める / content: acquire new Japanese content every _week_. This includes books, movies, music, games. I've got to keep topping up my Japanese gas tank to keep studying." };
+dl {
+    dt { "2ch" };
+    dd { "Read [2chan](http://en.wikipedia.org/wiki/2channel) every day. \"_it has gained significant influence in Japanese society, comparable to that of traditional mass media such as television, radio, and magazines_\". I'd be robbing myself of important arguing and trolling tactics if I ignored this!" };
+
+    dt { "記事 / article" };
+    dd { "Read an article-length document every day. This usually comes in the form of a [Japanese Wikipedia](http://ja.wikipedia.org/wiki/メインページ) article or a blog post." };
+
+    dt { "書く / write" };
+    dd { "Write every day. Sorry about all the Japanese tweets. :) (not really sorry)" };
+
+    dt { "アンキの勉強 / anki" };
+    dd { "Do my Anki reviews every day. I have an unbroken streak of 164 days, which is how long I've been using The Daily Practice. It's also the [longest streak on the site](http://twitter.com/jshirley/status/228887804485197824)!" };
+
+    dt { "漢字 / kanji" };
+    dd { "Learn at least one kanji every day. This uses the Heisig system I described above as tool number two. It has a recycling widget because I'm done! Once my last checkmark falls off the weekly calendar, so too will the goal itself. But the data is still there. That's a great bit of design." };
+
+    dt { "カードを加える / cards" };
+    dd { "Add sentence cards to Anki every day." };
+
+    dt { "単語 / vocabulary" };
+    dd { "Learn at least one word every day. I keep track of my active vocabulary [on github](https://github.com/sartak/vocabulary/commits)." };
+
+    dt { "ゲーム / game" };
+    dd { "Play a video game every _other_ day. Currently playing Final Fantasy VII on my newly-imported PlayStation 2." };
+
+    dt { "読む / read book" };
+    dd { "Read part of a book or manga every _other_ day. [Currently reading](http://www.goodreads.com/user/show/5099248-shawn-moore) Dune and Harry Potter and the Goblet of Fire." };
+
+    dt { "映画を観る / movie" };
+    dd { "Watch a movie or television every _fourth_ day. Mostly I watch American movies that I already like dubbed into Japanese. But I've noticed I can follow along with new content too, watching Miyazaki and Kurosawa." };
+
+    dt { "歌詞 / lyrics" };
+    dd { "Learn part of a song every _week_." };
+
+    dt { "漢検 / kanken test" };
+    dd { "Take the [kanji aptitude test](http://en.wikipedia.org/wiki/Kanji_kentei) every _week_. I have a [kanken DS game](http://traveljapanblog.com/wordpress/2009/04/kanken-ds-3-deluxe/) and I'm currently struggling with [level 7](http://en.wikipedia.org/wiki/Kanji_kentei#Level_7)." };
+
+    dt { "資料を集める / content" };
+    dd { "Acquire new Japanese content every _week_. This includes books, movies, music, games. I've got to keep topping up my Japanese gas tank to keep studying." };
 };
 
 p { "The numbers on the far right are streak counts. You'll notice that most of the daily goals have a streak of around 30, the every-other-day goals around 20, and the less frequent goals around 10. This is because about a month ago I noticed my study calendar looked like this:" };
