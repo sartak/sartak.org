@@ -46,7 +46,7 @@ p { "This is the current set of commitments I demand of myself. I wrote them in 
 
 dl {
     dt { "2ch" };
-    dd { "Read [2chan](http://en.wikipedia.org/wiki/2channel) every day. \"_\\[I\\]t has gained significant influence in Japanese society, comparable to that of traditional mass media such as television, radio, and magazines_\". I'd be robbing myself of important arguing and trolling tactics if I ignored this!" };
+    dd { "Read [2chan](http://en.wikipedia.org/wiki/2channel) every day. \"_It has gained significant influence in Japanese society, comparable to that of traditional mass media such as television, radio, and magazines_\". I'd be robbing myself of important arguing and trolling tactics if I ignored this!" };
 
     dt { "記事 (article)" };
     dd { "Read an article-length document every day. This usually comes in the form of a [Japanese Wikipedia](http://ja.wikipedia.org/wiki/メインページ) article or a blog post." };
