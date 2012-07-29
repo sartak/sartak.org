@@ -52,7 +52,7 @@ dl {
     dd { "Read an article-length document every day. This usually comes in the form of a [Japanese Wikipedia](http://ja.wikipedia.org/wiki/メインページ) article or a blog post." };
 
     dt { "書く (write)" };
-    dd { "Write every day. Sorry about all the Japanese tweets. :) (not really sorry)" };
+    dd { "Write every day. Sorry about [all the Japanese tweets](http://twitter.com/search/from%3Asartak%20lang%3Aja). :) (not really sorry)" };
 
     dt { "アンキの勉強 (anki)" };
     dd { "Do my Anki reviews every day. I have an unbroken streak of 164 days, which is how long I've been using The Daily Practice. It's also the [longest streak on the site](http://twitter.com/jshirley/status/228887804485197824)!" };
