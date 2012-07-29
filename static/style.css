@@ -136,13 +136,13 @@ sub {
     float: left;
 }
 
-#talks dt {
-    font-size: 1.4em;
+dt {
+    font-size: 1.2em;
 }
 #talks .metadata, #talk .metadata {
     font-size: .8em;
 }
-#talks dd {
+dd {
     margin-bottom: 1em;
 }
 
