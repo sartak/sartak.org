@@ -10,7 +10,7 @@ p { "The second tool is the _[**Remembering the Kanji**](http://www.amazon.com/g
 
 p { "The _fourth_ is my own **sentence corpus** system, which I still have not devoted the appropriate amount of time to explain. Some day, but not today!" };
 
-h2 { "My Study Calendar" };
+h2 { "A Calendar" };
 
 p { "The third tool is the focus of this article. It's important to expose oneself to a variety of media. There's no substitute for immersion in acquiring a second language. I need to make sure that I'm regularly reading articles and novels, practicing writing, watching movies, learning song lyrics (for [karaoke](http://www.flickr.com/photos/sartak/4628540837/) purposes), playing video games, and everything else I enjoy doing. Just... in Japanese." };
 
@@ -34,13 +34,13 @@ ul {
 
 p { "I'd been trying to get away from the physical whiteboard calendar because I'm whatever the opposite of a Luddite is. I've collected quite a few crummy habit-building iPhone calendar apps." };
 
-h3 { "[The Daily Practice](http://tdp.me)" };
+h2 { "[The Daily Practice](http://tdp.me)" };
 
 p { "Thankfully (and finally!), a worthy replacement has come out, and I've been on it exclusively for six months now. I even threw away the whiteboard in a symbolic gesture of victory. The new system is called [The Daily Practice](http://tdp.me) and it looks like this (plus purple translations I added in post):" };
 
 image "my-study-calendar/full.png";
 
-p { "As you can see it solves the issues I had with my whiteboard well. The quotation icons indicate notes, so I can track what I'm actually doing. I can consult my calendar and update it from anywhere I have an internet connection, including from my phone. The lightly shaded blocks are \"free\" days based on the independent schedule each goal." };
+p { "As you can see it solves the issues I had with my whiteboard. The quotation icons indicate notes, so I can track what I'm actually reading, watching, writing, etc. I can consult this calendar and update it from anywhere I have an internet connection, including from my phone. The lightly-shaded blocks are \"free\" days based on the independent schedule each goal has." };
 
 p { "This is the current set of commitments I demand of myself. I wrote them in Japanese because that is most definitely how I roll." };
 
