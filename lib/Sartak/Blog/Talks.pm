@@ -381,11 +381,21 @@ sub generate_talks_html {
         my $date = main::prettify_date($talk->{date}, 'en');
         my $conference = $talk->{conference};
 
-        $output .= qq[<li>
-    <span class="date">$date</span>
-    <span class="title"><a href="$talk->{url}">$talk->{name}</a></span>
-    <span class="conference">at <a href="$conference->{url}">$conference->{name}</a></span>
-</li>];
+        $output .= qq[
+            <li>
+                <span class="date">$date</span>
+                <span class="title"><a href="$talk->{url}">$talk->{name}</a></span>
+        ];
+
+        if ($conference->{name}) {
+            $output .= qq[
+                <span class="conference">at <a href="$conference->{url}">$conference->{name}</a></span>
+            ];
+        }
+
+        $output .= qq[
+            </li>
+        ];
     };
 
     $output = qq[<ul id="talks">$output</ul>];
