@@ -4,6 +4,17 @@ use warnings;
 
 my @talks = (
     {
+        name        => 'Introduction to Moose',
+        skip_index  => 1,
+        dir         => 'intro-to-moose',
+        length      => '60 min',
+        date        => '2012-05-21',
+        conference  => {
+            dir     => 'misc-2012',
+        },
+        description => q{An updated version of my 2009 Introduction to Moose talk.},
+    },
+    {
         name        => 'git-status-tackle',
         dir         => 'git-status-tackle',
         length      => '5 min',
