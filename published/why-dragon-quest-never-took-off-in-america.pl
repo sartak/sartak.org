@@ -9,4 +9,6 @@ a {
     image "why-dragon-quest-never-took-off-in-america/maze-1.jpg";
 };
 
+p { "Most other games' dungeons are a joke. But Dragon Quest I made me bust out the graph paper immediately." };
+
 p { "I think I'm going to love this game." };
