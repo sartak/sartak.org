@@ -4,6 +4,27 @@ use warnings;
 
 my @talks = (
     {
+        name        => 'Moose Role Usage Patterns',
+        dir         => 'role-usage-patterns',
+        length      => '40 min',
+        date        => '2012-08-22',
+        speakerdeck => '5034ce6c6801700002053899',
+        #video       => '',
+        conference  => {
+            name    => 'YAPC::EU',
+            dir     => 'yapc-eu-2012',
+            url     => 'http://act.yapc.eu/ye2012',
+            talk    => 'http://act.yapc.eu/ye2012/talk/4150',
+            venue   => 'Universität Frankfurt',
+            city    => 'Frankfurt',
+        },
+        links       => [
+            { type => 'pdf' },
+            { type => 'key' },
+        ],
+        description => q{Roles are one of the most exciting and powerful features provided by Moose, but also one of the most misunderstood. This talk will explore, in depth, some common usage patterns (and antipatterns) for roles and how best to use them in the design of your classes. I will also talk about the philosophy of roles and how they fit in with the larger OO toolset.},
+    },
+    {
         name        => 'Introduction to Moose',
         skip_index  => 1,
         dir         => 'intro-to-moose',
