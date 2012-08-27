@@ -287,7 +287,7 @@ sub generate_rss {
     for my $article (sort { $a->{date} cmp $b->{date} } @articles) {
         $feed->add_item(
             title       => decode_utf8($article->{title} || $article->{name}),
-            link        => $article->{url},
+            link        => "http://sartak.org" . $article->{url},
             description => decode_utf8($article->{original} || $article->{description}),
             dc          => {
                 date    => $article->{date},
@@ -311,7 +311,7 @@ sub generate_talk_rss {
     for my $talk (Sartak::Blog::Talks->talks) {
         $feed->add_item(
             title       => decode_utf8($talk->{name}),
-            link        => $talk->{url},
+            link        => "http://sartak.org" . $talk->{url},
             description => decode_utf8($talk->{description}),
             dc          => {
                 date    => $talk->{date},
