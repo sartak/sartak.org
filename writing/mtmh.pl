@@ -101,6 +101,10 @@ p { "最初のp5mopの拡張として[mopx::instance::tracking](https://github.c
 p { "夕飯の後で、昨日の旅だし、朝のトークをしたから、たいへん疲れました。で、やったことはFluxxだけでした。" };
 
 a {
+    href is "http://www.flickr.com/photos/sartak/7880533504";
+    image "mtmh/artsy-stevan.jpg";
+};
+a {
     href is "http://www.flickr.com/photos/sartak/7879978022";
     image "mtmh/perigrin-workstation.jpg";
 };
