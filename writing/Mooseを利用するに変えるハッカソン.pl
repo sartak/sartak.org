@@ -22,13 +22,13 @@ p { "その後で、Fluxx(zombie版とcthulhu版組み合わせられた)とい�
 h3 { "Day 2 (ハッカソンの一日目)" };
 p { "朝食から昼食まで私が「Mooseロール利用パターン」というトーク拡張版を話してあげました。昼食の後で、[\@pmichaud](http://twitter.com/pmichaud)さんが[NQP言語](http://pmichaud.com/2012/pres/mtmh2012-nqp/slides/start.html)について解説しました。プログラミング言語が作りたい方は、きっとNQPでとても早く計画できると思います。しかもハッカソンの間で[\@pmichaud](http://twitter.com/pmichaud)さんが「ちゃんとドキュメンテーションが書きたい」と言いました。" };
 p { "[\@perlyarg](http://twitter.com/perlyarg)さんとMooseのロールテストをp5mopに変更して始まりました。p5mopではロール合成は不完全ですから、そのテストは便利だと思います。" };
-p { "最初のp5mopの拡張として[mopx::instance::tracking](https://github.com/stevan/p5-mop/commit/04997c0c93c7)は、私が書いたことができました。とても簡単に、p5mopのClassというメタクラスをサブクラスして、`create_instance`というメソッドにオブジェクトを見逃さない挙動を追加されます。" };
+p { "最初のp5mopの拡張として[mopx::instance::tracking](https://github.com/stevan/p5-mop/commit/04997c0c93c7)は、私が書いたことができました。とても簡単に、p5mopのClassというメタクラスをサブクラスして、create_instanceというメソッドにオブジェクトを見逃さない挙動を追加されます。" };
 p { "夕飯の後で、昨日の旅だし、朝のトークをしたから、たいへん疲れました。で、やったことはFluxxだけでした。" };
 
 h3 { "Day 3 (ハッカソンの二日目)" };
 p { "先日書いたDTraceプローブをPerlに追加する[パッチ](https://rt.perl.org/rt3/Ticket/Display.html?id=114638)をやっと送りました。もし受け入れたら、5.18からop-entry、loading-file、loaded-fileというプローブを使うようになります。" };
 p { "誰かが「正規表現を使いこなす教師いますかー！」と聞いて、「私が手伝ってみてあげましょう」と私は答えました。問題は、テストが9秒以上で実行するので、ちょっと遅すぎました。役800回呼び出したregcomp(正規表現をコンパイルする関数)というopcodeに2秒以上部分があることを[Devel::NYTProf]で見つけました。でも、ちゃんと`qr//`を使ったので、regcompがほとんど呼ばないはずだと思いました。残念ですがDevel::NYTProfがopcode内に見ることができませんが、DTraceは各C関数でも見られます。そして私がperl providerのsub-entryとsub-returnというプローブをトレースして、pid providerのC関数のentryとreturnで、遅いマッチだけ内regcompをトレースしました。発見として、700部分のregcompは速いですけど、あと100部分のregcompはその速いregcompより100x以上遅い。なに。。。？後程、遅すぎた正規表現は記録括弧がありまして、その括弧を`(?:...)`に変更することで、とてみ速くなったことができました！実行は9秒から2秒まで減りました。" };
-
+p { "AUTOLOADを使っているモジュールには、「URI::Namespace=HASH(0x7ff5fa032360) contains invalid characters for a type name. Names can contain alphanumeric character, \":\", and \".\"」というエラーが発生していました。結局、原因は`\$obj->type`呼び出して、AUTOLOADを実行するはずがあるけど、実は名前として`\$obj`を渡して、タイプを定義する`Moose::Util::TypeConstraint::type(\$obj)`を呼び出されました。`no Moose::Util::TypeConstraint`とか`use namespace::autoclean`を追加すると、typeというメソッドはAUTOLOADを実行するので、よく解決しました。" };
 
 h3 { "Day 4 (ハッカソンの三日目)" };
 
