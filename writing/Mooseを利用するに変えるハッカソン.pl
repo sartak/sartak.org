@@ -12,7 +12,7 @@ h3 { "Day 0 (旅の日)" };
 p { "フランクフルトからスタヴァンゲルに飛んで行きました。ホテルからフランクフルト空港に、そして飛行機に通った道が分かりにくいと思います。中央(Hauptbahnhof)というか駅で乗り換えの標識がちょっと読めませんでした。しかも、空港のゲートを越えた後、バス(!)で飛行機に運ばされまして、道路から階段で直接に乗りました。ビックリした！" };
 p { "結局、プレーケストーレンの山小屋に無事に到着しました。" };
 p { "参加者の皆さんが、自己紹介したり、喋ったり、一緒に夕食を食べました。p5mopに興味ある参加者が「基本的に、どうやってroleという概念はp5mopの仕組みに合う？」というを夜中すぎまで論じました。" };
-p { "[\@robinsmidsrod](http://twitter.com/robinsmidsrod)さんが「日本語を入力する方法を説明しませんか？」と聞いて、私はもちろん嬉しくなりました ;) その後、XPathとかXML::RabbitとかUnicode CLDRとかとか喋りました。" };
+p { "[\@robinsmidsrod](http://twitter.com/robinsmidsrod)さんが「日本語を入力する方法を説明しませんか？」と聞いて、私はもちろん嬉しくなりました ;) その後、XPathとか[XML::Rabbit]とか[Unicode CLDR](http://ja.wikipedia.org/wiki/Common_Locale_Data_Repository)とかとか喋りました。" };
 
 h3 { "Day 1 (登山の日)" };
 p { "早起きして、プレーケストーレンという有名な崖にハイキングしました。眺めはとっっってもきれいでした！！！" };
@@ -22,11 +22,12 @@ p { "その後で、Fluxx(zombie版とcthulhu版組み合わせられた)とい�
 h3 { "Day 2 (ハッカソンの一日目)" };
 p { "朝食から昼食まで私が「Mooseロール利用パターン」というトーク拡張版を話してあげました。昼食の後で、[\@pmichaud](http://twitter.com/pmichaud)さんが[NQP言語](http://pmichaud.com/2012/pres/mtmh2012-nqp/slides/start.html)について解説しました。プログラミング言語が作りたい方は、きっとNQPでとても早く計画できると思います。しかもハッカソンの間で[\@pmichaud](http://twitter.com/pmichaud)さんが「ちゃんとドキュメンテーションが書きたい」と言いました。" };
 p { "[\@perlyarg](http://twitter.com/perlyarg)さんとMooseのロールテストをp5mopに変更して始まりました。p5mopではロール合成は不完全ですから、そのテストは便利だと思います。" };
-p { "最初のp5mopの拡張として[mopx::instance::tracking](https://github.com/stevan/p5-mop/commit/04997c0c93c7)は、私が書いたことができました。とても簡単に、p5mopのClassというメタクラスをサブクラスして、create_instanceというメソッドにオブジェクトを見逃さない挙動を追加されます。" };
+p { "最初のp5mopの拡張として[mopx::instance::tracking](https://github.com/stevan/p5-mop/commit/04997c0c93c7)は、私が書いたことができました。とても簡単に、p5mopのClassというメタクラスをサブクラスして、`create_instance`というメソッドにオブジェクトを見逃さない挙動を追加されます。" };
 p { "夕飯の後で、昨日の旅だし、朝のトークをしたから、たいへん疲れました。で、やったことはFluxxだけでした。" };
 
 h3 { "Day 3 (ハッカソンの二日目)" };
 p { "先日書いたDTraceプローブをPerlに追加する[パッチ](https://rt.perl.org/rt3/Ticket/Display.html?id=114638)をやっと送りました。もし受け入れたら、5.18からop-entry、loading-file、loaded-fileというプローブを使うようになります。" };
+p { "誰かが「正規表現を使いこなす教師いますかー！」と聞いて、「私が手伝ってみてあげましょう」と私は答えました。問題は、テストが9秒以上で実行するので、ちょっと遅すぎました。役800回呼び出したregcomp(正規表現をコンパイルする関数)というopcodeに2秒以上部分があることを[Devel::NYTProf]で見つけました。でも、ちゃんと`qr//`を使ったので、regcompがほとんど呼ばないはずだと思いました。残念ですがDevel::NYTProfがopcode内に見ることができませんが、DTraceは各C関数でも見られます。そして私がperl providerのsub-entryとsub-returnというプローブをトレースして、pid providerのC関数のentryとreturnで、遅いマッチだけ内regcompをトレースしました。発見として、700部分のregcompは速いですけど、あと100部分のregcompはその速いregcompより100x以上遅い。なに。。。？後程、遅すぎた正規表現は記録括弧がありまして、その括弧を`(?:...)`に変更することで、とてみ速くなったことができました！実行は9秒から2秒まで減りました。" };
 
 
 h3 { "Day 4 (ハッカソンの三日目)" };
