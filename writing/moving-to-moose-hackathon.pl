@@ -104,6 +104,7 @@ a {
     href is "http://www.flickr.com/photos/sartak/7880533504";
     image "moving-to-moose-hackathon/artsy-stevan.jpg";
 };
+
 a {
     href is "http://www.flickr.com/photos/sartak/7879978022";
     image "moving-to-moose-hackathon/perigrin-workstation.jpg";
@@ -113,6 +114,11 @@ h3 { "Day 3 (ハッカソンの二日目)" };
 p { "先日書いたDTraceプローブをPerlに追加する[パッチ](https://rt.perl.org/rt3/Ticket/Display.html?id=114638)をやっと送りました。もし受け入れたら、5.18からop-entry、loading-file、loaded-fileというプローブを使うようになります。" };
 p { "Rubenさんkが「正規表現を使いこなす教師いますかー！」と聞いて、「私が手伝ってみてあげましょう」と私は答えました。問題は、テストが9秒以上で実行するので、ちょっと遅すぎました。役800回呼び出したregcomp(正規表現をコンパイルする関数)というopcodeに2秒以上部分があることを[Devel::NYTProf]で見つけました。でも、ちゃんと`qr//`を使ったので、regcompがほとんど呼ばないはずだと思いました。残念ですがDevel::NYTProfがopcode内に見ることができませんが、DTraceは各C関数でも見られます。そして私がperl providerのsub-entryとsub-returnというプローブをトレースして、pid providerのC関数のentryとreturnで、遅いマッチだけ内regcompをトレースしました。発見として、700部分のregcompは速いですけど、あと100部分のregcompはその速いregcompより100x以上遅い。なに。。。？後程、遅すぎた正規表現は記録括弧がありまして、その括弧を`(?:...)`に変更することで、とてみ速くなったことができました！実行は9秒から2秒まで減りました。" };
 p { "AUTOLOADを使っているモジュールには、「URI::Namespace=HASH(0x7ff5fa032360) contains invalid characters for a type name. Names can contain alphanumeric character, \":\", and \".\"」というエラーが発生していました。結局、原因は`\$obj->type`呼び出して、AUTOLOADを実行するはずがあるけど、実は名前として`\$obj`を渡して、タイプを定義する`Moose::Util::TypeConstraint::type(\$obj)`を呼び出されました。`no Moose::Util::TypeConstraint`とか`use namespace::autoclean`を追加すると、typeというメソッドはAUTOLOADを実行するので、よく解決しました。" };
+
+a {
+    href is "http://www.flickr.com/photos/sartak/7880605988";
+    image "moving-to-moose-hackathon/doy-nothingmuch.jpg";
+};
 
 h3 { "Day 4 (ハッカソンの三日目)" };
 
