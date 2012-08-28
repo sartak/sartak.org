@@ -135,7 +135,8 @@ while (my $file = glob("published/* writing/*")) {
         $article->{dir} = date_dir($article->{date});
     }
 
-    $article->{file} = $article->{dir} . titleify($article->{title}) . '.html';
+    $article->{basename} ||= titleify($article->{title});
+    $article->{file} = $article->{dir} . $article->{basename} . '.html';
     $article->{url} = "/$article->{file}";
 
     push @{ $articles{ $article->{date} } }, $article;

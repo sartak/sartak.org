@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: Mooseを利用するに変えるハッカソン\ndraft: 1\n" }
+BEGIN { print "title: Mooseを利用するに変えるハッカソン\nbasename: moving-to-moose-hackathon\ndraft: 1\n" }
 
 p { "Oslo.pmが「[Moving to Moose Hackathon](http://act.yapc.eu/mtmh2012/)(Mooseを利用するに変えるハッカソン)」という会議をノルウェーのプレーケストーレンにある山小屋で開催しました。私は参加したいでしたが、招待頂きました。Oslo.pm、どうもありがとうございます！" };
 p { "会議のテーマは二つありました。1つは[RDF](http://act.yapc.eu/mtmh2012/sponsors.html#perlrdf)に興味あるコミュニティが、Mooseを利用するにモジュールを変えるつもりでした。あと1つは、[p5mop](http://act.yapc.eu/mtmh2012/sponsors.html#p5mop)を屈強化して、もう少しperl自体に追加できる状態に準備する予定がありました。" };
