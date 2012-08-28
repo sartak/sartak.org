@@ -10,7 +10,7 @@ p { "ドイツのフランクフルトで開催されたYAPC::EUに参加でき�
 
 a {
     href is "http://www.flickr.com/photos/sartak/7838221830";
-    image "mtmh/yapc-audience.jpg";
+    image "moving-to-moose-hackathon/yapc-audience.jpg";
 };
 
 
@@ -19,24 +19,24 @@ p { "フランクフルトからスタヴァンゲルに飛んで行きました
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880429950";
-    image "mtmh/flight-in.jpg";
+    image "moving-to-moose-hackathon/flight-in.jpg";
 };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880429316";
-    image "mtmh/oslo-bus.jpg";
+    image "moving-to-moose-hackathon/oslo-bus.jpg";
 };
 
 p { "結局、プレーケストーレンの山小屋に無事に到着しました。" };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880431538";
-    image "mtmh/lodge-lake.jpg";
+    image "moving-to-moose-hackathon/lodge-lake.jpg";
 };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880431082";
-    image "mtmh/lodge-interior.jpg";
+    image "moving-to-moose-hackathon/lodge-interior.jpg";
 };
 
 p { "参加者の皆さんが、自己紹介したり、喋ったり、一緒に夕食を食べました。p5mopに興味ある参加者が「基本的に、どうやってroleという概念はp5mopの仕組みに合う？」というを夜中すぎまで論じました。" };
@@ -48,32 +48,32 @@ p { "旅立ちは10時から16時までかかりました。たいへん疲れ�
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880432218";
-    image "mtmh/picnic.jpg";
+    image "moving-to-moose-hackathon/picnic.jpg";
 };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880432884";
-    image "mtmh/rocky-forest.jpg";
+    image "moving-to-moose-hackathon/rocky-forest.jpg";
 };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880376022";
-    image "mtmh/wave-of-trees.jpg";
+    image "moving-to-moose-hackathon/wave-of-trees.jpg";
 };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880377090";
-    image "mtmh/focused-cliff.jpg";
+    image "moving-to-moose-hackathon/focused-cliff.jpg";
 };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880435618";
-    image "mtmh/pulpit-rock.jpg";
+    image "moving-to-moose-hackathon/pulpit-rock.jpg";
 };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880377758";
-    image "mtmh/topdown-cliff.jpg";
+    image "moving-to-moose-hackathon/topdown-cliff.jpg";
 };
 
 
@@ -81,17 +81,17 @@ p { "その後で、Fluxx(zombie版とcthulhu版組み合わせられた)とい�
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880437426";
-    image "mtmh/stevan-peek.jpg";
+    image "moving-to-moose-hackathon/stevan-peek.jpg";
 };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880438210";
-    image "mtmh/fluxx-rules.jpg";
+    image "moving-to-moose-hackathon/fluxx-rules.jpg";
 };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880438674";
-    image "mtmh/pro-perigrin.jpg";
+    image "moving-to-moose-hackathon/pro-perigrin.jpg";
 };
 
 h3 { "Day 2 (ハッカソンの一日目)" };
@@ -102,11 +102,11 @@ p { "夕飯の後で、昨日の旅だし、朝のトークをしたから、た
 
 a {
     href is "http://www.flickr.com/photos/sartak/7880533504";
-    image "mtmh/artsy-stevan.jpg";
+    image "moving-to-moose-hackathon/artsy-stevan.jpg";
 };
 a {
     href is "http://www.flickr.com/photos/sartak/7879978022";
-    image "mtmh/perigrin-workstation.jpg";
+    image "moving-to-moose-hackathon/perigrin-workstation.jpg";
 };
 
 h3 { "Day 3 (ハッカソンの二日目)" };
