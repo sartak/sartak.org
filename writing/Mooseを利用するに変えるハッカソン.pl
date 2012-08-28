@@ -22,10 +22,12 @@ p { "その後で、Fluxx(zombie版とcthulhu版組み合わせられた)とい�
 h3 { "Day 2 (ハッカソンの一日目)" };
 p { "朝食から昼食まで私が「Mooseロール利用パターン」というトーク拡張版を話してあげました。昼食の後で、[\@pmichaud](http://twitter.com/pmichaud)さんが[NQP言語](http://pmichaud.com/2012/pres/mtmh2012-nqp/slides/start.html)について解説しました。プログラミング言語が作りたい方は、きっとNQPでとても早く計画できると思います。しかもハッカソンの間で[\@pmichaud](http://twitter.com/pmichaud)さんが「ちゃんとドキュメンテーションが書きたい」と言いました。" };
 p { "[\@perlyarg](http://twitter.com/perlyarg)さんとMooseのロールテストをp5mopに変更して始まりました。p5mopではロール合成は不完全ですから、そのテストは便利だと思います。" };
-p { "最初のp5mopの拡張としてmopx::instance::trackingは、私が書いたことができました。とても簡単に、p5mopのClassというメタクラスをサブクラスして、create_instanceというメソッドにオブジェクトを見逃さない挙動を追加されます。" };
+p { "最初のp5mopの拡張として[mopx::instance::tracking](https://github.com/stevan/p5-mop/commit/04997c0c93c7)は、私が書いたことができました。とても簡単に、p5mopのClassというメタクラスをサブクラスして、create_instanceというメソッドにオブジェクトを見逃さない挙動を追加されます。" };
 p { "夕飯の後で、昨日の旅だし、朝のトークをしたから、たいへん疲れました。で、やったことはFluxxだけでした。" };
 
 h3 { "Day 3 (ハッカソンの二日目)" };
+p { "先日書いたDTraceプローブをPerlに追加するパッチをやっと送りました。もし受け入れたら、5.18からop-entry、loading-file、loaded-fileというプローブを使うようになります。" };
+
 
 h3 { "Day 4 (ハッカソンの三日目)" };
 
