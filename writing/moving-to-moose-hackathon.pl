@@ -120,6 +120,19 @@ a {
     image "moving-to-moose-hackathon/doy-nothingmuch.jpg";
 };
 
+a {
+    href is "http://www.flickr.com/photos/sartak/7886214546";
+    image "moving-to-moose-hackathon/reminiscing.jpg";
+};
+
 h3 { "Day 4 (ハッカソンの三日目)" };
+
+p { "p5mopは`has \$foo`宣言でアトリビュート定義します。メソッドを実行する時に、PadWalkerでオブジェクトの値をその変数に代入します。メソッド内には、正しく変数を使うことができます。でも、\@doysterさんたちがbootstrapを書きなおした後で、\$self(PadWalkerで代入された変数)は時々間違うオブジェクトにあるが\$::SELF(localで代入された変数)は正しいオブジェクトにあることになってしまいました。\@doysterと\@stevanlittleと\@nothingmuchと私とデバッグしようとしましたが、結局原因を見つかれませんでした。" };
+p { "しかし、\@perlditionさんが書いている新しいモジュールで解決できるはずです。そのモジュールはlexical padで手動的に管理できますが、メソッド実行時に、カスタムpadをプッシュし、オブジェクトの値を使い、カスタムpadをパップすることで、PadWalker壊すことを抜けるはずです。" };
+
+a {
+    href is "http://www.flickr.com/photos/sartak/7886214156";
+    image "moving-to-moose-hackathon/roof-lawn.jpg";
+};
 
 h3 { "Day 5 (帰宅の日)" };
