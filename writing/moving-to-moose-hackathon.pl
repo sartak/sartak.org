@@ -138,5 +138,24 @@ a {
 h3 { "Day 5 (帰宅の日)" };
 p { "空港まで無事に着きました。でも、チェックインしようとしたら、「目的地：London/Gatwick」と表示されました。クソォォ！！と思って、不安感じきました。London/*Heathrow*からボストンまで飛ぶ飛行に乗り換える予定たったのです。Heathrowのターミナル5に乗り換えるのは、二時間でもちょっと足りないのですね。GatwickからHeathrowまで乗り換えるのは絶対無理です！原因は、予約には「London」だけ示して、ロンドンは航空5つまであると、全然考えなかったのです。" };
 p { "とにかく、カスタマーサービスに「飛行機の予約を変更してくれないか？」と聞いて、「新しい予約を取るしかできません」と答えました。で、新しくて高い予約を取りました。フランクフルトの代わりに、オスロで乗り換えまして、目的地はHeathrowにしました。"　};
-p { "Heathrowでビールと二番好きなチキンカツカレーを食べました。結局、定刻通りに家に帰ったことができました。" };
+p { "怒りを減るために、Heathrowでビールと二番好きなチキンカツカレーを食べました。結局、定刻通りに家に帰ったことができました。" };
 
+a {
+    href is "http://www.flickr.com/photos/sartak/7902234762/";
+    image "moving-to-moose-hackathon/tau-rainbow.jpg";
+};
+
+a {
+    href is "http://www.flickr.com/photos/sartak/7902236444/";
+    image "moving-to-moose-hackathon/outbound-ferry.jpg";
+};
+
+a {
+    href is "http://www.flickr.com/photos/sartak/7902233400/";
+    image "moving-to-moose-hackathon/comfort-food.jpg";
+};
+
+a {
+    href is "http://www.flickr.com/photos/sartak/7902238394/";
+    image "moving-to-moose-hackathon/high-life.jpg";
+};
