@@ -128,7 +128,7 @@ a {
 h3 { "Day 4 (ハッカソンの三日目)" };
 
 p { "p5mopは`has \$foo`宣言でアトリビュート定義します。メソッドを実行する時に、PadWalkerでオブジェクトの値をその変数に代入されます。メソッド内には、正しく変数を使うことができます。でも、[\@doyster](http://twitter.com/doyster)さんたちがbootstrapを書きなおした後で、\$self(PadWalkerで代入された変数)は時々間違うオブジェクトにあるが\$::SELF(localで代入された変数)は正しいオブジェクトにあることになってしまいました。\@doysterと[\@stevanlittle](http://twitter.com/stevanlittle)と[\@nothingmuch](http://twitter.com/nothingmuch)と私とデバッグしようとしましたが、結局原因を見つかれませんでした。" };
-p { "しかし、[\@perldition](http://twitter.com/perldition)さんが書いている新しいモジュールにすることで、解決できるはずです。そのモジュールはlexical padで手動的に管理できます。具体的に、メソッド実行時に、カスタムpadをスタックにプッシュし、そのブロックがオブジェクトの値を使えるになります。メソッドが返す時に、カスタムpadをポップされます。このモジュールでは、変数汚染が抜けられるはずです。" };
+p { "しかし、[\@perldition](http://twitter.com/perldition)さんが書いている新しいモジュールにすることで、解決できるはずです。そのモジュールはlexical padで手動的に管理できます。具体的に、メソッド実行時に、カスタムpadをスタックにプッシュされ、そのブロックがオブジェクトの値を使えるになります。メソッドが返す時に、カスタムpadをポップされます。このモジュールでは、変数汚染が抜けられるはずです。" };
 
 a {
     href is "http://www.flickr.com/photos/sartak/7886214156";
