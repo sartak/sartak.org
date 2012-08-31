@@ -49,6 +49,7 @@ ul#posts, ul#talks {
 }
 #posts .title a, #talks .title a {
     font-size: 1.1em;
+    line-height: 1.2em;
 }
 #posts .date, #talks .date, #post #date, #talk #date {
     float: right;
