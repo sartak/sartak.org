@@ -107,11 +107,6 @@ sub fill_in {
     $vars->{rss} ||= '/rss.xml';
 
     return $hbs->render_string($template, $vars);
-
-    $template =~ s[(title="RSS" href=")/rss.xml(")][$1$vars->{rss}$2]
-        if $vars->{rss};
-
-    return $template;
 }
 
 sub titleify {
