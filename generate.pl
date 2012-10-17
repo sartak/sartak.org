@@ -290,6 +290,8 @@ sub generate_rss {
     }
 
     @articles = sort { $b->{date} cmp $a->{date} } @articles;
+    splice @articles, 10;
+
     for my $article (@articles) {
         $feed->add_item(
             title       => decode_utf8($article->{title} || $article->{name}),
@@ -315,6 +317,8 @@ sub generate_talk_rss {
     );
 
     my @talks = Sartak::Blog::Talks->talks;
+    splice @talks, 10;
+
     for my $talk (@talks) {
         $feed->add_item(
             title       => decode_utf8($talk->{name}),
