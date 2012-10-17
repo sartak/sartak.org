@@ -8,7 +8,6 @@ use autodie;
 use Encode;
 use Sartak::Blog::Talks;
 use Text::Handlebars;
-use Text::Xslate 'mark_raw';
 
 my $title = 'sartak';
 my $outdir = shift || 'generated';
@@ -101,7 +100,6 @@ sub fill_in {
     my $template = shift;
     my $vars     = shift;
 
-    $vars->{content} = mark_raw($vars->{content});
     $vars->{rss} ||= '/rss.xml';
 
     return $hbs->render_string($template, $vars);
