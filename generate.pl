@@ -208,6 +208,7 @@ sub generate_index {
     print $handle fill_in($layout{$lang}, {
         content => $posts,
         title   => $title,
+        index   => 1,
     });
 }
 
