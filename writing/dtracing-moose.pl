@@ -91,4 +91,4 @@ Class::MOP::Class::make_immutable                            514217
 Moose::BEGIN                                                 772336
 DONE
 
-p { "Of course, `Moose::BEGIN` being the most expensive function makes a lot of sense. Next up is `make_immutable`, which happens to do a lot of work.
+p { "Of course, `Moose::BEGIN` being the most expensive function makes a lot of sense. Next up is `make_immutable`, which happens to do a lot of work." }
