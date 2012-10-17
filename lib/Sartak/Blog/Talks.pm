@@ -208,7 +208,7 @@ All with a very strongly object-oriented, antler-shaped flavor.},
             { type => 'key' },
         ],
         conference  => {
-            name    => 'Tsukuba.xs Beer Talks #1',
+            name    => 'Tsukuba.xs Beer Talks',
             dir     => 'tsukuba.xs-1',
             url     => 'http://atnd.org/events/4628',
             venue   => 'Recruit Media Technology Lab',
