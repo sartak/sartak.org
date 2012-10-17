@@ -289,7 +289,7 @@ sub generate_rss {
         push @articles, $talk;
     }
 
-    @articles = sort { $a->{date} cmp $b->{date} } @articles;
+    @articles = sort { $b->{date} cmp $a->{date} } @articles;
     for my $article (@articles) {
         $feed->add_item(
             title       => decode_utf8($article->{title} || $article->{name}),
