@@ -93,9 +93,7 @@ sub new_article {
 
 my $hbs = Text::Handlebars->new(
     helpers => {
-        now => sub {
-            return scalar gmtime;
-        }
+        now => sub { scalar gmtime },
     },
 );
 
