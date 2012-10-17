@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: How Many Sentences Teaches a Word?\ndate: 2012-02-16\n" }
+BEGIN { print "title: How Many Sentences Teaches a Word?\ndate: 2012-02-16\ngrid: 1\n" }
 
 p { "One of the questions I wonder about is how many sentences I need to add to my flash card deck to learn a particular word or kanji well enough to have no trouble with it. There are certainly a lot of tricky words such as 敢行 (decisive action) and 格納 (store away) that always seem to slip away from me. I suspect that is entirely because I have only one flash card for each of those words. I just don't have any other comprehensible sentences using them in the corpus of text I'm accumulating. Because I need to see more of those words to get them to stick in my head, should I just give up and delete those two important sentences from my deck? Typically what I'll do instead, which has worked well for words like 薄皮 (thin covering film) and 七面鳥 (turkey), is search Twitter. Even for the most obscure words I come across, Twitter gives me thousands of short example sentences." };
 
