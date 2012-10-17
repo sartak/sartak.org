@@ -130,13 +130,6 @@ sub {
 .synError         { color: #FFFFFF }
 */
 
-#nextlink {
-    float: right;
-}
-#prevlink {
-    float: left;
-}
-
 dt {
     font-size: 1.2em;
 }
