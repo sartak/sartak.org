@@ -7,6 +7,8 @@ use File::Path 'make_path';
 use autodie;
 use Encode;
 use Sartak::Blog::Talks;
+use Text::Handlebars;
+use Text::Xslate 'mark_raw';
 
 my $title = 'sartak';
 my $outdir = shift || 'generated';
@@ -89,12 +91,22 @@ sub new_article {
     return \%headers;
 }
 
+my $hbs = Text::Handlebars->new(
+    helpers => {
+        now => sub {
+            return scalar gmtime;
+        }
+    },
+);
+
 sub fill_in {
     my $template = shift;
     my $vars     = shift;
 
-    $template =~ s/{now}/scalar gmtime/eg;
-    $template =~ s/{(\w+)}/$vars->{$1} || do { warn "Undefined variable $1"; '' }/eg;
+    $vars->{content} = mark_raw($vars->{content});
+    $vars->{rss} ||= '/rss.xml';
+
+    return $hbs->render_string($template, $vars);
 
     $template =~ s[(title="RSS" href=")/rss.xml(")][$1$vars->{rss}$2]
         if $vars->{rss};
