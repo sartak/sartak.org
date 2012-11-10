@@ -55,6 +55,9 @@ ul#posts, ul#talks {
     float: right;
     color: #AAAAAA;
 }
+#posts li:hover .date {
+    color :#666666;
+}
 #posts li, #talks li {
     padding-bottom: 0.4em;
 }
