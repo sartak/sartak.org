@@ -2,6 +2,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+        {{#if external}}
+        <meta http-equiv="refresh" content="1;url={{external}}">
+        {{/if}}
+
         <title>{{title}}</title>
         <link rel="stylesheet" href="/style.css" type="text/css" />
         {{#if grid}}

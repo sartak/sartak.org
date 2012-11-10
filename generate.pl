@@ -140,7 +140,7 @@ while (my $file = glob("published/* writing/*")) {
 
     $article->{basename} ||= titleify($article->{title});
     $article->{file} = $article->{dir} . $article->{basename} . '.html';
-    $article->{url} = "http://sartak.org/$article->{file}";
+    $article->{url} = $article->{external} || "http://sartak.org/$article->{file}";
 
     push @{ $articles{ $article->{date} } }, $article;
 }
