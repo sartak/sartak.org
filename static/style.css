@@ -54,11 +54,11 @@ ul#posts, ul#talks {
 #posts .date, #talks .date, #post #date, #talk #date {
     float: right;
     color: #AAAAAA;
-    -webkit-transition: color .25s;
-    -moz-transition: color .25s;
-    -o-transition: color .25s;
-    -ms-transition: color .25s;
-    transition: color .25s;
+    -webkit-transition: color .75s;
+    -moz-transition: color .75s;
+    -o-transition: color .75s;
+    -ms-transition: color .75s;
+    transition: color .75s;
 }
 #posts li:hover .date {
     color: #000000;
