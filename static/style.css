@@ -56,7 +56,12 @@ ul#posts, ul#talks {
     color: #AAAAAA;
 }
 #posts li:hover .date {
-    color :#666666;
+    color: #333333;
+    -webkit-transition: color 1s;
+    -moz-transition: color 1s;
+    -o-transition: color 1s;
+    -ms-transition: color 1s;
+    transition: color 1s;
 }
 #posts li, #talks li {
     padding-bottom: 0.4em;
