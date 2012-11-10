@@ -140,7 +140,7 @@ while (my $file = glob("published/* writing/*")) {
 
     $article->{basename} ||= titleify($article->{title});
     $article->{file} = $article->{dir} . $article->{basename} . '.html';
-    $article->{url} = "/$article->{file}";
+    $article->{url} = "http://sartak.org/$article->{file}";
 
     push @{ $articles{ $article->{date} } }, $article;
 }
@@ -295,7 +295,7 @@ sub generate_rss {
     for my $article (@articles) {
         $feed->add_item(
             title       => decode_utf8($article->{title} || $article->{name}),
-            link        => "http://sartak.org" . $article->{url},
+            link        => $article->{url},
             description => decode_utf8($article->{original} || $article->{description}),
             dc          => {
                 date    => $article->{date},
