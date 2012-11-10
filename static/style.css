@@ -54,14 +54,19 @@ ul#posts, ul#talks {
 #posts .date, #talks .date, #post #date, #talk #date {
     float: right;
     color: #AAAAAA;
+    -webkit-transition: color .25s;
+    -moz-transition: color .25s;
+    -o-transition: color .25s;
+    -ms-transition: color .25s;
+    transition: color .25s;
 }
 #posts li:hover .date {
-    color: #333333;
-    -webkit-transition: color 1s;
-    -moz-transition: color 1s;
-    -o-transition: color 1s;
-    -ms-transition: color 1s;
-    transition: color 1s;
+    color: #000000;
+    -webkit-transition: color .25s;
+    -moz-transition: color .25s;
+    -o-transition: color .25s;
+    -ms-transition: color .25s;
+    transition: color .25s;
 }
 #posts li, #talks li {
     padding-bottom: 0.4em;
