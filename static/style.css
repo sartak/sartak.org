@@ -54,6 +54,9 @@ ul#posts, ul#talks {
 #posts .date, #talks .date, #post #date, #talk #date {
     float: right;
     color: #AAAAAA;
+}
+#posts .date {
+    color: #AAAAAA;
     -webkit-transition: color 1s ease-out;
     -moz-transition: color 1s ease-out;
     -o-transition: color 1s ease-out;
