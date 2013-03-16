@@ -173,3 +173,6 @@ dd {
     color: blue;
 }
 
+blockquote {
+    font-style: italic;
+}
