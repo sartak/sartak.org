@@ -5,7 +5,7 @@ BEGIN { print "title: Marketing 101\ndraft: 1\n" }
 p { "One of my girlfriend's friends just messaged her:" };
 
 blockquote {
-    p { "I'm reading an interesting article about the founders of GitHub. I was wondering where have I heard about this?" };
+    p { q{I'm reading an interesting article about the founders of GitHub. I was wondering "Where have I heard about this?"} };
     p { "It's imprinted on my brain from all those hungover mornings drinking coffee out of that mug!" };
 };
 
