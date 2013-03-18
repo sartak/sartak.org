@@ -119,6 +119,10 @@ sub {
     top: .5ex;
 }
 
+.code_snippet, pre {
+    font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+}
+
 .code_snippet {
     width: 100%;
     color: #DDDDDD;
