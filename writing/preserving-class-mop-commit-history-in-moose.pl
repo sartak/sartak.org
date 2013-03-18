@@ -26,27 +26,27 @@ $ git blame lib/Class/MOP/Package.pm
 38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  17)     my ( $class, @args ) = @_;
 TEXT
 
-p { "This is a problem because there is a rich history in Class::MOP before December 27th, 2010, which is when it was merged into the Moose repository. For example, I was curious when exactly Moose started forbidding bare references for attribute `default`. I actually had to resort to clumsily bisecting Class::MOP releases on Metacpan to find that the restriction was added in version 0.33 (August 19th, 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all Class::MOP history leads to `38bf2a25`." };
+p { "This is problematic because there is a rich and certainly important four years' worth of history in Class::MOP before December 27th, 2010, which is when it was merged into the Moose repository. For example, I was curious when exactly Moose started forbidding bare references for attribute `default`. I had to resort to clumsily bisecting Class::MOP releases on metacpan to find that the restriction was added in version 0.33 (August 19th, 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all Class::MOP history leads to `38bf2a25`." };
 
-p { "Ideally we would be able to tweak `38bf2a25`, two years later, to add a second parent commit (namely, `d004c8d5`). This would turn it into a merge commit, which is how we would inject the entire Class::MOP commit history into Moose's history. From then on git would inspect both histories to produce blame reports and commit logs." }
+p { "Ideally we would be able to tweak `38bf2a25`, two years later, to add a second parent commit (namely, `d004c8d5`). This would turn it into a merge commit, which is how we could inject the entire Class::MOP commit history into Moose's history. From then on git would inspect both histories to produce blame reports, commit logs, and so on." }
 
-p { "Unfortunately we cannot just go ahead and fix the public Moose repository to have the Class::MOP history. Adding a second parent to `38bf2a25` would change its SHA, and it would also cascade, changing every subsequent SHA in the two years' worth of changes since that commit. However! you, my friend, can fix it for your own checkout without worrying about screwing anybody up. git has a tool for rewiring parent commits. Two, in fact. The original tool was called `git graft` but there is a newer, more powerful replacement called, well, `git replace`. Let's give it a shot!" };
+p { "Unfortunately we cannot just go ahead and change the public Moose repository to have the Class::MOP history like that. Adding a second parent to `38bf2a25` would change that commit's SHA. That would cause cascade changes to every subsequent commit (and their SHAs) in the two years' worth of changes since. However! you, my friend, can fix it for your own checkout without worrying about screwing anybody up. git has a tool for rewiring parent commits. Two, in fact. The original tool was called `git graft` but there is a newer, more powerful replacement called, well, `git replace`. These tools change individual commits in your local repository without disrupting other commits and their SHAs. Let's give it a shot!" };
 
-p { "First, clone up a new copy of the Moose repository for playing around. Not strictly necessary, but caution is warranted here, to make sure this procedure works before I, through you, potentially damage your working copy." };
+p { "First, clone up a new copy of the Moose repository for playing around. Not strictly necessary, but caution is warranted here. You want to make sure this procedure works before I, through you, potentially damage your working copy." };
 
 code_snippet bash => << 'BASH';
 git clone gitmo@git.moose.perl.org:Moose.git
 cd Moose
 BASH
 
-p { "Next, fetch all of the Class-MOP commits so they exist in the Moose repository." };
+p { "Next, fetch Class::MOP's master so its commits also exist within the Moose repository." };
 
 code_snippet bash => << 'BASH';
 git remote add cmop gitmo@git.moose.perl.org:Class-MOP.git
 git fetch cmop master
 BASH
 
-p { "Finally, fix the sledgehammer-merge commit `38bf2a25` to include both its original parent commit **and** the last Class-MOP commit. To do that we create an entirely new commit object that is exactly like `38bf2a25` except it has that second parent commit, `d004c8d5`. Then use `git replace` to tell git to use the new SHA (probably `f18fded8`) in place of `38bf2a25`." };
+p { "Finally, fix the sledgehammer-merge commit `38bf2a25` to include both its original parent commit **and** the last Class::MOP commit. To do that we create an entirely new commit object that is exactly like `38bf2a25` except it has that second parent commit, `d004c8d5`. Then we use `git replace` to tell git to use the new SHA (probably `f18fded8`) in place of `38bf2a25`." };
 
 code_snippet bash => << 'BASH';
 NEW_MERGE=$(git cat-file commit 38bf2a25 | perl -ple '/^parent / && print "parent d004c8d565f9b314da7652e9368aeb4587ffaa3d"' | git hash-object -t commit -w --stdin)
