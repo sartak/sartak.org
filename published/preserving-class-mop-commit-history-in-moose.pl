@@ -93,3 +93,23 @@ f197afa6 (Jesse Luehrs    2010-05-10 21:13:19 -0500  12) use base 'Class::MOP::O
 6d5355c3 (Stevan Little   2006-06-29 23:28:32 +0000  16) sub initialize {
 3be6bc1c (Yuval Kogman    2008-08-14 18:21:45 +0000  17)     my ( $class, @args ) = @_;
 TEXT
+
+p { "In closing, to answer my original question using my normal means..." };
+
+code_snippet text => << 'TEXT';
+$ git log -p --reverse -S 'References are not allowed as default'
+
+commit 148b469742669e1a506538200f624dcdaeeb510a
+Author: Stevan Little <stevan.little@iinteractive.com>
+Date:   Wed Aug 16 21:32:05 2006 +0000
+
+    no ref in the defaults
+
+...
+
++    (Class::MOP::Attribute::is_default_a_coderef(\%options))
++        || confess("References are not allowed as default values, you must ".
++                   "wrap then in a CODE reference (ex: sub { [] } and not [])")
++            if exists $options{default} && ref $options{default};
+TEXT
+
