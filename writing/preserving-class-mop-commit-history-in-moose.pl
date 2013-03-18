@@ -1,0 +1,91 @@
+use Sartak::Blog;
+
+BEGIN { print "title: Preserving Class::MOP commit history in Moose\ndraft: 1\n" }
+
+p { "Ever use git blame or log in the Class::MOP parts of the Moose repository? You've probably seen Dave Rolsky's mega-commit `38bf2a25`." };
+
+code_snippet text => << 'TEXT';
+$ git blame lib/Class/MOP/Package.pm
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600   1)
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600   2) package Class::MOP::Package;
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600   3)
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600   4) use strict;
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600   5) use warnings;
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600   6)
+0db1c8dc (Jesse Luehrs 2011-04-17 19:11:28 -0500   7) use Scalar::Util 'blessed', 'reftype', 'weaken';
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600   8) use Carp         'confess';
+0db1c8dc (Jesse Luehrs 2011-04-17 19:11:28 -0500   9) use Devel::GlobalDestruction 'in_global_destruction';
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  10) use Package::Stash;
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  11)
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  12) use base 'Class::MOP::Object';
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  13)
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  14) # creation ...
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  15)
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  16) sub initialize {
+38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  17)     my ( $class, @args ) = @_;
+TEXT
+
+p { "This is a problem because there is a rich history in Class::MOP before December 27th, 2010 when it was merged into the Moose repository. For example, I was curious when exactly Moose started forbidding bare references for attribute `default`s. I had to resort to manually bisecting Class::MOP releases on Metacpan to find that it was added in version 0.33 (August 19th, 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all history leads to `38bf2a25`." };
+
+p { "Fortunately, git is pretty amazing and has a tool for injecting lost history. Two, in fact. The original tool was called `git graft` but there is a newer replacement called, well, `git replace`. The basic idea of both of these is you tweak a commit after the fact without disrupting its SHA (and thus the entire project's history). So while we cannot painlessly fix the public Moose repository to have the Class::MOP history, you, my friend, can fix it for your own checkout without worrying about screwing anybody up." };
+
+p { "First, clone up a new copy of the Moose repository for playing around. Not strcitly necessary, but caution is warranted here, to make sure this procedure works before doing any destructive damage to your working copy." };
+
+code_snippet bash => << 'BASH';
+git clone gitmo@git.moose.perl.org:Moose.git
+cd Moose
+BASH
+
+p { "Then fetch all of the Class-MOP commits so they exist in the Moose repository." };
+
+code_snippet bash => << 'BASH';
+git remote add cmop gitmo@git.moose.perl.org:Class-MOP.git
+git fetch cmop master
+BASH
+
+p { "Finally, fix the sledgehammer-merge commit `38bf2a25` to include both its original parent commit **and** the last Class-MOP commit. First we create an entirely new SHA that is exactly like 38bf2a25 except it has a second parent commit,  `d004c8d5` (which is the latest master commit in Class::MOP). Then the second line tells git to use our new SHA (probably `f18fded847`) in place of `38bf2a25` ." };
+
+code_snippet bash => << 'BASH';
+NEW_MERGE=$(git cat-file commit 38bf2a25 | perl -ple '/^parent / && print "parent d004c8d565f9b314da7652e9368aeb4587ffaa3d"' | git hash-object -t commit -w --stdin)
+git replace 38bf2a25 $NEW_MERGE
+BASH
+
+p { "All done. Enjoy your new old history! " };
+
+code_snippet bash => << 'BASH';
+$ git log --grep associated_metaclass --format='format:%h %ad %an%n    %s' lib/Class/MOP
+cc03c2b Sun Feb 19 12:51:48 2012 -0600 Dave Rolsky
+    Weaken the associated_metaclass after cloning a method.
+        -- post-merge commit
+aa5bb36 Mon Apr 25 10:38:05 2011 -0500 Jesse Luehrs
+    fix setting associated_metaclass and attribute on accessor objects
+        -- post-merge commit
+09ea7f8 Sun Aug 10 18:24:02 2008 +0000 Yuval Kogman
+    package_name >= associated_metaclass->name
+        -- pre-merge commit!
+5e60726 Sun Aug 10 17:42:29 2008 +0000 Yuval Kogman
+    add associated_metaclass to Method
+        -- pre-merge commitBASH
+BASH
+
+code_snippet text => << 'TEXT';
+$ git blame lib/Class/MOP/Package.pm
+
+2243a22b (Stevan Little   2006-06-29 18:27:47 +0000   1)
+2243a22b (Stevan Little   2006-06-29 18:27:47 +0000   2) package Class::MOP::Package;
+2243a22b (Stevan Little   2006-06-29 18:27:47 +0000   3)
+2243a22b (Stevan Little   2006-06-29 18:27:47 +0000   4) use strict;
+2243a22b (Stevan Little   2006-06-29 18:27:47 +0000   5) use warnings;
+2243a22b (Stevan Little   2006-06-29 18:27:47 +0000   6)
+0db1c8dc (Jesse Luehrs    2011-04-17 19:11:28 -0500   7) use Scalar::Util 'blessed', 'reftype', 'weaken';
+6d5355c3 (Stevan Little   2006-06-29 23:28:32 +0000   8) use Carp         'confess';
+0db1c8dc (Jesse Luehrs    2011-04-17 19:11:28 -0500   9) use Devel::GlobalDestruction 'in_global_destruction';
+407a4276 (Jesse Luehrs    2010-05-10 23:20:29 -0500  10) use Package::Stash;
+2243a22b (Stevan Little   2006-06-29 18:27:47 +0000  11)
+f197afa6 (Jesse Luehrs    2010-05-10 21:13:19 -0500  12) use base 'Class::MOP::Object';
+6e57504d (Stevan Little   2006-08-12 06:13:02 +0000  13)
+6d5355c3 (Stevan Little   2006-06-29 23:28:32 +0000  14) # creation ...
+6d5355c3 (Stevan Little   2006-06-29 23:28:32 +0000  15)
+6d5355c3 (Stevan Little   2006-06-29 23:28:32 +0000  16) sub initialize {
+3be6bc1c (Yuval Kogman    2008-08-14 18:21:45 +0000  17)     my ( $class, @args ) = @_;
+TEXT
