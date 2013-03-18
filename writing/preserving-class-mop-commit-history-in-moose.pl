@@ -6,6 +6,7 @@ p { "Ever use git blame or log in the Class::MOP parts of the Moose repository? 
 
 code_snippet text => << 'TEXT';
 $ git blame lib/Class/MOP/Package.pm
+
 38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600   1)
 38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600   2) package Class::MOP::Package;
 38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600   3)
@@ -25,35 +26,38 @@ $ git blame lib/Class/MOP/Package.pm
 38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  17)     my ( $class, @args ) = @_;
 TEXT
 
-p { "This is a problem because there is a rich history in Class::MOP before December 27th, 2010 when it was merged into the Moose repository. For example, I was curious when exactly Moose started forbidding bare references for attribute `default`s. I had to resort to manually bisecting Class::MOP releases on Metacpan to find that it was added in version 0.33 (August 19th, 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all history leads to `38bf2a25`." };
+p { "This is a problem because there is a rich history in Class::MOP before December 27th, 2010, which is when it was merged into the Moose repository. For example, I was curious when exactly Moose started forbidding bare references for attribute `default`. I actually had to resort to clumsily bisecting Class::MOP releases on Metacpan to find that the restriction was added in version 0.33 (August 19th, 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all Class::MOP history leads to `38bf2a25`." };
 
-p { "Fortunately, git is pretty amazing and has a tool for injecting lost history. Two, in fact. The original tool was called `git graft` but there is a newer replacement called, well, `git replace`. The basic idea of both of these is you tweak a commit after the fact without disrupting its SHA (and thus the entire project's history). So while we cannot painlessly fix the public Moose repository to have the Class::MOP history, you, my friend, can fix it for your own checkout without worrying about screwing anybody up." };
+p { "Ideally we would be able to tweak `38bf2a25`, two years later, to add a second parent commit (namely, `d004c8d5`). This would turn it into a merge commit, which is how we would inject the entire Class::MOP commit history into Moose's history. From then on git would inspect both histories to produce blame reports and commit logs." }
 
-p { "First, clone up a new copy of the Moose repository for playing around. Not strcitly necessary, but caution is warranted here, to make sure this procedure works before doing any destructive damage to your working copy." };
+p { "Unfortunately we cannot just go ahead and fix the public Moose repository to have the Class::MOP history. Adding a second parent to `38bf2a25` would change its SHA, and it would also cascade, changing every subsequent SHA in the two years' worth of changes since that commit. However! you, my friend, can fix it for your own checkout without worrying about screwing anybody up. git has a tool for rewiring parent commits. Two, in fact. The original tool was called `git graft` but there is a newer, more powerful replacement called, well, `git replace`. Let's give it a shot!" };
+
+p { "First, clone up a new copy of the Moose repository for playing around. Not strictly necessary, but caution is warranted here, to make sure this procedure works before I, through you, potentially damage your working copy." };
 
 code_snippet bash => << 'BASH';
 git clone gitmo@git.moose.perl.org:Moose.git
 cd Moose
 BASH
 
-p { "Then fetch all of the Class-MOP commits so they exist in the Moose repository." };
+p { "Next, fetch all of the Class-MOP commits so they exist in the Moose repository." };
 
 code_snippet bash => << 'BASH';
 git remote add cmop gitmo@git.moose.perl.org:Class-MOP.git
 git fetch cmop master
 BASH
 
-p { "Finally, fix the sledgehammer-merge commit `38bf2a25` to include both its original parent commit **and** the last Class-MOP commit. First we create an entirely new SHA that is exactly like 38bf2a25 except it has a second parent commit,  `d004c8d5` (which is the latest master commit in Class::MOP). Then the second line tells git to use our new SHA (probably `f18fded847`) in place of `38bf2a25` ." };
+p { "Finally, fix the sledgehammer-merge commit `38bf2a25` to include both its original parent commit **and** the last Class-MOP commit. To do that we create an entirely new commit object that is exactly like `38bf2a25` except it has that second parent commit, `d004c8d5`. Then use `git replace` to tell git to use the new SHA (probably `f18fded8`) in place of `38bf2a25`." };
 
 code_snippet bash => << 'BASH';
 NEW_MERGE=$(git cat-file commit 38bf2a25 | perl -ple '/^parent / && print "parent d004c8d565f9b314da7652e9368aeb4587ffaa3d"' | git hash-object -t commit -w --stdin)
 git replace 38bf2a25 $NEW_MERGE
 BASH
 
-p { "All done. Enjoy your new old history! " };
+p { "All done. Enjoy your new (old) history!" };
 
 code_snippet bash => << 'BASH';
 $ git log --grep associated_metaclass --format='format:%h %ad %an%n    %s' lib/Class/MOP
+
 cc03c2b Sun Feb 19 12:51:48 2012 -0600 Dave Rolsky
     Weaken the associated_metaclass after cloning a method.
         -- post-merge commit
@@ -65,7 +69,7 @@ aa5bb36 Mon Apr 25 10:38:05 2011 -0500 Jesse Luehrs
         -- pre-merge commit!
 5e60726 Sun Aug 10 17:42:29 2008 +0000 Yuval Kogman
     add associated_metaclass to Method
-        -- pre-merge commitBASH
+        -- pre-merge commit!
 BASH
 
 code_snippet text => << 'TEXT';
