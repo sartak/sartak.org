@@ -34,28 +34,28 @@ p { "Alas, we cannot just go ahead and change the public Moose repository to hav
 
 p { "To do this, start by cloning up a new copy of the Moose repository for playing around. Not strictly necessary, but caution is definitely warranted here. You want to make sure this procedure works before I, through you, potentially damage your working copy." };
 
-code_snippet bash => << 'BASH';
+code_snippet sh => << 'BASH';
 git clone gitmo@git.moose.perl.org:Moose.git
 cd Moose
 BASH
 
 p { "Next, fetch Class::MOP's master so its commits also exist within the Moose repository." };
 
-code_snippet bash => << 'BASH';
+code_snippet sh => << 'BASH';
 git remote add cmop gitmo@git.moose.perl.org:Class-MOP.git
 git fetch cmop master
 BASH
 
 p { "Finally, fix the sledgehammer-merge commit `38bf2a25` to include both its original parent commit **and** the last Class::MOP commit. To do that we create an entirely new commit object that is exactly like `38bf2a25` except it has that second parent commit, `d004c8d5`. Then we use `git replace` to tell git to use the new SHA (probably `f18fded8`) in place of `38bf2a25`." };
 
-code_snippet bash => << 'BASH';
+code_snippet sh => << 'BASH';
 NEW_MERGE=$(git cat-file commit 38bf2a25 | perl -ple '/^parent / && print "parent d004c8d565f9b314da7652e9368aeb4587ffaa3d"' | git hash-object -t commit -w --stdin)
 git replace 38bf2a25 $NEW_MERGE
 BASH
 
 p { "All done. Enjoy your new (old) history!" };
 
-code_snippet bash => << 'BASH';
+code_snippet text => << 'BASH';
 $ git log --grep associated_metaclass --format='format:%h %ad %an%n    %s' lib/Class/MOP
 
 cc03c2b Sun Feb 19 12:51:48 2012 -0600 Dave Rolsky
