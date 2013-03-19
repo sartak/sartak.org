@@ -53,7 +53,7 @@ p { "However! you, my friend, can fix it for your own checkout without screwing 
 p { "To do this, start by cloning up a new copy of the Moose repository for playing around. Not strictly necessary, but caution is definitely warranted here. You want to make sure this procedure works before I, through you, potentially damage your working copy." };
 
 code_snippet sh => << 'BASH';
-git clone gitmo@git.moose.perl.org:Moose.git
+git clone git://git.moose.perl.org/Moose.git
 cd Moose
 BASH
 
