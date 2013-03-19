@@ -36,7 +36,9 @@ Date:   Mon Dec 27 08:48:08 2010 -0600
     Merged CMOP into Moose
 TEXT
 
-p { "This is problematic because there is a rich and certainly important four years' worth of history in Class::MOP before December 27th, 2010, which is when it was merged into the Moose repository. For example, I was curious when exactly Moose started forbidding bare references for attribute `default`. I had to resort to clumsily bisecting Class::MOP releases on metacpan to find that the restriction was added in version 0.33 (August 19th, 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all Class::MOP history leads to `38bf2a25`." };
+p { "This is problematic because there is a rich and quite important four years' worth of history in Class::MOP before December 27th, 2010, which is when it was merged into the Moose repository. All of that is pretty much lost because this commit is a copy instead of something more delicate. I don't blame Dave on bit for this; I certainly didn't object when this merger was going down, nor did I appreciate how valuable clean commit history was back then." };
+
+p { "Why does this copy merge matter anyway? Well, for example, I was curious when exactly Moose started forbidding bare references for attribute `default`. I had to resort to clumsily bisecting Class::MOP releases on metacpan to find that the restriction was added in version 0.33 (August 19th, 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all Class::MOP history leads to `38bf2a25`." };
 
 p { "Ideally we would be able to tweak `38bf2a25`, two years later, to add a second parent commit (namely, the last commit in Class::MOP, `d004c8d5`). This would turn it into a merge commit, which is how we could inject the entire Class::MOP commit history into Moose's history. From then on git would inspect both histories to produce blame reports, commit logs, and so on. Just like any other merge commit." }
 
