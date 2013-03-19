@@ -38,6 +38,8 @@ Date:   Mon Dec 27 08:48:08 2010 -0600
         ...
 TEXT
 
+p { "diffstat says this commit changed a solid fourteen thousand lines of code across 138 files. A most productive morning for Dave!" };
+
 p { "This is problematic because there is a rich and quite important four years' worth of history before December 27th 2010, which is when Class::MOP was merged into the Moose repository. All of that is effectively lost because this commit is a copy instead of a more delicate merge. I don't blame Dave one bit for this; I certainly did not object when this merger was going down, nor did I appreciate how valuable a clean commit history is." };
 
 p { "Why does this copy merge *really* matter anyway? Well, for example, we needed to know exactly when Moose started forbidding bare references in attribute `default` (to prove someone wrong on the Internet, that most noble of goals). I had to resort to clumsily bisecting Class::MOP releases on metacpan to find that the restriction was added in version 0.33 (August 19th 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all Class::MOP history leads to `38bf2a25`." };
