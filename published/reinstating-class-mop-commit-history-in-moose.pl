@@ -67,7 +67,11 @@ BASH
 p { "Finally, fix the sledgehammer-merge commit `38bf2a25` to include both its original parent commit **and** the last Class::MOP commit. To do that we create an entirely new commit object that is exactly like `38bf2a25` except it has that second parent commit, `d004c8d5`. Then we use `git replace` to tell git to use the new SHA (hint: it's `f18fded8`) in place of `38bf2a25`." };
 
 code_snippet sh => << 'BASH';
-NEW_MERGE=$(git cat-file commit 38bf2a25 | perl -ple '/^parent / && print "parent d004c8d565f9b314da7652e9368aeb4587ffaa3d"' | git hash-object -t commit -w --stdin)
+NEW_MERGE=$(
+      git cat-file commit 38bf2a25
+    | perl -ple '/^parent / && print "parent d004c8d565f9b314da7652e9368aeb4587ffaa3d"'
+    | git hash-object -t commit -w --stdin
+)
 git replace 38bf2a25 $NEW_MERGE
 BASH
 
