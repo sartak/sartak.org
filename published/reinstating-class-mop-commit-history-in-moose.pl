@@ -60,7 +60,7 @@ BASH
 p { "Next, fetch Class::MOP's master so its commits also exist within the Moose repository." };
 
 code_snippet sh => << 'BASH';
-git remote add cmop gitmo@git.moose.perl.org:Class-MOP.git
+git remote add cmop git://git.moose.perl.org/Class-MOP.git
 git fetch cmop master
 BASH
 
