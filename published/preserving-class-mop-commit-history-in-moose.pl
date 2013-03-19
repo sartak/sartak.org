@@ -2,7 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: Preserving Class::MOP's Commit History in Moose\ndate: 2013-03-18\n" }
 
-p { "Ever use git blame or log in the Class::MOP parts of the Moose repository? You've probably seen Dave Rolsky's mega commit `38bf2a25`." };
+p { "Ever use `git blame` or `git log` in the Class::MOP parts of the Moose repository? If so you've probably seen Dave Rolsky's mega commit `38bf2a25`." };
 
 code_snippet text => << 'TEXT';
 $ git blame lib/Class/MOP/Package.pm
@@ -26,7 +26,7 @@ $ git blame lib/Class/MOP/Package.pm
 38bf2a25 (Dave Rolsky  2010-12-27 08:48:08 -0600  17)     my ( $class, @args ) = @_;
 TEXT
 
-p { "This commit is a straight up copy of all the Class::MOP code into the Moose repository, committed as a single (gigantic) changeset." };
+p { "This commit is a straight up copy of all the Class::MOP code into the Moose repository. Unfortunately it was committed as a single (gigantic) changeset." };
 
 code_snippet text => << 'TEXT';
 commit 38bf2a2585e26a47c919fd4c286b7716acb51c00
@@ -38,9 +38,9 @@ Date:   Mon Dec 27 08:48:08 2010 -0600
         ...
 TEXT
 
-p { "This is problematic because there is a rich and quite important four years' worth of history before December 27th 2010, which is when Class::MOP was merged into the Moose repository. All of that is effectively lost because this commit is a copy instead of a more delicate merge. I don't blame Dave one bit for this; I certainly did not object when this merger was going down, nor did I at the time appreciate how valuable a clean commit history is." };
+p { "This is problematic because there is a rich and quite important four years' worth of history before December 27th 2010, which is when Class::MOP was merged into the Moose repository. All of that is effectively lost because this commit is a copy instead of a more delicate merge. I don't blame Dave one bit for this; I certainly did not object when this merger was going down, nor did I appreciate how valuable a clean commit history is." };
 
-p { "Why does this copy merge *really* matter anyway? Well, for example, we needed to know exactly when Moose started forbidding bare references in attribute `default`. I had to resort to clumsily bisecting Class::MOP releases on metacpan to find that the restriction was added in version 0.33 (August 19th 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all Class::MOP history leads to `38bf2a25`." };
+p { "Why does this copy merge *really* matter anyway? Well, for example, we needed to know exactly when Moose started forbidding bare references in attribute `default` (to prove someone wrong on the Internet, that most noble of goals). I had to resort to clumsily bisecting Class::MOP releases on metacpan to find that the restriction was added in version 0.33 (August 19th 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all Class::MOP history leads to `38bf2a25`." };
 
 p { "In an ideal world, we would be able to tweak `38bf2a25`, two years later, to add a second parent commit (namely, the last commit in Class::MOP, `d004c8d5`). This would turn it into a merge of two commits, which is how we could inject the entire Class::MOP commit history into Moose's history. From then on git would inspect both histories to produce blame reports, commit logs, and so on. Just like any other merge commit." }
 
