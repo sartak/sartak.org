@@ -2,7 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: Preserving Class::MOP Commit History in Moose\ndate: 2013-03-18\n" }
 
-p { "Ever use git blame or log in the Class::MOP parts of the Moose repository? You've probably seen Dave Rolsky's mega-commit `38bf2a25`." };
+p { "Ever use git blame or log in the Class::MOP parts of the Moose repository? You've probably seen Dave Rolsky's mega commit `38bf2a25`." };
 
 code_snippet text => << 'TEXT';
 $ git blame lib/Class/MOP/Package.pm
@@ -34,17 +34,19 @@ Author: Dave Rolsky <autarch@urth.org>
 Date:   Mon Dec 27 08:48:08 2010 -0600
 
     Merged CMOP into Moose
+
+        ...
 TEXT
 
-p { "This is problematic because there is a rich and quite important four years' worth of history in Class::MOP before December 27th, 2010, which is when it was merged into the Moose repository. All of that is pretty much lost because this commit is a copy instead of something more delicate. I don't blame Dave on bit for this; I certainly didn't object when this merger was going down, nor did I appreciate how valuable clean commit history was back then." };
+p { "This is problematic because there is a rich and quite important four years' worth of history before December 27th 2010, which is when Class::MOP was merged into the Moose repository. All of that is effectively lost because this commit is a copy instead of a more delicate merge. I don't blame Dave one bit for this; I certainly did not object when this merger was going down, nor did I at the time appreciate how valuable a clean commit history is." };
 
-p { "Why does this copy merge matter anyway? Well, for example, I was curious when exactly Moose started forbidding bare references for attribute `default`. I had to resort to clumsily bisecting Class::MOP releases on metacpan to find that the restriction was added in version 0.33 (August 19th, 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all Class::MOP history leads to `38bf2a25`." };
+p { "Why does this copy merge *really* matter anyway? Well, for example, we needed to know exactly when Moose started forbidding bare references in attribute `default`. I had to resort to clumsily bisecting Class::MOP releases on metacpan to find that the restriction was added in version 0.33 (August 19th 2006). I was sad that I was not able to use my usual `git blame` or `git log` tools because all Class::MOP history leads to `38bf2a25`." };
 
-p { "Ideally we would be able to tweak `38bf2a25`, two years later, to add a second parent commit (namely, the last commit in Class::MOP, `d004c8d5`). This would turn it into a merge commit, which is how we could inject the entire Class::MOP commit history into Moose's history. From then on git would inspect both histories to produce blame reports, commit logs, and so on. Just like any other merge commit." }
+p { "In an ideal world, we would be able to tweak `38bf2a25`, two years later, to add a second parent commit (namely, the last commit in Class::MOP, `d004c8d5`). This would turn it into a merge of two commits, which is how we could inject the entire Class::MOP commit history into Moose's history. From then on git would inspect both histories to produce blame reports, commit logs, and so on. Just like any other merge commit." }
 
-p { "Alas, we cannot just go ahead and change the public Moose repository to have the Class::MOP history like that. Adding a second parent to `38bf2a25` would change that commit's SHA. That would cause a cascade of changes to every subsequent commit (and their SHAs) in the two years' worth of commits since. This would in turn break everyone's git clone of the Moose repository, as well as any archived conversations about commits, and the rest of the civilized world." };
+p { "Alas, we cannot just go ahead and change the public Moose repository to include the Class::MOP history like that. Adding a second parent to `38bf2a25` would change that commit's SHA. That would cause a cascade of changes to every subsequent commit (and their SHAs) in the two years' worth of commits since. This would in turn break everyone's git clone of the Moose repository, as well as any external pointers to commits (such as RT tickets, email archives, etc), and the rest of the civilized world." };
 
-p { "However! you, my friend, can fix it for your own checkout without worrying about screwing anybody up. git has a tool for rewiring parent commits. Two, in fact. The original tool was called `git graft` but there is a newer, more powerful replacement called, well, `git replace`. These tools allow you to tweak individual commits in your local repository without disrupting other commits and their SHAs. This means you can still freely and painlessly share your branches and commits with GitHub and other developers." };
+p { "However! you, my friend, can fix it for your own checkout without screwing anybody up. git has a tool for rewiring parent commits. Two, in fact. The original tool was called `git graft` but there is a slicker, more powerful replacement called, well, `git replace`. These tools allow you to tweak individual commits in your local repository without disrupting other commits and their SHAs. This means you can still freely and painlessly share your branches and commits with GitHub, other developers, and yo momma." };
 
 p { "To do this, start by cloning up a new copy of the Moose repository for playing around. Not strictly necessary, but caution is definitely warranted here. You want to make sure this procedure works before I, through you, potentially damage your working copy." };
 
@@ -60,7 +62,7 @@ git remote add cmop gitmo@git.moose.perl.org:Class-MOP.git
 git fetch cmop master
 BASH
 
-p { "Finally, fix the sledgehammer-merge commit `38bf2a25` to include both its original parent commit **and** the last Class::MOP commit. To do that we create an entirely new commit object that is exactly like `38bf2a25` except it has that second parent commit, `d004c8d5`. Then we use `git replace` to tell git to use the new SHA (probably `f18fded8`) in place of `38bf2a25`." };
+p { "Finally, fix the sledgehammer-merge commit `38bf2a25` to include both its original parent commit **and** the last Class::MOP commit. To do that we create an entirely new commit object that is exactly like `38bf2a25` except it has that second parent commit, `d004c8d5`. Then we use `git replace` to tell git to use the new SHA (hint: it's `f18fded8`) in place of `38bf2a25`." };
 
 code_snippet sh => << 'BASH';
 NEW_MERGE=$(git cat-file commit 38bf2a25 | perl -ple '/^parent / && print "parent d004c8d565f9b314da7652e9368aeb4587ffaa3d"' | git hash-object -t commit -w --stdin)
@@ -127,3 +129,4 @@ Date:   Wed Aug 16 21:32:05 2006 +0000
 +            if exists $options{default} && ref $options{default};
 TEXT
 
+p { "Sweet, sweet history." };
