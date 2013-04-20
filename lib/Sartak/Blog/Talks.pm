@@ -4,12 +4,33 @@ use warnings;
 
 my @talks = (
     {
+        name        => 'git flux',
+        dir         => 'git-flux',
+        length      => '45 min',
+        date        => '2013-04-20',
+        conference  => {
+            name    => 'DCBPW',
+            dir     => 'dcbpw-2013',
+            url     => 'http://dcbpw.org/dcbpw2013/',
+            talk    => 'http://dcbpw.org/dcbpw2013/talk/4607',
+            venue   => 'University of Baltimore',
+            city    => 'Baltimore',
+        },
+        links       => [
+            { type => 'key' },
+        ],
+        description => q{<img src="git-flux.png" />
+
+        There are a bazillion different ways to use git, which is of course a blessing and a curse. You can use it any way you like, but that puts the burden on you to figure out what's best.
+
+    Well we've already done the hard work of figuring out what's best. I'm here to explain how we use git at Infinity Interactive to ship great software to our clients.},
+    },
+    {
         name        => 'Moose Role Usage Patterns',
         dir         => 'role-usage-patterns',
         length      => '40 min',
         date        => '2012-08-22',
         speakerdeck => '5034ce6c6801700002053899',
-        #video       => '',
         conference  => {
             name    => 'YAPC::EU',
             dir     => 'yapc-eu-2012',
