@@ -91,6 +91,12 @@ ul#posts, ul#talks {
 
 #post h1, #talk h1 {
     margin: 0;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+#post p, #talk p {
+    font-family: "Baskerville", "Georgia", serif;
+    font-size: 1.2em;
 }
 
 .spoiler {
