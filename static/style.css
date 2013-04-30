@@ -91,6 +91,13 @@ ul#posts, ul#talks {
 
 #post h1, #talk h1 {
     margin: 0;
+}
+
+#post h1, #talk h1,
+#post h2, #talk h2,
+#post h3, #talk h3,
+#post h4, #talk h4,
+#post h5, #talk h5 {
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
