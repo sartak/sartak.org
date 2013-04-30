@@ -94,7 +94,7 @@ ul#posts, ul#talks {
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
-#post p, #talk p {
+#post article, #talk article {
     font-family: "Baskerville", "Georgia", serif;
     font-size: 1.2em;
 }
