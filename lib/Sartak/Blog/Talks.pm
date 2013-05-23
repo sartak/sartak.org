@@ -18,6 +18,7 @@ my @talks = (
         },
         links       => [
             { type => 'key' },
+            { type => 'pdf' },
         ],
         description => q{<img src="git-flux.png" />
 
