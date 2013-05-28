@@ -212,7 +212,7 @@ All with a very strongly object-oriented, antler-shaped flavor.},
         links       => [
             { type => 'pdf' },
             { type => 'key' },
-            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/the-evolution-of-pathdispatcher' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/pathdispatcher' },
         ],
         conference  => {
             name    => 'YAPC::NA',
