@@ -43,6 +43,7 @@ my @talks = (
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/moose-role-usage-patterns' },
         ],
         description => q{Roles are one of the most exciting and powerful features provided by Moose, but also one of the most misunderstood. This talk will explore, in depth, some common usage patterns (and antipatterns) for roles and how best to use them in the design of your classes. I will also talk about the philosophy of roles and how they fit in with the larger OO toolset.},
     },
@@ -74,6 +75,7 @@ my @talks = (
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/git-status-tackle' },
         ],
         description => q{`git status` is verbose almost to the point of uselessness. git-status-tackle is a new suite of tools that tells you exactly what you want to know about your git repository in a very pluggable and configurable way.},
     },
@@ -95,6 +97,7 @@ my @talks = (
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/dtrace-printf-debugging-for-seventh-level-wizards' },
         ],
         description => q{<a href="/talks/yapc-asia-2011/dtrace/">(日本語版はこちら)</a>
 
@@ -115,6 +118,7 @@ This talk is intended as an introduction to DTrace for those who have maybe hear
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/dtrace-printf' },
         ],
         video       => 'http://www.youtube.com/watch?v=GccTqjEWAp4',
         conference  => {
@@ -142,6 +146,7 @@ DTraceは、コンピューターが何を動作していることを調べる�
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/announcing-announcements' },
         ],
         conference  => {
             name    => 'YAPC::NA',
@@ -182,6 +187,7 @@ All with a very strongly object-oriented, antler-shaped flavor.},
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/the-evolution-of-pathdispatcher' },
         ],
         video       => [
             'http://www.youtube.com/watch?v=fLVTZv4XjgM',
@@ -206,6 +212,7 @@ All with a very strongly object-oriented, antler-shaped flavor.},
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/the-evolution-of-pathdispatcher' },
         ],
         conference  => {
             name    => 'YAPC::NA',
@@ -228,6 +235,7 @@ All with a very strongly object-oriented, antler-shaped flavor.},
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/inlinec' },
         ],
         conference  => {
             name    => 'Tsukuba.xs Beer Talks',
@@ -247,6 +255,7 @@ All with a very strongly object-oriented, antler-shaped flavor.},
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/nonhierarchical-oop' },
         ],
         conference  => {
             name    => 'OSDC.tw',
@@ -283,6 +292,7 @@ All with a very strongly object-oriented, antler-shaped flavor.},
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/parameterized-roles' },
         ],
         video       => 'http://www.nicovideo.jp/watch/sm8674742',
         conference  => {
@@ -312,6 +322,7 @@ Parameterized roles (via MooseX::Role::Parameterized) improve the reusability of
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/api-design' },
         ],
         video       => 'http://www.nicovideo.jp/watch/sm8627720',
         conference  => {
@@ -339,6 +350,7 @@ Finally, I will reveal the secret to designing excellent APIs.},
         links       => [
             { type => 'pdf' },
             { type => 'key' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/extending-moose-for-applications' },
         ],
         conference  => {
             name    => 'YAPC::NA',
@@ -483,10 +495,6 @@ sub talk_pages {
                     <script src="http://speakerdeck.com/embed/$talk->{speakerdeck}.js"></script>
                 </div>
             END
-            push @links, {
-                label => 'Speakerdeck',
-                href  => "http://speakerdeck.com/presentations/$talk->{speakerdeck}",
-            };
         }
 
         my $videos = "";
