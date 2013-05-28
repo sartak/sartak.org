@@ -482,8 +482,8 @@ sub talk_pages {
         my $conference = $talk->{conference};
 
         for (@links) {
-            if (my $label = $upload{$_->{type}}) {
-                $_->{label} = $label;
+            if ($_->{type}) {
+                $_->{label} = $upload{$_->{type}};
                 $_->{href} = "/talks/$conference->{dir}/$talk->{dir}/$talk->{dir}.$_->{type}";
             }
         }
