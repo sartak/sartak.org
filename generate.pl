@@ -271,7 +271,7 @@ sub generate_talks {
 }
 
 sub generate_rss {
-    use XML::RSS;
+    require XML::RSS;
 
     my $feed = XML::RSS->new(version => '1.0');
     $feed->channel(
@@ -309,7 +309,7 @@ sub generate_rss {
 }
 
 sub generate_talk_rss {
-    use XML::RSS;
+    require XML::RSS;
 
     my $feed = XML::RSS->new(version => '1.0');
     $feed->channel(
