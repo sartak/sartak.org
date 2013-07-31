@@ -119,6 +119,7 @@ ul#posts, ul#talks {
 #projects li img.icon {
     -webkit-filter: grayscale(50%);
     filter: grayscale(50%);
+    border: 2px solid #888;
 
     -webkit-transition: all .25s ease-out;
     -moz-transition: all .25s ease-out;
@@ -129,6 +130,7 @@ ul#posts, ul#talks {
 #projects li:hover img.icon {
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
+    border: 2px solid #000;
 }
 #projects li .details {
     opacity: 0;
