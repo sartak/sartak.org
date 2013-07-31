@@ -118,8 +118,8 @@ ul#posts, ul#talks {
 }
 
 #projects li img.icon {
-    -webkit-filter: grayscale(80%);
-    filter: grayscale(80%);
+    -webkit-filter: grayscale(80%) blur(1px);
+    filter: grayscale(80%) blur(1px);
     border: 2px solid #333;
 
     -webkit-transition: all .25s ease-out;
@@ -129,8 +129,8 @@ ul#posts, ul#talks {
     transition: all .25s ease-out;
 }
 #projects li:hover img.icon {
-    -webkit-filter: grayscale(0%);
-    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%) blur(0);
+    filter: grayscale(0%) blur(0);
     border: 2px solid #000;
 }
 #projects li .details {
