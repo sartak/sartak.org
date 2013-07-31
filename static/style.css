@@ -94,6 +94,7 @@ ul#posts, ul#talks {
 }
 #projects li {
     display: inline-block;
+    vertical-align: top;
     text-align: center;
     width: 228px;
     height: 228px;
