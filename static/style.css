@@ -120,7 +120,7 @@ ul#posts, ul#talks {
 #projects li img.icon {
     -webkit-filter: grayscale(80%);
     filter: grayscale(80%);
-    border: 2px solid #CCC;
+    border: 2px solid #333;
 
     -webkit-transition: all .25s ease-out;
     -moz-transition: all .25s ease-out;
