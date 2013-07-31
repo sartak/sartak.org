@@ -178,8 +178,10 @@ each_article {
 generate_index('en');
 generate_index('ja');
 generate_drafts();
-generate_about('en');
-generate_about('ja');
+generate_page(lang => 'en', page => 'about', title => 'About Me');
+generate_page(lang => 'ja', page => 'about', title => '自己紹介');
+generate_page(lang => 'en', page => 'projects', title => 'Projects');
+generate_page(lang => 'ja', page => 'projects', title => '開発');
 generate_talks();
 generate_rss();
 generate_talk_rss();
@@ -232,14 +234,14 @@ sub generate_drafts {
     });
 }
 
-sub generate_about {
-    my $lang = shift;
+sub generate_page {
+    my %args = @_;
 
-    my $file = $lang eq 'ja' ? "$outdir/about.ja.html" : "$outdir/about.html";
+    my $file = $args{lang} eq 'ja' ? "$outdir/$args{page}.ja.html" : "$outdir/$args{page}.html";
     open my $handle, '>', $file;
-    print $handle fill_in($layout{$lang}, {
-        content => scalar slurp('about.'.$lang.'.html'),
-        title   => ($lang eq 'ja' ? '自己紹介' : 'About Me'),
+    print $handle fill_in($layout{$args{lang}}, {
+        content => scalar slurp("$args{page}.$args{lang}.html"),
+        title   => $args{title},
     });
 }
 
