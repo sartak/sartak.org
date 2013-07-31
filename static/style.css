@@ -94,17 +94,27 @@ ul#posts, ul#talks {
 }
 #projects li {
     display: inline-block;
+    text-align: center;
     width: 228px;
-    height: 141px;
+    height: 228px;
+}
+#projects li .name {
+    font-weight: bold;
+    display: block;
+}
+#projects li .details {
+    font-style: italic;
 }
 
 #projects li img.icon {
+    height: 114px;
+    width: 114px;
     border-radius: 20px;
 }
 
 #projects li img.icon {
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+    -webkit-filter: grayscale(50%);
+    filter: grayscale(50%);
 
     -webkit-transition: all .25s ease-out;
     -moz-transition: all .25s ease-out;
