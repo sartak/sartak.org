@@ -98,6 +98,10 @@ ul#posts, ul#talks {
     width: 228px;
     height: 228px;
 }
+#projects li a {
+    text-decoration: none;
+    color: black;
+}
 #projects li .name {
     font-weight: bold;
     display: block;
