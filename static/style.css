@@ -109,7 +109,7 @@ ul#posts, ul#talks {
     display: block;
 }
 #projects li .details {
-    font-style: italic;
+//    font-style: italic;
 }
 
 #projects li img.icon {
