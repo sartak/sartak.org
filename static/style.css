@@ -118,9 +118,9 @@ ul#posts, ul#talks {
 }
 
 #projects li img.icon {
-    -webkit-filter: grayscale(50%);
-    filter: grayscale(50%);
-    border: 2px solid #888;
+    -webkit-filter: grayscale(80%);
+    filter: grayscale(80%);
+    border: 2px solid #CCC;
 
     -webkit-transition: all .25s ease-out;
     -moz-transition: all .25s ease-out;
