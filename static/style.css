@@ -89,6 +89,45 @@ ul#posts, ul#talks {
     margin-bottom: 1em;
 }
 
+#projects ul {
+    list-style-type: none;
+}
+#projects li {
+    display: inline-block;
+    width: 228px;
+    height: 141px;
+}
+
+#projects li img.icon {
+    border-radius: 20px;
+}
+
+#projects li img.icon {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    -ms-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+}
+#projects li:hover img.icon {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+#projects li .details {
+    opacity: 0;
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    -ms-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+}
+#projects li:hover .details {
+    opacity: 1;
+}
+
 #post h1, #talk h1 {
     margin: 0;
 }
