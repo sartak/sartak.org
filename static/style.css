@@ -108,9 +108,6 @@ ul#posts, ul#talks {
     font-weight: bold;
     display: block;
 }
-#projects li .details {
-//    font-style: italic;
-}
 
 #projects li img.icon {
     height: 114px;
