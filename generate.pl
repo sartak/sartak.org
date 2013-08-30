@@ -4,6 +4,7 @@ use warnings;
 use lib 'lib';
 use File::Slurp 'slurp';
 use File::Path 'make_path';
+use Text::MultiMarkdown 'markdown';
 use autodie;
 use Encode;
 use Sartak::Blog::Talks;
@@ -43,6 +44,16 @@ sub read_content_pl {
     my $file = shift;
     open my $handle, '-|', "perl -Ilib '$file'";
     return join "", <$handle>;
+}
+
+sub read_content_md {
+    my $file = shift;
+    my $content = slurp $file;
+
+    my $headers;
+    $headers .= $1 while $content =~ s/^(\w+: .+\n)//;
+
+    return $headers . markdown($content);
 }
 
 sub read_content {
