@@ -7,7 +7,7 @@ outs_raw '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.j
 div {
     style is "float: right; padding-bottom: 1em; padding-left: 1em";
     a {
-        href is "http://rpglanguage.net/KanaSwirl.app";
+        href is "http://itunes.apple.com/us/app/kanaswirl/id525332301?at=11l7vX&ct=sartak-introkanaswirl";
         image "introducing-kanaswirl/KanaSwirl-256x256.png";
         p { style is "text-align: center"; "KanaSwirl in the App Store" };
     };
@@ -26,7 +26,7 @@ ENDJS
 
 p { "<span id=\"audience\">Some of you</span> are reading this on the most efficient language learning device ever designed: the iPhone. It can store many days' worth of target language music and podcasts, many lifetimes' worth of target language books, countless mono- and bilingual dictionaries, and includes an operating system localized to practically any language people speak. Not to mention there are loads of great apps designed for and by speakers of your target language. And it even fits in your pocket so you can carry your immersive environment with you all the time." };
 
-p { "To that end, I have written and released a game called [KanaSwirl](http://rpglanguage.net/KanaSwirl.app). It teaches you the 46 Japanese hiragana characters in a fun, quick, and easy way. It is the kind of app I wish existed when I was starting out with Japanese. It took me something like two months to become comfortable with the kana. I hope my game enables everyone to trounce that." };
+p { "To that end, I have written and released a game called [KanaSwirl](http://itunes.apple.com/us/app/kanaswirl/id525332301?at=11l7vX&ct=sartak-introkanaswirl). It teaches you the 46 Japanese hiragana characters in a fun, quick, and easy way. It is the kind of app I wish existed when I was starting out with Japanese. It took me something like two months to become comfortable with the kana. I hope my game enables everyone to trounce that." };
 
 p { "If you have finished going through the learning process, KanaSwirl looks like this:" };
 
@@ -74,7 +74,7 @@ id twirlAndMove = [CCSpawn actions:
 
 p { "After adding those simple lines of code the app suddenly became a game. Now instead of simply popping into existence in-place, the kana buttons you tap to answer questions now simultaneously rotate 360 degrees and move from the center to their desired position (calculated with `sin` and `cos`). Now the game is dynamic. cocos2d is full of easy, effective tools like this. Another tool I want to highlight is scene transitions -- just a single additional function call lets you page flip from one scene to the other, or slide, or any of the other dozens of builtin transitions. The only thing I have found lacking so far is drawing individual pixels or lines. You can do it with OpenGL but it isn't as frictionless as the rest of the API." };
 
-p { "The only big stumbling block I had was designing the icon. I think it's passable. The designy bits in the app is actually limited to programmatic effects: transitions, animations, and particle effects. For particle effects I used an app called [Particle Mint](http://itunes.apple.com/us/app/particle-mint/id445400440) which gives you live previews and editing on the device you will eventually run the game on. I wouldn't say it was a delight to use, but it definitely got the job done without getting in my way too much." };
+p { "The only big stumbling block I had was designing the icon. I think it's passable. The designy bits in the app is actually limited to programmatic effects: transitions, animations, and particle effects. For particle effects I used an app called [Particle Mint](http://itunes.apple.com/us/app/particle-mint/id445400440?at=11l7vX&ct=sartak-introkanaswirl) which gives you live previews and editing on the device you will eventually run the game on. I wouldn't say it was a delight to use, but it definitely got the job done without getting in my way too much." };
 
 p { "iPad support wasn't tricky at all. I just needed to switch to using sizes and positions that refer to screen size instead of a constant number of points. So if there ever were a third iOS device size, I probably would not need to change much code to support it." };
 
