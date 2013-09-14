@@ -1,5 +1,5 @@
 title: My New Blog: <i>Japanese Technique</i>
-draft: 1
+date: 2013-09-14
 
 I've decided to split off a separate blog for all my Japanese-related content. I'm calling the new site [*Japanese Technique*](http://blog.rpglanguage.net).
 
