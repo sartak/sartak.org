@@ -1,4 +1,4 @@
-title: My New Blog: Japanese Technique
+title: My New Blog: <i>Japanese Technique</i>
 draft: 1
 
 I've decided to split off a separate blog for all my Japanese-related content. I'm calling the new site [*Japanese Technique*](http://blog.rpglanguage.net).
