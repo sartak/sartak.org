@@ -205,7 +205,7 @@ sub generate_index {
     each_article {
         my $article = shift;
         my $date = prettify_date($article->{date}, $lang);
-        my $sigil = $article->{external} ? " ⤴ " : "";
+        my $sigil = $article->{external} ? ' <span class="external">⤴</span> ' : "";
         $posts .= qq[<li>
     <span class="date">$date</span>
     <span class="title"><a href="$article->{url}">$article->{title}</a>$sigil</span>
