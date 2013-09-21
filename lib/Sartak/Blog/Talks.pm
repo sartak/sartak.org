@@ -4,6 +4,29 @@ use warnings;
 
 my @talks = (
     {
+        name        => 'git flux - 結果的なブランチ管理',
+        dir         => 'git-flux',
+        length      => '20 min',
+        date        => '2013-09-21',
+        conference  => {
+            name    => 'YAPC::Asia',
+            dir     => 'yapc-asia-2013',
+            url     => 'http://yapcasia.org/2013/',
+            talk    => 'http://yapcasia.org/2013/talk/show/e73de9d2-c803-11e2-be2e-7ec06aeab6a4',
+            venue   => 'Keio University Hiyoshi Campus',
+            city    => 'Kawasaki',
+        },
+        links       => [
+            { type => 'key' },
+            { type => 'pdf' },
+        ],
+        description => q{<img src="git-flux.png" />
+
+gitこその使い方が多さは例外で、幸福でもあり災いでもありますね。好きな方法を選んでもいいですが、その選ぶ必要はあるから、どのユーザーも自分が、有効に使うことを研究しなければならない責任あるので困ります。
+同僚とチームで開発しながら、たくさんブランチ管理システムを使ってみて、このgit fluxというシステムを作りました。
+このトークは、gitをうまく利用することでアプリケーションを開発する方法を紹介します。},
+    },
+    {
         name        => 'git flux',
         dir         => 'git-flux',
         length      => '45 min',
