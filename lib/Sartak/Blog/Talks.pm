@@ -22,6 +22,8 @@ my @talks = (
         ],
         description => q{<img src="git-flux.png" />
 
+<a href="/talks/dcbpw-2013/git-flux/">(English version here)</a>
+
 gitこその使い方が多さは例外で、幸福でもあり災いでもありますね。好きな方法を選んでもいいですが、その選ぶ必要はあるから、どのユーザーも自分が、有効に使うことを研究しなければならない責任あるので困ります。
 同僚とチームで開発しながら、たくさんブランチ管理システムを使ってみて、このgit fluxというシステムを作りました。
 このトークは、gitをうまく利用することでアプリケーションを開発する方法を紹介します。},
@@ -45,9 +47,11 @@ gitこその使い方が多さは例外で、幸福でもあり災いでもあ�
         ],
         description => q{<img src="git-flux.png" />
 
-        There are a bazillion different ways to use git, which is of course a blessing and a curse. You can use it any way you like, but that puts the burden on you to figure out what's best.
+<a href="/talks/yapc-asia-2013/git-flux/">(日本語版はこちら)</a>
 
-    Well we've already done the hard work of figuring out what's best. I'm here to explain how we use git at Infinity Interactive to ship great software to our clients.},
+There are a bazillion different ways to use git, which is of course a blessing and a curse. You can use it any way you like, but that puts the burden on you to figure out what's best.
+
+Well we've already done the hard work of figuring out what's best. I'm here to explain how we use git at Infinity Interactive to ship great software to our clients.},
     },
     {
         name        => 'Moose Role Usage Patterns',
