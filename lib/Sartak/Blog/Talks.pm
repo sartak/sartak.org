@@ -4,6 +4,31 @@ use warnings;
 
 my @talks = (
     {
+        name        => 'git flux: effective branch management',
+        dir         => 'git-flux',
+        length      => '20 min',
+        date        => '2013-10-05',
+        conference  => {
+            name    => 'PPW',
+            dir     => 'ppw-2013',
+            url     => 'http://pghpw.org/ppw2013/',
+            talk    => 'http://pghpw.org/ppw2013/talk/5054',
+            venue   => 'Pittsburgh Technology Institute',
+            city    => 'Pittsburgh',
+        },
+        links       => [
+            { type => 'key' },
+            { type => 'pdf' },
+        ],
+        description => q{<img src="git-flux.png" />
+
+<a href="/talks/yapc-asia-2013/git-flux/">(日本語版はこちら)</a>
+
+There are a bazillion different ways to use git, which is of course a blessing and a curse. You can use it any way you like, but that puts the burden on you to figure out what's best.
+
+Well we've already done the hard work of figuring out what's best. I'm here to explain how we use git at Infinity Interactive to ship great software to our clients.},
+    },
+    {
         name        => 'git flux - 結果的なブランチ管理',
         dir         => 'git-flux',
         length      => '20 min',
