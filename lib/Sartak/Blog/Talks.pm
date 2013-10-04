@@ -47,7 +47,7 @@ Well we've already done the hard work of figuring out what's best. I'm here to e
         ],
         description => q{<img src="git-flux.png" />
 
-<a href="/talks/dcbpw-2013/git-flux/">(English version here)</a>
+<a href="/talks/ppw-2013/git-flux/">(English version here)</a>
 
 gitこその使い方が多さは例外で、幸福でもあり災いでもありますね。好きな方法を選んでもいいですが、その選ぶ必要はあるから、どのユーザーも自分が、有効に使うことを研究しなければならない責任あるので困ります。
 同僚とチームで開発しながら、たくさんブランチ管理システムを使ってみて、このgit fluxというシステムを作りました。
