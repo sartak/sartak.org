@@ -2,7 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: Structured Exceptions in Moose\ndraft: 1\n" }
 
-p { "Yesterday, Upasana Shukla's structured exceptions branch [landed in Moose](https://github.com/moose/Moose/pull/38). Her apprenticeship is noSE draftw officially complete. I couldn't be happier with her work." };
+p { "Yesterday, Upasana Shukla's structured exceptions branch [landed in Moose](https://github.com/moose/Moose/pull/38). Her apprenticeship is now officially complete. I couldn't be happier with her work." };
 
 h2 { "Backstory" };
 
