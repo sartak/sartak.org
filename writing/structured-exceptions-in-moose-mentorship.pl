@@ -2,7 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: <i>Structured Exceptions in Moose</i> Mentorship\ndraft: 1\n" }
 
-p { "Yesterday, [Upasana Shukla](http://blogs.perl.org/users/upasana/)'s structured exceptions branch [landed in Moose](https://github.com/moose/Moose/pull/38). Her apprenticeship is now officially complete. I couldn't be happier with her work. Thank you so much for persisting through a long and challenging summer, Upasana!" };
+p { "Yesterday, [Upasana](http://blogs.perl.org/users/upasana/)'s structured exceptions branch [landed in Moose](https://github.com/moose/Moose/pull/38). Her apprenticeship is now officially complete. I couldn't be happier with her work. Thank you so much for persisting through a long and challenging summer, Upasana!" };
 
 p { "Working with Upasana has been a blast. This mentorship has given me a real appreciation for how difficult it is to break into your first programming community. There are so many challenges that we old fogeys take for granted. There are of course technical problems, like how to name methods, how to produce a clean and useful git history, how to change code in a popular project without breaking downstream consumers, how to write effective tests, and so on. But there are also many social problems to overcome, such as how to ask questions effectively, when to ignore the peanut gallery, how to work with/around other people's schedules, and even how to detect jokes, sarcasm, and mood generally in text-based chat. These are real barriers to entry for any new contributor. It's a small wonder that anyone learns to navigate these quagmires without help from a mentor. So, please please please go easy on your newbies. It's harder for them than you realize." };
 
