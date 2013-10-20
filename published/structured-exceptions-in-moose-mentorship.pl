@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: <i>Structured Exceptions in Moose</i> Mentorship\ndraft: 1\n" }
+BEGIN { print "title: <i>Structured Exceptions in Moose</i> Mentorship\ndate: 2013-10-19\n" }
 
 p { "For the past six months, I have been mentoring a student named [Upasana](http://blogs.perl.org/users/upasana/) for Moose. This mentorship is done through the [GNOME Outreach Program for Women](https://wiki.gnome.org/OutreachProgramForWomen) and is sponsored by [The Perl Foundation](http://www.perlfoundation.org/). Our project was to convert Moose's hundreds of exceptions from strings to a hierarchy of exception classes. This increases robustness of the entire Moose ecosystem and at the same time allows Moose to be more aggressive in updating (perhaps eventually translating?) its error messages." };
 
