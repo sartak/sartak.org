@@ -58,7 +58,7 @@ p { "After we figured out the code to replicate the error condition, next was co
 
 p { "Finally, that exception would be done, so she would post a gist for me to review. I was unfortunately not always available to review those gists (especially during some crunch time at work), so at times they would grow and grow. I think the longest gist was something like 2000 lines long. In my reviews, I did my best to justify every change to her code that I suggested, since I wanted to foster an appreciation of what I suppose I would call *deliberate code*. No extraneous cruft, proper variable names, easily understood and maintained methods, etc. See this example [review session](https://gist.github.com/sartak/7064731)." };
 
-p { "Repeat this 300 times and you can see how this might take a whole summer!" };
+p { "Repeat this 300 times and you can see how it might take a whole summer!" };
 
 p { "We communicated through IRC for everything, but we used GitHub issues for tracking what needed doing. We ended up with nearly 300 issues covering everything from \"please review this gist\" to \"sign OPW contracts\" to an issue for pretty much each individual exception. I am a huge believer in using bug trackers (I run a personal RT instance that has nearly 3000 tickets in it), and so I am glad we found a way to make GitHub issues work for us." };
 
