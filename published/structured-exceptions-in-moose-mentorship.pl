@@ -38,7 +38,7 @@ p { "As part of that pre-proposal work, Upasana released her first module, [Moos
 
 p { "After this fix, Upasana wrote and submitted her proposal to OPW. She had already landed a real bugfix into Moose, had a strong (and desperately needed) project outline, and had started getting involved in the community. In other words, Upasana and I conspired to make it very difficult for anyone to reject her proposal. ;) Indeed it passed through Perl's vetting with flying colors." };
 
-h2 { "Moose Hacking" };
+h2 { "Summer Reading" };
 
 p { "With her proposal accepted, Upasana was eager to begin the real work. So what I did first was maliciously dump a ton of reading material on her. The first task was to finish *Modern Perl*, of course." };
 
@@ -47,6 +47,8 @@ p { "It was important to me that she learn from an example of exceptions done pa
 p { "Because Moose is so heavily influenced by (one wouldn't even be wrong to call it a a port of) the Common Lisp Object System, it made sense for her to work through [*The Art of the Metaobject Protocol*](http://en.wikipedia.org/wiki/The_Art_of_the_Metaobject_Protocol). If you really want to hack on Moose, there is simply no way of getting around the metaobject protocol. Without an understanding of the MOP you can really only change the shallowest layers of Moose. Poorly, at that. After lots of reading of this book, and banging her head against walls, and asking questions, and experimenting, Upasana successfully grokked the MOP and has since been able to put Moose's abstractions to work fluently." };
 
 p { "Upasana probably felt like she was thrown into the deep end with these two Lisp books, so of course I also recommended she read up on [Traits](http://scg.unibe.ch/research/traits) (which is Smalltalk). Any useful <s>exception</s> *class* hierarchy will need to make use of roles to model cross-class concerns, so understanding role theory was important. But there was also the practical aspect of being able to convert the exceptions that Moose's role implementation throws. In the end, [the roles that were designed](https://github.com/moose/Moose/tree/master/lib/Moose/Exception/Role) mostly focused around the different classes of metaobject in Moose. Once structured exceptions are used in anger, we may discover additional roles for our exception hierarchy." };
+
+h2 { "Moose Hacking" };
 
 p { "At some point she was finally done with all that boring summer reading homework and started coding. The first exception we converted was the first exception in `lib/Moose.pm`. Namely, `extends` with no arguments is an error. Reading through the channel logs, I apparently recommended <s>Ender</s> Upasana convert this exception just for practice, to get a sense of how the work would go. It turns out that this practice was just as good as real work. I had not planned it that way, but there was no reason to scrap and start over once we had designed the [Moose::Exception](https://github.com/moose/Moose/blob/master/lib/Moose/Exception.pm) superclass and converted some exceptions over." };
 
