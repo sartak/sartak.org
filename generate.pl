@@ -175,6 +175,8 @@ sub generate_article {
         </div>
     ];
 
+    $article->{title_tag} = $article->{title};
+    $article->{title_tag} =~ s/<.*?>//g;
     my $html = fill_in($layout{en}, $article);
 
     make_path "$outdir/$article->{dir}";
