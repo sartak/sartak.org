@@ -14,7 +14,7 @@ p { "Thanks also to [Jesse Luehrs](https://twitter.com/doyster) for being an uno
 
 h2 { "Backstory" };
 
-p { "At YAPC::NA 2012 in Madison, [John Anderson](https://twitter.com/genehack) gave a [talk on the benefits of structured exceptions](http://www.youtube.com/watch?v=O1b-z7QvVW0). We commiserated over Moose's stringy exceptions several times. Their existence was especially egregious because the rest of Moose is so heavily object-oriented, having been built on top of a meta-object protocol. During the Q&A for John's talk it was made clear that if anyone was willing to put in the hard work to convert Moose to structured exceptions, that branch would not only be merged, but cherished." };
+p { "At YAPC::NA 2012 in Madison, a vague blur named [John Anderson](https://twitter.com/genehack) gave a [talk on the benefits of structured exceptions](http://www.youtube.com/watch?v=O1b-z7QvVW0). We commiserated over Moose's stringy exceptions several times. Their existence was especially egregious because the rest of Moose is so heavily object-oriented, having been built on top of a meta-object protocol. During the Q&A for John's talk it was made clear that if anyone was willing to put in the hard work to convert Moose to structured exceptions, that branch would not only be merged, but cherished." };
 
 p { "I volunteered to do that work. Maybe. You know, I really must review the video to judge how much of that volunteering was actually voluntary. In any case, I started a branch but never got far with it. That led to ribbing over the next six months in the Moose IRC channels that I had not kept my promise." };
 
