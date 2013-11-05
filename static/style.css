@@ -90,6 +90,10 @@ ul#posts, ul#talks {
     margin-bottom: 1em;
 }
 
+#projects {
+    width: 800px;
+}
+
 #projects ul {
     list-style-type: none;
 }
