@@ -154,6 +154,10 @@ while (my $file = glob("published/* writing/*")) {
     $article->{file} = $article->{dir} . $article->{basename} . '.html';
     $article->{url} = $article->{external} || "http://sartak.org/$article->{file}";
 
+    if ($article->{external}) {
+        $article->{description} = qq{<p>This article was published at <a href="$article->{external}"</a></p>};
+    }
+
     push @{ $articles{ $article->{date} } }, $article;
 }
 
