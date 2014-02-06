@@ -289,7 +289,7 @@ sub generate_talks {
 sub generate_rss {
     require XML::RSS;
 
-    my $feed = XML::RSS->new(version => '1.0');
+    my $feed = XML::RSS->new(version => '2.0');
     $feed->channel(
         title => $title,
         link  => 'http://sartak.org',
@@ -314,6 +314,7 @@ sub generate_rss {
             title       => decode_utf8($article->{title} || $article->{name}),
             link        => $article->{url},
             description => decode_utf8($article->{original} || $article->{description}),
+            permaLink   => $article->{url},
             dc          => {
                 date    => $article->{date},
                 author  => 'Shawn M Moore',
