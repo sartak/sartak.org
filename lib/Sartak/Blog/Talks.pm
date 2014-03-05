@@ -70,7 +70,10 @@ gitこその使い方が多さは例外で、幸福でもあり災いでもあ�
             { type => 'key' },
             { type => 'pdf' },
         ],
-        description => q{<img src="git-flux.png" />
+        description => q{
+<strong>Update!</strong> I presented a newer version of this talk at <a href="/talks/ppw-2013/git-flux/">PPW</a>.
+
+<img src="git-flux.png" />
 
 <a href="/talks/yapc-asia-2013/git-flux/">(日本語版はこちら)</a>
 
