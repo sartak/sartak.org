@@ -38,7 +38,7 @@ CODE
 
         p { "Note that it is _not_ sufficient to simply say `shape.alpha = shape.alpha`. That does not trigger a display. For whatever reason, the internals demand you actually change the property value." };
 
-        p { "You know, I wouldn't be surpised to learn that internally, Sprite Kit uses a `setNeedsDisplay:` system like `CALayer`. That is an optimization to eliminate useless redraws. If that's the case, then whoever was working on `SKShapeNode` apparently forgot to have `setStrokeColor:` invoke Sprite Kit's version of `setNeedsDisplay:`." };
+        p { "You know, I wouldn't be surpised to learn that internally, Sprite Kit uses a `setNeedsDisplay:` system like `CALayer`. That is an optimization to eliminate useless redraws. If that's the case, then whoever was working on `SKShapeNode` apparently forgot to have `setStrokeColor:` invoke the `setNeedsDisplay:` of Sprite Kit." };
 
         br {};
 
