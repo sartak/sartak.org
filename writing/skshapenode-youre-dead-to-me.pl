@@ -99,7 +99,32 @@ CODE
             height is "568";
             src is "/img/blog/skshapenode-youre-dead-to-me/shrink-post.png";
         };
-        p { "I have no idea why this happens except it seems to be `SKShapeNode`'s fault. All the more reason to eliminate it without mercy." };
+        p { "I have no idea why this happens except it seems to yet again be the fault of `SKShapeNode` inside of an `SKEffectNode`. As before, replace the Sprite Kit template's scene class's implementation with the following:" };
+        code_snippet 'objc' => << 'CODE';
+-(id)initWithSize:(CGSize)size {    
+    if (self = [super initWithSize:size]) {
+        SKEffectNode *container = [SKEffectNode node];
+        [self addChild:container];
+    }
+    return self;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    SKEffectNode *container = self.children[0];
+
+    SKShapeNode *shape = [SKShapeNode node];
+    shape.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(-10, -10, 20, 20) cornerRadius:4].CGPath;
+    shape.position = [touch locationInNode:self];
+    shape.strokeColor = [SKColor colorWithHue:drand48() saturation:1 brightness:1 alpha:1];
+    shape.blendMode = SKBlendModeAdd;
+    [container addChild:shape];
+}
+CODE
+
+        p { "Tap the screen a few times. All's well." };
+        p { "Tap the screen a few more time… <em>Hey what the hell was</em> that<em>?</em>" };
+        p { "What in the world did Apple do to cause this bug?" };
     };
 }
 
