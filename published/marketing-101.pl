@@ -13,8 +13,8 @@ a {
     href is "http://shop.github.com/products/octocat-mug";
     img {
         width is "512px";
-        height is "326px";
-        src is "http://cdn.shopify.com/s/files/1/0051/4802/products/MG_0914_1024x1024.jpg?63";
+        height is "343px";
+        src is "/img/blog/marketing-101/octocat-mug.jpg";
     };
 };
 
