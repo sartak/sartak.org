@@ -10,7 +10,7 @@ p{ "**`SKShapeNode`** is a subclass of `SKNode` that draws a `CGPathRef`. It can
 
 p { "However, `SKShapeNode` is by far the least-well engineered API in Sprite Kit. In fact, I have trouble naming a single lousier API that I've used since I started programming professionally. At least SOAP has an _ethos_." };
 
-p { "I respect that iOS 7 was a rush order. It's unfair to expect that everything will come out perfectly during a platform reinvention. However I maintain that Sprite Kit would have been improved by simply holding `SKShapeNode` back until iOS 8. It was not ready to ship. But since people have it, they want to use it. And to those people, BEWARE! There most certainly be dragons." };
+p { "I respect that iOS 7 was a rush order. It's unfair to expect that everything will come out perfectly during a platform reinvention. However I maintain that Sprite Kit would have been improved by simply holding `SKShapeNode` back until iOS 8. It was not ready to ship. But since people have it, they want to use it. And to those people, BEWARE!" };
 
 p { "`SKShapeNode`, how do I loathe thee? Let me count the ways." };
 
@@ -18,12 +18,13 @@ ol {
     li {
         id is "leak";
         p { "`SKShapeNode` … [is](http://stackoverflow.com/questions/20292318/why-does-creating-and-removing-skshapenode-and-sknode-repeatedly-cause-a-memory) … [widely](http://stackoverflow.com/questions/18889297/skshapenode-has-unbounded-memory-growth) … [known](http://stackoverflow.com/questions/20134891/skphysicsbody-bodywithpolygonfrompath-memory-leaks) … [to](http://stackoverflow.com/questions/22323189/memory-leak-in-sprite-kit-application) … [leak](http://stackoverflow.com/a/22282920/290913) … [memory](http://tonychamblee.com/2013/11/18/tcprogresstimer-a-spritekit-progress-timer/)." };
+        p { "Unfixable memory leaks is already enough reason to avoid using an API. But wait, there's more…" };
     }
 
     li {
         id is "linewidth";
         p { qq{From `SKShapeNode`'s [documentation](https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKShapeNode_Ref/Reference/Reference.html#//apple_ref/occ/instp/SKShapeNode/lineWidth), "A line width larger than `2.0` may cause rendering artifacts in the final rendered image."} };
-        p { "It's good that they are up front about this limitation. But it's still pretty weak." };
+        p { "It's good that they are up front about this limitation. But that is still pretty weak." };
     }
 
     li {
@@ -89,6 +90,7 @@ CODE
 
         p { "Those red lines are from `SKShapeNode` instances that once rendered red rectangles. _Many_ frames ago. For whatever reason `SKShapeNode` decided to try to resurrect them, but only did half the job." };
     };
+
     li {
         id is "resizing";
         p { "This one is the most baffling and upsetting. It seems that if you have too many `SKShapeNode` instances visible on screen, it completely screws up the scene rendering. The scene shrinks to about 60% of its height for a few moments. In the following screenshots you can see what happens when I tiptoe past the apparent `SKShapeNode` limit (thanks to all that detritus from the previous point). The game becomes completely unusable." };
@@ -130,6 +132,8 @@ CODE
         p { "Tap the screen a few times. All's well." };
         p { "Tap the screen a few more time… <em>Hey what the hell was</em> that<em>?</em>" };
         p { "What in the world did Apple do to cause this bug?" };
+
+        p { "I've reported this bug to Apple as [rdar://16400203](http://openradar.appspot.com/radar?id=5866175049236480)." };
     };
 }
 
