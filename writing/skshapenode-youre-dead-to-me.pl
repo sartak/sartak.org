@@ -108,7 +108,7 @@ CODE
             src is "/img/blog/skshapenode-youre-dead-to-me/shrink-post.png";
         };
         p { "This problem seems to yet again be the fault of `SKShapeNode` inside of an `SKEffectNode`. My guess is that `SKEffectNode`'s unique rendering model is triggering this. `SKEffectNode` lets you apply Core Image filters (which are akin to Photoshop filters) to some of your nodes. It's amazingly powerful. Seriously next level shit. But to achieve that, `SKEffectNode` must render its subtree into a separate buffer to which it can apply its CI filter. This different codepath is probably the cause of all the problems. But if `SKShapeNode` freaks out when it's being rendered into an `SKEffectNode`, I seriously question how robust Sprite Kit is. (Incidentally, `SKEffectNode` also doesn't respect the `zPosition`s of its children, but that's another post altogether. The solution for that one is to interject a plain `SKNode` into the node tree.)" };
-        p { "Anyway. I've luckily been able to replicate this crazy rendering bug with a small amount of code. I've recorded a (video showing this bug)[http://sartak.org/misc/shape-in-effect.mov]. As before, replace the Sprite Kit template's scene class's implementation with the following:" };
+        p { "Anyway. I've luckily been able to replicate this crazy rendering bug with a small amount of code. I've recorded a [video showing this bug](http://sartak.org/misc/shape-in-effect.mov). As before, replace the Sprite Kit template's scene class's implementation with the following:" };
         code_snippet 'objc' => << 'CODE';
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -133,9 +133,7 @@ CODE
 
         p { "Tap the screen a few times. All's well." };
         p { "Tap the screen a few more time… <em>Hey what the hell was</em> that<em>?</em>" };
-        p { "What in the world did Apple do to cause this bug?" };
-
-        p { "I've reported this bug to Apple as [rdar://16400203](http://openradar.appspot.com/radar?id=5866175049236480)." };
+        p { "What in the world did Apple do to cause this bug? Regardless, I've reported this one as [rdar://16400203](http://openradar.appspot.com/radar?id=5866175049236480)." };
     };
 }
 
@@ -146,11 +144,11 @@ p { "Because of all these flaws, **`SKShapeNode` is completely untrustworthy**. 
 ol {
     li {
         id is "nuke";
-        p { "Just remove the `SKShapeNode`. For some effects it's not worth all the trouble." };
+        p { "Just remove the `SKShapeNode`. For some effects it's not worth all the trouble. You'll soon think of something better to replace it." };
     };
     li {
         id is "colorsprite";
-        p { "For borders on opaque nodes, just use a `SKShapeNode` instantiated with `+[SKSpriteNode spriteNodeWithColor:size:]`. This gets you a rectangular block of the provided `SKColor`. Beyond just borders, I've converted my HP bars this way too." };
+        p { "For borders on opaque nodes, just use a `SKShapeNode` instantiated with <nobr>`+[SKSpriteNode spriteNodeWithColor:size:]`</nobr>. This gets you a rectangular block of the provided `SKColor`. Beyond just borders, I've converted my HP bars this way too." };
         p { "The output even looks better too. And you won't have to fear using a border width of greater than 2.0. Cripes!" };
     };
 
