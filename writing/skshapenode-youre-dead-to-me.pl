@@ -79,7 +79,23 @@ CODE
         };
 
         p { "Those red lines are from `SKShapeNode` instances that once rendered red-stroked round rects. _Many_ frames ago. For whatever reason `SKShapeNode` decided to try to resurrect them, but only did half the job." };
-    }
+    };
+    li {
+        p { "This one is the most baffling and upsetting. I have no idea what is happening or why." };
+        p { "It seems that if you have enough `SKShapeNode` instances visible on screen, it completely screws up the scene rendering. The scene shrinks to about 60% of its height for a few moments. I think, but can't confirm, that touch input might be part of the recipe for disaster. In the following screenshots you can see what happens when I tiptoe past the apparent `SKShapeNode` limit (thanks to all that detritus from the previous point). The app becomes completely unusable." };
+
+        img {
+            width is "320";
+            height is "568";
+            src is "/img/blog/skshapenode-youre-dead-to-me/shrink-pre.png";
+        };
+        img {
+            width is "320";
+            height is "568";
+            src is "/img/blog/skshapenode-youre-dead-to-me/shrink-post.png";
+        };
+        p { "I have no idea why this happens except it seems to be `SKShapeNode`'s fault. All the more reason to eliminate it without mercy." };
+    };
 }
 
 p { "Because of all these reasons, I now refuse to use `SKShapeNode` for any new code I wrote. Whenever I get the chance, I refactor code that uses it to stop using it. Here are some ways I've been able to do that." };
@@ -104,20 +120,5 @@ ol {
             height is "103";
             src is "/img/blog/skshapenode-youre-dead-to-me/lightning.png";
         };
-    };
-    li {
-        p { "This one is the most baffling and upsetting. I have no idea what is happening or why." };
-        p { "It seems that if you have enough `SKShapeNode` instances visible on screen, it completely screws up the scene rendering. The scene shrinks to about 60% of its height for a few moments. I think, but can't confirm, that touch input might be part of the recipe for disaster." };
-        img {
-            width is "320";
-            height is "568";
-            src is "/img/blog/skshapenode-youre-dead-to-me/shrink-pre.png";
-        };
-        img {
-            width is "320";
-            height is "568";
-            src is "/img/blog/skshapenode-youre-dead-to-me/shrink-post.png";
-        };
-        p { "I have no idea why this happens except it seems to be `SKShapeNode`'s fault. All the more reason to eliminate it without mercy." };
     };
 };
