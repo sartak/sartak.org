@@ -1,7 +1,7 @@
 title: <tt>SKShapeNode</tt>, you're dead to me
 draft: 1
 
-For the past three months I've spent every free moment working on my next iOS game. I now regularly shut down [Diesel](http://www.diesel-cafe.com) at 11pm. The game is ambitious and I'm having a blast making it. I've not got anything to announce just yet. Soon! But I figured in the meantime I'd document one recurring source of pain from [Sprite Kit](https://developer.apple.com/library/ios/documentation/GraphicsAnimation/Conceptual/SpriteKit_PG/Introduction/Introduction.html).
+For the past three months I've spent every free moment working on my next iOS game. I now regularly shut down [Diesel](http://www.diesel-cafe.com) at 11pm. The game is my most ambitious project yet and I'm having a blast making it. I've not got anything to announce just yet. Soon! In the meantime, I want to describe one recurring source of pain in [Sprite Kit](https://developer.apple.com/library/ios/documentation/GraphicsAnimation/Conceptual/SpriteKit_PG/Introduction/Introduction.html).
 
 **`SKShapeNode`** is a subclass of `SKNode` that lets you draw arbitrary shapes. Bézier curves, polygons, rings, whatever. You can set the stroke color of the shape, or its fill color, or both. This certainly looks to be a useful class. You could probably implement a decent chunk of your game's HUD with it. Bézier curves are a great way to give visual feedback of a user's gesture as in, say, [Flight Control](https://itunes.apple.com/us/app/flight-control/id306220440?at=11l7vX&ct=sartak-shape).
 
