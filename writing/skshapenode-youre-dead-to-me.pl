@@ -16,11 +16,16 @@ p { "`SKShapeNode`, how do I loathe thee? Let me count the ways." };
 
 ol {
     li {
+        p { "`SKShapeNode` … [is](http://stackoverflow.com/questions/20292318/why-does-creating-and-removing-skshapenode-and-sknode-repeatedly-cause-a-memory) … [widely](http://stackoverflow.com/questions/18889297/skshapenode-has-unbounded-memory-growth) … [known](http://stackoverflow.com/questions/20134891/skphysicsbody-bodywithpolygonfrompath-memory-leaks) … [to](http://stackoverflow.com/questions/22323189/memory-leak-in-sprite-kit-application) … [leak](http://stackoverflow.com/a/22282920/290913) … [memory](http://tonychamblee.com/2013/11/18/tcprogresstimer-a-spritekit-progress-timer/)." };
+    }
+
+    li {
         p { qq{From `SKShapeNode`'s [documentation](https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKShapeNode_Ref/Reference/Reference.html#//apple_ref/occ/instp/SKShapeNode/lineWidth), "A line width larger than `2.0` may cause rendering artifacts in the final rendered image."} };
         p { "Wat." };
     }
+
     li {
-        p { "Sometimes, when I send a message like `setStrokeColor:[SKColor redColor]`, it sometimes has no visual effect at all. So I have to trick the `SKShapeNode` into redrawing itself. Changing its `alpha` is one way to do it:" };
+        p { "When I send a message like `setStrokeColor:[SKColor redColor]`, it sometimes has no visual effect at all. So I have to trick the `SKShapeNode` into redrawing itself. Changing its `alpha` is one way to do it:" };
 
 code_snippet 'objc' => << 'CODE';
 #if BUSTED_SKSHAPENODE_SETSTROKECOLOR
@@ -31,9 +36,11 @@ code_snippet 'objc' => << 'CODE';
 shape.strokeColor = [SKColor redColor];
 CODE
 
-        p { "Note that it is _not_ sufficient to simply say `shape.alpha = shape.alpha`. That isn't enough to trigger a display." };
+        p { "Note that it is _not_ sufficient to simply say `shape.alpha = shape.alpha`. That does not trigger a display. For whatever reason, the internals demand you actually change the property value." };
 
-        p { "I wouldn't be surpised to learn that internally, Sprite Kit uses a `setNeedsDisplay:` system like `CALayer` to redraw only when necessary. If that's the case, then whoever was working on `SKShapeNode` apparently forgot to have `setStrokeColor:` invoke Sprite Kit's version of `setNeedsDisplay:`." };
+        p { "You know, I wouldn't be surpised to learn that internally, Sprite Kit uses a `setNeedsDisplay:` system like `CALayer`. That is an optimization to eliminate useless redraws. If that's the case, then whoever was working on `SKShapeNode` apparently forgot to have `setStrokeColor:` invoke Sprite Kit's version of `setNeedsDisplay:`." };
+
+        br {};
 
         p { "Digging deeper, it seems this problem manifests itself only when the `SKShapeNode` is a descendent of an `SKEffectNode`. To see it in action, start a new project using the Sprite Kit template and replace your scene class's implementation with this:" };
 
@@ -63,10 +70,6 @@ code_snippet 'objc' => << 'CODE';
     return self;
 }
 CODE
-    }
-
-    li {
-        "Memory leaks"
     }
 
     li {
