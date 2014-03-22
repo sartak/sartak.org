@@ -23,7 +23,7 @@ ol {
     li {
         id is "linewidth";
         p { qq{From `SKShapeNode`'s [documentation](https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKShapeNode_Ref/Reference/Reference.html#//apple_ref/occ/instp/SKShapeNode/lineWidth), "A line width larger than `2.0` may cause rendering artifacts in the final rendered image."} };
-        p { "It's good that they are up front about this limitation. But that is a heavy restriction." };
+        p { "It's good that they are up front about this limitation. But it's still pretty weak." };
     }
 
     li {
@@ -91,8 +91,7 @@ CODE
     };
     li {
         id is "resizing";
-        p { "This one is the most baffling and upsetting. I have no idea what is happening or why." };
-        p { "It seems that if you have enough `SKShapeNode` instances visible on screen, it completely screws up the scene rendering. The scene shrinks to about 60% of its height for a few moments. In the following screenshots you can see what happens when I tiptoe past the apparent `SKShapeNode` limit (thanks to all that detritus from the previous point). The app becomes completely unusable." };
+        p { "This one is the most baffling and upsetting. It seems that if you have too many `SKShapeNode` instances visible on screen, it completely screws up the scene rendering. The scene shrinks to about 60% of its height for a few moments. In the following screenshots you can see what happens when I tiptoe past the apparent `SKShapeNode` limit (thanks to all that detritus from the previous point). The game becomes completely unusable." };
 
         img {
             width is "320";
@@ -104,7 +103,7 @@ CODE
             height is "568";
             src is "/img/blog/skshapenode-youre-dead-to-me/shrink-post.png";
         };
-        p { "I have no idea why this happens except it seems to yet again be the fault of `SKShapeNode` inside of an `SKEffectNode`. The cause is possibly related to `SKEffectNode`'s unique rendering model. `SKEffectNode` lets you apply Core Image filters (which are akin to Photoshop filters) to some of your nodes. It's amazingly powerful. Seriously next level shit. But to achieve that, it must render its subtree into a separate buffer to which it can apply CI filters. This different codepath is probably the cause of all the problems. But if `SKShapeNode` cannot handle being rendered in an `SKEffectNode`, I seriously question how robust Sprite Kit is. (Incidentally, `SKEffectNode` also doesn't respect the `zPosition`s of its children, but that's another post altogether. The solution for that one is to interject a plain `SKNode` into the node tree.)" };
+        p { "This problem seems to yet again be the fault of `SKShapeNode` inside of an `SKEffectNode`. My guess is that `SKEffectNode`'s unique rendering model is triggering this. `SKEffectNode` lets you apply Core Image filters (which are akin to Photoshop filters) to some of your nodes. It's amazingly powerful. Seriously next level shit. But to achieve that, `SKEffectNode` must render its subtree into a separate buffer to which it can apply its CI filter. This different codepath is probably the cause of all the problems. But if `SKShapeNode` freaks out when it's being rendered into an `SKEffectNode`, I seriously question how robust Sprite Kit is. (Incidentally, `SKEffectNode` also doesn't respect the `zPosition`s of its children, but that's another post altogether. The solution for that one is to interject a plain `SKNode` into the node tree.)" };
         p { "Anyway. I've luckily been able to replicate this crazy rendering bug with a small amount of code. As before, replace the Sprite Kit template's scene class's implementation with the following:" };
         code_snippet 'objc' => << 'CODE';
 -(id)initWithSize:(CGSize)size {    
@@ -133,6 +132,8 @@ CODE
         p { "What in the world did Apple do to cause this bug?" };
     };
 }
+
+br {};
 
 p { "Because of all these flaws, **`SKShapeNode` is completely untrustworthy**. I now refuse to use `SKShapeNode` for any new code I write. I have also been refactoring existing code that uses it to stop using it. Here are some ways I've been able to do that." };
 
@@ -163,13 +164,15 @@ ol {
         };
 
         p { "This works fine if your `CAShapeLayer` is going to be the topmost UI component. However if you need to display Sprite Kit content _over_ the layer, things would get tricky. Maybe you can use two `SKView` instances, sandwiching the `CAShapeLayer`. That sounds like an awful lot of work though. Personally, I've chosen my battles carefully: there will be nothing in the game that renders above that drawing pad or lightning bolt." };
-        p { "Beware: Using `CALayer` requires jumping through a few `convertPoint:` hurdles. The coordinate system of Sprite Kit is different from the coordinate system of Core Animation. Natch." };
+        p { "Be aware that using `CALayer` requires jumping through a few `convertPoint:` hurdles. The coordinate system of Sprite Kit is different from the coordinate system of Core Animation. Natch." };
     };
     li {
         id is "rasterizeshape";
-        p { "While I haven't personally used this technique, I see no reason it wouldn't work. Render a `CGPathRef` offscreen using `CAShapeLayer`. Then snapshot that into an image. Then create an `SKSpriteNode` with that snapshot as a texture." };
+        p { "Render a `CGPathRef` offscreen using a disconnected `CAShapeLayer`. Then snapshot that into an image. Then create an `SKSpriteNode` with that snapshot as a texture. While I haven't personally used this technique, I see no reason it wouldn't work." };
         p { "Now you can add that sprite to your scene, animate it all over town, put it over or under other nodes, etc. You now have an unchanging `SKShapeNode` without all of the insane, unfixable bugs." };
     };
 };
+
+br {};
 
 p { "You know, maybe that one is worth doing *right*. The first person to implement the complete `SKShapeNode` API using an `SKSpriteNode` backed by a `CALayer` wins … my undying respect!" };
