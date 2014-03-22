@@ -70,10 +70,12 @@ code_snippet 'objc' => << 'CODE';
     return self;
 }
 CODE
+
+        p { "For me, the round rect stays red indefinitely. If you change that `if (0)` to a true value, then the code to change the `SKShapeNode`'s alpha kicks in and that causes the subsequent `setStrokeColor:` to have the intended visible effect." };
     }
 
     li {
-        p { "`SKShapeNode` sometimes drops nice little rendering glitches throughout my scenes." }
+        p { "`SKShapeNode` sometimes drops little rendering glitches throughout my scenes." }
 
         img {
             width is "163";
@@ -101,17 +103,17 @@ CODE
     };
 }
 
-p { "Because of all these reasons, I now refuse to use `SKShapeNode` for any new code I wrote. Whenever I get the chance, I refactor code that uses it to stop using it. Here are some ways I've been able to do that." };
+p { "Because of all these flaws, **`SKShapeNode` is completely untrustworthy**. I now refuse to use `SKShapeNode` for any new code I write. I have also been refactoring existing code that uses it to stop using it. Here are some ways I've been able to do that." };
 
 ol {
     li {
-        p { "For borders on opaque nodes, just use a `SKShapeNode` instantiated with `+[SKSpriteNode spriteNodeWithColor:size:]`. This gets you a rectangular block of `SKColor`." };
+        p { "For borders on opaque nodes, just use a `SKShapeNode` instantiated with `+[SKSpriteNode spriteNodeWithColor:size:]`. This gets you a rectangular block of the provided `SKColor`." };
         p { "Your borders will look better too. And you won't have to fear using a border width of greater than 2.0." };
-        p { "Cripes." };
+        p { "*Cripes*." };
     };
 
     li {
-        p { "Sprite Kit plays well with `CALayer` and friends. When you can get away with it, stick a `CAShapeLayer` into your `SKView`'s layer. I use this in two places in my game; a drawing pad and a procedurally-generated lightning bolt." };
+        p { "Sprite Kit plays well enough with `CALayer` and friends. When you can get away with it, stick a `CAShapeLayer` into your `SKView`'s layer. I use this in two places in my game: a drawing pad and a procedurally-generated lightning bolt." };
 
         img {
             width is "200";
@@ -123,5 +125,14 @@ ol {
             height is "103";
             src is "/img/blog/skshapenode-youre-dead-to-me/lightning.png";
         };
+
+        p { "If you need to display Sprite Kit content _over_ the shape, things get tricky. This might not work for that. I've chosen my battles here carefully: there will be nothing in the game that renders on top of that drawing pad or lightning bold." };
+        p { "Using `CALayer` requires jumping through a few `convertPoint:` hurdles. The coordinate system of Sprite Kit is different from the coordinate system of Core Animation. Natch." };
+    };
+    li {
+        p { "While I haven't personally used this tactic, I think it should work with little fuss. Render a `CGPathRef` offscreen using `CAShapeLayer`. Then snapshot that layer into an image. Then create an `SKSpriteNode` with that snapshot as a texture." };
+        p { "Now you can add that sprite to your scene, animate it around, put it over or under other nodes. You now have an unchanging `SKShapeNode` without its crap." };
     };
 };
+
+p { "The first person to implement the complete `SKShapeNode` API using an `SKSpriteNode` backed by a `CALayer` wins … my undying respect!" };
