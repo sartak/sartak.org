@@ -10,7 +10,7 @@ p{ "**`SKShapeNode`** is a subclass of `SKNode` that lets you draw arbitrary sha
 
 p { "However, `SKShapeNode` is by far the least-well engineered API in Sprite Kit. In fact, I have trouble naming a single lousier API that I've used since I started programming professionally. At least SOAP has an _ethos_." };
 
-p { "I respect that iOS 7 was a rush order. Expecting everything to come out perfectly during a platform reinvention is unrealistic. However I maintain that Sprite Kit would have been improved by simply holding `SKShapeNode` back until iOS 8. It was not ready to ship. But since people have it, they want to use it. I figured I'd document the many ways it has burned me. And most importantly, how I've replaced it in my game." };
+p { "I respect that iOS 7 was a rush order. It's unfair to expect that everything will come out perfectly during a platform reinvention. However I maintain that Sprite Kit would have been improved by simply holding `SKShapeNode` back until iOS 8. It was not ready to ship. But since people have it, they want to use it. And to those people, BEWARE! There most certainly be dragons." };
 
 p { "`SKShapeNode`, how do I loathe thee? Let me count the ways." };
 
@@ -70,9 +70,6 @@ CODE
     }
 
     li {
-        "Weird shrinking behavior"
-    }
-    li {
         p { "`SKShapeNode` sometimes drops nice little rendering glitches throughout my scenes." }
 
         img {
@@ -84,3 +81,41 @@ CODE
         p { "Those red lines are from `SKShapeNode` instances that once rendered red-stroked round rects. _Many_ frames ago. For whatever reason `SKShapeNode` decided to try to resurrect them, but only did half the job." };
     }
 }
+
+p { "Because of all these reasons, I now refuse to use `SKShapeNode` for any new code I wrote. Whenever I get the chance, I refactor code that uses it to stop using it. Here are some ways I've been able to do that." };
+
+ol {
+    li {
+        p { "For borders on opaque nodes, just use a `SKShapeNode` instantiated with `+[SKSpriteNode spriteNodeWithColor:size:]`. This gets you a rectangular block of `SKColor`." };
+        p { "Your borders will look better too. And you won't have to fear using a border width of greater than 2.0." };
+        p { "Cripes." };
+    };
+
+    li {
+        p { "Sprite Kit plays well with `CALayer` and friends. When you can get away with it, stick a `CAShapeLayer` into your `SKView`'s layer. I use this in two places in my game; a drawing pad and a procedurally-generated lightning bolt." };
+
+        img {
+            width is "200";
+            height is "200";
+            src is "/img/blog/skshapenode-youre-dead-to-me/drawing.png";
+        };
+        img {
+            width is "135";
+            height is "103";
+            src is "/img/blog/skshapenode-youre-dead-to-me/lightning.png";
+        };
+    };
+    li {
+        p { "Weird shrinking behavior" };
+        img {
+            width is "320";
+            height is "568";
+            src is "/img/blog/skshapenode-youre-dead-to-me/shrink-pre.png";
+        };
+        img {
+            width is "320";
+            height is "568";
+            src is "/img/blog/skshapenode-youre-dead-to-me/shrink-post.png";
+        };
+    };
+};
