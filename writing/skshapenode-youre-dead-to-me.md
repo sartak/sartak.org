@@ -13,13 +13,13 @@ I respect that iOS 7 was a rush order. Expecting everything to come out perfectl
 
 <ol markdown="1">
 
-<li>
-<p>From `SKShapeNode`'s [documentation](https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKShapeNode_Ref/Reference/Reference.html#//apple_ref/occ/instp/SKShapeNode/lineWidth), "A line width larger than `2.0` may cause rendering artifacts in the final rendered image."</p>
+<li markdown="1">
+<p markdown="1">From `SKShapeNode`'s [documentation](https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKShapeNode_Ref/Reference/Reference.html#//apple_ref/occ/instp/SKShapeNode/lineWidth), "A line width larger than `2.0` may cause rendering artifacts in the final rendered image."</p>
 
 <p>Wat.</p>
 </li>
 
-<li>
+<li markdown="1">
 I've had quite a few problems with `setStrokeColor:` not working at all.
 
 When I send a message like `setStrokeColor:[SKColor redColor]`, it sometimes has no effect at all. So I have to trick the `SKShapeNode` into redrawing itself. I've 
@@ -32,18 +32,18 @@ When I send a message like `setStrokeColor:[SKColor redColor]`, it sometimes has
 
 </li>
 
-<li>
+<li markdown="1">
 Memory leaks
 </li>
 
-<li>
+<li markdown="1">
 Weird shrinking behavior
 </li>
 
-<li>
-`SKShapeNode` sometimes drops nice little rendering glitches throughout my scenes.
+<li markdown="1">
+<p markdown="1">`SKShapeNode` sometimes drops nice little rendering glitches throughout my scenes.</p>
 
-<img src="/img/blog/skshapenode-youre-dead-to-me/detritus.png">
+<img width="163" height="136" src="/img/blog/skshapenode-youre-dead-to-me/detritus.png">
 
-Those red lines are from `SKShapeNode` that were red-stroked round rects. _Many_ frames ago. For whatever reason `SKShapeNode` decided to try to resurrect them, but only did half the job.
+<p markdown="1">Those red lines are from `SKShapeNode` instances that once rendered red-stroked round rects. _Many_ frames ago. For whatever reason `SKShapeNode` decided to try to resurrect them, but only did half the job.</p>
 </ol>
