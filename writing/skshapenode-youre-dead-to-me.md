@@ -20,7 +20,16 @@ I respect that iOS 7 was a rush order. Expecting everything to come out perfectl
 </li>
 
 <li>
-`setStrokeColor:` and `#define`
+I've had quite a few problems with `setStrokeColor:` not working at all.
+
+When I send a message like `setStrokeColor:[SKColor redColor]`, it sometimes has no effect at all. So I have to trick the `SKShapeNode` into redrawing itself. I've 
+
+    shape.alpha = 0.99999f;
+    shape.strokeColor = [SKColor redColor];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        shape.alpha = 1;
+    });
+
 </li>
 
 <li>
@@ -31,4 +40,10 @@ Memory leaks
 Weird shrinking behavior
 </li>
 
+<li>
+`SKShapeNode` sometimes drops nice little rendering glitches throughout my scenes.
+
+<img src="/img/blog/skshapenode-youre-dead-to-me/detritus.png">
+
+Those red lines are from `SKShapeNode` that were red-stroked round rects. _Many_ frames ago. For whatever reason `SKShapeNode` decided to try to resurrect them, but only did half the job.
 </ol>
