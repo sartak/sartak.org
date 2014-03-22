@@ -8,7 +8,7 @@ p { "For the past three months I've spent damn near every night and weekend mome
 
 p{ "**`SKShapeNode`** is a subclass of `SKNode` that draws a `CGPathRef`. It can render Bézier curves, polygons, rings, Louisiana, whatever. You can set the stroke color of the shape, or its fill color, or both. You could probably implement a decent chunk of your game's HUD with it. Bézier curves are a great way to give visual feedback of a user's gesture as in, say, [Flight Control](https://itunes.apple.com/us/app/flight-control/id306220440?at=11l7vX&ct=sartak-shape). Describing shapes at runtime rather than at design time (as in `SKSpriteNode`) unlocks worlds of possibilities." };
 
-p { "However, `SKShapeNode` is by far the least-well engineered API in Sprite Kit. In fact, I have trouble naming a single lousier API that I've used since I started programming professionally. At least SOAP has an _ethos_." };
+p { "However, `SKShapeNode` is by far the least-well engineered API in Sprite Kit. In fact, I have trouble naming a single lousier API that I've used since I started programming professionally. Say what you will about tenets of SOAP, at least it's an _ethos_." };
 
 p { "I respect that iOS 7 was a rush order. It's unfair to expect that everything will come out perfectly during a platform reinvention. However I maintain that Sprite Kit would have been improved by simply holding `SKShapeNode` back until iOS 8. It was not ready to ship. But since people have it, they want to use it. And to those people, BEWARE!" };
 
