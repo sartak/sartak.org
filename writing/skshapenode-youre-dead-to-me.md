@@ -14,7 +14,7 @@ I respect that iOS 7 was a rush order. Expecting everything to come out perfectl
 <ul>
 
 <li>
-From SKShapeNode's [documentation](https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKShapeNode_Ref/Reference/Reference.html#//apple_ref/occ/instp/SKShapeNode/lineWidth), "A line width larger than <tt>2.0</tt> may cause rendering artifacts in the final rendered image."
+From `SKShapeNode`'s [documentation](https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKShapeNode_Ref/Reference/Reference.html#//apple_ref/occ/instp/SKShapeNode/lineWidth), "A line width larger than <tt>2.0</tt> may cause rendering artifacts in the final rendered image."
 
 Wat.
 </li>
