@@ -16,15 +16,18 @@ p { "`SKShapeNode`, how do I loathe thee? Let me count the ways." };
 
 ol {
     li {
+        id is "leak";
         p { "`SKShapeNode` … [is](http://stackoverflow.com/questions/20292318/why-does-creating-and-removing-skshapenode-and-sknode-repeatedly-cause-a-memory) … [widely](http://stackoverflow.com/questions/18889297/skshapenode-has-unbounded-memory-growth) … [known](http://stackoverflow.com/questions/20134891/skphysicsbody-bodywithpolygonfrompath-memory-leaks) … [to](http://stackoverflow.com/questions/22323189/memory-leak-in-sprite-kit-application) … [leak](http://stackoverflow.com/a/22282920/290913) … [memory](http://tonychamblee.com/2013/11/18/tcprogresstimer-a-spritekit-progress-timer/)." };
     }
 
     li {
+        id is "linewidth";
         p { qq{From `SKShapeNode`'s [documentation](https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKShapeNode_Ref/Reference/Reference.html#//apple_ref/occ/instp/SKShapeNode/lineWidth), "A line width larger than `2.0` may cause rendering artifacts in the final rendered image."} };
         p { "Wat." };
     }
 
     li {
+        id is "setstrokecolor";
         p { "When I send a message like `setStrokeColor:[SKColor redColor]`, it sometimes has no visual effect at all. So I have to trick the `SKShapeNode` into redrawing itself. Changing its `alpha` is one way to do it:" };
 
 code_snippet 'objc' => << 'CODE';
@@ -75,6 +78,7 @@ CODE
     }
 
     li {
+        id is "detritus";
         p { "`SKShapeNode` sometimes drops little rendering glitches throughout my scenes." }
 
         img {
@@ -86,6 +90,7 @@ CODE
         p { "Those red lines are from `SKShapeNode` instances that once rendered red-stroked round rects. _Many_ frames ago. For whatever reason `SKShapeNode` decided to try to resurrect them, but only did half the job." };
     };
     li {
+        id is "resizing";
         p { "This one is the most baffling and upsetting. I have no idea what is happening or why." };
         p { "It seems that if you have enough `SKShapeNode` instances visible on screen, it completely screws up the scene rendering. The scene shrinks to about 60% of its height for a few moments. I think, but can't confirm, that touch input might be part of the recipe for disaster. In the following screenshots you can see what happens when I tiptoe past the apparent `SKShapeNode` limit (thanks to all that detritus from the previous point). The app becomes completely unusable." };
 
@@ -132,12 +137,14 @@ p { "Because of all these flaws, **`SKShapeNode` is completely untrustworthy**. 
 
 ol {
     li {
+        id is "colorsprite";
         p { "For borders on opaque nodes, just use a `SKShapeNode` instantiated with `+[SKSpriteNode spriteNodeWithColor:size:]`. This gets you a rectangular block of the provided `SKColor`." };
         p { "Your borders will look better too. And you won't have to fear using a border width of greater than 2.0." };
         p { "*Cripes*." };
     };
 
     li {
+        id is "shapelayer";
         p { "Sprite Kit plays well enough with `CALayer` and friends. When you can get away with it, stick a `CAShapeLayer` into your `SKView`'s layer. I use this in two places in my game: a drawing pad and a procedurally-generated lightning bolt." };
 
         img {
@@ -155,6 +162,7 @@ ol {
         p { "Beware: Using `CALayer` requires jumping through a few `convertPoint:` hurdles. The coordinate system of Sprite Kit is different from the coordinate system of Core Animation. Natch." };
     };
     li {
+        id is "rasterizeshape";
         p { "While I haven't personally used this technique, I see no reason it wouldn't work. Render a `CGPathRef` offscreen using `CAShapeLayer`. Then snapshot that into an image. Then create an `SKSpriteNode` with that snapshot as a texture." };
         p { "Now you can add that sprite to your scene, animate it all over town, put it over or under other nodes, etc. You now have an unchanging `SKShapeNode` without all of the insane, unfixable bugs." };
     };
