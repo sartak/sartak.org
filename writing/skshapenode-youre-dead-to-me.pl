@@ -76,6 +76,8 @@ code_snippet 'objc' => << 'CODE';
 CODE
 
         p { "For me, the round rect stays red indefinitely. If you change that `if (0)` to a true value, then the alpha change causes the subsequent `setStrokeColor:` to have the intended visible effect." };
+
+        p { "I've reported this to Apple as [rdar://16400219](http://openradar.appspot.com/radar?id=5827279825403904)." };
     }
 
     li {
