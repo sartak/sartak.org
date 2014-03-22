@@ -99,7 +99,7 @@ CODE
             height is "568";
             src is "/img/blog/skshapenode-youre-dead-to-me/shrink-post.png";
         };
-        p { "I have no idea why this happens except it seems to yet again be the fault of `SKShapeNode` inside of an `SKEffectNode`. As before, replace the Sprite Kit template's scene class's implementation with the following:" };
+        p { "I have no idea why this happens except it seems to yet again be the fault of `SKShapeNode` inside of an `SKEffectNode`. Luckily I've been able to replicate it with a pretty small amount of code. As before, replace the Sprite Kit template's scene class's implementation with the following:" };
         code_snippet 'objc' => << 'CODE';
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -151,13 +151,13 @@ ol {
             src is "/img/blog/skshapenode-youre-dead-to-me/lightning.png";
         };
 
-        p { "If you need to display Sprite Kit content _over_ the shape, things get tricky. This might not work for that. I've chosen my battles here carefully: there will be nothing in the game that renders on top of that drawing pad or lightning bold." };
-        p { "Using `CALayer` requires jumping through a few `convertPoint:` hurdles. The coordinate system of Sprite Kit is different from the coordinate system of Core Animation. Natch." };
+        p { "This works fine if your `CAShapeLayer` is going to be the topmost UI component. However if you need to display Sprite Kit content _over_ the layer, things would get tricky. Maybe you can use two `SKView` instances, sandwiching the `CAShapeLayer`. That sounds like an awful lot of work though. Personally, I've chosen my battles carefully: there will be nothing in the game that renders above that drawing pad or lightning bolt." };
+        p { "Beware: Using `CALayer` requires jumping through a few `convertPoint:` hurdles. The coordinate system of Sprite Kit is different from the coordinate system of Core Animation. Natch." };
     };
     li {
-        p { "While I haven't personally used this tactic, I think it should work with little fuss. Render a `CGPathRef` offscreen using `CAShapeLayer`. Then snapshot that layer into an image. Then create an `SKSpriteNode` with that snapshot as a texture." };
-        p { "Now you can add that sprite to your scene, animate it around, put it over or under other nodes. You now have an unchanging `SKShapeNode` without its crap." };
+        p { "While I haven't personally used this technique, I see no reason it wouldn't work. Render a `CGPathRef` offscreen using `CAShapeLayer`. Then snapshot that into an image. Then create an `SKSpriteNode` with that snapshot as a texture." };
+        p { "Now you can add that sprite to your scene, animate it all over town, put it over or under other nodes, etc. You now have an unchanging `SKShapeNode` without all of the insane, unfixable bugs." };
     };
 };
 
-p { "The first person to implement the complete `SKShapeNode` API using an `SKSpriteNode` backed by a `CALayer` wins … my undying respect!" };
+p { "You know, maybe that one is worth doing *right*. The first person to implement the complete `SKShapeNode` API using an `SKSpriteNode` backed by a `CALayer` wins … my undying respect!" };
