@@ -250,3 +250,11 @@ dd {
 blockquote {
     font-style: italic;
 }
+
+img + img {
+    margin-left: 0.5em;
+}
+
+ol, ul {
+    padding-left: 0;
+}
