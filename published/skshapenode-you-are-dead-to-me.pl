@@ -1,7 +1,7 @@
 use Sartak::Blog;
 
 BEGIN { print "title: <tt>SKShapeNode</tt>, you are dead to me
-draft: 1
+date: 2014-03-22
 " }
 
 p { "For the past three months I've spent damn near every night and weekend moment building my next iOS game. I now regularly shut down [Diesel Cafe](http://www.diesel-cafe.com). The game is my most ambitious project yet and I'm having a blast making it. As of today it's sixteen thousand lines and growing strong. For the UI I'm using [Sprite Kit](https://developer.apple.com/library/ios/documentation/GraphicsAnimation/Conceptual/SpriteKit_PG/Introduction/Introduction.html) which has been a real pleasure to use. But lurking inside it there is one source of pain that keeps recurring." };
