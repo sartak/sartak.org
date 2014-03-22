@@ -92,7 +92,7 @@ CODE
     li {
         id is "resizing";
         p { "This one is the most baffling and upsetting. I have no idea what is happening or why." };
-        p { "It seems that if you have enough `SKShapeNode` instances visible on screen, it completely screws up the scene rendering. The scene shrinks to about 60% of its height for a few moments. I think, but can't confirm, that touch input might be part of the recipe for disaster. In the following screenshots you can see what happens when I tiptoe past the apparent `SKShapeNode` limit (thanks to all that detritus from the previous point). The app becomes completely unusable." };
+        p { "It seems that if you have enough `SKShapeNode` instances visible on screen, it completely screws up the scene rendering. The scene shrinks to about 60% of its height for a few moments. In the following screenshots you can see what happens when I tiptoe past the apparent `SKShapeNode` limit (thanks to all that detritus from the previous point). The app becomes completely unusable." };
 
         img {
             width is "320";
