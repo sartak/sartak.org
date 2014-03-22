@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: <tt>SKShapeNode</tt>, you're dead to me
+BEGIN { print "title: <tt>SKShapeNode</tt>, you are dead to me
 draft: 1
 " }
 
@@ -87,7 +87,7 @@ CODE
         img {
             width is "163";
             height is "136";
-            src is "/img/blog/skshapenode-youre-dead-to-me/detritus.png";
+            src is "/img/blog/skshapenode-you-are-dead-to-me/detritus.png";
         };
 
         p { "Those red lines are from `SKShapeNode` instances that once rendered red rectangles. _Many_ frames ago. For whatever reason `SKShapeNode` decided to try to resurrect them, but only did half the job." };
@@ -100,12 +100,12 @@ CODE
         img {
             width is "320";
             height is "568";
-            src is "/img/blog/skshapenode-youre-dead-to-me/shrink-pre.png";
+            src is "/img/blog/skshapenode-you-are-dead-to-me/shrink-pre.png";
         };
         img {
             width is "320";
             height is "568";
-            src is "/img/blog/skshapenode-youre-dead-to-me/shrink-post.png";
+            src is "/img/blog/skshapenode-you-are-dead-to-me/shrink-post.png";
         };
         p { "This problem seems to yet again be the fault of `SKShapeNode` inside of an `SKEffectNode`. My guess is that `SKEffectNode`'s unique rendering model is triggering this. `SKEffectNode` lets you apply Core Image filters (which are akin to Photoshop filters) to some of your nodes. It's amazingly powerful. Seriously next level shit. But to achieve that, `SKEffectNode` must render its subtree into a separate buffer to which it can apply its CI filter. This different codepath is probably the cause of all the problems. But if `SKShapeNode` freaks out when it's being rendered into an `SKEffectNode`, I seriously question how robust Sprite Kit is. (Incidentally, `SKEffectNode` also doesn't respect the `zPosition`s of its children, but that's another post altogether. The solution for that one is to interject a plain `SKNode` into the node tree.)" };
         p { "Anyway. I've luckily been able to replicate this crazy rendering bug with a small amount of code. I've recorded a [video showing this bug](http://sartak.org/misc/shape-in-effect.mov). As before, replace the Sprite Kit template's scene class's implementation with the following:" };
@@ -159,12 +159,12 @@ ol {
         img {
             width is "200";
             height is "200";
-            src is "/img/blog/skshapenode-youre-dead-to-me/drawing.png";
+            src is "/img/blog/skshapenode-you-are-dead-to-me/drawing.png";
         };
         img {
             width is "135";
             height is "103";
-            src is "/img/blog/skshapenode-youre-dead-to-me/lightning.png";
+            src is "/img/blog/skshapenode-you-are-dead-to-me/lightning.png";
         };
 
         p { "This works fine if your `CAShapeLayer` is going to be the topmost UI component. However if you need to display Sprite Kit content _over_ the layer, things would get tricky. Maybe you can use two `SKView` instances, sandwiching the `CAShapeLayer`. That sounds like an awful lot of work though. Personally, I've chosen my battles carefully; there will be nothing in my game that renders above that drawing pad or lightning bolt." };
