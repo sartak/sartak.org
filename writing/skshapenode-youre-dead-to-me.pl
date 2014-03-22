@@ -167,7 +167,7 @@ ol {
             src is "/img/blog/skshapenode-youre-dead-to-me/lightning.png";
         };
 
-        p { "This works fine if your `CAShapeLayer` is going to be the topmost UI component. However if you need to display Sprite Kit content _over_ the layer, things would get tricky. Maybe you can use two `SKView` instances, sandwiching the `CAShapeLayer`. That sounds like an awful lot of work though. Personally, I've chosen my battles carefully: there will be nothing in the game that renders above that drawing pad or lightning bolt." };
+        p { "This works fine if your `CAShapeLayer` is going to be the topmost UI component. However if you need to display Sprite Kit content _over_ the layer, things would get tricky. Maybe you can use two `SKView` instances, sandwiching the `CAShapeLayer`. That sounds like an awful lot of work though. Personally, I've chosen my battles carefully; there will be nothing in my game that renders above that drawing pad or lightning bolt." };
         p { "Be aware that using `CALayer` requires jumping through a few `convertPoint:` hurdles. The coordinate system of Sprite Kit is different from the coordinate system of Core Animation. Natch." };
     };
     li {
