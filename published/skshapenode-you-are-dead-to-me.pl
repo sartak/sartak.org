@@ -108,7 +108,7 @@ CODE
             src is "/img/blog/skshapenode-you-are-dead-to-me/shrink-post.png";
         };
         p { "This problem seems to yet again be the fault of `SKShapeNode` inside of an `SKEffectNode`. My guess is that `SKEffectNode`'s unique rendering model is triggering this. `SKEffectNode` lets you apply Core Image filters (which are akin to Photoshop filters) to some of your nodes. It's amazingly powerful. Seriously next level shit. But to achieve that, `SKEffectNode` must render its subtree into a separate buffer to which it can apply its CI filter. This different codepath is probably the cause of all the problems. But if `SKShapeNode` freaks out when it's being rendered into an `SKEffectNode`, I seriously question how robust Sprite Kit is. (Incidentally, `SKEffectNode` also doesn't respect the `zPosition`s of its children, but that's another post altogether. The solution for that one is to interject a plain `SKNode` into the node tree.)" };
-        p { "Anyway. I've luckily been able to replicate this crazy rendering bug with a small amount of code. I've recorded a [video showing this bug](http://sartak.org/misc/shape-in-effect.mov). As before, replace the Sprite Kit template's scene class's implementation with the following:" };
+        p { "Anyway. I've luckily been able to replicate this crazy rendering glitch with a small amount of code. I've recorded a [video showing the bug](http://sartak.org/misc/shape-in-effect.mov). As before, replace the Sprite Kit template's scene class's implementation with the following:" };
         code_snippet 'objc' => << 'CODE';
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
