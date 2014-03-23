@@ -135,6 +135,10 @@ CODE
         p { "Tap the screen a few more time… <em>Hey what the hell was</em> that<em>?</em>" };
         p { "What in the world did Apple do to cause this bug? Regardless, I've reported this one as [rdar://16400203](http://openradar.appspot.com/radar?id=5866175049236480)." };
     };
+    li {
+        id is "others";
+        p { "According to other folks, `SKShapeNode` also has [terrible performance](https://twitter.com/mczonk/status/419194602089091073) and is [missing key features](https://twitter.com/joped/status/403415980946100225) from its `CAShapeLayer` counterpart." };
+    };
 }
 
 br {};
