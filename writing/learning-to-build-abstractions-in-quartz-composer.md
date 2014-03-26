@@ -73,7 +73,10 @@ We've renamed the properties, so let's go back to our composition to see our cha
 
 <img width="143" height="78" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/radial-input-input.png">
 
-Ah crud. Still two uselessly-named `Input` inlets. I bet that every time we edit `Radial Button` we must remove it from our composition and add the new version back in. What a pain! If you know a better solution, please get in touch. Otherwise, if you really must remove and re-add your custom patches after each change, it's probably best to finish the patch in isolation before adding it to your project.
+Ah crud. Still two uselessly-named `Input` inlets. I bet that every time
+we edit `Radial Button` we must remove it from our composition and add
+the new version back in. What a pain! If you know a better solution,
+please get in touch. Otherwise, if you really must remove and re-add your custom patches after each change, it's probably best to finish the patch in isolation before adding it to your project.
 
 **Beware!** Don't forget to adjust the layer ordering after you add new layers. `Hit Area` should be the layer with the highest number, then the `Add Button` layer should be the next layer below that. If you miss this step, you will see rendering bugs. Or worse, the touch handler mysteriously won't fire, because it is obscured by other layers.
 
@@ -112,7 +115,8 @@ If you inspect a `Mathematical Patch`, under the `Settings` pane there is a text
 
 For the `x-coordinate` patch, we'll want to use the formula `sin(360 * index/count) * radius`.
 
-**Note**! `sin` uses degrees not radians. Knowing that will save you the twenty minutes of self-doubt and head-scratching that I suffered. :)
+**Note**! `sin` uses degrees not radians. Knowing that will save you the
+twenty minutes of self-doubt and head-scratching that I suffered. :)
 
 For the `y-coordinate` patch, we'll use the same formula but with `cos` instead, producing `cos(360 * index/count) * radius`.
 
