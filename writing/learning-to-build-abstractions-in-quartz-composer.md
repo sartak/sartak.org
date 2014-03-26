@@ -158,10 +158,10 @@ If you wanted to, you could use an `Input Splitter` to avoid duplicating the `Ra
 
 I wonder if there's an automatic way to specify the `Count` and `Index` properties. Is there a way to count or enumerate the number of connections from an outlet? Quartz Composer provides a *lot* of patches so I would not be surprised if it did.
 
-To ace the composition, you could move the menu to the bottom left of the screen and make it cover only a quarter of the circle like Path does. I imagine you could implement the latter merely by choosing interesting values for `Index` and `Count`.
+To ace this project, you could move the menu to the bottom left of the screen. Make it cover only a quarter of the circle like Path does. I imagine you could implement the latter merely by choosing interesting values for `Index` and `Count`. Or, better yet, expose the `360` factor from the `sin` and `cos` formulae as a published input.
 
 ## The Rub
 
-Quartz Composer is certainly an interesting tool to have in your toolbelt. Origami does a lot to make it more usable and more flexible. For future projects I see no reason to prototype animations in code. Origami helps you design your interactions faster and gives that sweet, sweet [instantaneous feedback](http://vimeo.com/36579366).
+Quartz Composer is certainly an interesting tool to have in your repertoire. Origami does a lot to make it more usable and more flexible. For future projects I no longer have a reason to prototype animations in code. Origami helps you design your interactions faster and gives that sweet, sweet [instantaneous feedback](http://vimeo.com/36579366).
 
-Yes, it is too easy to create a mess of your composition with too many patches. However Quartz Composer thankfully does provide designers robust tools for creating and reusing abstractions. You just have to think like a programmer. ;)
+Yes, it is too easy to create a mess of your composition with too many patches. Just like not using functions would make a mess of your code. Quartz Composer thankfully does provide designers robust tools for creating and reusing abstractions. You just have to think like a programmer. ;)
