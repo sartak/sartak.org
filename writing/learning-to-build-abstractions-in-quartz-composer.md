@@ -51,6 +51,8 @@ If all went according to plan, there should be no change in the Viewer. Indeed t
 
 Let's get rid of the other two buttons and replace them with macros. Copy and paste works just fine on macro patches. Make sure that each of the three macros has its `Input` and `Image` inlets populated.
 
+<img width="533" height="347" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/macros.png">
+
 Running the Viewer you now see that there's only one button. The problem of course is that all three buttons are animating between the same positions at the same times, so the other two buttons are hiding below the visible one.
 
 Clearly we need more macro parameters. But to add them I would have to edit the macro three times, once for each button. This is because I used copy and paste to duplicate the macros. Just like in programming, copy and paste is a worst practice.
