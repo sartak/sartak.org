@@ -69,7 +69,7 @@ Then from the Patch Library drag in two more `Radial Button`s and wire them up. 
 
 In the Patch Library, right click the `Radial Button` object and select `Edit`. Then without selecting a patch, open up the Patch Inspector. This inspects `Radial Button` itself. In the dropdown at the top select `Published Inputs & Outputs`. You'll see a table of `Input` mapped to `input_proxy_1` and another `Input` mapped to `input_proxy_2`. Change one of the `Input` labels to `Progress` and the other to `Image`. I don't know if there's a way to immediately see which is which. However if you save and reopen `Radial Button`, the label on the image layer should say "Image" not "Progress". If you guessed wrong be sure to flip them the other way.
 
-Now that we've renamed the properties let's go back to our composition to see our change.
+We've renamed the properties, so let's go back to our composition to see our change.
 
 <img width="143" height="78" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/radial-input-input.png">
 
@@ -79,7 +79,7 @@ Ah crud. Still two generic `Input` inlets. I bet that every time we edit `Radial
 
 Next let's make more properties into parameters. `x-` and `y-coordinate` are as good a place to start as any. Recall that in Pasan's post we assigned different end values to each button's transition patches. However, notice that the `Start Value` and `End Value` of the transition patch have ordinary inlet ports. That means we could publish those inputs from `Radial Button` itself. Start by right clicking `Transition X`, selecting `Publish Inputs`, then `End Value`. Call it `End X`. Similarly, publish `Transition Y`'s `End Value` as `End Y`.
 
-Go back to your composition, remove the `Radial Button` patches, then readd them. You'll see now that you have the new `End X` and `End Y` inputs. Hook up the `Progress` and `Image` inlets as before. Then, using the same method as in Pasan's post, assign constant values using the Patch Inspector for each of the `End X` and `End Y` inputs on each of the three buttons. For convenience they are:
+Go back to your composition, remove the `Radial Button` patches, then readd them. You'll see that you have the new `End X` and `End Y` inputs. Hook up the `Progress` and `Image` inlets as before. Then, using the same method as in Pasan's post, assign constant values using the Patch Inspector for each of the `End X` and `End Y` inputs on each of the three buttons. For convenience they are:
 
 - A button: `(-184.5, -408.5)`
 - B button: `(0, -298.5)`
@@ -87,7 +87,7 @@ Go back to your composition, remove the `Radial Button` patches, then readd them
 
 Notice how the default values for `End X` and `End Y` are the values that had been assigned to each `End Value` of `Button A`'s two transitions. You should change them to better defaults (like `0`) by editing the `Radial Button` patch. Use the Patch Inspector with no patch selected, then changing the values under `Input Parameters`.
 
-In the Viewer, confirm that the animation is working again. The only thing left to fix is the friction and tension of each of the buttons coming out. I'm sure you can now handle that.
+In the Viewer, confirm that the animation is working again. The only thing left to fix is the friction and tension of each of the buttons coming out. I'm sure you can handle that.
 
 ## How Bout Dem Abstractions
 
@@ -117,13 +117,13 @@ For the `y-coordinate` patch, we'll use the same formula but with `cos` instead,
 
 Hook the `Result` outlets of these two patches up to the `End Values` of the corresponding transitions.
 
-Now, we'll need to publish the `Index`, `Count`, and `Radius` properties. If we do that on one of the two `Mathematical Expression` patches, the other one won't get those inputs. If we do it on both patches, we might expect that Quartz Composer would send the same value to both patches, but that's not the case. The patch just publishes two sets of inputs with the same names. Useless!
+We'll need to publish the `Index`, `Count`, and `Radius` properties. If we do that on one of the two `Mathematical Expression` patches, the other one won't get those inputs. If we do it on both patches, we might expect that Quartz Composer would send the same value to both patches, but that's not the case. The patch just publishes two sets of inputs with the same names. Useless!
 
 What we want here is an `Input Splitter`. Right click one of the `Mathematical Expression` patches and select `Insert Input Splitter` for `Radius`. This gives you a tiny patch with an unnamed input and output. The key to using this is that you can send output from one patch as input to multiple other patches. So drag the noodle from the `Radius` `Input Splitter` to both `Mathematical Expression` patches' `Radius` input. Repeat for `Index` and `Count`.
 
 Then finally we can publish the `Radius`, `Count`, and `Index` properties in the usual way from the `Input Splitter` patches.
 
-With all those changes made, my `Radial Button` patch now looks like this:
+With all those changes made, my `Radial Button` patch looks like this:
 
 <img width="640" height="423" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/radial-splitters.png">
 
@@ -135,11 +135,11 @@ With each radius set to `200`, count set to `3`, and index from `0` to `2`, I ge
 
 <img width="256" height="270" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/composition-result.png">
 
-Great! Now we can factor out the `Friction` parameter in the same way. This is your cue!
+Great! We can factor out the `Friction` parameter in the same way. (This is your cue!)
 
 ## Put Your Abstraction to Work
 
-Now that was certainly a lot of work to build out that `Radial Button` patch. Let's see how well it serves us by adding a fourth and fifth button to the menu.
+That was certainly a lot of work to build out that `Radial Button` patch. Let's see how well it serves us by adding a fourth and fifth button to the menu.
 
 First, add your new images to the composition. Delete their `Layer` patches. Drag in two more `Radial Button`s. Hook up their `Image` and `Progress` inlets.
 
@@ -149,7 +149,7 @@ Then set the `Radius` of the two new patches to `200`. Set the `Count` of all th
 
 Success!
 
-If you wanted to, you could use an `Input Splitter` to avoid duplicating the `Radius` and `Count` properties.
+If you wanted to, you could use an `Input Splitter` to avoid duplicating the `Radius` and `Count` properties and make it even easier to add buttons.
 
 I wonder if there's an automatic way to specify the `Count` and `Index` properties. Is there a way to count or enumerate the number of connections from an outlet? Quartz Composer provides a *lot* of patches so I would not be surprised if it did.
 
