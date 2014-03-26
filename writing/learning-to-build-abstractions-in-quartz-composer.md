@@ -101,24 +101,24 @@ That is not good enough.
 
 If we want to add or remove a button in this menu, it'd be a surprising amount of work. We would need to do some trigonometry for each button to produce a new set of magic numbers. No way! It needs to be as easy to add a button as it would be in, say, Interface Builder.
 
-Before we do that, let's simplify the problem first. Let's move everything to the origin. That means you need to change the `Radial Button`'s `Start Value` for both `Transition X` and `Transition Y` to `0`. And then in your composition, change the `y-coordinate` of the `Add Button` and the `Hit Test` from `-512` to `0`.
+Before we attempt that, let's simplify the problem first. Let's move everything to the origin. That means you need to change the `Radial Button`'s `Start Value` for both `Transition X` and `Transition Y` to `0`. And then in your composition, change the `y-coordinate` of the `Add Button` and the `Hit Test` from `-512` to `0`.
 
 Adjusting this so that everything is relative to the origin, instead of the magic value `-512`, simplifies the problem. Also, we'll lay the buttons across the complete circle around the add button, rather than just half or a quarter of it.
 
 To begin, we'll remove the `End X` and `End Y` published inputs from `Radial Button`. You remove them the same way you added them: just right click the patch and select the property under `Published Inputs`.
 
-The new inputs we'll want are `Radius`, `Count`, and `Index`. The `Radius` input will tell us how far from the origin to move the button. `Count` and `Index` will be used to decide where on the circle the button will go.
+The new inputs we'll want are `Radius`, `Count`, and `Index`. The `Radius` input will tell us how far from the origin to move that button. `Count` and `Index` will be used to decide where on the circle that button will go.
 
-To calculate the destination of each button, we'll need access to `sin` and `cos`. Quartz Composer has a Mathematical Expression patch that evaluates expressions of arbitrarily many variables. We'll need one patch for the `x-coordinate` and another for the `y-coordinate`, so drag out two.
+To calculate the destination of each button, we'll need to use `sin` and `cos`. Quartz Composer provides a `Mathematical Expression` patch that evaluates expressions of arbitrarily many variables. We'll need one patch for the `x-coordinate` and another for the `y-coordinate`, so drag out two.
 
 If you inspect a `Mathematical Patch`, under the `Settings` pane there is a text field for formula. Any free variables in this formula will end up as inputs to the patch (which is a wonderful bit of design).
 
-For the `x-coordinate` patch, we'll want to use the formula `sin(360 * index/count) * radius`.
+For the `x-coordinate` patch, we'll want to use the formula <nobr>`sin(360 * index/count) * radius`</nobr>.
 
 **Note**! `sin` uses degrees not radians. Knowing that will save you the
 twenty minutes of self-doubt and head-scratching that I suffered. :)
 
-For the `y-coordinate` patch, we'll use the same formula but with `cos` instead, producing `cos(360 * index/count) * radius`.
+For the `y-coordinate` patch, we'll use the same formula but with `cos` instead, producing <nobr>`cos(360 * index/count) * radius`</nobr>.
 
 Hook the `Result` outlets of these two patches up to the `End Values` of the corresponding `Transition` patches.
 
