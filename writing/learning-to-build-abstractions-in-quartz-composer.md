@@ -8,7 +8,7 @@ I recommend you not only read Pasan's post, but also *actually* follow along! At
 Near the end of his post, Pasan laments:
 
 > The only downside that I see right now to using Quartz
-> Composer is that if you're protoyping something complex,
+> Composer is that if you're prototyping something complex,
 > your composition can get **unwieldy and convoluted fairly quickly**.
 > In just creating a radial menu with three buttons we have
 > over 20 patches in our composition.
@@ -73,13 +73,14 @@ We've renamed the properties, so let's go back to our composition to see our cha
 
 <img width="143" height="78" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/radial-input-input.png">
 
-Ah crud. Still two uselessly-named `Input` inlets. I bet that every time we edit `Radial Button` we must remove it from our composition and add the new version back in. What a pain! If you know a better solution, please get in touch. Otherwise, if you really must remove and readd your custom patches after each change, it's probably best to finish the patch in isolation before adding it to your project.
+Ah crud. Still two uselessly-named `Input` inlets. I bet that every time we edit `Radial Button` we must remove it from our composition and add the new version back in. What a pain! If you know a better solution, please get in touch. Otherwise, if you really must remove and re-add your custom patches after each change, it's probably best to finish the patch in isolation before adding it to your project.
 
 **Beware!** Don't forget to adjust the layer ordering after you add new layers. `Hit Area` should be the layer with the highest number, then the `Add Button` layer should be the next layer below that. If you miss this step, you will see rendering bugs. Or worse, the touch handler mysteriously won't fire, because it is obscured by other layers.
 
 Next let's make more properties into parameters. `x-` and `y-coordinate` are as good a place to start as any. Recall that in Pasan's post we assigned different `End Value`s to each button's `Transition` patches. However, notice that the `Start Value` and `End Value` of the `Transition` patch have ordinary inlet ports. That means we could publish those inputs from `Radial Button` itself. Start by right clicking `Transition X`, selecting `Publish Inputs`, then `End Value`. Call it `End X`. Similarly, publish `Transition Y`'s `End Value` as `End Y`.
 
-Go back to your composition, remove the `Radial Button` patches, then readd them. You'll see that you have the new `End X` and `End Y` inputs. Hook up the `Progress` and `Image` inlets as before. Then, using the same method as in Pasan's post, assign constant values using the Patch Inspector for each of the `End X` and `End Y` inputs on each of the three buttons. For convenience they are:
+Go back to your composition, remove the `Radial Button` patches, then
+re-add them. You'll see that you have the new `End X` and `End Y` inputs. Hook up the `Progress` and `Image` inlets as before. Then, using the same method as in Pasan's post, assign constant values using the Patch Inspector for each of the `End X` and `End Y` inputs on each of the three buttons. For convenience they are:
 
 - A button: `(-184.5, -408.5)`
 - B button: `(0, -298.5)`
@@ -111,7 +112,7 @@ If you inspect a `Mathematical Patch`, under the `Settings` pane there is a text
 
 For the `x-coordinate` patch, we'll want to use the formula `sin(360 * index/count) * radius`.
 
-**Note**! `sin` uses degrees not radians. Knowing that will save you the twenty minutes of self-doubt and headscratching that I suffered. :)
+**Note**! `sin` uses degrees not radians. Knowing that will save you the twenty minutes of self-doubt and head-scratching that I suffered. :)
 
 For the `y-coordinate` patch, we'll use the same formula but with `cos` instead, producing `cos(360 * index/count) * radius`.
 
