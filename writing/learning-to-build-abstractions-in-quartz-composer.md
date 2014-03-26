@@ -5,7 +5,7 @@ I decided today that I would learn a bit of [Quartz Composer](http://en.wikipedi
 
 I recommend you not only read the post, but also *actually* follow along! At worst you'll have spent 20 minutes looking at another way of doing things. At best you'll have a new tool in your kit and you'll learn to be even more handsome.
 
-At the end of Pasan's post, he mentions,
+At the end of Pasan's post, he mentions:
 
 > The only downside that I see right now to using Quartz
 > Composer is that if you're protoyping something complex,
@@ -14,7 +14,7 @@ At the end of Pasan's post, he mentions,
 > over 20 patches in our composition. This can be mitigated
 > to some effect by rearranging and using QC's notes feature.
 
-I agree that it's unwieldy. Here's my version of the resulting composition:
+I agree that it's unwieldy. Here's a snapshot of my resulting composition:
 
 <img width="392" height="267" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/notes.png">
 
