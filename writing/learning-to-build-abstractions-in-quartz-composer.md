@@ -3,7 +3,7 @@ draft: 1
 
 I decided today that I would learn a bit of [Quartz Composer](http://en.wikipedia.org/wiki/Quartz_Composer). I had never touched it before, beyond reading a couple articles and watching a conference talk. The most useful article for me was "[UI Prototyping with Quartz Composer and Origami](http://www.pasanpremaratne.com/2014/03/15/UI-Prototyping-with-Quartz-Composer-and-Origami/)" by Pasan Premaratne. It takes you from absolute zero to having built a simpler version to [Path's attractive spinout menu](http://codepen.io/sparanoid/pen/nHAmi) with Facebook's [Origami](http://facebook.github.io/origami/).
 
-I recommend you not only read the post, but also *actually* follow along! At worst you'll have spent twenty minutes examining at another way of doing things. At best you'll have a new tool in your kit and become even more handsome.
+I recommend you not only read the post, but also *actually* follow along! At worst you'll have spent twenty minutes examining at another way of doing things. At best you'll have acquired a new tool for your kit and become even more handsome.
 
 At the end of Pasan's post, he mentions:
 
@@ -13,15 +13,15 @@ At the end of Pasan's post, he mentions:
 > In just creating a radial menu with three buttons we have
 > over 20 patches in our composition.
 
-I agree that it's unwieldy. Here's a snapshot of my resulting composition:
+I agree that it can become unwieldy. Here's a snapshot of my small composition:
 
 <img width="392" height="267" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/notes.png">
 
-Those three yellow blocks are essentially the same code. Each yellow block does not explicitly group its contained patches; they are spacially contained in a particular region on the canvas. Nothing more. So the yellow block is about as constructive as a source code comment.
+Those three yellow blocks contain essentially the same code. Each block does not explicitly group its contained patches; they are spacially contained in a particular region on the canvas. Nothing more. So a yellow block is about as constructive as a source code comment.
 
-These blocks contain the same patches duplicated with slightly different parameters. That is naturally a bit offensive to me as a programmer. If possible I would like to clean up that repetition. But I'm not even sure that I can.
+These blocks contain the same patches duplicated with slightly different parameters. That is of course a bit offensive to me as a programmer. If possible I would like to clean up that repetition. But I'm not even sure that I can.
 
-Here's the rub. If Quartz Composer provides no tools to abstract away chunks of your composition, then it is nothing more than a shiny toy. It would be like a programming language that does not support creating functions. But if QC *does* enable building bigger, reusable units of design, then it is worthy of study.
+Here's the rub. If Quartz Composer provides no tools to abstract away chunks of your composition, then it is nothing more than a shiny toy. It would be like a programming language that does not support creating functions. But if QC *does* enable building bigger, reusable units of design, then it is worthy of my attention.
 
 So! Let's learn how to build abstractions in Quartz Composer. Together! This is my very first day with Quartz Composer, so there are going to be some false starts. Bear with me. :)
 
@@ -31,9 +31,9 @@ Step one is to read and follow along with everything in Pasan's post.
 
 Go do it. I'll be here.
 
-As I went through Pasan's tutorial, I kept seeing mention of a "Macro" feature all over Quartz Composer. If it's like any other kind of macro, it would be one way to encapsulate complexity in your composition.
+As I went through Pasan's tutorial, I kept seeing mention of a "Macro" feature all over Quartz Composer. If it's like any other system's macro, it would be one way to encapsulate complexity in your composition.
 
-The next step then must be to select the group of patches responsible for one of the buttons and click `Create Macro` in the toolbar. This replaces all the patches with a single `Macro Patch`. The noodle from `Interaction 2`'s Drag outlet is connected to this macro patch, which is a good sign. In fact if you go over to the Viewer you should see that nothing has changed.
+The next step, then, must be to select the group of patches responsible for one of the buttons and click `Create Macro` in the toolbar. This replaces all the patches with a single `Macro Patch`. The noodle from `Interaction 2`'s Drag outlet is connected to this macro patch, which is a good sign. In fact if you go over to the Viewer you should see that nothing has changed.
 
 Double click the macro patch (careful: double click its body, not its titlebar) to edit its contents. We can see that it is almost identical to what we had before for a button. However there is a new patch called `Number Splitter` near the top. This must be how Quartz Composer connects the Drag interaction outside the macro to the input of the bouncy and classic animations inside the macro. Note that `Number Splitter`'s inlet is green, presumably to indicate that.
 
@@ -147,7 +147,7 @@ Then set the `Radius` of the two new patches to 200. Set the `Count` of all the 
 
 That's all!
 
-<img width="314" height="275" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/five-buttons.png">
+<img src="/img/blog/learning-to-build-abstractions-in-quartz-composer/done.gif">
 
 Success!
 
