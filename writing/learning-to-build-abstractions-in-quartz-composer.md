@@ -67,7 +67,7 @@ Another button in the QC toolbar is `Add to Library`. I presume that is for reus
 
 Then from the Patch Library drag in two more Radial Buttons and wire them up. You'll notice that the inlets are now called "Enable", "Input", and "Input". Not great, so let's fix that problem first.
 
-In the Patch Library, right click the `Radial Button` object and select `Edit`. Then without selecting a patch, open up the Patch Inspector. This inspects the Radial Button patch itself. In the dropdown at the top select "Published Inputs & Outputs". You'll see a table of `Input` mapped to `input_proxy_1` and another `Input` mapped to `input_proxy_2`. Change one of the `Input` labels to `Progress` and the other to `Image`. I don't know if there's a way to immediately see which is which, but if you save and reopen the Radial Button the label on the layer should say "Image" not "Progress". If you guessed wrong be sure to flip them the other way.
+In the Patch Library, right click the `Radial Button` object and select `Edit`. Then without selecting a patch, open up the Patch Inspector. This inspects the Radial Button patch itself. In the dropdown at the top select "Published Inputs & Outputs". You'll see a table of `Input` mapped to `input_proxy_1` and another `Input` mapped to `input_proxy_2`. Change one of the `Input` labels to `Progress` and the other to `Image`. I don't know if there's a way to immediately see which is which. However if you save and reopen `Radial Button`, the label on the image layer should say "Image" not "Progress". If you guessed wrong be sure to flip them the other way.
 
 Now that we've renamed the properties let's go back to our composition to see our change.
 
