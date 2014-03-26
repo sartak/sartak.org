@@ -1,5 +1,5 @@
 title: Learning to Build Abstractions in Quartz Composer
-draft: 1
+date: 2014-03-26
 
 I decided today that I would learn a bit of [Quartz Composer](http://en.wikipedia.org/wiki/Quartz_Composer). I had never touched it before, beyond reading a couple articles and watching a conference talk. The most useful introduction for me was "[UI Prototyping with Quartz Composer and Origami](http://www.pasanpremaratne.com/2014/03/15/UI-Prototyping-with-Quartz-Composer-and-Origami/)" by Pasan Premaratne. It takes you from absolute zero to having built a simpler version to [Path's attractive spinout menu](http://codepen.io/sparanoid/pen/nHAmi) with Facebook's [Origami](http://facebook.github.io/origami/).
 
