@@ -1,7 +1,7 @@
-title: Macros in Quartz Composer
+title: Learning to Build Abstractions in Quartz Composer
 draft: 1
 
-I decided today that I would learn a bit of [Quartz Composer](http://en.wikipedia.org/wiki/Quartz_Composer). One very helpful article was "[UI Prototyping with Quartz Composer and Origami](http://www.pasanpremaratne.com/2014/03/15/UI-Prototyping-with-Quartz-Composer-and-Origami/)" by Pasan Premaratne. This article takes you from zero to having built a simpler version to Path's attractive spinout menu with Facebook's [http://facebook.github.io/origami/](Origami). At the end of Pasan's post, he mentions,
+I decided today that I would learn a bit of [Quartz Composer](http://en.wikipedia.org/wiki/Quartz_Composer). One very helpful article was "[UI Prototyping with Quartz Composer and Origami](http://www.pasanpremaratne.com/2014/03/15/UI-Prototyping-with-Quartz-Composer-and-Origami/)" by Pasan Premaratne. This article takes you from zero to having built a simpler version to [Path's attractive spinout menu](http://codepen.io/sparanoid/pen/nHAmi) with Facebook's [Origami](http://facebook.github.io/origami/). At the end of Pasan's post, he mentions,
 
 > The only downside that I see right now to using Quartz
 > Composer is that if you're protoyping something complex,
@@ -10,9 +10,9 @@ I decided today that I would learn a bit of [Quartz Composer](http://en.wikipedi
 > over 20 patches in our composition. This can be mitigated
 > to some effect by rearranging and using QC's notes feature.
 
-I agree that it's unwieldy. Here's my version of the composition:
+I agree that it's unwieldy. Here's my version of the resulting composition:
 
-<img width="392" height="267" src="/img/blog/macros-in-quartz-composer/notes.png">
+<img width="392" height="267" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/notes.png">
 
 I thought I'd take this one step further and use this "Macro" feature I kept seeing all over Quartz Composer. Because I really try my hardest to never repeat myself! I'm writing this as I learn how macros work, so there may be some false starts.
 
@@ -52,7 +52,7 @@ In the Patch Library right click the Radial Button object and select Edit. Then 
 
 Now that we've renamed the properties let's go back to our composition and see the fruits of our labor.
 
-<img width="143" height="78" src="/img/blog/macros-in-quartz-composer/radial-input-input.png">
+<img width="143" height="78" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/radial-input-input.png">
 
 Ah crud. It looks like every time we edit the Radial Button patch we'll need to remove it from our composition and add the new version back in. Be careful to adjust the layers after you do this. Hit Area should be the layer with the highest number, then the Plus Button Layer should be the next layer below that. If you miss this step it will cause a bit of frustration! :)
 
@@ -98,15 +98,15 @@ Then finally we can publish the Radius, Count, and Index properties in the usual
 
 Here is where my Radial Button patch stands:
 
-<img width="640" height="423" src="/img/blog/macros-in-quartz-composer/radial-splitters.png">
+<img width="640" height="423" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/radial-splitters.png">
 
 And then from our Composition we can use this new and improved version.
 
-<img width="502" height="396" src="/img/blog/macros-in-quartz-composer/composition-patch.png">
+<img width="502" height="396" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/composition-patch.png">
 
 With each radius is set to 200, count set to 3, and index from 0 to 2, I get the following result:
 
-<img width="256" height="270" src="/img/blog/macros-in-quartz-composer/composition-result.png">
+<img width="256" height="270" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/composition-result.png">
 
 Great! Now we can factor out the friction parameter in the same way. Exercise for the reader. :)
 
@@ -120,7 +120,7 @@ Then set the Radius of the two new patches to 200. Set the count of all the Radi
 
 That's all!
 
-<img width="314" height="275" src="/img/blog/macros-in-quartz-composer/five-buttons.png">
+<img width="314" height="275" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/five-buttons.png">
 
 If you wanted to, you could use an Input Splitter to avoid duplicating the Radius and Count properties.
 
