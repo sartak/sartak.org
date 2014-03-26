@@ -1,7 +1,7 @@
 title: Macros in Quartz Composer
 draft: 1
 
-I decided today that I would learn a bit of (Quartz Composer)[http://en.wikipedia.org/wiki/Quartz_Composer]. One very helpful article was "(UI Prototyping with Quartz Composer and Origami)[http://www.pasanpremaratne.com/2014/03/15/UI-Prototyping-with-Quartz-Composer-and-Origami/]" by Pasan Premaratne. This article takes you from zero to having built a simpler version to Path's attractive spinout menu with Facebook's (http://facebook.github.io/origami/)[Origami]. At the end of Pasan's post, he mentions,
+I decided today that I would learn a bit of [Quartz Composer](http://en.wikipedia.org/wiki/Quartz_Composer). One very helpful article was "[UI Prototyping with Quartz Composer and Origami](http://www.pasanpremaratne.com/2014/03/15/UI-Prototyping-with-Quartz-Composer-and-Origami/)" by Pasan Premaratne. This article takes you from zero to having built a simpler version to Path's attractive spinout menu with Facebook's [http://facebook.github.io/origami/](Origami). At the end of Pasan's post, he mentions,
 
 > The only downside that I see right now to using Quartz
 > Composer is that if you're protoyping something complex,
