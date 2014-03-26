@@ -41,7 +41,7 @@ If we want to make this macro generic, we would need to create our own parameter
 
 To parameterize the image, right click the Layer patch. Under `Publish Inputs` select the `Image` property. QC offers to let you name the parameter differently from the name that the Layer patch expects, but in this case we can stick with `Image`. This turns the inlet green, which matches the `Number Splitter` parameter. Here's to hoping!
 
-Clicking `Edit Parent` in the QC toolbar leaves the macro and returns to our overall composition. If you look at the macro patch you can see that it now has an `Image` inlet. Success! Drag that `ButtonA.png` file back into the composition, delete its layer, and hook up its outlet to the macro's `Image` input.
+Clicking `Edit Parent` in the QC toolbar leaves the macro and returns to our overall composition. If you look at the macro patch you can see that it now has an `Image` inlet. Drag that `ButtonA.png` file back into the composition, delete its layer, and hook up its outlet to the macro's `Image` input.
 
 If all went according to plan, there should be no change in the Viewer. Indeed there are three spinout buttons labeled A, B, and C.
 
@@ -144,8 +144,6 @@ Now that was certainly a lot of work to build out that `Radial Button` patch. Le
 First, add your new images to the composition. Delete their `Layer` patches. Drag in two more `Radial Button`s. Hook up their `Image` and `Progress` inlets.
 
 Then set the `Radius` of the two new patches to `200`. Set the `Count` of all the `Radial Button` patches to `5`. Then finally set the `Index` values of the new patches to `3` and `4`.
-
-That's all!
 
 <img width="252" height="223" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/finished.gif">
 
