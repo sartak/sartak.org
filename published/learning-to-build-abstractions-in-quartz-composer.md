@@ -89,7 +89,7 @@ re-add them. You'll see that you have the new `End X` and `End Y` inputs. Hook u
 - B button: `(0, -298.5)`
 - C button: `(184.5, -408.5)`
 
-Notice as you're editing how the default values for `End X` and `End Y` are the values that had been assigned to each `End Value` of `Button A`'s two `Transition` patches. You should change them to better defaults (like `0`) by editing the `Radial Button` patch. Use the Patch Inspector with no patch selected, then changing the values under `Input Parameters`.
+Notice as you're editing how the default values for `End X` and `End Y` are the values that had been assigned to each `End Value` of `Button A`'s two `Transition` patches. You should change them to better defaults (like `0`) by editing the `Radial Button` patch. Use the Patch Inspector with no patch selected, then change the values under `Input Parameters`.
 
 In the Viewer, confirm that the animation is working again. The only thing left to fix is the friction and tension of each of the buttons coming out. I'm sure you can handle that.
 
@@ -103,7 +103,7 @@ If we want to add or remove a button in this menu, it'd be a surprising amount o
 
 Before we attempt that, let's simplify the problem first. Let's move everything to the origin. Change the `Radial Button`'s `Start Value` for both `Transition X` and `Transition Y` to `0`. And then in your composition, change the `y-coordinate` of the `Add Button` and the `Hit Test` from `-512` to `0`.
 
-Moving to the origin, instead of the magic `y-coordinate` `-512`, reduces the fiddliness of the task. Also, we'll lay the buttons across the complete circle around the add button, rather than just half or a quarter of it.
+Using the origin, instead of the magic `y-coordinate` `-512`, reduces the fiddliness of the task. Also, we'll lay the buttons across the complete circle around the add button, rather than just half or a quarter of it. Once we have that working, coming back and restoring these constraints would be straightforward.
 
 To begin, we'll remove the `End X` and `End Y` published inputs from `Radial Button`. You remove them the same way you added them: just right click the patch and select the property under `Published Inputs`.
 
@@ -116,7 +116,7 @@ If you inspect a `Mathematical Patch`, under the `Settings` pane there is a text
 For the `x-coordinate` patch, we'll want to use the formula <nobr>`sin(360 * index/count) * radius`</nobr>.
 
 **Note**! `sin` uses degrees not radians. Knowing that will save you the
-twenty minutes of self-doubt and head-scratching that I suffered. :)
+twenty minutes of head-scratching and intense self-doubt that I suffered. :)
 
 For the `y-coordinate` patch, we'll use the same formula but with `cos` instead, producing <nobr>`cos(360 * index/count) * radius`</nobr>.
 
