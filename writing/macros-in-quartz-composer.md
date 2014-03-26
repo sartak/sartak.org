@@ -102,7 +102,7 @@ Here is where my Radial Button patch stands:
 
 And then from our Composition we can use this new and improved version.
 
-<img width="502" height="396" src="/img/blog/macros-in-quartz-composer/compositionpatch.png">
+<img width="502" height="396" src="/img/blog/macros-in-quartz-composer/composition-patch.png">
 
 With each radius is set to 200, count set to 3, and index from 0 to 2, I get the following result:
 
