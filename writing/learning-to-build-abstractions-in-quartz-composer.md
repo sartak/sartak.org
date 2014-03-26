@@ -147,7 +147,7 @@ Then set the `Radius` of the two new patches to 200. Set the `Count` of all the 
 
 That's all!
 
-<img src="/img/blog/learning-to-build-abstractions-in-quartz-composer/finished.gif">
+<img width="252" height="223" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/finished.gif">
 
 Success!
 
