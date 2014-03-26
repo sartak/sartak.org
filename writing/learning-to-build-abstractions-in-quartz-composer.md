@@ -1,11 +1,15 @@
 title: Learning to Build Abstractions in Quartz Composer
 draft: 1
 
-I decided today that I would learn a bit of [Quartz Composer](http://en.wikipedia.org/wiki/Quartz_Composer). One very helpful article was "[UI Prototyping with Quartz Composer and Origami](http://www.pasanpremaratne.com/2014/03/15/UI-Prototyping-with-Quartz-Composer-and-Origami/)" by Pasan Premaratne. This article takes you from zero to having built a simpler version to [Path's attractive spinout menu](http://codepen.io/sparanoid/pen/nHAmi) with Facebook's [Origami](http://facebook.github.io/origami/). At the end of Pasan's post, he mentions,
+I decided today that I would learn a bit of [Quartz Composer](http://en.wikipedia.org/wiki/Quartz_Composer). I had never touched it before beyond reading a couple articles and watching a conference talk. The only instructive article was "[UI Prototyping with Quartz Composer and Origami](http://www.pasanpremaratne.com/2014/03/15/UI-Prototyping-with-Quartz-Composer-and-Origami/)" by Pasan Premaratne. This article takes you from zero to having built a simpler version to [Path's attractive spinout menu](http://codepen.io/sparanoid/pen/nHAmi) with Facebook's [Origami](http://facebook.github.io/origami/).
+
+I recommend you not only read the post, but also *actually* follow along! At worst you'll have spent 20 minutes looking at another way of doing things. At best you'll have a new tool in your kit and you'll learn to be even more handsome.
+
+At the end of Pasan's post, he mentions,
 
 > The only downside that I see right now to using Quartz
 > Composer is that if you're protoyping something complex,
-> your composition can get unwieldy and convoluted fairly quickly.
+> your composition can get **unwieldy and convoluted fairly quickly**.
 > In just creating a radial menu with three buttons we have
 > over 20 patches in our composition. This can be mitigated
 > to some effect by rearranging and using QC's notes feature.
@@ -14,21 +18,27 @@ I agree that it's unwieldy. Here's my version of the resulting composition:
 
 <img width="392" height="267" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/notes.png">
 
-I thought I'd take this one step further and use this "Macro" feature I kept seeing all over Quartz Composer. Because I really try my hardest to never repeat myself! I'm writing this as I learn how macros work, so there may be some false starts.
+Those three yellow blocks are essentially the same code duplicated with slightly different parameters. That is naturally a bit offensive to me as a programmer. So I'd like to clean that up. If Quartz Composer provides no tools to abstract away chunks of your composition, then it's nothing more than a toy. But if you *can* build bigger, reusable units of design, then Quartz Composer is certainly worth looking into.
 
-Step one is to read and follow along with everything in Pasan's post. I'll be here.
+So let's learn how to build abstractions in Quartz Composer. Together! This is my very first day with Quartz Composer, so there are going to be some false starts. Bear with me. :)
 
 ## Macros
 
-The next step, surely, must be to select the patches representing one of the buttons and click "Create Macro". This replaces all the patches with just a "Macro Patch". The noodle from "Interaction 2"'s Drag outlet is connected to this macro patch, which is a good sign. In fact if you go over to the Viewer you should see that nothing has changed.
+Step one is to read and follow along with everything in Pasan's post.
 
-Double click the macro (in its body, not its titlebar) to edit its contents. We can see that it's almost identical to what we had before for Button A. However there's a new patch called "Number Splitter" near the top. This must be how Quartz Composer models the input to the bouncy and classic animations from outside the macro. The patch's inlet is green presumably to indicate that.
+Go do it. I'll be here.
+
+As I went through Pasan's tutorial, I kept seeing mention of a "Macro" feature all over Quartz Composer. Surely this is would be one way to encapsulate complexity in your composition.
+
+The next step, surely, must be to select the patches representing one of the buttons and click `Create Macro` in the toolbar. This replaces all the patches with a single `Macro Patch`. The noodle from `Interaction 2`'s Drag outlet is connected to this macro patch, which is a good sign. In fact if you go over to the Viewer you should see that nothing has changed.
+
+Double click the `Macro Patch` (careful: double click its body, not its titlebar) to edit its contents. We can see that it's almost identical to what we had before for `Button A`. However there's a new patch called `Number Splitter` near the top. This must be how Quartz Composer models the input to the bouncy and classic animations from outside the macro. The patch's inlet is green presumably to indicate that.
 
 If we want to make this macro generic, we need to create our own parameters. The button image must be a parameter otherwise every button will be labeled "A". The best place to start is probably to delete the image patch which is hardcoded to be `ButtonA.png`.
 
-To parameterize the image, right click the Layer patch. Under "Publish Inputs" select the "Image" option. QC offers to let you name the parameter differently from what the Layer patch expects, but in this case we can stick with "Image". This turns the inlet green, which matches the "Number Splitter" parameter. Here's to hoping!
+To parameterize the image, right click the Layer patch. Under `Publish Inputs` select the `Image` option. QC offers to let you name the parameter differently from what the Layer patch expects, but in this case we can stick with `Image`. This turns the inlet green, which matches the `Number Splitter` parameter. Here's to hoping!
 
-Clicking "Edit Parent" in the QC toolbar leaves the macro and goes back to our overall composition. If you look at the macro patch you can see that it now has an "Image" inlet. Success! Drag that `ButtonA.png` back into the composition, delete its layer, and hook up its outlet to the macro.
+Clicking `Edit Parent` in the QC toolbar leaves the macro and goes back to our overall composition. If you look at the macro patch you can see that it now has an "Image" inlet. Success! Drag that `ButtonA.png` back into the composition, delete its layer, and hook up its outlet to the macro.
 
 If all went according to plan, there should be no change in the Viewer. Still three spinout buttons labeled A, B, and C.
 
