@@ -17,9 +17,13 @@ I agree that it's unwieldy. Here's a snapshot of my resulting composition:
 
 <img width="392" height="267" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/notes.png">
 
-Those three yellow blocks are essentially the same code duplicated with slightly different parameters. That is naturally a bit offensive to me as a programmer. So I'd like to clean that up. If Quartz Composer provides no tools to abstract away chunks of your composition, then it's nothing more than a toy. But if you *can* build bigger, reusable units of design, then Quartz Composer is certainly worth looking into.
+Those three yellow blocks are essentially the same code. The yellow block does not explicitly group these patches; they are nothing more than spacially contained in a particular region on the canvas. The yellow block is equivalent to a source code comment.
 
-So let's learn how to build abstractions in Quartz Composer. Together! This is my very first day with Quartz Composer, so there are going to be some false starts. Bear with me. :)
+These blocks contain the same patches duplicated with slightly different parameters. That is naturally a bit offensive to me as a programmer. If possible I would like to clean up that repetition. But I'm not even sure that I can.
+
+If Quartz Composer provides no tools to abstract away chunks of your composition, then it is nothing more than a shiny toy. But if you *can* build bigger, reusable units of design, then it is worthy of study.
+
+Let's learn how to build abstractions in Quartz Composer. Together! This is my very first day with Quartz Composer, so there are going to be some false starts. Bear with me. :)
 
 ## Macros
 
