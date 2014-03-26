@@ -11,8 +11,7 @@ At the end of Pasan's post, he mentions:
 > Composer is that if you're protoyping something complex,
 > your composition can get **unwieldy and convoluted fairly quickly**.
 > In just creating a radial menu with three buttons we have
-> over 20 patches in our composition. This can be mitigated
-> to some effect by rearranging and using QC's notes feature.
+> over 20 patches in our composition.
 
 I agree that it's unwieldy. Here's a snapshot of my resulting composition:
 
