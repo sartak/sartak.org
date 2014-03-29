@@ -71,7 +71,7 @@ BEGIN {
 
 sub code_snippet {
     my ($type, $code) = @_;
-    chomp $code;
+    1 while chomp $code;
 
     pre {
         class is "$type code_snippet";
@@ -81,7 +81,7 @@ sub code_snippet {
         );
 
         my $html = $syntax->html;
-        chomp $html;
+        1 while chomp $html;
         outs_raw $html;
     }
 }
