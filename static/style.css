@@ -1,5 +1,7 @@
 body {
     font-family: "Avenir Next", "Avenir", "Helvetica Neue", "Helvetica", sans-serif;
+    background: #DDD;
+    color: #333;
 }
 
 a {
@@ -157,7 +159,7 @@ ul#posts, ul#talks {
 
 #post article, #talk article {
     font-size: 1.2em;
-    line-height: 1.33;
+    line-height: 2;
 }
 
 .spoiler {
@@ -192,7 +194,7 @@ sub {
 .code_snippet {
     width: 100%;
     color: #DDDDDD;
-    background: black;
+    background: #333333;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
