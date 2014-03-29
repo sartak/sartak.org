@@ -71,19 +71,19 @@ BEGIN {
 
 sub code_snippet {
     my ($type, $code) = @_;
+
     1 while chomp $code;
 
-    pre {
-        class is "$type code_snippet";
-        my $syntax = Text::VimColor->new(
-            string   => $code,
-            filetype => $type,
-        );
+    my $syntax = Text::VimColor->new(
+        string   => $code,
+        filetype => $type,
+    );
 
-        my $html = $syntax->html;
-        1 while chomp $html;
-        outs_raw $html;
-    }
+    my $html = $syntax->html;
+
+    1 while chomp $html;
+
+    outs_raw qq{<pre class="$type code_snippet">$html</pre>};
 }
 
 sub perl {
