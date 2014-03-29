@@ -79,7 +79,7 @@ ul#posts, ul#talks {
     transition: color .25s;
 }
 #posts li, #talks li {
-    padding-bottom: 0.4em;
+    padding-bottom: 0.8em;
 }
 #talks .conference {
     font-size: 0.7em;
