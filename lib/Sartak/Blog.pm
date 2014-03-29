@@ -71,6 +71,7 @@ BEGIN {
 
 sub code_snippet {
     my ($type, $code) = @_;
+    chomp $code;
 
     pre {
         class is "$type code_snippet";
