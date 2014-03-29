@@ -73,7 +73,7 @@ sub code_snippet {
     my ($type, $code) = @_;
     1 while chomp $code;
 
-    pre {
+    div {
         class is "$type code_snippet";
         my $syntax = Text::VimColor->new(
             string   => $code,
@@ -82,7 +82,7 @@ sub code_snippet {
 
         my $html = $syntax->html;
         1 while chomp $html;
-        outs_raw $html;
+        outs_raw "<pre>$html</pre>";
     }
 }
 
