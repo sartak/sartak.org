@@ -252,3 +252,7 @@ img + img {
 ol, ul {
     padding-left: 0;
 }
+
+.external {
+    color: #999;
+}
