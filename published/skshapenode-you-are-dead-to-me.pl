@@ -25,6 +25,11 @@ ol {
         id is "linewidth";
         p { qq{From `SKShapeNode`'s [documentation](https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKShapeNode_Ref/Reference/Reference.html#//apple_ref/occ/instp/SKShapeNode/lineWidth), "A line width larger than `2.0` may cause rendering artifacts in the final rendered image."} };
         p { "It's good that they are up front about this limitation. But that is still pretty weak." };
+        img {
+            width is "193";
+            height is "175";
+            src is "/img/blog/skshapenode-you-are-dead-to-me/artifacts.png";
+        };
     }
 
     li {
