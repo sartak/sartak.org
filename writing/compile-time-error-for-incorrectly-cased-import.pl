@@ -70,7 +70,7 @@ p { "Now when you `⌘B`, Xcode will tell you about all your miscased `#import` 
 
 img {
     width is "858";
-    height is "128";
+    height is "64";
     src is "/img/blog/compile-time-error-for-incorrectly-cased-import/sweet-sweet-error.png";
 };
 
