@@ -58,7 +58,7 @@ CODE
    li { "Drag and drop to reorder your build phases however you like. Mine's near the top, because I think it's better to fail fast." };
 };
 
-p { "When it's all said and done, your build phase should resemble mine. Unless you're from the future, in which case [you look different!](https://www.youtube.com/watch?v=3SbeIqPhtSk)" };
+p { "When it's all said and done, your build phase should resemble mine. Unless you've got a newer version of Xcode than me, in which case [I'm knowing about my own future, that's cool!](https://www.youtube.com/watch?v=3SbeIqPhtSk)" };
 
 img {
     width is "627";
