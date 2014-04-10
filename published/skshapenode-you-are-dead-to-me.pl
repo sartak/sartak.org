@@ -189,3 +189,15 @@ ol {
 br {};
 
 p { "You know, maybe that one is worth doing *right*. The first person to implement the complete `SKShapeNode` API using an `SKSpriteNode` backed by a `CALayer` wins … my undying respect!" };
+
+p { "As far as I'm concerned, this is how `SKShapeNode` should be handled in your codebase:" };
+
+code_snippet 'objc' => << 'CODE';
+#define SKShapeNode SHAPENODE_IS_BANNED
+CODE
+
+img {
+    width is "275";
+    height is "34";
+    src is "/img/blog/skshapenode-you-are-dead-to-me/banned.png";
+};
