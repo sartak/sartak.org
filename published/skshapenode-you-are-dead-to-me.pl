@@ -190,11 +190,17 @@ br {};
 
 p { "You know, maybe that one is worth doing *right*. The first person to implement the complete `SKShapeNode` API using an `SKSpriteNode` backed by a `CALayer` wins … my undying respect!" };
 
+p { "Update: Reader [Michael Redig](http://secretgamegroup.com) pointed me to his [`SKUtilities`](https://github.com/mredig/SKUtilities) project which implements exactly that: [`SKUShapeNode`](https://github.com/mredig/SKUtilities/blob/Shapes/time_conv/Utilities/SKUShapeNode.m) is a subclass of `SKSpriteNode` that renders using a `CAShapeLayer`." };
+
+br {};
+
 p { "As far as I'm concerned, this is how `SKShapeNode` should be handled in your codebase:" };
 
 code_snippet 'objc' => << 'CODE';
 #define SKShapeNode SHAPENODE_IS_BANNED
 CODE
+
+p { "This results in an error if in a moment of weakness you try to use use `SKShapeNode`:" };
 
 img {
     width is "275";
