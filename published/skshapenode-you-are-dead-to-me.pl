@@ -200,7 +200,7 @@ code_snippet 'objc' => << 'CODE';
 #define SKShapeNode SHAPENODE_IS_BANNED
 CODE
 
-p { "This results in an error if in a moment of weakness you try to use use `SKShapeNode`:" };
+p { "This results in an error if, in a moment of weakness, you try to use `SKShapeNode`:" };
 
 img {
     width is "275";
