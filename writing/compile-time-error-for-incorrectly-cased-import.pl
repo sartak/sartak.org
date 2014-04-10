@@ -22,7 +22,8 @@ ul {
     li { "Click the little `+` button at the top left." };
     li { 'Select "New Run Script Build Phase".' };
     li { 'This adds a "Run Script" entry to the bottom of this list. Pop it open by clicking its disclosure triangle.' };
-    li { "Set the value of Shell to `/usr/bin/perl`. You're welcome to dread what comes next." };
+    li { "Set the value of Shell to `/usr/bin/perl`" }
+    li { "You heard that right. Perl." };
     li { outs "In the textarea below Shell, paste in the following Perl script: ";
 
 code_snippet 'perl' => << 'CODE';
@@ -33,25 +34,34 @@ my %lc_file = map { lc($_) => $_ } keys %is_file;
 my $errors = 0;
 
 for my $file (@files) {
-        open my $handle, "<", $file;
-            while (<$handle>) {
-                        next unless my ($import) = /#import\s*"(.*)"/;
-                                next if $is_file{$import};
+    open my $handle, "<", $file;
+    while (<$handle>) {
+        next unless my ($import) = /#import\s*"(.*)"/;
+        next if $is_file{$import};
 
-                                        print qq{$file:$.: warning "$import"};
+        print qq{$file:$.: warning "$import"};
 
-                                                if ($lc_file{lc $import}) {
-                                                                print qq{ (should be "$lc_file{lc $import}")};
-                                                                        }
+        if ($lc_file{lc $import}) {
+            print qq{ (should be "$lc_file{lc $import}")};
+        }
 
-                                                                                print qq{\n};
+        print qq{\n};
 
-                                                                                        ++$errors;
-                                                                                            }
+        ++$errors;
+    }
 }
 
 exit 1 if $errors;
 CODE
    };
+   li { "Rename the build phase by clicking its name twice. I called mine `Check #import Casing`" };
+   li { "Drag and drop your build phase wherever you like. Mine's near the top, because I think it's better to fail fast." };
+};
 
+p { "When it's all said and done, your build phase should resemble mine. Unless you're from the future, in which case [you look different!](https://www.youtube.com/watch?v=3SbeIqPhtSk)" };
+
+img {
+    width is "625";
+    height is "699";
+    src is "img/blog/compile-time-error-for-incorrectly-cased-import/build-phase.png";
 };
