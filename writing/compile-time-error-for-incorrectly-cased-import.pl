@@ -63,5 +63,5 @@ p { "When it's all said and done, your build phase should resemble mine. Unless 
 img {
     width is "625";
     height is "699";
-    src is "img/blog/compile-time-error-for-incorrectly-cased-import/build-phase.png";
+    src is "/img/blog/compile-time-error-for-incorrectly-cased-import/build-phase.png";
 };
