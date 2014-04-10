@@ -41,8 +41,8 @@ for my $file (@files) {
 
         print qq{$file:$.: warning "$import"};
 
-        if ($lc_file{lc $import}) {
-            print qq{ (should be "$lc_file{lc $import}")};
+        if (my $fixed_case = $lc_file{lc $import}) {
+            print qq{ (should be "$fixed_case")};
         }
 
         print qq{\n};
