@@ -1,7 +1,7 @@
 use Sartak::Blog;
 
 BEGIN { print "title: Compile-Time Error for Incorrectly Cased <tt>#import</tt>
-draft: 1
+date: 2014-04-10
 " }
 
 p { "OS X uses a case-insensitive filesystem by default. That means the following code that purports to load `AFNetworking.h` both compiles and runs, nary a peep:" };
