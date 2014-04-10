@@ -10,7 +10,7 @@ use Encode;
 use Sartak::Blog::Talks;
 use Text::Handlebars;
 
-my $title = 'sartak';
+my $title = 'Shawn M Moore';
 my $outdir = shift || 'generated';
 
 make_path $outdir unless -d $outdir;
@@ -285,7 +285,7 @@ sub generate_talks {
     open my $handle, '>', "$outdir/talks/index.html";
     print $handle fill_in($layout{en}, {
         content => Sartak::Blog::Talks->generate_talks_html,
-        title   => 'Talks',
+        title   => 'Sartak Talks',
         rss     => '/talks/rss.xml',
     });
 }
