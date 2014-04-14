@@ -190,7 +190,7 @@ br {};
 
 p { "You know, maybe that one is worth doing *right*. The first person to implement the complete `SKShapeNode` API using an `SKSpriteNode` backed by a `CALayer` wins … my undying respect!" };
 
-p { "Update: Reader [Michael Redig](http://secretgamegroup.com) pointed me to his [`SKUtilities`](https://github.com/mredig/SKUtilities) project which implements exactly that: [`SKUShapeNode`](https://github.com/mredig/SKUtilities/blob/Shapes/time_conv/Utilities/SKUShapeNode.m) is a subclass of `SKSpriteNode` that renders using a `CAShapeLayer`." };
+p { "Update: Reader [Michael Redig](http://secretgamegroup.com) pointed me to his [`SKUtilities`](https://github.com/mredig/SKUtilities) project which implements exactly that: [`SKUShapeNode`](https://github.com/mredig/SKUtilities/blob/Shapes/time_conv/Utilities/SKUShapeNode.m) is a subclass of `SKSpriteNode` that renders using a `CAShapeLayer`. It's currently incomplete but certainly looks to me like a good start." };
 
 br {};
 
