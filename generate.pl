@@ -196,10 +196,10 @@ each_article {
 generate_index('en');
 generate_index('ja');
 generate_drafts();
-generate_page(lang => 'en', page => 'about', title => 'About Me');
-generate_page(lang => 'ja', page => 'about', title => '自己紹介');
-generate_page(lang => 'en', page => 'projects', title => 'Projects');
-generate_page(lang => 'ja', page => 'projects', title => '開発');
+generate_page(lang => 'en', page => 'about', title_tag => 'About Me');
+generate_page(lang => 'ja', page => 'about', title_tag => '自己紹介');
+generate_page(lang => 'en', page => 'projects', title_tag => 'Projects');
+generate_page(lang => 'ja', page => 'projects', title_tag => '開発');
 generate_talks();
 generate_rss();
 generate_talk_rss();
@@ -259,7 +259,7 @@ sub generate_page {
     open my $handle, '>', $file;
     print $handle fill_in($layout{$args{lang}}, {
         content => scalar slurp("$args{page}.$args{lang}.html"),
-        title   => $args{title},
+        %args,
     });
 }
 
