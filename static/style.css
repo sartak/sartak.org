@@ -37,6 +37,7 @@ nav h1, nav img, nav ul, nav li {
 nav li {
     padding-bottom: 0.3em;
 }
+
 nav ul {
     list-style-type: none;
 }
@@ -81,6 +82,10 @@ ul#posts, ul#talks {
 #posts li, #talks li {
     padding-bottom: 0.8em;
 }
+#posts li.new-year {
+    padding-top: 0.6em;
+}
+
 #talks .conference {
     font-size: 0.7em;
 }

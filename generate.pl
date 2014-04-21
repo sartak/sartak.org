@@ -209,11 +209,21 @@ sub generate_index {
     my $lang = shift;
 
     my $posts;
+    my $new_year;
+
     each_article {
         my $article = shift;
         my $date = prettify_date($article->{date}, $lang);
         my $sigil = $article->{external} ? ' <span class="external">⤴</span> ' : "";
-        $posts .= qq[<li>
+        my $li_class = "";
+
+        my ($year) = $article->{date} =~ /^(\d\d\d\d)-/;
+        if (defined($new_year) && $year != $new_year) {
+            $li_class .= " new-year";
+        }
+        $new_year = $year;
+
+        $posts .= qq[<li class="$li_class">
     <span class="date">$date</span>
     <span class="title"><a href="$article->{url}">$article->{title}</a>$sigil</span>
 </li>];
