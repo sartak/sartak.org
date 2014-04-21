@@ -487,13 +487,21 @@ sub talks { @talks }
 
 sub generate_talks_html {
     my $output = '';
+    my $new_year;
 
     for my $talk (@talks) {
         my $date = main::prettify_date($talk->{date}, 'en');
         my $conference = $talk->{conference};
+        my $li_class = "";
+
+        my ($year) = $talk->{date} =~ /^(\d\d\d\d)-/;
+        if (defined($new_year) && $year != $new_year) {
+            $li_class .= " new-year";
+        }
+        $new_year = $year;
 
         $output .= qq[
-            <li>
+            <li class="$li_class">
                 <span class="date">$date</span>
                 <span class="title"><a href="$talk->{url}">$talk->{name}</a></span>
         ];

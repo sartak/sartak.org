@@ -82,7 +82,7 @@ ul#posts, ul#talks {
 #posts li, #talks li {
     padding-bottom: 0.8em;
 }
-#posts li.new-year {
+#posts li.new-year, #talks li.new-year {
     padding-top: 0.6em;
 }
 
