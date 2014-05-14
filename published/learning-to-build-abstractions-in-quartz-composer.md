@@ -165,3 +165,5 @@ To ace this project, you could move the menu to the bottom left of the screen. M
 Quartz Composer is certainly an interesting tool to have in your repertoire. Origami does a lot to make it more usable and more flexible. For future projects I no longer have a reason to prototype animations in code. Origami helps you design your interactions faster and gets you closer to that sweet, sweet [instantaneous feedback](http://vimeo.com/36579366).
 
 Yes, it is too easy to create a mess of your composition with too many patches. Just like not using functions would make a mess of your code. Quartz Composer thankfully does provide designers robust tools for creating and reusing abstractions. You just have to think like a programmer. ;)
+
+Update: Jeremy Bishop has [taken this](https://www.facebook.com/groups/origami.community/567050420060511/) a couple steps further. He added more parameters and took a stab at the iterator idea.
