@@ -12,7 +12,7 @@ img {
     src is "/img/blog/foreign-films/tfd.jpg";
 };
 
-p { "I love it ;)" };
+p { "I love it ;) You should [buy one](http://sharing-machine.myshopify.com/products/random-original-tfd-art) too if you like the comic at all." };
 
 a {
     href is "http://www.toothpastefordinner.com/index.php?date=011912";
