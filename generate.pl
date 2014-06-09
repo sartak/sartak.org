@@ -235,9 +235,10 @@ sub generate_index {
 
     open my $handle, '>', $file;
     print $handle fill_in($layout{$lang}, {
-        content => $posts,
-        title   => $title,
-        index   => 1,
+        content   => $posts,
+        title     => $title,
+        title_tag => 'sartak.org',
+        index     => 1,
     });
 }
 
@@ -257,8 +258,9 @@ sub generate_drafts {
 
     open my $handle, '>', "$outdir/drafts/index.html";
     print $handle fill_in($layout{en}, {
-        content => $posts,
-        title   => $title,
+        content   => $posts,
+        title     => $title,
+        title_tag => 'sartak.org',
     });
 }
 
@@ -286,17 +288,19 @@ sub generate_talks {
 
         open my $handle, '>', "$dir/index.html";
         print $handle fill_in($layout{en}, {
-            content => $page->{content},
-            title   => $title,
-            rss     => '/talks/rss.xml',
+            content   => $page->{content},
+            title     => $title,
+            title_tag => 'sartak.org',
+            rss       => '/talks/rss.xml',
         });
     }
 
     open my $handle, '>', "$outdir/talks/index.html";
     print $handle fill_in($layout{en}, {
-        content => Sartak::Blog::Talks->generate_talks_html,
-        title   => 'Sartak Talks',
-        rss     => '/talks/rss.xml',
+        content   => Sartak::Blog::Talks->generate_talks_html,
+        title     => 'sartak.org',
+        title_tag => 'sartak.org',
+        rss       => '/talks/rss.xml',
     });
 }
 
