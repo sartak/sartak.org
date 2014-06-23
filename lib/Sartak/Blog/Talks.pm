@@ -4,6 +4,28 @@ use warnings;
 
 my @talks = (
     {
+        name        => 'DTrace War Stories',
+        dir         => 'dtrace-war-stories',
+        length      => '20 min',
+        date        => '2014-06-23',
+        #video       => '',
+        conference  => {
+            name    => 'YAPC::NA',
+            dir     => 'yapc-na-2014',
+            url     => 'http://yapcna.org/yn2014/',
+            talk    => 'http://www.yapcna.org/yn2014/talk/5389',
+            venue   => 'Hilton DoubleTree',
+            city    => 'Orlando',
+        },
+        links       => [
+            { type => 'key.tar' },
+            { type => 'pdf' },
+        ],
+        description => q{Several stories of how DTrace saved someone's day when *nothing else* could.
+
+    You too can wield this power and be the envy of your community.},
+    },
+    {
         name        => 'git flux: effective branch management',
         dir         => 'git-flux',
         length      => '20 min',
