@@ -551,8 +551,9 @@ sub generate_talks_html {
 }
 
 my %upload = (
-    pdf => 'PDF',
-    key => 'Keynote source',
+    pdf       => 'PDF',
+    key       => 'Keynote source',
+    'key.tar' => 'Keynote source',
 );
 
 sub talk_pages {
