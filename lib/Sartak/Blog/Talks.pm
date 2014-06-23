@@ -8,7 +8,8 @@ my @talks = (
         dir         => 'dtrace-war-stories',
         length      => '20 min',
         date        => '2014-06-23',
-        #video       => '',
+        video       => 'https://www.youtube.com/watch?v=P88qXvU2RUA',
+        embed       => '<iframe width="560" height="315" src="//www.youtube.com/embed/P88qXvU2RUA" frameborder="0" allowfullscreen></iframe>',
         conference  => {
             name    => 'YAPC::NA',
             dir     => 'yapc-na-2014',
@@ -20,6 +21,7 @@ my @talks = (
         links       => [
             { type => 'key.tar' },
             { type => 'pdf' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/dtrace-war-stories' },
         ],
         description => q{Several stories of how DTrace saved someone's day when *nothing else* could.
 
@@ -575,9 +577,12 @@ sub talk_pages {
             }
         }
 
-        my $slides = "";
-        if ($talk->{speakerdeck}) {
-            $slides = << "            END";
+        my $embed = "";
+        if ($talk->{embed}) {
+            $embed = $talk->{embed};
+        }
+        elsif ($talk->{speakerdeck}) {
+            $embed = << "            END";
                 <div id="slides">
                     <script src="http://speakerdeck.com/embed/$talk->{speakerdeck}.js"></script>
                 </div>
@@ -628,7 +633,7 @@ sub talk_pages {
                 <br />
                 <br />
 
-                $slides
+                $embed
                 <p class="description">$talk->{description}</p>
                 $links
             </div>
