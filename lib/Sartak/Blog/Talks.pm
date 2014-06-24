@@ -4,6 +4,33 @@ use warnings;
 
 my @talks = (
     {
+        name        => 'How to be Fluent in Japanese',
+        dir         => 'how-to-be-fluent-in-japanese',
+        length      => '5 min',
+        date        => '2014-06-24',
+        #       video       => '',
+        #       embed       => '',
+        conference  => {
+            name    => 'YAPC::NA',
+            dir     => 'yapc-na-2014',
+            url     => 'http://yapcna.org/yn2014/',
+            talk    => 'http://www.yapcna.org/yn2014/talk/5600',
+            venue   => 'Hilton DoubleTree',
+            city    => 'Orlando',
+        },
+        links       => [
+            { type => 'key.tar' },
+            { type => 'pdf' },
+            #{ label => 'Speakerdeck', href => '' },
+        ],
+        description => q{Two rules for learning a second language that have guided me to become fluent in Japanese.
+
+And
+so
+can
+you!},
+    },
+    {
         name        => 'DTrace War Stories',
         dir         => 'dtrace-war-stories',
         length      => '20 min',
