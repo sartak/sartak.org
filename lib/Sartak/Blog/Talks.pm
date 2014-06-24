@@ -21,7 +21,7 @@ my @talks = (
         links       => [
             { type => 'key.tar' },
             { type => 'pdf' },
-            #{ label => 'Speakerdeck', href => '' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/how-to-be-fluent-in-japanese' },
         ],
         description => q{Two rules for learning a second language that have guided me to become fluent in Japanese.
 
