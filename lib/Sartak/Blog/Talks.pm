@@ -8,8 +8,8 @@ my @talks = (
         dir         => 'how-to-be-fluent-in-japanese',
         length      => '5 min',
         date        => '2014-06-24',
-        #       video       => '',
-        #       embed       => '',
+        video       => 'https://www.youtube.com/watch?v=YJrTaMUvjVA&t=45m40s',
+        embed       => '<iframe width="560" height="315" src="//www.youtube.com/embed/YJrTaMUvjVA?start=2740&end=3070" frameborder="0" allowfullscreen></iframe>',
         conference  => {
             name    => 'YAPC::NA',
             dir     => 'yapc-na-2014',
