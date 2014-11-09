@@ -4,6 +4,28 @@ use warnings;
 
 my @talks = (
     {
+        name        => 'Kindergarten Code',
+        dir         => 'kindergarten-code',
+        length      => '20 min',
+        date        => '2014-11-09',
+        video       => 'https://www.youtube.com/watch?v=4sEeqtiLFVU',
+        embed       => '<iframe width="560" height="315" src="//www.youtube.com/embed/4sEeqtiLFVU" frameborder="0" allowfullscreen></iframe>',
+        conference  => {
+            name    => 'PPW',
+            dir     => 'ppw-2014',
+            url     => 'http://pghpw.org/ppw2014/',
+            talk    => 'http://pghpw.org/ppw2014/talk/5786',
+            venue   => 'Downtown Doubletree Hotel',
+            city    => 'Pittsburgh',
+        },
+        links       => [
+            { type => 'key.tar' },
+            { type => 'pdf' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/kindergarten-code' },
+        ],
+        description => q{Over the years, I've come to understand the qualities that I admire in code. With the help of some of my personal heroes, I'll explain why I strive for "kindergarten code" and how it will make you a better engineer.},
+    },
+    {
         name        => 'How to be Fluent in Japanese',
         dir         => 'how-to-be-fluent-in-japanese',
         length      => '5 min',
