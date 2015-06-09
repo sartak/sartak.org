@@ -4,6 +4,30 @@ use warnings;
 
 my @talks = (
     {
+        name        => 'Lifting Moose',
+        dir         => 'lifting-moose',
+        length      => '20 min',
+        date        => '2015-06-09',
+        video       => 'https://www.youtube.com/watch?v=y67sOfTaIVk',
+        embed       => '<iframe width="560" height="315" src="//www.youtube.com/embed/y67sOfTaIVk" frameborder="0" allowfullscreen></iframe>',
+        conference  => {
+            name    => 'YAPC::NA',
+            dir     => 'yapc-na-2015',
+            url     => 'http://www.yapcna.org/yn2015/',
+            talk    => 'http://www.yapcna.org/yn2015/talk/6069',
+            venue   => 'Little America Hotel',
+            city    => 'Salt Lake City',
+        },
+        links       => [
+            { type => 'key.tar' },
+            { type => 'pdf' },
+            { label => 'Speakerdeck', href => 'https://speakerdeck.com/sartak/lifting-moose' },
+        ],
+        description => q{Moose is great for creating classes and objects, sure. But if your Moose usage is limited to reducing keystrokes, you're wasting so much potential.
+
+Moose's real power lies in empowering you to create abstractions in the domain of your application. Come find out why you would do this. And how!},
+    },
+    {
         name        => 'Kindergarten Code',
         dir         => 'kindergarten-code',
         length      => '20 min',
