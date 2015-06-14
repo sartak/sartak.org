@@ -8,8 +8,8 @@ my @talks = (
         dir         => 'lifting-moose',
         length      => '20 min',
         date        => '2015-06-09',
-        video       => 'https://www.youtube.com/watch?v=y67sOfTaIVk',
-        embed       => '<iframe width="560" height="315" src="//www.youtube.com/embed/y67sOfTaIVk" frameborder="0" allowfullscreen></iframe>',
+        video       => 'https://www.youtube.com/watch?v=w9HHHNVrmOs',
+        embed       => '<iframe width="560" height="315" src="//www.youtube.com/embed/w9HHHNVrmOs" frameborder="0" allowfullscreen></iframe>',
         conference  => {
             name    => 'YAPC::NA',
             dir     => 'yapc-na-2015',
