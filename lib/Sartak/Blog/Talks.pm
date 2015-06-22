@@ -711,11 +711,15 @@ sub talk_pages {
         my $date = main::prettify_date($talk->{date}, 'en');
         my $presented = $talk->{future} ? "To be presented" : "Presented";
 
+        my $presented_at = $conference->{name}
+                         ? qq{$presented at <a href="$conference->{url}">$conference->{name}</a>, $conference->{venue} in $conference->{city}.}
+                         : "";
+
         my $html = << "        END";
             <div id="talk">
                 <span id="date">$date</span>
                 <h1 id="title">$talk->{name}</h1>
-                <span class="metadata">$talk->{length}. $presented at <a href="$conference->{url}">$conference->{name}</a>, $conference->{venue} in $conference->{city}.</span>
+                <span class="metadata">$talk->{length}. $presented_at</span>
                 <br />
                 <br />
 
