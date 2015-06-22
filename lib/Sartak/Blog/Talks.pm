@@ -533,7 +533,6 @@ Experience with using Moose to create regular classes is expected. Having some f
     },
     {
         name        => 'Introduction to Moose',
-        skip_index  => 1,
         dir         => 'moose',
         length      => '45 min',
         date        => '2009-02-07',
@@ -549,7 +548,6 @@ Experience with using Moose to create regular classes is expected. Having some f
     },
     {
         name        => 'Devel::REPL and Carp::REPL',
-        skip_index  => 1,
         dir         => 'devel-repl',
         length      => '45 min',
         date        => '2009-02-07',
@@ -569,7 +567,6 @@ Matt Trout's design for Devel::REPL is worthy of study. It is a Moose library th
     },
     {
         name        => 'Template::Declare',
-        skip_index  => 1,
         dir         => 'template-declare',
         length      => '20 min',
         date        => '2008-02-16',
