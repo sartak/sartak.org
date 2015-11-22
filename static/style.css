@@ -13,7 +13,7 @@ a:hover {
     text-decoration: underline;
 }
 
-nav {
+body.colnav nav {
     text-align: center;
     position: fixed;
     top: 0;
@@ -21,8 +21,65 @@ nav {
     width: 140px;
 }
 
+body.rownav {
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+body.rownav nav {
+    margin: .75em;
+}
+
+body.rownav nav a,
+body.rownav nav h1,
+body.rownav nav ul,
+body.rownav nav li {
+    display: inline-block;
+}
+
+body.rownav nav h1 {
+    position: relative;
+    top: -.25em;
+    margin-left: .5em;
+}
+
+body.rownav nav li {
+    position: relative;
+    top: -.5em;
+    margin-left: 1em;
+}
+
+body.rownav nav .colnav {
+    display: none;
+}
+
+body.colnav nav .rownav {
+    display: none;
+}
+
+body.rownav nav img {
+    height: 2em;
+    width: 2em;
+}
+
+body.rownav p {
+    width: 42em;
+    margin: 1em auto;
+    padding: 0 1em;
+}
+
+@media all and (max-width: 47.826em) {
+    body.rownav #date {
+        display: none;
+    }
+
+    body.rownav p {
+        width: 92%;
+    }
+}
+
 @media all and (max-width: 1000px) {
-    nav {
+    body.colnav nav {
         position: absolute;
     }
 }
@@ -43,10 +100,15 @@ nav ul {
 }
 nav img {
     border: 0;
+}
+body.colnav nav img {
     border-radius: 17px;
 }
+body.rownav nav img {
+    border-radius: 7px;
+}
 
-#content {
+body.colnav #content {
     margin-left: 180px;
     width: 700px;
 }
@@ -59,10 +121,23 @@ ul#posts, ul#talks {
     font-size: 1.1em;
     line-height: 1.2em;
 }
-#posts .date, #talks .date, #post #date, #talk #date {
+
+#posts .date,
+#talks .date,
+body.colnav #date {
     float: right;
+}
+#posts .date,
+#talks .date,
+#date {
     color: #AAAAAA;
 }
+
+body.rownav #date {
+     position: absolute;
+     right: 2em;
+}
+
 #posts .date {
     color: #AAAAAA;
     -webkit-transition: color 1s ease-out;
@@ -156,6 +231,11 @@ ul#posts, ul#talks {
 }
 #projects li:hover .details {
     opacity: 1;
+}
+
+body.rownav #post h1,
+body.rownav #post h2 {
+    text-align: center;
 }
 
 #post h1, #talk h1 {

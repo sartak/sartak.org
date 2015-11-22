@@ -28,21 +28,22 @@
         <link rel="openid2.local_id" href="http://sartak.myopenid.com" />
         {{/if}}
     </head>
-    <body>
+    <body class="{{#if rownav}}rownav{{else}}colnav{{/if}}">
         <nav>
-            <h1 class="sartak"><a href="/">sartak</a></h1>
+            <h1 class="sartak colnav"><a href="/">sartak</a></h1>
             <a href="/"><img height="100" width="100" src="/img/sartak-200x200.jpg" /></a>
+            <h1 class="sartak rownav"><a href="/">sartak</a></h1>
             <ul id="links">
                 <li><a href="/">blog</a></li>
-                <li><a href="/about.html">about</a></li>
-                <li><a href="/projects.html">projects</a></li>
-                <li><a href="/talks">talks</a></li>
+                <li class="colnav"><a href="/about.html">about</a></li>
+                <li class="colnav"><a href="/projects.html">projects</a></li>
+                <li class="colnav"><a href="/talks">talks</a></li>
                 <li><a href="http://twitter.com/sartak">twitter</a></li>
-                <li><a href="http://github.com/sartak">github</a></li>
-                <li><a href="http://www.amazon.com/wishlist/28Z3PMAC42Z9F/ref=cm_wl_rlist_go?tag=533633855-20">wishlist</a></li>
-                <li><a href="mailto:www@sartak.org">email</a></li>
-                <li><a href="http://rpglanguage.net">RPGlanguage</a></li>
-                <li><a class="xyzzy" href="http://github.com/sartak/sartak.org">fork me</a></li>
+                <li class="colnav"><a href="http://github.com/sartak">github</a></li>
+                <li class="colnav"><a href="http://www.amazon.com/wishlist/28Z3PMAC42Z9F/ref=cm_wl_rlist_go?tag=533633855-20">wishlist</a></li>
+                <li class="colnav"><a href="mailto:www@sartak.org">email</a></li>
+                <li class="colnav"><a href="http://rpglanguage.net">RPGlanguage</a></li>
+                <li class="colnav"><a class="xyzzy" href="http://github.com/sartak/sartak.org">fork me</a></li>
             </ul>
         </nav>
         <div id="content">
