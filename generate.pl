@@ -233,6 +233,9 @@ sub generate_index {
 
     each_article {
         my $article = shift;
+
+        return if $article->{noindex};
+
         my $date = prettify_date($article->{date}, $lang);
         my $sigil = $article->{external} ? ' <span class="external">⤴</span> ' : "";
         my $li_class = "";
@@ -266,6 +269,8 @@ sub generate_drafts {
     my $posts = '';
     for my $article (grep { $_->{draft} } @articles) {
         generate_article($article);
+
+        next if $article->{noindex};
 
         my $date = prettify_date($article->{date}, 'en');
         $posts .= qq[<li>
@@ -337,6 +342,7 @@ sub generate_rss {
 
     each_article {
         my $article = shift;
+        next if $article->{noindex};
         push @articles, $article;
     };
 
