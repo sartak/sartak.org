@@ -62,10 +62,16 @@ body.rownav nav img {
     width: 2em;
 }
 
-body.rownav p {
+body.rownav #content p,
+body.rownav #content ul:not(.huds),
+body.rownav #content ol {
     width: 42em;
     margin: 1em auto;
     padding: 0 1em;
+}
+
+.centered {
+    text-align: center;
 }
 
 @media all and (max-width: 47.826em) {
@@ -73,7 +79,9 @@ body.rownav p {
         display: none;
     }
 
-    body.rownav p {
+    body.rownav #content p,
+    body.rownav #content ul:not(.huds),
+    body.rownav #content ol {
         width: 92%;
     }
 }
@@ -340,4 +348,145 @@ ol, ul {
 
 .external {
     color: #999;
+}
+
+figure {
+    text-align: center;
+    margin: 0;
+    margin-top: .5em;
+}
+figure img {
+    width: 100%;
+    max-width: 52em;
+    vertical-align: middle;
+}
+
+h2.context {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+figure.bust img,
+img#cover {
+    max-width: 2000px;
+    width: 100%;
+}
+
+figure.screenshot img {
+    max-width: 320px;
+}
+
+@media all and (min-width: 58em) {
+    .box {
+        display: flex;
+        width: 52em;
+        margin: 0 auto;
+        justify-content: space-between;
+    }
+    .box.center {
+        justify-content: center;
+    }
+
+    .bust.box {
+        max-width: 2000px;
+        width: 100%;
+    }
+
+    .box.v1-1 {
+        flex-direction: column;
+        margin-left: .5em;
+    }
+
+    .box.h1-1 > figure:last-child {
+        margin-left: .5em;
+    }
+
+    .tokyo-20150821-19 { width: 84% }
+    .tokyo-20150821-101631 { width: 133.4% }
+    .tokyo-20150821-132607 { width: 151.4% }
+    .tokyo-20150823-145933 { width: 158.0% }
+    .tokyo-20150823-161736 { width: 150.0% }
+    .tokyo-20150826-113950 { width: 170.0% }
+    .tokyo-20150826-113950 { width: 170.0% }
+    .tokyo-20150828-183521 { width: 53.7% }
+    .tokyo-20150830-103320 { width: 56.3% }
+    .tokyo-20150902-123413 { width: 75.6% }
+    .tokyo-20150902-124110 { width: 170.0% }
+    .tokyo-20150902-150654 { width: 170.0% }
+}
+
+.huds-container {
+    width: 100%;
+    max-width: 1295px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.huds {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.huds > .hud {
+    flex-basis: 324px;
+    flex-grow: 1;
+}
+
+/* don't display day 15 as over double size in two column flex */
+.hud.dummy { display: none }
+@media all and (min-width: 682px) and (max-width: 1005px) {
+    .huds .hud.dummy { display: block }
+}
+
+.huds {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.huds > .hud figure {
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.hud {
+    display: block;
+    position: relative;
+
+    max-width: 52em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hud > a > div {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 2em;
+    text-align: center;
+}
+
+.hud > a:hover {
+    text-decoration: none;
+}
+
+.hud > a > div > span {
+    display: inline-block;
+    max-width: 50%;
+
+    border-radius: 5px;
+    padding: .25em 1em;
+
+    color: white;
+    opacity: .95;
+    background-color: #27aae1;
+    transition: background-color 200ms linear;
+}
+
+.hud > a:hover > div > span,
+.hud > a:active > div > span {
+    background-color: #00a14b;
+    transition: background-color 200ms linear;
 }
