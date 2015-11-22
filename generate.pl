@@ -98,6 +98,13 @@ sub new_article {
         </article>
     ];
 
+    if ($headers{cover}) {
+        $content = qq[
+        <img id="cover" src="$headers{cover}">
+        $content
+        ];
+    }
+
     $headers{content} = $content;
 
     return \%headers;
