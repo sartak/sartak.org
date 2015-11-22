@@ -55,7 +55,13 @@ sub read_content_md {
     my $headers;
     $headers .= $1 while $content =~ s/^(\w+: .+\n)//;
 
-    return $headers . markdown($content);
+    my $md = markdown($content);
+
+    # ugh
+    $md =~ s{<\s*p\s*>\s*<\s*figure}{<figure}gi;
+    $md =~ s{<\s*/\s*figure\s*>\s*<\s*/\s*p\s*>}{</figure>}gi;
+
+    return $headers . $md;
 }
 
 sub read_content {
