@@ -25,6 +25,8 @@ my @months = qw/
     August September October November December
 /;
 
+my $css_sha;
+
 sub prettify_date {
     my $date = shift;
     my $lang = shift;
@@ -112,6 +114,8 @@ sub fill_in {
     my $vars     = shift;
 
     $vars->{rss} ||= '/rss.xml';
+    $vars->{css_sha} ||= $css_sha
+        or die "No CSS sha yet??";
 
     return $hbs->render_string($template, $vars);
 }
@@ -135,6 +139,16 @@ sub date_dir {
         or die "Invalid date: $date";
     return $date;
 }
+
+sub generate_css {
+    my $output = `sha1sum static/style.css`;
+    ($css_sha) = $output =~ /^(\w+) /;
+    die "Can't extract CSS sha from: $output" if !$css_sha;
+
+    system("cp -r static/style.css $outdir/$css_sha.css");
+}
+
+generate_css();
 
 my %articles;
 
@@ -162,30 +176,11 @@ while (my $file = glob("published/* writing/*")) {
 }
 
 my @articles = map { @{ $articles{$_} } } reverse sort keys %articles;
-
 sub each_article (&) {
     my $code = shift;
 
     my @articles = grep { !$_->{draft} } @articles;
     $code->($_) for @articles;
-}
-
-sub generate_article {
-    my $article = shift;
-
-    $article->{content} = qq[
-        <div id="post">
-            $article->{content}
-        </div>
-    ];
-
-    $article->{title_tag} = $article->{title};
-    $article->{title_tag} =~ s/<.*?>//g;
-    my $html = fill_in($layout{en}, $article);
-
-    make_path "$outdir/$article->{dir}";
-    open my $handle, '>', "$outdir/$article->{file}";
-    print $handle $html;
 }
 
 each_article {
@@ -204,6 +199,24 @@ generate_talks();
 generate_rss();
 generate_talk_rss();
 generate_static();
+
+sub generate_article {
+    my $article = shift;
+
+    $article->{content} = qq[
+        <div id="post">
+            $article->{content}
+        </div>
+    ];
+
+    $article->{title_tag} = $article->{title};
+    $article->{title_tag} =~ s/<.*?>//g;
+    my $html = fill_in($layout{en}, $article);
+
+    make_path "$outdir/$article->{dir}";
+    open my $handle, '>', "$outdir/$article->{file}";
+    print $handle $html;
+}
 
 sub generate_index {
     my $lang = shift;
