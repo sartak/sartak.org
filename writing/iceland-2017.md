@@ -45,7 +45,7 @@ home to eat.
 <h2 class="context">Golden Circle</h2>
 
 <figure><img src="/img/blog/iceland-2017/20171002-120250-17.jpg"></figure>
-<figure><img src="/img/blog/iceland-2017/20171002-132514-18.jpg"></figure>
+<figure class="bust"><img src="/img/blog/iceland-2017/20171002-132514-18.jpg"></figure>
 <figure><img src="/img/blog/iceland-2017/20171002-133133-19.jpg"></figure>
 <figure><img src="/img/blog/iceland-2017/20171002-152023-21.jpg"></figure>
 <figure><img src="/img/blog/iceland-2017/20171002-152314-22.jpg"></figure>
