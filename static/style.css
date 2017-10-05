@@ -366,7 +366,8 @@ h2.context {
     margin-bottom: 0;
 }
 
-img + h2.context {
+img + h2.context,
+figure + h2.context {
     margin-top: 2em;
 }
 
