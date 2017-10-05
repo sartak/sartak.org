@@ -362,13 +362,12 @@ figure img {
 }
 
 h2.context {
-    margin-top: 0;
+    margin-top: 2em;
     margin-bottom: 0;
 }
 
-img + h2.context,
-figure + h2.context {
-    margin-top: 2em;
+h2.context + h2.context {
+    margin-top: 0;
 }
 
 figure.bust img,
