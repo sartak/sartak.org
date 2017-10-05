@@ -1,5 +1,5 @@
 title: Iceland 2017
-draft: 1
+date: 2017-10-04
 rownav: 1
 
 <figure><img src="/img/blog/iceland-2017/20171001-142943-9.jpg"></figure>
