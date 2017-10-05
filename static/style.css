@@ -22,12 +22,13 @@ body.colnav nav {
 }
 
 body.rownav {
-    margin: 0;
-    margin-bottom: 8px;
+    margin: 8px 0;
 }
 
 body.rownav nav {
-    margin: .75em;
+    position: absolute;
+    top: 8px;
+    left: 8px;
 }
 
 body.rownav nav a,
@@ -374,6 +375,10 @@ figure.bust img,
 img#cover {
     max-width: 2000px;
     width: 100%;
+}
+
+img#cover {
+    margin-top: 3em;
 }
 
 figure.screenshot img {
