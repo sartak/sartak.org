@@ -366,6 +366,10 @@ h2.context {
     margin-bottom: 0;
 }
 
+img + h2.context {
+    margin-top: 2em;
+}
+
 figure.bust img,
 img#cover {
     max-width: 2000px;
