@@ -22,13 +22,16 @@ body.colnav nav {
 }
 
 body.rownav {
-    margin: 8px 0;
+    margin: 0;
 }
 
 body.rownav nav {
     position: absolute;
+    background: rgba(238, 238, 238, .6);
+    border-radius: 5px;
     top: 8px;
     left: 8px;
+    padding: .5em;
 }
 
 body.rownav nav a,
@@ -36,12 +39,11 @@ body.rownav nav h1,
 body.rownav nav ul,
 body.rownav nav li {
     display: inline-block;
+    vertical-align: middle;
 }
 
 body.rownav nav h1 {
-    position: relative;
-    top: -.25em;
-    margin-left: .5em;
+    margin-left: .3em;
 }
 
 body.rownav nav li {
@@ -58,6 +60,7 @@ body.colnav nav .rownav {
     display: none;
 }
 
+body.rownav nav > a,
 body.rownav nav img {
     height: 2em;
     width: 2em;
@@ -383,8 +386,8 @@ img#cover {
     width: 100%;
 }
 
-img#cover {
-    margin-top: 3em;
+body.rownav header {
+    margin-top: 8px;
 }
 
 figure.screenshot img {
