@@ -18,7 +18,7 @@ home to eat.
 
 <div class="box h1-1">
   <figure><img src="/img/blog/iceland-2017/20170930-152701-5.jpg"></figure>
-  <div class="box v1-1 tokyo-20150821-19">
+  <div class="box v1-1">
     <figure><img src="/img/blog/iceland-2017/20171001-140815-8.jpg"></figure>
     <figure><img src="/img/blog/iceland-2017/20171002-192253-24.jpg"></figure>
   </div>
