@@ -304,6 +304,18 @@ sub {
     padding: 1em 1em 1em 1em;
     overflow: hidden;
 }
+
+.code_container {
+    text-align: center;
+}
+
+.code_container .code_snippet {
+    display: inline-block;
+    width: auto;
+    max-width: 80%;
+    text-align: left;
+}
+
 .code_snippet:hover {
     overflow: auto;
 }

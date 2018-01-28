@@ -15,16 +15,17 @@ The second is in the credits scene. I hadn't planned to use it anywhere besides 
 
 The [shader I wrote](https://www.shadertoy.com/view/MtjBWy) generates an animated pinwheel effect. Surprisingly, Shadertoy didn't have something like this. There was [one shader](https://www.shadertoy.com/view/MtsXzn) that was vaguely close, but I wanted the traditional two-color effect. Here's the code I ended up with:
 
+<div class="code_container">
 <pre class="glsl code_snippet">
-<span class="synType">void</span> mainImage(out vec4 o, vec2 i)
+<span class="synType">void</span> mainImage(out <span class="synType">vec4</span> o, <span class="synType">vec2</span> i)
 {
     <span class="synType">vec4</span> color1 = vec4(<span class="synConstant">1</span>, <span class="synConstant">1</span>, <span class="synConstant">1</span>, <span class="synConstant">1</span>);
     <span class="synType">vec4</span> color2 = vec4(<span class="synConstant">0</span>, <span class="synConstant">0</span>, <span class="synConstant">0</span>, <span class="synConstant">1</span>);
     <span class="synType">float</span> speed = <span class="synConstant">2.0</span>;
     <span class="synType">float</span> spokes = <span class="synConstant">12.0</span>;
-    <span>vec2</span> anchorPoint = vec2(<span class="synConstant">0.5</span>, <span class="synConstant">0.5</span>);
+    <span class="synType">vec2</span> anchorPoint = vec2(<span class="synConstant">0.5</span>, <span class="synConstant">0.5</span>);
 
-    <span>vec2</span> uv = i / iResolution.xy;
+    <span class="synType">vec2</span> uv = i / iResolution.xy;
 
     <span class="synType">float</span> theta = atan(uv.y - anchorPoint.y, uv.x - anchorPoint.x);
     <span class="synType">float</span> percent = theta / (<span class="synConstant">2.0</span>*<span class="synConstant">3.14159</span>);
@@ -36,6 +37,7 @@ The [shader I wrote](https://www.shadertoy.com/view/MtjBWy) generates an animate
     }
 }
 </pre>
+</div>
 
 The reason I wanted to write this particular shader was to take the very exciting event of learning a new spell, and kick up the visuals to indicate how important it is. This is _not_ very exciting:
 
