@@ -521,3 +521,8 @@ figure.screenshot img {
     background-color: #00a14b;
     transition: background-color 200ms linear;
 }
+
+img.right {
+    float: right;
+    margin-left: 1em;
+}
