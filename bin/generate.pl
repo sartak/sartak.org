@@ -9,6 +9,8 @@ use autodie;
 use Encode;
 use Sartak::Blog::Talks;
 use Text::Handlebars;
+use Unicode::Normalize qw/NFD NFC/;
+use List::MoreUtils 'uniq';
 
 my $title = 'Shawn M Moore';
 my $outdir = shift || 'generated';
@@ -227,8 +229,11 @@ sub generate_article {
     my $html = fill_in($layout{en}, $article);
 
     make_path "$outdir/$article->{dir}";
-    open my $handle, '>', "$outdir/$article->{file}";
-    print $handle $html;
+
+    for my $file (uniq(NFD($article->{file}), NFC($article->{file}))) {
+        open my $handle, '>', "$outdir/$article->{file}";
+        print $handle $html;
+    }
 }
 
 sub generate_index {
