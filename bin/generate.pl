@@ -252,12 +252,13 @@ sub generate_index {
         my $li_class = "";
 
         my ($year) = $article->{date} =~ /^(\d\d\d\d)-/;
-        if (defined($new_year) && $year != $new_year) {
+        if (!defined($new_year) || $year != $new_year) {
             $li_class .= " new-year";
         }
         $new_year = $year;
 
         $posts .= qq[<li class="$li_class">
+    <span class="year">$year</span>
     <span class="date">$date</span>
     <span class="title"><a href="$article->{url}">$article->{title}</a>$sigil</span>
 </li>];
@@ -273,6 +274,7 @@ sub generate_index {
         title     => $title,
         title_tag => 'sartak.org',
         index     => 1,
+        rownav    => 1,
     });
 }
 
@@ -297,6 +299,7 @@ sub generate_drafts {
         content   => $posts,
         title     => $title,
         title_tag => 'sartak.org',
+        rownav    => 1,
     });
 }
 
@@ -307,6 +310,7 @@ sub generate_page {
     open my $handle, '>', $file;
     print $handle fill_in($layout{$args{lang}}, {
         content => scalar slurp("$args{page}.$args{lang}.html"),
+        rownav => 1,
         %args,
     });
 }
@@ -328,6 +332,7 @@ sub generate_talks {
             title     => $title,
             title_tag => 'sartak.org',
             rss       => '/talks/rss.xml',
+            rownav    => 1,
         });
     }
 
@@ -337,6 +342,7 @@ sub generate_talks {
         title     => 'sartak.org',
         title_tag => 'sartak.org',
         rss       => '/talks/rss.xml',
+        rownav    => 1,
     });
 }
 

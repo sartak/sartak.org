@@ -1,17 +1,24 @@
 title: Jifty's Request Inspector
 date: 2009-10-07
+rownav: 1
 
 <p><a href="http://jifty.org">Jifty</a>'s <a href="http://p3rl.org/Jifty::Plugin::RequestInspector">RequestInspector plugin</a> provides you with debugging information for HTTP requests. You can examine the SQL queries that were issued in servicing the request, inspect a <a href="http://p3rl.org/Devel::NYTProf">Devel::NYTProf</a> profile of the request, and more. The information is presented in an (admittedly ugly) admin panel. Here's what our <a href="https://github.com/bestpractical/App-Changeloggr">Changelogger</a>'s request inspector page looks like:</p>
 
-<img src="/img/blog/jiftys-request-inspector/basic.png" />
+<figure>
+<img height=242 width=700 style="width:700px" src="/img/blog/jiftys-request-inspector/basic.png" />
+</figure>
 
 <p>If we click into one of the requests, we can get an overview of that request.</p>
 
-<img src="/img/blog/jiftys-request-inspector/request.png" />
+<figure>
+<img height=361 width=700 style="width:700px" src="/img/blog/jiftys-request-inspector/request.png" />
+</figure>
 
 <p>We can inspect in detail a particular part of a request with another click.</p>
 
-<img src="/img/blog/jiftys-request-inspector/dumpreqres.png" />
+<figure>
+<img height=695 width=688 style="width:688px" src="/img/blog/jiftys-request-inspector/dumpreqres.png" />
+</figure>
 
 <h2>Backend</h2>
 
@@ -25,7 +32,7 @@ date: 2009-10-07
 
 <p>When the user wants to see a request, RequestInspector calls the <tt>inspect_render_summary</tt> method on each plugin. When the user wants to see the detailed analysis by a particular plugin for a particular request, RequestInspector calls the <tt>inspect_render_analysis</tt> method on that plugin. It is completely up to the plugin to decide what to render. Both methods receive the data it returned from <tt>inspect_after_request</tt> for that request.</p>
 
-<h3>Benefits</h3>
+<h2>Benefits</h2>
 
 <p>You might wonder why this design is better than, say, a specific data format to which each plugin must adhere.</p>
 

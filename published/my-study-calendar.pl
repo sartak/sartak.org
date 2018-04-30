@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: My Study Calendar\ndate: 2012-07-28\n" }
+BEGIN { print "title: My Study Calendar\ndate: 2012-07-28\nrownav: 1\n" }
 
 p { "I've been studying Japanese for three years now. There are four tools that I have found to be invaluable in making me productive with the language. (I'm still trying to figure out how to be modest about it.)" };
 
@@ -16,9 +16,8 @@ p { "The third tool is the focus of this article. It's important to expose onese
 
 p { "To track my progress, to keep me honest about my immersion, and to decide what kinds of study I should do today, I maintain a **study calendar**. It used to take the form of a cheap whiteboard, inspired directly by [Giles](http://gilesbowkett.blogspot.com/2011/01/my-habit-calendar-system-levelling-up.html) [Bowkett](http://gilesbowkett.blogspot.com/2010/02/calendar-win-rapid-course-correction.html)." };
 
-a {
-    href is "http://www.flickr.com/photos/sartak/5998087904/in/photostream";
-    image "my-study-calendar/whiteboard.jpg";
+figure {
+img { src is "/img/blog/my-study-calendar/whiteboard.jpg" };
 };
 
 p { "The whiteboard calendar served me well for over a year. But it had many glaring problems:" };
@@ -38,7 +37,9 @@ h2 { "[The Daily Practice](http://tdp.me)" };
 
 p { "Thankfully (and finally!), a worthy replacement has come out, and I've been on it exclusively for six months now. I even threw away the whiteboard in a symbolic gesture of victory. The new system is called [The Daily Practice](http://tdp.me) and it looks like this (plus purple translations I added in post):" };
 
-image "my-study-calendar/full.png";
+figure {
+  img { width is 741; height is 476; style is "width: 741px"; src is "/img/blog/my-study-calendar/full.png" };
+};
 
 p { "As you can see it solves the issues I had with my whiteboard. The quotation icons indicate notes, so I can track what I'm actually reading, watching, writing, etc. I can consult this calendar and update it from anywhere I have an internet connection, including from my phone. The lightly-shaded blocks are \"free\" days based on the independent schedule each goal has." };
 
@@ -87,7 +88,9 @@ dl {
 
 p { "The numbers on the far right are streak counts. You'll notice that most of the daily goals have a streak of around 30, the every-other-day goals around 20, and the less frequent goals around 10. This is because about a month ago I noticed my study calendar looked like this:" };
 
-image "my-study-calendar/barren.png";
+figure {
+img { width is 740; height is 499; style is "width: 740px"; src is "/img/blog/my-study-calendar/barren.png" };
+};
 
 p { "As you can see, this time period is barren. There are multiple days where I did only the bare essentials: my Anki reviews and learning a couple kanji. It was depressing to look at." };
 

@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: Marketing 101\ndate: 2013-03-16\n" }
+BEGIN { print "title: Marketing 101\ndate: 2013-03-16\nrownav: 1" }
 
 p { "My girlfriend's friend just sent her a message:" };
 
@@ -9,11 +9,11 @@ blockquote {
     p { "It's imprinted on my brain from all those hungover mornings drinking coffee out of that mug!" };
 };
 
-a {
-    href is "http://shop.github.com/products/octocat-mug";
+figure {
     img {
         width is "512px";
         height is "343px";
+        style is "width: 512px";
         src is "/img/blog/marketing-101/octocat-mug.jpg";
     };
 };

@@ -1,15 +1,24 @@
 title: Installing Imager::File::GIF and Imager::File::JPEG with homebrew
 date: 2010-12-27
+rownav: 1
 
-More for my future reference than anything else :)
+<p>More for my future reference than anything else :)</p>
 
+<div class="code_container">
 <pre class="sh code_snippet">
 brew <span class="synStatement">install</span> giflib
-brew <span class="synStatement">install</span> libjpeg
 cpanm <span class="synSpecial">--look</span> Imager::File::GIF
     perl Makefile.PL <span class="synSpecial">--libpath=~/.brew/lib</span> <span class="synSpecial">--incpath=~/.brew/include</span>
     make <span class="synStatement">test</span> <span class="synStatement">install</span>
+</pre>
+</div>
+
+<div class="code_container">
+<pre class="sh code_snippet">
+brew <span class="synStatement">install</span> libjpeg
 cpanm <span class="synSpecial">--look</span> Imager::File::JPEG
     perl Makefile.PL <span class="synSpecial">--libpath=~/.brew/lib</span> <span class="synSpecial">--incpath=~/.brew/include</span>
     make <span class="synStatement">test</span> <span class="synStatement">install</span>
 </pre>
+</div>
+

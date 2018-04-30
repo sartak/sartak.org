@@ -1,15 +1,16 @@
 title: Perl::Critic::Dynamic::Moose
 date: 2009-05-03
+rownav: 1
 
 <p>In <a href="/2009/04/the-new-moose-warning-and-the-new-moose-critic.html">my previous post</a>, I wrote "What we need is a set of Perl::Critic policies for Moose." I've put my money where my mouth is and implemented five of them.</p>
 
-<h3>CPAN?</h3>
+<h2>CPAN?</h2>
 
 <p><tt>Perl::Critic::Dynamic::Moose</tt> is not on CPAN yet because <tt>Perl::Critic</tt> does not currently distinguish between "safe" (static) and "possibly unsafe" (dynamic) policies. <tt>Perl::Critic</tt> usually works by statically inspecting some Perl document. This allows users to <a href="http://perlcritic.com/">critique untrusted code</a>. Most of the policies I wrote are <i>dynamic</i>. These dynamic policies work by executing the code to be critiqued, then analyzing any new metaclasses that were created. While this limits their utility to analyzing only trusted code, this dynamicism does magnify analytic potential. Instead of inspecting <a href="http://p3rl.org/PPI">PPI</a> DOMs, these policies can inspect any and every metaobject in the system. A large part of why the metaobject protocol exists is for sane and consistent inspection, so these dynamic policies work well.</p>
 
 <p>Anyway, <tt>Perl::Critic</tt> uses <a href="http://p3rl.org/Module::Pluggable"><tt>Module::Pluggable</tt></a> to unconditionally load every module in the <tt>Perl::Critic::Policy</tt> namespace. It would be harmful to add unsafe modules to that namespace, so I am going to make sure that a new <tt>Perl::Critic</tt> that runs only safe policies is released before I begin publishing dynamic policies. It should be a very simple matter of programming...</p>
 
-<h3>Perl::Critic::DynamicMoosePolicy</h3>
+<h2>Perl::Critic::DynamicMoosePolicy</h2>
 
 <p><tt>Perl::Critic::DynamicMoosePolicy</tt> is a base class for dynamic Moose policies. It's written, of course, with Moose (extending <tt>Perl::Critic::Policy</tt> using <a href="http://p3rl.org/MooseX::NonMoose"><tt>MooseX::NonMoose</tt></a>). It does the things that every dynamic Moose policy needs to do:</p>
 
@@ -33,29 +34,35 @@ date: 2009-05-03
 
 <p>Policies may define a <tt>applies_to_metaclass</tt> method that filters for only the metaclasses that sensibly apply. I utilized the rarely-seen <a href="http://p3rl.org/Moose::Cookbook::Basics::Recipe6"><tt>augment</tt> and <tt>inner</tt></a> for this method (as well as <tt>default_themes</tt>). The default implementation of <tt>applies_to_metaclass</tt> is:
 
+<div class="code_container">
 <pre class="perl code_snippet">
 <span class="synStatement">sub </span><span class="synIdentifier">applies_to_metaclass </span>{ <span class="synConstant">'Class::MOP::Class'</span>, inner() }
 </pre>
+</div>
 
 <p>If the policy wants to analyze <em>only</em> role metaobjects, then they can ignore the method's inverse nature by writing the standard:</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
 <span class="synStatement">sub </span><span class="synIdentifier">applies_to_metaclass </span>{ <span class="synConstant">'Moose::Meta::Role'</span> }
 </pre>
+</div>
 
 <p>If the policy wants to analyze <em>only</em> class metaobjects, then they do not have to augment this method. The parent's <tt>inner</tt> in such cases is a no-op, returning the empty list.</p>
 
 <p>However, if a policy wants to analyze <em>both</em> classes and roles (which I suspect happens when the actual subject for analysis is attributes and methods), the policy can include:</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
 augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class="synStatement">sub </span>{
     <span class="synConstant">'Moose::Meta::Role'</span>
 };
 </pre>
+</div>
 
 <p><tt>augment</tt> signals that the method resolution order <em>descends</em> the class hierarchy: grandparent -&gt; parent -&gt; child. <tt>inner</tt> calls the next most specific method. The end result of calling the above method is the list <tt>('Class::MOP::Class', 'Moose::Meta::Role')</tt>.</p>
 
-<h3>PCP::DynamicMoose::ProhibitPublicBuilder</h3>
+<h2>PCP::DynamicMoose::ProhibitPublicBuilder</h2>
 
 <p>I wrote this policy first because I knew this area of the metaobject protocol well. Any problems were likely caused by the fork-and-eval side, not the inspection side. Pick your battles.</p>
 
@@ -65,6 +72,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>Handling roles for this policy sucks because attributes in roles are just inert hash references. Since there have been threats to improve roles to make use of real objects, I will elide handling roles here for brevity.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
 <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$name</span> (<span class="synIdentifier">$meta-&gt;get_attribute_list</span>) {
     <span class="synStatement">my</span> <span class="synIdentifier">$attribute</span> = <span class="synIdentifier">$meta-&gt;get_attribute</span>(<span class="synIdentifier">$name</span>);
@@ -79,10 +87,11 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
     }
 }
 </pre>
+</div>
 
 <p><tt>get_attribute_list</tt> returns the names of attributes defined in this <em>local</em> class. Inherited attributes are not considered. I figure you would be running these policies on every class and role in your project anyway.</p>
 
-<h3>PCP::DynamicMoose::RequireMakeImmutable</h3>
+<h2>PCP::DynamicMoose::RequireMakeImmutable</h2>
 
 <p>Next up is another easy policy. This is <em>by far</em> the simplest. It performs one simple check on the metaclass (<tt>is_immutable</tt>).</p>
 
@@ -90,7 +99,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>As with most static policies, <tt>PCP::Moose::RequireMakeImmutable</tt> admirably handles the common cases, but might not handle strange corner cases well. Dynamic policies can fill such gaps.</p>
 
-<h3>PCP::Moose::RequireMethodModifiers</h3>
+<h2>PCP::Moose::RequireMethodModifiers</h2>
 
 <p>Moose provides a rich set of method modifiers:</p>
 
@@ -107,6 +116,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 <p>This is the first novel dynamic policy; the previous policies could be implemented statically, but this one would have little chance. Let's walk through its entire <tt>violates_metaclass</tt>.</p>
 
 
+<div class="code_container">
 <pre class="perl code_snippet">
 <span class="synStatement">sub </span><span class="synIdentifier">violates_metaclass </span>{
     <span class="synStatement">my</span> <span class="synIdentifier">$self</span>  = <span class="synStatement">shift</span>;
@@ -114,24 +124,30 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
     <span class="synStatement">my</span> <span class="synIdentifier">@violations</span>;
 </pre>
+</div>
 
 <p>This policy does not apply to roles, and does not require Moose-specific features (such as, well, roles), so it can use the default <tt>applies_to_metaclass</tt>. We also need a place to store the list of violations, since many methods could be implicitly overriding inherited methods.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
     <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$name</span> (<span class="synIdentifier">$class-&gt;get_method_list</span>) {
         <span class="synStatement">my</span> <span class="synIdentifier">$method</span> = <span class="synIdentifier">$class-&gt;get_method</span>(<span class="synIdentifier">$name</span>);
 </pre>
+</div>
 
 <p>We iterate over the class's <em>local</em> methods. <tt>get_method_list</tt> and <tt>get_method</tt> do not look at inherited methods at all. Methods brought in from <em>locally-consumed roles</em> are also included in this list &mdash; this is a feature called <em>flattening</em>. (If in your code you <em>do</em> want to consider inheritance, use <tt>get_all_methods</tt> and <tt>find_method_by_name</tt>)</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
         <span class="synComment"># override and augment modifiers are always fine.</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Moose::Meta::Method::Overridden'</span>)
              || <span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Moose::Meta::Method::Augmented'</span>);
 </pre>
+</div>
 
 <p>This quickly excludes two of the five method modifiers. Such modifiers have their own metaclasses for various reasons, not least of which is our usage here: to allow detection that the method is just a modifier.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
         <span class="synComment"># Since we can implicitly override and wrap in the same class, we</span>
         <span class="synComment"># need to be a little more careful here.</span>
@@ -141,40 +157,48 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
                  <span class="synStatement">ne</span> <span class="synIdentifier">$orig_method-&gt;associated_metaclass-&gt;name</span>;
         }
 </pre>
+</div>
 
 <p>Handling the other three method modifiers (<tt>before</tt>, <tt>after</tt>, and <tt>around</tt>) is trickier. You can both define a method and wrap it with these three modifiers in the same class. This is useful for, say, running code <tt>before</tt> an attribute's <tt>clearer</tt>.</p>
 
 <p>If the method we're wrapping is from a different metaclass, then we must be wrapping an inherited method, which is fine. If we're wrapping a local method, then we need to peel off a layer. We do not need peel off many layers in a loop, since multiple local modifiers coalesce into one layer.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
         <span class="synComment"># Generated methods</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method-&gt;isa</span>(<span class="synConstant">'Class::MOP::Method::Generated'</span>);
 </pre>
+</div>
 
 <p>This one worries me a little. Generated methods are those created for you by Moose. Examples include accessors, <tt>new</tt> (but only after a <tt>make_immutable</tt>), and delegation methods. Since these methods are generated for you, you have no way to indicate that they are overriding an inherited method.</p>
 
 <p>Because you can certainly accidentally override an inherited method with a generated method, this check should be optional.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
         <span class="synComment"># </span><span class="synTodo">XXX</span><span class="synComment">: this freaking sucks</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$name</span> <span class="synStatement">eq</span> <span class="synConstant">'meta'</span>
              || <span class="synIdentifier">$name</span> <span class="synStatement">eq</span> <span class="synConstant">'BUILD'</span>
              || <span class="synIdentifier">$name</span> <span class="synStatement">eq</span> <span class="synConstant">'DEMOLISH'</span>;
 </pre>
+</div>
 
 <p>This "freaking sucks" for two reasons. <tt>meta</tt> is installed into your local class by Moose. That's fine (though we will eventually support renaming or excluding it). The metaclass of the <tt>meta</tt> method is not <tt>Class::MOP::Method::Generated</tt> like it should be, it's <tt>Moose::Meta::Method</tt>. This misclassification makes it look like a regular method defined by the user. <tt>meta</tt> would receive special consideration even if it were properly labeled as a generated method, because every class gets its own.</p>
 
 <p>The other reason this sucks is the hardcoded <tt>BUILD</tt> and <tt>DEMOLISH</tt>. These are special methods with unusual dispatch semantics. Every <tt>BUILD</tt> and <tt>DEMOLISH</tt> method is called in your hierarchy automatically; there is no choice about redispatching to your inherited method. This is a useful feature, because too often do we forget to do this which can silently mess up initialization or destruction. Anyway, this list of special methods should be inspectable from the metaclass, and given their own <tt>Class::MOP::Method</tt> subclass.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
         <span class="synStatement">my</span> <span class="synIdentifier">$next</span> = <span class="synIdentifier">$class-&gt;find_next_method_by_name</span>(<span class="synIdentifier">$name</span>);
 
         <span class="synComment"># Adding new methods is always fine.</span>
         <span class="synStatement">next</span> <span class="synStatement">if</span> !<span class="synIdentifier">$next</span>;
 </pre>
+</div>
 
 <p>Simple enough, right? It finds the inherited method by a given name, if any. If there is none, then it must be an entirely new method with a unique name, which is perfectly fine.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
         <span class="synStatement">push</span> <span class="synIdentifier">@violations</span>, <span class="synIdentifier">$self-&gt;violation</span>(
             <span class="synConstant">&quot;The '</span><span class="synIdentifier">$name</span><span class="synConstant">' method of class &quot;</span> . <span class="synIdentifier">$class-&gt;name</span>
@@ -186,11 +210,12 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
     <span class="synStatement">return</span> <span class="synIdentifier">@violations</span>;
 }
 </pre>
+</div>
 
 <p>That's all. We've exhausted all the acceptable ways for a method to interact with its super-methods, so what remains must be a violation.</p>
 
 
-<h3>PCP::DynamicMoose::ClassOverridesRole</h3>
+<h2>PCP::DynamicMoose::ClassOverridesRole</h2>
 
 <p>Ahhh, the violation that launched a thousand comments. I've already <a href="/2009/04/the-new-moose-warning-and-the-new-moose-critic.html">summed up the what and the why</a> of this violation.</p>
 
@@ -198,6 +223,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>Let's walk through this implementation as well.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
 <span class="synStatement">sub </span><span class="synIdentifier">violates_metaclass </span>{
     <span class="synStatement">my</span> <span class="synIdentifier">$self</span>  = <span class="synStatement">shift</span>;
@@ -205,41 +231,50 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
     <span class="synStatement">my</span> <span class="synIdentifier">@violations</span>;
 </pre>
+</div>
 
 <p>Familiar enough.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
     <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$application</span> (<span class="synIdentifier">$class-&gt;role_applications</span>) {
         <span class="synStatement">my</span> <span class="synIdentifier">$role</span> = <span class="synIdentifier">$application-&gt;role</span>;
 </pre>
+</div>
 
 <p>Every time you consume a role with <tt>with</tt>, it creates an object of class <tt>Moose::Meta::Role::Application::ToClass</tt> and adds it to your metaclass. This object has, among other things, a <tt>role</tt> attribute.</p>
 
 <p>As an aside, it might be interesting to make the <tt>does</tt> method return these role application objects. They're certainly true values, and there is precedent: the true value that <tt>can</tt> returns is a code reference.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
         <span class="synStatement">for</span> <span class="synStatement">my</span> <span class="synIdentifier">$method</span> (<span class="synIdentifier">$role-&gt;get_method_list</span>) {
             <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$application-&gt;is_method_excluded</span>(<span class="synIdentifier">$method</span>);
             <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$application-&gt;is_method_aliased</span>(<span class="synIdentifier">$method</span>);
 </pre>
+</div>
 
 <p>We need to consider every method in the role. If a method has been excluded or aliased, then that is explicit overriding, so the violation does not apply.</p>
 
 <p>To allow for this explicit override is exactly why I needed to add role-application tracking to Moose, and why I could not implement this policy until today.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
             <span class="synStatement">my</span> <span class="synIdentifier">$method_object</span> = <span class="synIdentifier">$class-&gt;get_method</span>(<span class="synIdentifier">$method</span>)
                 <span class="synStatement">or</span> <span class="synStatement">next</span>;
 </pre>
+</div>
 
 <p>We inspect the method's metaobject from the class. Again, we use <tt>get_method</tt> and not <tt>find_method_by_name</tt> because we do not want to consider inheritance. At this point, the method is definitely there, since it hasn't been excluded. What matters now is whether the role provided it or if the class did.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
             <span class="synStatement">if</span> (<span class="synIdentifier">$method_object-&gt;isa</span>(<span class="synConstant">'Moose::Meta::Role::Method'</span>)) {
                 <span class="synStatement">next</span> <span class="synStatement">if</span> <span class="synIdentifier">$method_object-&gt;body</span>
                      == <span class="synIdentifier">$role-&gt;get_method</span>(<span class="synIdentifier">$method</span>)-&gt;body;
             }
 </pre>
+</div>
 
 <p>Methods of class <tt>Moose::Meta::Role::Method</tt> were originally pulled in from a role. If the method was not provided by a role, then it was a silent class override.</p>
 
@@ -247,6 +282,7 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
 
 <p>The inside statement also attempts to handle the method coming in from the same role multiple ways. Suppose you have a <tt>Foo::Basic</tt> role with a method <tt>kerplow</tt> that is consumed by both the <tt>Foo::Advanced</tt> and <tt>Foo::Safe</tt> roles. A class that sequentially consumes <tt>Foo::Advanced</tt> then <tt>Foo::Safe</tt> would get the <tt>kerplow</tt> method twice. But since it's the exact same implementation (i.e. the same code reference), it's not worth warning about. I trust that the programmer will utilize <a href="http://p3rl.org/Test::Perl::Critic"><tt>Test::Perl::Critic</tt></a>, so that the divergence of the two <tt>kerplow</tt> methods would become a violation.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
             <span class="synStatement">my</span> <span class="synIdentifier">$class_name</span> = <span class="synIdentifier">$class-&gt;name</span>;
             <span class="synStatement">my</span> <span class="synIdentifier">$role_name</span>  = <span class="synIdentifier">$role-&gt;name</span>;
@@ -261,16 +297,17 @@ augment <span class="synConstant">applies_to_metaclass</span> =&gt; <span class=
     <span class="synStatement">return</span> <span class="synIdentifier">@violations</span>;
 }
 </pre>
+</div>
 
 <p>And that's it.</p>
 
-<h3>PCP::Moose::ProhibitMultipleWiths</h3>
+<h2>PCP::Moose::ProhibitMultipleWiths</h2>
 
 <p>I did write one static policy, which prohibits multiple calls to <tt>with</tt> in one package. Roles provide powerful and safe means of combination, but these are only activated if you actually <em>combine</em> the roles. If you sequentially apply multiple roles to a class, conflicting method names are silently ignored. This could possibly be fixed in the future, but for now we'll have to live with this behavior. At least we can now warn you about it.</p>
 
 <p>This implementation is pretty simple as far as <tt>Perl::Critic</tt> policies go. I wrote this one as a static policy because PPI-based analysis is still very worthwhile. It actually would have been easier to implement dynamically. However, as I explained earlier, you would lose out the "location" of the violation &mdash; the second <tt>with</tt>.</p>
 
-<h3>Conclusion</h3>
+<h2>Conclusion</h2>
 
 <p>I'm quite happy with how dynamic Moose policies are coming along. We now have policies for all the ideas I listed in my previous post. The only one I didn't cover, "Declaring a <tt>new</tt> method instead of using the many object construction hooks", was written quickly after my post by Elliot as a static policy.</p>
 

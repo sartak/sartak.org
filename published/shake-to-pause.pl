@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: Shake to Pause\ndate: 2012-06-03\n" }
+BEGIN { print "title: Shake to Pause\ndate: 2012-06-03\nrownav: 1" }
 
 p { "This morning I was groggily playing the game I'm [working on](/2012/05/introducing-kanaswirl.html) called [KanaSwirl](http://itunes.apple.com/us/app/kanaswirl/id525332301?at=11l7vX&ct=sartak-shake), supine in bed. Phone inches above my face, purring along in the game, then ***pow!***, I slipped and the bastard hit me right in the cheek. Of course, my game kept running, ignoring my curse, smarting, and eventual rescue of my phone off the floor. But it got me [thinking](http://twitter.com/RPGlanguage/status/208923480887005184): why _didn't_ the game pause? The iPhone has an accelerometer: surely it would be trivial to sense the sudden jolt of glass hitting flesh." };
 
@@ -23,6 +23,10 @@ self.isAccelerometerEnabled = YES;
 
 p { "I'm sure that `if` check for acceleration could be improved (compare the overall magnitude instead of each component separately?), but what I have here has worked well for me. It doesn't automatically trigger when I'm walking even animatedly, but it does pass the phone-falls-into-cheek test. On the off-chance you don't want this behavior, I went ahead and added a snarky setting too." };
 
-image "shake-to-pause/settings.png";
+figure {
+    img { width is 396; style is "width:396px"; height is 744; src is "/img/blog/shake-to-pause/settings.png" };
+};
 
 p { "While I initially added this for when I dropped my phone, it's also useful as advertised &mdash; it's easier to shake your phone than it is to peck at the onscreen pause button. I'm sure many other games could benefit from this shake to pause idea. If you add it to your game, I'd like to hear about it!" };
+
+p { "(this post was featured in [Little Big Details](http://littlebigdetails.com/post/29479815722/kanaswirl-shake-your-device-or-drop-it-to), and then in [_Microinteractions_](http://shop.oreilly.com/product/0636920027676.do), page 36)" }

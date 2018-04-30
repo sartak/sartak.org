@@ -1,5 +1,6 @@
 title: On Learning
 date: 2010-01-01
+rownav: 1
 
 <p>At a party last night, I explained spaced repetition and Anki to two separate groups of people.<sup>
   <a class="footnote_link" href="#footnote_1" name="footnote_back_1">[1]</a>
@@ -54,20 +55,26 @@ date: 2010-01-01
 <p>Iroha is far too long to use only one card, so the best way to learn it &#40;as pointed out by 
  <a href="http://study-shack.com/creating-cards-models-for-all-classes">Study Shack</a>&#41; is by using eight cards, one for each line of the poem. Each card has a different line blanked out and your job is to produce the missing line. Here&#39;s what Anki&#39;s review interface looks like &#40;with the answer revealed in the lower half&#41;:
 </p>
-<img src="/img/blog/on-learning/iroha.png" />
+<figure>
+<img width=818 height=699 style="width:818px" src="/img/blog/on-learning/iroha.png" />
+</figure>
 <p>Anki has a convenient feature called &#39;cloze deletion&#39; that makes creating eight similar cards like this take only a minute.</p>
 <p>By the way seeing the other seven lines of the poem in every card is like even more spaced repetition, for free.</p>
 <h3>Design</h3>
 <p>Facts are not limited to a front and back. Each fact belongs to a <em>model</em>. The model lets you control which fields are available &#40;including requiredness and uniqueness constraints on each field&#41;. Some models I use are Sentence &#40;which has fields 日本語, Meaning, Readings, and Source&#41; and Capital &#40;Region, Capital&#41;. Models also control how cards of that model are displayed.
 </p>
-<img src="/img/blog/on-learning/model.png" />
+<figure>
+<img width=613 height=653 style="width:613px" src="/img/blog/on-learning/model.png" />
+</figure>
 <p>As you can see, you can also generate several cards from a single fact. Not only do I want to test myself to be able to produce the capital of a given region, but I also want to test myself on producing a region given just its capital city.</p>
 <p>You can have as many fields in a model as you want, and you can generate many different types of cards for each fact. You could create eight cards based on ten fields if you were so inclined. This is powerful stuff! Anki lets you uphold the Don&#39;t Repeat Yourself principle dear to many programmers.</p>
 <h3>Interface</h3>
 <p>Anki has a lot of gears and widgets, but what matters most is the interface you see when you&#39;re reviewing a fact. It may not look like it, but Anki&#39;s review interface is actually a fully-featured web browser. <em>With Javascript.</em> It has, for example, 
  <code>alert&#40;&#41;</code>. Providing a full web browser gives Anki basically limitless flexibility!
 </p>
-<img src="/img/blog/on-learning/alert.png" />
+<figure>
+<img width=743 height=573 style="width:743px" src="/img/blog/on-learning/alert.png" />
+</figure>
 <p>Being able to use arbitrary fields in a model works out amazingly well when you have Javascript at your disposal. You can make one of the fields a YouTube video and show it if you want.
  <sup>
   <a class="footnote_link" href="#footnote_4" name="footnote_back_4">[4]</a>
@@ -88,10 +95,14 @@ date: 2010-01-01
  <a href="http://www.mblondel.org/journal/2008/08/01/web-canvas/">Web Canvas</a> which turned out to be quite good in terms of functionality and ease-of-use. I had to patch it to accept my iPod&#39;s touch gestures &#40;which was incorporated upstream&#41; but after that it was pretty smooth sailing. (update: I've also submitted some <a href="http://github.com/sartak/ianki">patches</a> to iAnki itself). Here&#39;s what my iAnki looks like for testing a kanji:
 </p>
 
-<img src="/img/blog/on-learning/prompt.png" />
+<figure>
+<img width=320 height=480 style="width:320px" src="/img/blog/on-learning/prompt.png" />
+</figure>
 <p>This is asking us to produce the kanji for &#34;frost&#34;.</p>
 <br />
-<img src="/img/blog/on-learning/hint.png" />
+<figure>
+<img width=320 height=480 style="width:320px" src="/img/blog/on-learning/hint.png" />
+</figure>
 <p>If I have trouble remembering the kanji, I can look at the primitive story of the kanji. Stories are a peculiarity of the 
  <a href="http://www.amazon.com/gp/product/0824831659?ie=UTF8&#38;tag=sartak-20&#38;linkCode=as2&#38;camp=1789&#38;creative=390957&#38;creativeASIN=0824831659">method I am using to learn kanji</a> which will be the topic of another post. The &#34;&#40;primitives&#41;&#34; link had a javascript onclick handler that replaced itself with the story. Hiding the story behind a link is handy because I usually do not want to see the story unless I am stuck.
  <sup>
@@ -99,14 +110,18 @@ date: 2010-01-01
  </sup>
 </p>
 <br />
-<img src="/img/blog/on-learning/penmanship.png" />
+<figure>
+<img width=320 height=480 style="width:320px" src="/img/blog/on-learning/penmanship.png" />
+</figure>
 <p>Now I&#39;ve written out the kanji. As fun as touchscreens are, it&#39;s <em>really</em> hard to demonstrate good penmanship with them. This is actually embarrassingly bad.
  <sup>
   <a class="footnote_link" href="#footnote_7" name="footnote_back_7">[7]</a>
  </sup>
 </p>
 <br />
-<img src="/img/blog/on-learning/answer.png" />
+<figure>
+<img width=320 height=480 style="width:320px" src="/img/blog/on-learning/answer.png" />
+</figure>
 <p>Finally I check the answer against what I wrote. Since I got this correct, and I recalled it effortlessly, I marked it as a four. Anki scheduled this kanji to appear again in about eight weeks.</p>
 <h3>Graphs</h3>
 <p>Most importantly, Anki lets you measure your worth with graphs and statistics! This is a graph of facts I&#39;ve added over the past month. The spike on the fifth is when I played Phantasy Star IV
@@ -114,9 +129,13 @@ date: 2010-01-01
   <a class="footnote_link" href="#footnote_8" name="footnote_back_8">[8]</a>
  </sup>all day and added a bunch of sentences.
 </p>
-<img src="/img/blog/on-learning/graph.png" />
+<figure>
+<img width=659 height=325 style="width:659px" src="/img/blog/on-learning/graph.png" />
+</figure>
 <p>It also tells you how difficult each card is. So here are the cards that trouble me most. I should give them special treatment, such as cramming them for a while or something.</p>
-<img src="/img/blog/on-learning/ease.png" />
+<figure>
+<img width=918 height=900 style="width:918px" src="/img/blog/on-learning/ease.png" />
+</figure>
 <p>All of your cards are stored in a SQLite database so if Anki doesn&#39;t offer exactly the kind of information you want, you can still get at it. I used the database directly to produce a calendar of kanji I&#39;ve learned. That was a little worrying; I didn&#39;t realize how few kanji I learned in November and December &#40;compared to October&#41;. But for the same reason it was also motivating.
 </p>
 <hr />

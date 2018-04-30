@@ -1,11 +1,12 @@
 title: Breaking Sys::Protect
 date: 2009-03-25
+rownav: 1
 
 <p><a href="http://p3rl.org/Sys::Protect">Sys::Protect</a> does not bill itself as unbreakable protection, but it's fun to break it anyway.</p>
 
 <p><a href="http://p3rl.org/PadWalker">PadWalker</a> is used as an example of an XS module that could seriously mess with other code. <a href="http://p3rl.org/Math::BigInt::FastCalc">Math::BigInt::FastCalc</a> is specifically allowed by Sys::Protect to perform unsafe operations because its domain is only big integers, it is used by a lot of other modules, and because its XS code has been verified to be safe.</p>
 
-
+<div class="code_container">
 <pre class="perl code_snippet">
 <span class="synPreProc">#!/usr/bin/env perl</span>
 <span class="synStatement">no strict</span>;
@@ -27,6 +28,7 @@ is(<span class="synIdentifier">${</span>PadWalker::closed_over(<span class="synI
     <span class="synIdentifier">$_[</span><span class="synConstant">0</span><span class="synIdentifier">]</span> = <span class="synConstant">&quot;PadWalker&quot;</span>;
 }; 
 </pre>
+</div>
 
 <p>Don't use Sys::Protect. :)</p>
 

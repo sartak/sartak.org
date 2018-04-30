@@ -2,6 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: nginx + FastCGI + Plack + systemd
 date: 2015-12-02
+rownav: 1
 " }
 
 p { "One of my backburner projects has been to migrate this here website onto a fresh server. I never want to feel stuck on an old server again, so I've been investing time to make deploying the full sartak.org experience both quick and painless. That means managing all the configuration with the configuration manager I hate the least. Today that happens to be Ansible." };
@@ -25,6 +26,7 @@ p { "Here's what I'm working with here. I've got a small, light-traffic Perl web
 p { "First, the nginx config. (For those following along at home, replace both instances of `micro.sartak.org` with your domain name)" };
 
 outs_raw << 'NGINX';
+<div class="code_container">
 <pre class="nginx code_snippet"><span class="synStatement">server</span> {
     server_name <span class="synIdentifier">micro.sartak.org</span>;
     <span class="synStatement">location</span> <span class="synIdentifier">/</span> {
@@ -33,6 +35,7 @@ outs_raw << 'NGINX';
         fastcgi_param <span class="synConstant">SCRIPT_NAME</span> <span class="synIdentifier">""</span>;
     }
 }</pre>
+</div>
 NGINX
 
 p { "Next is to convince systemd to keep the app running. Drop this into `/etc/systemd/system/micro.sartak.org.service` (Replace `micro.sartak.org` and `/usr/local/share/Sartak-Microblog`, and possibly also `app.psgi`)" };

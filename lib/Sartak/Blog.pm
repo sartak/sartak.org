@@ -83,7 +83,7 @@ sub code_snippet {
 
     1 while chomp $html;
 
-    outs_raw qq{<pre class="$type code_snippet">$html</pre>};
+    outs_raw qq{<div class="code_container"><pre class="$type code_snippet">$html</pre></div>};
 }
 
 sub perl {

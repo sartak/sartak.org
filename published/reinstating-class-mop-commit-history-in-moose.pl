@@ -1,6 +1,6 @@
 use Sartak::Blog;
 
-BEGIN { print "title: Reinstating Class::MOP's Commit History in Moose\ndate: 2013-03-18\n" }
+BEGIN { print "title: Reinstating Class::MOP's Commit History in Moose\ndate: 2013-03-18\nrownav: 1\n" }
 
 p { "Ever use `git blame` or `git log` in the Class::MOP parts of the Moose repository? If so you've probably seen Dave Rolsky's mega commit `38bf2a25`." };
 

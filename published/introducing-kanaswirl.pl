@@ -1,52 +1,44 @@
 use Sartak::Blog;
 
-BEGIN { print "title: Introducing KanaSwirl\ndate: 2012-05-14\n" }
+BEGIN { print "title: Introducing KanaSwirl\ndate: 2012-05-14\nrownav: 1" }
 
-outs_raw '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>';
-
-div {
-    style is "float: right; padding-bottom: 1em; padding-left: 1em";
-    a {
-        href is "http://itunes.apple.com/us/app/kanaswirl/id525332301?at=11l7vX&ct=sartak-introkanaswirl";
-        image "introducing-kanaswirl/KanaSwirl-256x256.png";
-        p { style is "text-align: center"; "KanaSwirl in the App Store" };
-    };
+p {
+a {
+    class is "right";
+    href is "http://itunes.apple.com/us/app/kanaswirl/id525332301?at=11l7vX&ct=sartak-introkanaswirl";
+    img { height is "256"; width is "256"; style is "width: 256px"; src is "/img/blog/introducing-kanaswirl/KanaSwirl-256x256.png" };
+};
 };
 
-
-outs_raw << 'ENDJS';
-    <script type="text/javascript">
-        $(function () {
-            if (navigator.userAgent.match(/iPhone/i)) {
-                $("#audience").html("You");
-            }
-        });
-    </script>
-ENDJS
-
-p { "<span id=\"audience\">Some of you</span> are reading this on the most efficient language learning device ever designed: the iPhone. It can store many days' worth of target language music and podcasts, many lifetimes' worth of target language books, countless mono- and bilingual dictionaries, and includes an operating system localized to practically any language people speak. Not to mention there are loads of great apps designed for and by speakers of your target language. And it even fits in your pocket so you can carry your immersive environment with you all the time." };
+p { "Some of you are reading this on the most efficient language learning device ever designed: the iPhone. It can store many days' worth of target language music and podcasts, many lifetimes' worth of target language books, countless mono- and bilingual dictionaries, and includes an operating system localized to practically any language people speak. Not to mention there are loads of great apps designed for and by speakers of your target language. And it even fits in your pocket so you can carry your immersive environment with you all the time." };
 
 p { "To that end, I have written and released a game called [KanaSwirl](http://itunes.apple.com/us/app/kanaswirl/id525332301?at=11l7vX&ct=sartak-introkanaswirl). It teaches you the 46 Japanese hiragana characters in a fun, quick, and easy way. It is the kind of app I wish existed when I was starting out with Japanese. It took me something like two months to become comfortable with the kana. I hope my game enables everyone to trounce that." };
 
 p { "If you have finished going through the learning process, KanaSwirl looks like this:" };
 
-image "introducing-kanaswirl/game-half.png";
+figure {
+img { width is "480"; height is "320"; style is "width:480px"; src is "/img/blog/introducing-kanaswirl/game-half.png" };
+};
 
 p { "Given the prompt MU you tap the corresponding kana, む. Pretty simple, which is the point! You can pick it up at any time and do as many reviews as you like." };
 
 p { "Even simpler, if you are just starting out, the game goes easy on you. You start off with just two characters, あ and い. Once you get the hang of those, the game teaches you う, and so on." };
 
-image "introducing-kanaswirl/easy-half.png";
+figure {
+img { width is "480"; height is "320"; style is "width:480px"; src is "/img/blog/introducing-kanaswirl/easy-half.png" };
+};
 
 p { "The game dynamically responds to how well you're doing. On the individual game level, if you are correctly answering the prompts quickly or slowly, characters are added to or removed from the circle. And again, on the global level, if you have been generally answering all the characters correctly, KanaSwirl will teach you the next character." };
 
 p { "It also tracks and offers some statistics about your reviews. I am very interested in expanding this part of the experience. I look forward to the day my app bluntly tells me what characters I frequently confuse." };
 
-image "introducing-kanaswirl/statistics-half.png";
+figure {
+img { width is "480"; height is "320"; style is "width:480px"; src is "/img/blog/introducing-kanaswirl/statistics-half.png" };
+};
 
 p { "I had a very fun week creating this game. The only problem is my Japanese study suffered a _lot_ that week. :)" };
 
-h3 { "Anki" };
+h2 { "Anki" };
 
 p { "KanaSwirl may seem like a competitor to [Anki](http://ankisrs.net), but I think both have their own separate strengths and complement eachother. I love Anki to death, and if I have any success with Japanese it is Anki's fault. Anki is certainly better at keeping tens of thousands of facts in your head (I'm living proof!). It is also not limited to individual words or characters like KanaSwirl is, but works with complete sentences or even pictures." };
 
@@ -54,7 +46,7 @@ p { "KanaSwirl has its advantages too. For one, when you finish your Anki review
 
 p { "Ultimately I want *games* I don't feel guilty playing. Sure Angry Birds is entertaining, but at the end of the day what do you get out of it?" };
 
-h3 { "XCode/Objective-C development" };
+h2 { "XCode/Objective-C development" };
 
 p { "This was my first non-Perl project in a very long time. It was also my very first Objective C exposure. I'm having a blast with it. It feels more natural as a C-with-objects than C++ ever did. Even though it is a statically-typed, compiled language, I don't feel constrained. Other than by the lack of `map`. Integer division tripped me up until I realized it was happening." };
 
@@ -78,7 +70,7 @@ p { "The only big stumbling block I had was designing the icon. I think it's pas
 
 p { "iPad support wasn't tricky at all. I just needed to switch to using sizes and positions that refer to screen size instead of a constant number of points. So if there ever were a third iOS device size, I probably would not need to change much code to support it." };
 
-h3 { "See also"};
+h2 { "See also"};
 
 p { "I have been tweeting as [\@RPGlanguage](http://twitter.com/RPGlanguage) since day one about this project, including lots of screenshots and development notes. RPGlanguage is my umbrella name for the (many!) games I plan to write."};
 

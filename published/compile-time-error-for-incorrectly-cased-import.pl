@@ -2,6 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: Compile-Time Error for Incorrectly Cased <tt>#import</tt>
 date: 2014-04-10
+rownav: 1
 " }
 
 p { "OS X uses a case-insensitive filesystem by default. That means the following code that purports to load `AFNetworking.h` both compiles and runs, nary a peep:" };
@@ -60,18 +61,24 @@ CODE
 
 p { "When it's all said and done, your build phase should resemble mine. Unless you've got a newer version of Xcode than me, in which case [I'm knowing about my own future, that's cool!](https://www.youtube.com/watch?v=3SbeIqPhtSk)" };
 
+figure {
 img {
     width is "627";
     height is "696";
+    style is "width: 627px";
     src is "/img/blog/compile-time-error-for-incorrectly-cased-import/build-phase.png";
+};
 };
 
 p { "Now when you `⌘B`, Xcode will tell you about all your miscased `#import` statements just like any other builtin error. One less thing to be vigilant about! Happily, Xcode even shows these errors right in context." };
 
+figure {
 img {
     width is "858";
     height is "64";
+    style is "width: 858px";
     src is "/img/blog/compile-time-error-for-incorrectly-cased-import/sweet-sweet-error.png";
+};
 };
 
 p { "You might notice that this is actually an error. That's because in my projects, all warnings are errors. Ain't nobody got time for anything less." };

@@ -1,5 +1,6 @@
 title: Learning to Build Abstractions in Quartz Composer
 date: 2014-03-26
+rownav: 1
 
 I decided today that I would learn a bit of [Quartz Composer](http://en.wikipedia.org/wiki/Quartz_Composer). I had never touched it before, beyond reading a couple articles and watching a conference talk. The most useful introduction for me was "[UI Prototyping with Quartz Composer and Origami](http://www.pasanpremaratne.com/2014/03/15/UI-Prototyping-with-Quartz-Composer-and-Origami/)" by Pasan Premaratne. It takes you from absolute zero to having built a simpler version to [Path's attractive spinout menu](http://codepen.io/sparanoid/pen/nHAmi) with Facebook's [Origami](http://facebook.github.io/origami/).
 
@@ -13,9 +14,9 @@ Near the end of his post, Pasan laments:
 > In just creating a radial menu with three buttons we have
 > over 20 patches in our composition.
 
-I agree that it can become unwieldy. Here's a snapshot of my small composition:
+I agree that it can become unwieldy. Here's a (zoomed out intentionally) snapshot of my small composition:
 
-<img width="392" height="267" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/notes.png">
+<figure><img width="392" height="267" style="width:392px" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/notes.png"></figure>
 
 Those three yellow blocks contain essentially the same code. Each block does not explicitly group its contained patches; they are spacially arranged in a particular region on the canvas. Nothing more. So a yellow block is about as constructive as a source code comment.
 
@@ -51,7 +52,7 @@ If all went according to plan, there should be no change in the Viewer. Indeed t
 
 Let's get rid of the other two buttons and replace them with macros. Copy and paste appears to work just fine on macro patches. Ensure that each of the three macros has its `Input` and `Image` inlets populated.
 
-<img width="533" height="347" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/macros.png">
+<figure><img width="533" height="347" style="width:533px" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/macros.png"></figure>
 
 If you flip to the Viewer you'll see that there's only one button. The problem is that all three buttons are animating between the same positions at the same times. The other two buttons are hiding below the visible one.
 
@@ -71,7 +72,7 @@ In the Patch Library, right click the `Radial Button` object and select `Edit`. 
 
 We've renamed the properties, so let's go back to our composition to see our change.
 
-<img width="143" height="78" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/radial-input-input.png">
+<figure><img width="143" height="78" style="width: 143px" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/radial-input-input.png"></figure>
 
 Ah crud. Still two uselessly-named `Input` inlets. I bet that every time
 we edit `Radial Button` we must remove it from our composition and add
@@ -130,15 +131,15 @@ Then finally we can publish the `Radius`, `Count`, and `Index` properties in the
 
 With all those changes made, our `Radial Button` patch looks like this:
 
-<img width="640" height="423" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/radial-splitters.png">
+<figure><img width="640" height="423" style="width:640px" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/radial-splitters.png"></figure>
 
 And then our project can use that new and improved version like this:
 
-<img width="502" height="396" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/composition-patch.png">
+<figure><img width="502" height="396" style="width:502px" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/composition-patch.png"></figure>
 
 With each `Radius` set to `200`, `Count` set to `3`, and `Index` from `0` to `2`, we get the following result:
 
-<img width="256" height="270" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/composition-result.png">
+<figure><img width="256" height="270" style="width:256px" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/composition-result.png"></figure>
 
 Great! We can factor out the `Friction` parameter in the same way. (This is your cue!)
 
@@ -150,7 +151,7 @@ First, add your new images to the composition. Delete their `Layer` patches. Dra
 
 Then set the `Radius` of the two new patches to `200`. Set the `Count` of all the `Radial Button` patches to `5`. Then finally set the `Index` values of the new patches to `3` and `4`.
 
-<img width="252" height="223" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/finished.gif">
+<figure><img width="252" height="223" style="width:252px" src="/img/blog/learning-to-build-abstractions-in-quartz-composer/finished.gif"></figure>
 
 Success!
 

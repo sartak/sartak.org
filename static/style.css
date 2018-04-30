@@ -68,26 +68,54 @@ body.rownav nav img {
 
 body.rownav #content p,
 body.rownav #content ul:not(.huds),
-body.rownav #content ol {
+body.rownav #content ol,
+body.rownav #content dl,
+body.rownav #content blockquote {
     width: 42em;
     margin: 1em auto;
     padding: 0 1em;
+}
+
+body.rownav #content li p,
+body.rownav #content li ul,
+body.rownav #content li ol,
+body.rownav #content li dl,
+body.rownav #content li blockquote {
+    width: auto;
+    padding: 0;
 }
 
 .centered {
     text-align: center;
 }
 
+#content ul#posts, #content ul#talks {
+    margin-top: 4em;
+    list-style-type: none;
+}
+
 @media all and (max-width: 47.826em) {
+    #content ul#posts, #content ul#talks {
+        margin-top: 2em;
+    }
+
     body.rownav #date {
         display: none;
+    }
+
+    body.rownav #post h1,
+    body.rownav #talk h1 {
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     body.rownav #content header,
     body.rownav #content p,
     body.rownav #content ul:not(.huds),
-    body.rownav #content ol {
-        width: 92%;
+    body.rownav #content ol,
+    body.rownav #content dl,
+    body.rownav #content blockquote {
+        width: auto;
     }
 
     body.rownav #content header {
@@ -106,6 +134,15 @@ body.rownav #content ol {
         width: 100%;
         border-radius: 0;
         overflow-x: auto;
+    }
+    body.rownav li .code_snippet {
+        border-radius: 10px;
+    }
+
+    body.rownav #content ul:not(.huds),
+    body.rownav #content ol {
+        padding-left: 2em;
+        margin-left: 0;
     }
 }
 
@@ -144,10 +181,6 @@ body.colnav #content {
     width: 700px;
 }
 
-ul#posts, ul#talks {
-    margin-top: 0;
-    list-style-type: none;
-}
 #posts .title a, #talks .title a {
     font-size: 1.1em;
     line-height: 1.2em;
@@ -155,11 +188,26 @@ ul#posts, ul#talks {
 
 #posts .date,
 #talks .date,
+#posts .year,
+#talks .year {
+    display: none;
+}
+
+#posts .new-year .year,
+#talks .new-year .year {
+    display: block;
+    margin-left: -1.5em;
+    margin-top: 2.4em;
+    margin-bottom: .8em;
+}
+
+#posts li:first-child .year {
+    margin-top: 0;
+}
+
 body.colnav #date {
     float: right;
 }
-#posts .date,
-#talks .date,
 #date {
     color: #AAAAAA;
 }
@@ -169,27 +217,8 @@ body.rownav #date {
      right: 2em;
 }
 
-#posts .date {
-    color: #AAAAAA;
-    -webkit-transition: color 1s ease-out;
-    -moz-transition: color 1s ease-out;
-    -o-transition: color 1s ease-out;
-    -ms-transition: color 1s ease-out;
-    transition: color 1s ease-out;
-}
-#posts li:hover .date {
-    color: #000000;
-    -webkit-transition: color .25s;
-    -moz-transition: color .25s;
-    -o-transition: color .25s;
-    -ms-transition: color .25s;
-    transition: color .25s;
-}
 #posts li, #talks li {
     padding-bottom: 0.8em;
-}
-#posts li.new-year, #talks li.new-year {
-    padding-top: 0.6em;
 }
 
 #talks .conference {
@@ -209,6 +238,7 @@ body.rownav #date {
 
 #projects {
     width: 800px;
+    margin-top: 100px;
 }
 
 #projects ul {
@@ -264,13 +294,17 @@ body.rownav #date {
     opacity: 1;
 }
 
+body.rownav #talk h1,
 body.rownav #post h1,
-body.rownav #post h2 {
+body.rownav #post h2,
+body.rownav #post h3,
+body.rownav #post h4,
+body.rownav #post h5 {
     text-align: center;
 }
 
 #post h1, #talk h1 {
-    margin: 0;
+    margin: 0 150px;
 }
 
 #post article, #talk article {
@@ -325,8 +359,7 @@ sub {
 
 .code_container .code_snippet {
     display: inline-block;
-    width: auto;
-    max-width: 80%;
+    width: 40em;
     text-align: left;
 }
 
@@ -370,15 +403,25 @@ dd {
     color: blue;
 }
 
-blockquote {
+#content blockquote {
     font-style: italic;
+}
+
+body.rownav #content blockquote {
+    text-align: right;
+    margin: 3em auto;
+}
+
+body.rownav #content blockquote p {
+    text-align: left;
+    margin-bottom: 0;
 }
 
 img + img {
     margin-left: 0.5em;
 }
 
-ol, ul {
+ol, ul, dl {
     padding-left: 0;
 }
 
@@ -395,6 +438,10 @@ figure img {
     width: 100%;
     max-width: 52em;
     vertical-align: middle;
+}
+
+h2 {
+    margin-top: 2em;
 }
 
 h2.context {
@@ -420,6 +467,10 @@ figure.screenshot img {
     max-width: 320px;
 }
 
+.box.center {
+    text-align: center;
+}
+
 @media all and (min-width: 58em) {
     .box {
         display: flex;
@@ -427,6 +478,10 @@ figure.screenshot img {
         margin: 0 auto;
         justify-content: space-between;
     }
+    li .box {
+        width: auto;
+    }
+
     .box.center {
         justify-content: center;
     }
@@ -536,7 +591,13 @@ figure.screenshot img {
     transition: background-color 200ms linear;
 }
 
-img.right {
+a.right, img.right {
     float: right;
     margin-left: 1em;
+}
+
+iframe {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

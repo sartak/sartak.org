@@ -134,7 +134,7 @@ you!},
             { type => 'key' },
             { type => 'pdf' },
         ],
-        description => q{<img src="git-flux.png" />
+        description => q{<figure><img src="git-flux.png" /></figure>
 
 <a href="/talks/yapc-asia-2013/git-flux/">(日本語版はこちら)</a>
 
@@ -159,7 +159,7 @@ Well we've already done the hard work of figuring out what's best. I'm here to e
             { type => 'key' },
             { type => 'pdf' },
         ],
-        description => q{<img src="git-flux.png" />
+        description => q{<figure><img src="git-flux.png" /></figure>
 
 <a href="/talks/ppw-2013/git-flux/">(English version here)</a>
 
@@ -187,7 +187,7 @@ gitこその使い方が多さは例外で、幸福でもあり災いでもあ�
         description => q{
 <strong>Update!</strong> I presented a newer version of this talk at <a href="/talks/ppw-2013/git-flux/">PPW</a>.
 
-<img src="git-flux.png" />
+<figure><img src="git-flux.png" /></figure>
 
 <a href="/talks/yapc-asia-2013/git-flux/">(日本語版はこちら)</a>
 
@@ -605,13 +605,14 @@ sub generate_talks_html {
         my $li_class = "";
 
         my ($year) = $talk->{date} =~ /^(\d\d\d\d)-/;
-        if (defined($new_year) && $year != $new_year) {
+        if (!defined($new_year) || $year != $new_year) {
             $li_class .= " new-year";
         }
         $new_year = $year;
 
         $output .= qq[
             <li class="$li_class">
+                <span class="year">$year</span>
                 <span class="date">$date</span>
                 <span class="title"><a href="$talk->{url}">$talk->{name}</a></span>
         ];
@@ -628,12 +629,6 @@ sub generate_talks_html {
     };
 
     $output = qq[<ul id="talks">$output</ul>];
-
-    $output .= << "    END";
-            <hr />
-            <p class="license"><div style="text-align: center"><a href="http://creativecommons.org/licenses/by-sa/3.0/us/" rel="license"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/us/88x31.png"/></a></div>These talks are licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/us/" rel="license">Creative Commons Attribution-Share Alike 3.0 United States License</a>.</p>
-        </div>
-    END
 
     return $output;
 }
@@ -717,18 +712,23 @@ sub talk_pages {
 
         my $html = << "        END";
             <div id="talk">
-                <span id="date">$date</span>
-                <h1 id="title">$talk->{name}</h1>
-                <span class="metadata">$talk->{length}. $presented_at</span>
-                <br />
-                <br />
+                <header>
+                    <span id="date">$date</span>
+                    <h1 id="title">$talk->{name}</h1>
+                </header>
+                <article>
+                    <p class="metadata">$talk->{length}. $presented_at</p>
+                    <br />
+                    <br />
 
-                $embed
-                <p class="description">$talk->{description}</p>
-                $links
+                    $embed
+                    <p class="description">$talk->{description}</p>
+                    $links
+                </article>
             </div>
             <hr />
-            <p class="license"><div style="text-align: center"><a href="http://creativecommons.org/licenses/by-sa/3.0/us/" rel="license"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/us/88x31.png"/></a></div>This talk is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/us/" rel="license">Creative Commons Attribution-Share Alike 3.0 United States License</a>.</p>
+            <div style="text-align: center"><a href="http://creativecommons.org/licenses/by-sa/3.0/us/" rel="license"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/us/88x31.png"/></a></div>
+            <p>This talk is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/us/" rel="license">Creative Commons Attribution-Share Alike 3.0 United States License</a>.</p>
         END
 
         $page->{content} = $html;

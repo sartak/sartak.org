@@ -1,18 +1,24 @@
 use Sartak::Blog;
 
-BEGIN { print "title: TODO? vim ♥ ack\ndate: 2011-09-20\n" }
+BEGIN { print "title: TODO? vim ♥ ack\ndate: 2011-09-20\nrownav: 1\n" }
 
 p { "One pattern I frequently find myself following is acking for a very specific set of results..." }
 
+div { class is "code_container";
 pre { class is "code_snippet"; outs_raw q{ack -a 'uri_for.*(contact|address|phone)'} }
+};
 
 p { "Then I launch vim to start editing the files that were matched here..." }
 
+div { class is "code_container";
 pre { class is "code_snippet"; outs_raw q{vim `ack -la 'uri_for.*(contact|address|phone)'`} }
+};
 
 p { "Then I rewrite the search term using vim's regular expressions instead of Perl's far superior syntax..." }
 
+div { class is "code_container";
 pre { class is "code_snippet"; outs_raw q{/uri_for.*\(contact\|address\|phone\)} }
+};
 
 p { "Then finally I get along with my editing, using both `n` and `:bn` to advance to the each match as needed." }
 

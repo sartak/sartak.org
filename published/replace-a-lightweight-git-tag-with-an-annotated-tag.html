@@ -1,5 +1,6 @@
 title: Replace a Lightweight Git Tag with an Annotated Tag
 date: 2011-01-11
+rownav: 1
 
 <p>When I released <a href="http://p3rl.org/Jifty::DBI">Jifty-DBI</a> versions <a href="https://github.com/bestpractical/jifty-dbi/tree/0.63">0.63</a> and <a href="https://github.com/bestpractical/jifty-dbi/tree/0.64">0.64</a>, I used a <i>lightweight tag</i> (a simple pointer to a commit) instead of an <i>annotated tag</i> (nearly the equivalent of a commit) to tag the release. At work, we're moving toward using annotated tags for our releases so that they are cryptographically signed, contain author and date, and perhaps most importantly, work better with <a href="http://www.kernel.org/pub/software/scm/git/docs/git-describe.html"><tt>git describe</tt></a>. I was asked to fix the lightweight tags I made for Jifty-DBI releases, which involved a few git incantations I had never used before; hence this post. The basic procedure is:</p>
 
@@ -13,7 +14,7 @@ date: 2011-01-11
 
 <p>Here's the syntax for each of these commands to upgrade tag <strong>0.64</strong> from lightweight to annotated.</p>
 
-
+<div class="code_container">
 <pre class="sh code_snippet">
 git checkout <span class="synConstant">0</span>.<span class="synConstant">64</span>
 git tag <span class="synSpecial">-d</span> <span class="synConstant">0</span>.<span class="synConstant">64</span>
@@ -21,3 +22,4 @@ git tag <span class="synSpecial">-d</span> <span class="synConstant">0</span>.<s
 git push origin :refs/tags/<span class="synConstant">0</span>.<span class="synConstant">64</span>
 git push <span class="synSpecial">--tags</span>
 </pre>
+</div>

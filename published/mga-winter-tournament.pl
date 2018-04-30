@@ -2,6 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: Mass Go - Winter 2017 Tournament
 date: 2017-01-08
+rownav: 1
 "}
 
 p { "Today I participated in the [Massachusetts Go Association](http://massgo.org) Winter 2017 [tournament](https://www.meetup.com/massgo/events/236274733/). I've been looking forward to this for a while, and have been studying extra hard to put in a good showing." }
@@ -188,7 +189,9 @@ p { "I was concerned about getting cut off in the upper right and having to make
 
 p { "The situation in the bottom left caused a bit of a ruckus. It was my first time having any kind of dispute about the alive/dead status of a group in any game, and in a tournament setting no less. In the end, it didn't matter too much, but a photo of the situation was requested for posterity." };
 
-image "mga-winter-tournament/dispute.jpg";
+figure {
+    img { width is 426; height is 568; style is "width:426px"; src is "/img/blog/mga-winter-tournament/dispute.jpg" };
+};
 
 p { "Move 186 is a pure gote move that I was comfortable playing, even though it cost sente and a point of territory, to help squash any potential of white's middle group struggling to come back alive." };
 
@@ -230,7 +233,7 @@ PL[W];W[fc];B[ec];W[fd];B[df];W[ic];B[jc];W[jb];B[id];W[hc];B[kb];W[ib];B[lc]
 ;W[bf];B[bh];W[ag];B[gf];W[ah];B[ai];W[aj];B[af];W[al];B[bj];W[ak];B[bk]
 ;W[am];B[br];W[ro];B[rp];W[ar];B[ms];W[ns];B[op];W[oq];B[rs];W[kp];B[lp]
 ;W[kq];B[ko];W[ma];B[nb];W[ka];B[mb];W[la];B[lb];W[ja];B[ae];W[ad];B[ag]
-;W[cf];B[cg];W[ed];B[de];RW[])
+;W[cf];B[cg];W[ed];B[de])
 </div>
 ];
 
@@ -265,16 +268,7 @@ outs_raw q[
 #go-game-1, #go-game-2, #go-game-3, #go-game-4 {
     min-height: 500px;
     min-width: 400px;
-    margin-left: 1em;
     position: relative;
-    float: right;
-}
-article > img {
-    max-height: 400px;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
 }
 </style>
 
@@ -282,27 +276,29 @@ article > img {
 <script type="text/javascript">
     window.onload = function () {
         for (var i = 1; i <= 4; i++) {
-            var id = "go-game-" + i;
-            var element = document.getElementById(id);
-            var sgf = element.innerHTML;
+            (function () {
+                var id = "go-game-" + i;
+                var element = document.getElementById(id);
+                var sgf = element.innerHTML;
 
-            element.innerHTML = "";
+                element.innerHTML = "";
 
-            var gliftWidget = glift.create({
-                divId       : id,
-                sgf         : {
-                    sgfString: sgf,
-                    uiComponents      : ['BOARD', 'STATUS_BAR', 'ICONBAR']
-                },
-                display     : {
-                    theme             : 'DEPTH',
-                    goBoardBackground : '/misc/go-games/viewer/wood.png',
-                }
-            });
-            
-            window.addEventListener('resize', function(event){
-                gliftWidget && gliftWidget.redraw();
-            });
+                var gliftWidget = glift.create({
+                    divId       : id,
+                    sgf         : {
+                        sgfString: sgf,
+                        uiComponents      : ['BOARD', 'STATUS_BAR', 'ICONBAR']
+                    },
+                    display     : {
+                        theme             : 'DEPTH',
+                        goBoardBackground : '/misc/go-games/viewer/wood.png',
+                    }
+                });
+
+                window.addEventListener('resize', function(event){
+                    gliftWidget && gliftWidget.redraw();
+                });
+            })();
         }
     };
 </script>

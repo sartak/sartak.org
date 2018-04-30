@@ -2,6 +2,7 @@ use Sartak::Blog;
 
 BEGIN { print "title: <tt>SKShapeNode</tt>, you are dead to me
 date: 2014-03-22
+rownav: 1
 " }
 
 p { "<i>Update: Apple has resolved many of these bugs in subsequent versions of iOS. Your mileage will vary.</i>" }
@@ -18,24 +19,24 @@ p { "`SKShapeNode`, how do I loathe thee? Let me count the ways." };
 
 ol {
     li {
-        id is "leak";
         p { "`SKShapeNode` … [is](http://stackoverflow.com/questions/20292318/why-does-creating-and-removing-skshapenode-and-sknode-repeatedly-cause-a-memory) … [widely](http://stackoverflow.com/questions/18889297/skshapenode-has-unbounded-memory-growth) … [known](http://stackoverflow.com/questions/20134891/skphysicsbody-bodywithpolygonfrompath-memory-leaks) … [to](http://stackoverflow.com/questions/22323189/memory-leak-in-sprite-kit-application) … [leak](http://stackoverflow.com/a/22282920/290913) … [memory](http://tonychamblee.com/2013/11/18/tcprogresstimer-a-spritekit-progress-timer/)." };
         p { "Unfixable memory leaks is already enough reason to avoid using an API. But wait, there's more…" };
     }
 
     li {
-        id is "linewidth";
         p { qq{From `SKShapeNode`'s [documentation](https://developer.apple.com/library/ios/documentation/SpriteKit/Reference/SKShapeNode_Ref/Reference/Reference.html#//apple_ref/occ/instp/SKShapeNode/lineWidth), "A line width larger than `2.0` may cause rendering artifacts in the final rendered image."} };
         p { "It's good that they are up front about this limitation. But that is still pretty weak." };
+        figure {
         img {
             width is "193";
             height is "175";
+            style is "width: 193px";
             src is "/img/blog/skshapenode-you-are-dead-to-me/artifacts.png";
+        };
         };
     }
 
     li {
-        id is "setstrokecolor";
         p { "Sometimes `setStrokeColor:[SKColor redColor]` has no visual effect at all. So you have to trick the `SKShapeNode` into redrawing itself. Changing its `alpha` is one way to do it:" };
 
 code_snippet 'objc' => << 'CODE';
@@ -88,31 +89,37 @@ CODE
     }
 
     li {
-        id is "detritus";
         p { "`SKShapeNode` sometimes drops little rendering glitches throughout my scenes." }
 
+        figure {
         img {
             width is "163";
             height is "136";
+            style is "width: 163px";
             src is "/img/blog/skshapenode-you-are-dead-to-me/detritus.png";
+        };
         };
 
         p { "Those red lines are from `SKShapeNode` instances that once rendered red rectangles. _Many_ frames ago. For whatever reason `SKShapeNode` decided to try to resurrect them, but only did half the job." };
     };
 
     li {
-        id is "resizing";
         p { "This one is the most baffling and upsetting. It seems that if you have too many `SKShapeNode` instances visible on screen, it completely screws up the scene rendering. The scene shrinks to about 60% of its height for a few moments. In the following screenshots you can see what happens when I tiptoe past the apparent `SKShapeNode` limit (thanks to all that detritus from the previous point). The game becomes completely unusable." };
 
-        img {
-            width is "320";
-            height is "568";
-            src is "/img/blog/skshapenode-you-are-dead-to-me/shrink-pre.png";
-        };
-        img {
-            width is "320";
-            height is "568";
-            src is "/img/blog/skshapenode-you-are-dead-to-me/shrink-post.png";
+        div {
+            class is "center box h1-1";
+            img {
+                width is "320";
+                height is "568";
+                style is "width: 320px";
+                src is "/img/blog/skshapenode-you-are-dead-to-me/shrink-pre.png";
+            };
+            img {
+                width is "320";
+                height is "568";
+                style is "width: 320px";
+                src is "/img/blog/skshapenode-you-are-dead-to-me/shrink-post.png";
+            };
         };
         p { "This problem seems to yet again be the fault of `SKShapeNode` inside of an `SKEffectNode`. My guess is that `SKEffectNode`'s unique rendering model is triggering this. `SKEffectNode` lets you apply Core Image filters (which are akin to Photoshop filters) to some of your nodes. It's amazingly powerful. Seriously next level shit. But to achieve that, `SKEffectNode` must render its subtree into a separate buffer to which it can apply its CI filter. This different codepath is probably the cause of all the problems. But if `SKShapeNode` freaks out when it's being rendered into an `SKEffectNode`, I seriously question how robust Sprite Kit is. (Incidentally, `SKEffectNode` also doesn't respect the `zPosition`s of its children, but that's another post altogether. The solution for that one is to interject a plain `SKNode` into the node tree. See [rdar://16534245](http://openradar.appspot.com/radar?id=5778117482250240))" };
         p { "Anyway. I've luckily been able to replicate this crazy rendering glitch with a small amount of code. I've recorded a [video showing the bug](http://sartak.org/misc/shape-in-effect.mov). As before, replace the Sprite Kit template's scene class's implementation with the following:" };
@@ -143,7 +150,6 @@ CODE
         p { "What in the world did Apple do to cause this bug? Regardless, I've reported this one as [rdar://16400203](http://openradar.appspot.com/radar?id=5866175049236480)." };
     };
     li {
-        id is "others";
         p { "According to other folks, `SKShapeNode` also has [terrible performance](https://twitter.com/mczonk/status/419194602089091073) and is [missing key features](https://twitter.com/joped/status/403415980946100225) from its `CAShapeLayer` counterpart." };
     };
 }
@@ -154,35 +160,38 @@ p { "Because of all these flaws, **`SKShapeNode` is completely untrustworthy**. 
 
 ol {
     li {
-        id is "nuke";
         p { "Just remove the `SKShapeNode`. For some effects it's not worth all the trouble. You'll soon think of something better to replace it." };
     };
     li {
-        id is "colorsprite";
         p { "For borders on opaque nodes, just use a `SKSpriteNode` instantiated with <nobr>`+[SKSpriteNode spriteNodeWithColor:size:]`</nobr>. This gets you a rectangular block of the provided `SKColor`. Beyond just borders, I've converted my HP bars this way too." };
         p { "Switching to a sprite even looks better. And you won't have to fear using a border width of greater than 2.0. Cripes!" };
     };
 
     li {
-        id is "shapelayer";
         p { "Sprite Kit plays well enough with `CALayer` and friends. When you can get away with it, stick a `CAShapeLayer` into your `SKView`'s layer. I use this in two places in my game: a drawing pad and a procedurally-generated lightning bolt." };
 
+        figure {
         img {
             width is "200";
             height is "200";
+            style is "width: 200px";
             src is "/img/blog/skshapenode-you-are-dead-to-me/drawing.png";
         };
+        };
+
+        figure {
         img {
             width is "135";
             height is "103";
+            style is "width: 135px";
             src is "/img/blog/skshapenode-you-are-dead-to-me/lightning.png";
+        };
         };
 
         p { "This works fine if your `CAShapeLayer` is going to be the topmost UI component. However if you need to display Sprite Kit content _over_ the layer, things would get tricky. Maybe you can use two `SKView` instances, sandwiching the `CAShapeLayer`. That sounds like an awful lot of work though. Personally, I've chosen my battles carefully; there will be nothing in my game that renders above that drawing pad or lightning bolt." };
         p { "Be aware that using `CALayer` requires jumping through a few `convertPoint:` hurdles. The coordinate system of Sprite Kit is different from the coordinate system of Core Animation. Natch." };
     };
     li {
-        id is "rasterizeshape";
         p { "Render a `CGPathRef` offscreen using a disconnected `CAShapeLayer`. Then snapshot that into an image. Then create an `SKSpriteNode` with that snapshot as a texture. While I haven't personally used this technique, I see no reason it wouldn't work." };
         p { "Now you can add that sprite to your scene, animate it all over town, put it over or under other nodes, etc. You now have an unchanging `SKShapeNode` without all of the insane, unfixable bugs." };
     };
@@ -204,8 +213,11 @@ CODE
 
 p { "This results in an error if, in a moment of weakness, you try to use `SKShapeNode`:" };
 
+figure {
 img {
     width is "275";
     height is "34";
+    style is "width: 275px";
     src is "/img/blog/skshapenode-you-are-dead-to-me/banned.png";
+};
 };

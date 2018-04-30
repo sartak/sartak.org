@@ -1,11 +1,12 @@
 title: The Design of Parameterized Roles
 date: 2009-05-12
+rownav: 1
 
 <p>There has been a lot of good discussion about roles lately, due to <a href="http://www.modernperlbooks.com/cgi-bin/mt/mt-search.cgi?blog_id=1&tag=roles&limit=20">chromatic</a> and <a href="http://use.perl.org/~Ovid/journal">Ovid</a>. We're starting to attract people from outside of not only the <a href="http://moose.perl.org">Moose</a> and <a href="http://dev.perl.org/perl6/">Perl 6</a> communities, but outside of the greater Perl community. I'm thrilled, because roles are an excellent complement to inheritance, and deserve to be widely adopted.</p>
 
 <p>In <a href="http://www.modernperlbooks.com/mt/2009/04/the-why-of-perl-roles.html">The Why of Perl Roles</a>, chromatic quickly describes <em>parametric roles</em>, also known as parameterized roles. A <b>parameterized role</b> is a role whose application can be customized. Such a role accepts parameters at composition time to alter its behavior <em>any way it wishes</em>. This increases the flexibility of the role, fostering opportunities for greater code reuse.</p>
 
-<h3>Example</h3>
+<h2>Example</h2>
 
 <p>My <a href="https://github.com/sartak/TAEB">NetHack bot TAEB</a> has a <a href="https://github.com/sartak/TAEB/blob/master/lib/TAEB/Action/Role/Item.pm"><tt>TAEB::Action::Role::Item</tt></a> parameterized role. It accepts one parameter, a list of names for item attributes. These attributes (which specify a type constraint of <a href="http://p3rl.org/NetHack::Item"><tt>NetHack::Item</tt></a> and a custom "provided" trait) are added to the class upon composition. The role provides a few other things as well: a <tt>current_item</tt> attribute and a method for dealing with missing-item exceptions. The <tt>current_item</tt> attribute's value is a lazy default, pointing to the first item in the parameterized list of attribute names. This is an application of the well-trodden Don't Repeat Yourself principle &mdash; each class does not have to repeat its item attribute names. Parameterized roles are pretty good enablers of <i>DRY</i>!</p>
 
@@ -13,7 +14,7 @@ date: 2009-05-12
 
 <p>In older versions of the code, <tt>TAEB::Action::Role::Item</tt> was not parameterized. This role always gave you a single attribute named <tt>item</tt>. The <tt>into</tt> attribute of <tt>TAEB::Action::Dip</tt> was a second-class citizen. There are a number of ways a second-class item attribute can go wrong, such as not having a type constraint, or not being visible to <tt>current_item</tt>'s lazy default. It also prevented us from renaming the <tt>item</tt> attribute to, say, <tt>weapon</tt> for <tt>TAEB::Action::Wield</tt>. We drastically improved the code's clarity and expressiveness by parameterizing the role.</p>
 
-<h3>Design</h3>
+<h2>Design</h2>
 
 <p>In December, I wrote the <a href="http://p3rl.org/MooseX::Role::Parameterized"><tt>MooseX::Role::Parameterized</tt></a> extension. I had grown tired of people (primarily myself!) putting off coding because the proper implementation of <i>whatever</i> demanded parameterized roles. I am not exaggerating:</p>
 
@@ -43,6 +44,7 @@ date: 2009-05-12
 
 <p>This difference is precisely what makes the syntax of <tt>MooseX::Role::Parameterized</tt> slightly unusual, at least in the context of core Moose:</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
 <span class="synStatement">package</span><span class="synType"> Counter</span>;
 <span class="synStatement">use </span>MooseX::Role::Parameterized;
@@ -52,9 +54,11 @@ parameter <span class="synConstant">name</span> =&gt; (
     <span class="synConstant">required</span> =&gt; <span class="synConstant">1</span>,
 );
 </pre>
+</div>
 
 <p>You explicitly specify which parameters the role can take. This improves introspectability, and makes it immediately obvious (if you've written Moose code) how to specify that a parameter is required, or has a type constraint; default value; or predicate, etc.</p>
 
+<div class="code_container">
 <pre class="perl code_snippet">
 role {
     <span class="synStatement">my</span> <span class="synIdentifier">$p</span> = <span class="synStatement">shift</span>;
@@ -71,12 +75,13 @@ role {
     };
 };
 </pre>
+</div>
 
 <p>The <tt>role</tt> keyword exists for specifying the aforementioned role-building procedure. This is the unusual syntax. <a href="http://p3rl.org/MooseX::Declare"><tt>MooseX::Declare</tt></a> could improve upon this a lot, once some tuits are spent.</p>
 
 <p>The <tt>method</tt> keyword is required (instead of the usual <tt>sub name { ... }</tt>) because Perl handles <em>named, inner subroutines</em> in a way that is not useful for this design. The details are many, but mostly unimportant. The salient point is that such subroutines do not properly close over <tt>$p</tt>, rendering them unparameterizable. The anonymous subroutine passed to <tt>method</tt> can properly capture <tt>$p</tt>. The <tt>method</tt> keyword has a fringe benefit over <tt>sub</tt> in easing the parameterization of the method's name.</p>
 
-<h3>Current and future work</h3>
+<h2>Current and future work</h2>
 
 <p>I recently fixed <a href="http://rt.cpan.org/Public/Bug/Display.html?id=45393">a bug</a> in <tt>MooseX::Role::Parameterized</tt> that prevented parameterized roles from participating in role summation. Role summation is what provides protection against method name conflicts <em>at compile time</em>, among other things. Being unable to partake in composition limited parameterized roles' usefulness. I'm very happy to have fixed the one crippling issue with this extension.</p>
 

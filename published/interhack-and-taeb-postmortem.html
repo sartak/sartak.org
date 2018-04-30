@@ -1,7 +1,8 @@
 title: Interhack and TAEB Postmortem
 date: 2011-01-24
+rownav: 1
 
-<h5><a href="https://github.com/sartak/interhack">Interhack</a></h5>
+<h2><a href="https://github.com/sartak/interhack">Interhack</a></h2>
 
 <p>Interhack, a "smart" telnet client for server <a href="http://www.nethack.org/">NetHack</a> play, initially started because the annual <a href="http://nethack.devnull.net/">/dev/null</a> tournament didn't have any of <a href="http://alt.org/nethack">nethack.alt.org</a>'s interface patches - most importantly <a href="http://bilious.homelinux.org/?45">Color HP Monitor</a>. In vanilla NetHack, your HP display doesn't change color as you take damage, so in the tournament we would simply not notice we were being slaughtered because we had been subconsciously trained to notice damage using only our peripheral vision, which detects changes in color far more effectively than changes in numbers.</p>
 
@@ -9,15 +10,17 @@ date: 2011-01-24
 
 <p>Also, I only added (or permitted) features that would not take actions on the user's behalf. I was worried that such actions could misfire because of bugs in Interhack and cause someone to lose their game. In which case they'd have every right to be angry at me personally. In all of Interhack's usage I only heard of a couple of incidents where Interhack screwed someone up badly. In one, the person didn't get their wish because of a bug in Interhack's accidental-wish-escape protection. When you press an arrow key or other non-character keys, NetHack sees that as a sequence of characters beginning with escape, so it thinks you're trying to cancel your wish, which earns you a random item instead of a really powerful, useful one. We added code to catch that escape key and prompt you, asking if you really did mean to cancel your wish, which was certainly useful and saved wishes that would have been lost, but for whatever reason in that one instance Interhack hung at that prompt, so he had to kill it. When he restarted NetHack, which doesn't keep enough state in its save file to remember that you were at a wish prompt, it came back up with a wasted wish. Oops!</p>
 
-<img src="/img/blog/interhack-and-taeb-postmortem/wish-escape.png" />
+<figure>
+<img style="width:492px" width=492 height=321 src="/img/blog/interhack-and-taeb-postmortem/wish-escape.png" />
+</figure>
 
 <p>Interhack lost steam because of a poor implementation (<a href="http://perldoc.perl.org/functions/do.html"><tt>do FILE</tt></a> is entirely insufficient for a plugin system. No, really.) and NetHack bot development.</p>
 
-<h5><a href="https://github.com/sartak/taeb">TAEB</a></h5>
+<h2><a href="https://github.com/sartak/taeb">TAEB</a></h2>
 
 <p>TAEB started as my fifth or so NetHack bot, this time with a thoughtful design instead of just winging it (see above). Because as designed TAEB's AI was separate from the rest of the codebase, and thus very trivially pluggable, TAEB's name (Tactical Amulet Extraction Bot) has actually <em>never</em> been accurate. But it was such a great name, inciting laughter in anyone we told who was at least as geeky as we are, so we naturally wouldn't change it. TAEB was really a bot <em>framework</em> which <em>happened</em> to ship with a bunch of different AIs. We also (partly as a joke, but partly as a debugging tool) included a <a href="https://github.com/sartak/TAEB/blob/master/lib/TAEB/AI/Human.pm">Human AI</a> that just prompted the terminal what to do every turn. I was fond of labeling TAEB "a framework for programmatic NetHack". Nowadays I'd just shorten that to "a NetHack API", but I was a little more pretentious back then.</p>
 
-<h5><tt>TAEB::AI::Interhack</tt></h5>
+<h2><tt>TAEB::AI::Interhack</tt></h2>
 
 <p>That "programmatic NetHack" label hints at the fundamental design difference between TAEB and Interhack. Because TAEB asserts complete control over the interaction with NetHack (exposing a proper API instead of proxying a practically opaque stream of characters representing NetHack commands), we could go so much further with new interface features that were only a dream in Interhack. For example, autoexplore could never work in Interhack - its conception of the map was about as good as your terminal's (i.e. just a 2d array of colored characters) - but autoexplore would be trivial in TAEB. I even had a pretty good design for an autoplay feature: just use one of TAEB's AI modules until a sufficiently challenging situation came up, then ask the human what to do. Beyond that the human could advise the bot on strategical issues (head to Minetown first, then Sokoban, then Mine's End) instead of tactical or trifling issues (like remembering to pick up food and eating, fighting weak monsters, and navigating across levels to a particular landmark like the nearest altar). In addition to autoexplore and autoplay we could have plugins like: remember which tiles you've ever stepped on for finding the vibrating square and astral portals and even just evading hidden traps, perfect memory of where every item on the ground is (even if your character has been stricken with amnesia), estimating the risk of monsters to determine if they can be windshielded or if they need to be taken out with more caution using magic; ranged weapons; kiting; etc, and even little things like an automap that doesn't suck - it would just know which level you're on and fill in the unexplored sections of the map for you.</p>
 
