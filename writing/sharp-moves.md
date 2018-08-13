@@ -1,4 +1,4 @@
-title: A Year of Yunguseng Dojang (or, Deliberate Practice vol. I: Coaching)
+title: A Year of Yunguseng Dojang (or, Deliberate Practice vol. II: Coaching)
 draft: 1
 date: 2018-04-27
 rownav: 1

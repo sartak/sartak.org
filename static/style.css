@@ -601,3 +601,12 @@ iframe {
     margin-left: auto;
     margin-right: auto;
 }
+
+.glift {
+    min-height: 500px;
+    min-width: 400px;
+    position: relative;
+}
+#content .glift .glift-comment-box p {
+    width: auto;
+}
